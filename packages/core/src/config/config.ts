@@ -65,6 +65,7 @@ import { ideContextStore } from '../ide/ideContext.js';
 import { InputFormat, OutputFormat } from '../output/types.js';
 import { PromptRegistry } from '../prompts/prompt-registry.js';
 import { SubagentManager } from '../subagents/subagent-manager.js';
+import type { SubagentConfig } from '../subagents/types.js';
 import {
   DEFAULT_OTLP_ENDPOINT,
   DEFAULT_TELEMETRY_TARGET,
@@ -290,9 +291,11 @@ export interface ConfigParameters {
   eventEmitter?: EventEmitter;
   useSmartEdit?: boolean;
   output?: OutputSettings;
-  skipStartupContext?: boolean;
   inputFormat?: InputFormat;
   outputFormat?: OutputFormat;
+  skipStartupContext?: boolean;
+  sdkMode?: boolean;
+  sessionSubagents?: SubagentConfig[];
 }
 
 function normalizeConfigOutputFormat(
@@ -339,8 +342,10 @@ export class Config {
   private readonly toolDiscoveryCommand: string | undefined;
   private readonly toolCallCommand: string | undefined;
   private readonly mcpServerCommand: string | undefined;
-  private readonly mcpServers: Record<string, MCPServerConfig> | undefined;
+  private mcpServers: Record<string, MCPServerConfig> | undefined;
+  private sessionSubagents: SubagentConfig[];
   private userMemory: string;
+  private sdkMode: boolean;
   private geminiMdFileCount: number;
   private approvalMode: ApprovalMode;
   private readonly showMemoryUsage: boolean;
@@ -440,6 +445,8 @@ export class Config {
     this.toolCallCommand = params.toolCallCommand;
     this.mcpServerCommand = params.mcpServerCommand;
     this.mcpServers = params.mcpServers;
+    this.sessionSubagents = params.sessionSubagents ?? [];
+    this.sdkMode = params.sdkMode ?? false;
     this.userMemory = params.userMemory ?? '';
     this.geminiMdFileCount = params.geminiMdFileCount ?? 0;
     this.approvalMode = params.approvalMode ?? ApprovalMode.DEFAULT;
@@ -774,6 +781,46 @@ export class Config {
 
   getMcpServers(): Record<string, MCPServerConfig> | undefined {
     return this.mcpServers;
+  }
+
+  setMcpServers(servers: Record<string, MCPServerConfig>): void {
+    if (this.initialized) {
+      throw new Error('Cannot modify mcpServers after initialization');
+    }
+    this.mcpServers = servers;
+  }
+
+  addMcpServers(servers: Record<string, MCPServerConfig>): void {
+    if (this.initialized) {
+      throw new Error('Cannot modify mcpServers after initialization');
+    }
+    this.mcpServers = { ...this.mcpServers, ...servers };
+  }
+
+  getSessionSubagents(): SubagentConfig[] {
+    return this.sessionSubagents;
+  }
+
+  setSessionSubagents(subagents: SubagentConfig[]): void {
+    if (this.initialized) {
+      throw new Error('Cannot modify sessionSubagents after initialization');
+    }
+    this.sessionSubagents = subagents;
+  }
+
+  addSessionSubagents(subagents: SubagentConfig[]): void {
+    if (this.initialized) {
+      throw new Error('Cannot modify sessionSubagents after initialization');
+    }
+    this.sessionSubagents = [...this.sessionSubagents, ...subagents];
+  }
+
+  getSdkMode(): boolean {
+    return this.sdkMode;
+  }
+
+  setSdkMode(value: boolean): void {
+    this.sdkMode = value;
   }
 
   getUserMemory(): string {
