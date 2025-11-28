@@ -410,7 +410,6 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           string: true,
           description: 'Core tool paths',
           coerce: (tools: string[]) =>
-            // Handle comma-separated values
             tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
         })
         .option('exclude-tools', {
@@ -418,7 +417,13 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           string: true,
           description: 'Tools to exclude',
           coerce: (tools: string[]) =>
-            // Handle comma-separated values
+            tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
+        })
+        .option('allowed-tools', {
+          type: 'array',
+          string: true,
+          description: 'Tools to allow, will bypass confirmation',
+          coerce: (tools: string[]) =>
             tools.flatMap((tool) => tool.split(',').map((t) => t.trim())),
         })
         .option('auth-type', {
