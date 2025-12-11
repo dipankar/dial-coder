@@ -52,7 +52,7 @@ import {
   recordTokenUsageMetrics,
   recordToolCallMetrics,
 } from './metrics.js';
-import { QwenLogger } from './qwen-logger/qwen-logger.js';
+import { QwenLogger } from './dial-logger/dial-logger.js';
 import { isTelemetrySdkInitialized } from './sdk.js';
 import type {
   ApiErrorEvent,

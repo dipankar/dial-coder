@@ -6,7 +6,7 @@
 
 import { describe, it, expect, afterEach } from 'vitest';
 import { Ignore, loadIgnoreRules } from './ignore.js';
-import { createTmpDir, cleanupTmpDir } from '@qwen-code/qwen-code-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@dial-code/dial-test-utils';
 
 describe('Ignore', () => {
   describe('getDirectoryFilter', () => {
@@ -89,9 +89,9 @@ describe('loadIgnoreRules', () => {
     expect(fileFilter('test.txt')).toBe(false);
   });
 
-  it('should load rules from .qwenignore', async () => {
+  it('should load rules from .dialignore', async () => {
     tmpDir = await createTmpDir({
-      '.qwenignore': '*.log',
+      '.dialignore': '*.log',
     });
     const ignore = loadIgnoreRules({
       projectRoot: tmpDir,
@@ -104,10 +104,10 @@ describe('loadIgnoreRules', () => {
     expect(fileFilter('test.txt')).toBe(false);
   });
 
-  it('should combine rules from .gitignore and .qwenignore', async () => {
+  it('should combine rules from .gitignore and .dialignore', async () => {
     tmpDir = await createTmpDir({
       '.gitignore': '*.log',
-      '.qwenignore': '*.txt',
+      '.dialignore': '*.txt',
     });
     const ignore = loadIgnoreRules({
       projectRoot: tmpDir,

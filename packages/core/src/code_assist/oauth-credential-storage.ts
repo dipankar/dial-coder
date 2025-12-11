@@ -12,7 +12,7 @@ import * as path from 'node:path';
 import * as os from 'node:os';
 import { promises as fs } from 'node:fs';
 
-const QWEN_DIR = '.qwen';
+const DIAL_DIR = '.dial';
 const KEYCHAIN_SERVICE_NAME = 'qwen-code-oauth';
 const MAIN_ACCOUNT_KEY = 'main-account';
 
@@ -86,7 +86,7 @@ export class OAuthCredentialStorage {
       await this.storage.deleteCredentials(MAIN_ACCOUNT_KEY);
 
       // Also try to remove the old file if it exists
-      const oldFilePath = path.join(os.homedir(), QWEN_DIR, OAUTH_FILE);
+      const oldFilePath = path.join(os.homedir(), DIAL_DIR, OAUTH_FILE);
       await fs.rm(oldFilePath, { force: true }).catch(() => {});
     } catch (error: unknown) {
       console.error(error);
@@ -98,7 +98,7 @@ export class OAuthCredentialStorage {
    * Migrate credentials from old file-based storage to keychain
    */
   private static async migrateFromFileStorage(): Promise<Credentials | null> {
-    const oldFilePath = path.join(os.homedir(), QWEN_DIR, OAUTH_FILE);
+    const oldFilePath = path.join(os.homedir(), DIAL_DIR, OAUTH_FILE);
 
     let credsJson: string;
     try {

@@ -11,7 +11,7 @@ import { ToolCallStatus } from '../../types.js';
 import { DiffRenderer } from './DiffRenderer.js';
 import { MarkdownDisplay } from '../../utils/MarkdownDisplay.js';
 import { AnsiOutputText } from '../AnsiOutput.js';
-import { GeminiRespondingSpinner } from '../GeminiRespondingSpinner.js';
+import { DialRespondingSpinner } from '../DialRespondingSpinner.js';
 import { MaxSizedBox } from '../shared/MaxSizedBox.js';
 import { TodoDisplay } from '../TodoDisplay.js';
 import type {
@@ -20,7 +20,7 @@ import type {
   PlanResultDisplay,
   AnsiOutput,
   Config,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { AgentExecutionDisplay } from '../subagents/index.js';
 import { PlanSummaryDisplay } from '../PlanSummaryDisplay.js';
 import { ShellInputPrompt } from '../ShellInputPrompt.js';
@@ -398,7 +398,7 @@ const ToolStatusIndicator: React.FC<ToolStatusIndicatorProps> = ({
         <Text color={theme.status.success}>{TOOL_STATUS.PENDING}</Text>
       )}
       {status === ToolCallStatus.Executing && (
-        <GeminiRespondingSpinner
+        <DialRespondingSpinner
           spinnerType="toggle"
           nonRespondingDisplay={TOOL_STATUS.EXECUTING}
         />

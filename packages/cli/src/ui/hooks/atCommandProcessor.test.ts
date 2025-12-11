@@ -7,7 +7,7 @@
 import type { Mock } from 'vitest';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { handleAtCommand } from './atCommandProcessor.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@dial-code/dial-core';
 import {
   FileDiscoveryService,
   GlobTool,
@@ -16,7 +16,7 @@ import {
   ToolRegistry,
   COMMON_IGNORE_PATTERNS,
   // DEFAULT_FILE_EXCLUDES,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import * as os from 'node:os';
 import { ToolCallStatus } from '../types.js';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
@@ -583,7 +583,7 @@ describe('handleAtCommand', () => {
   describe('qwen-ignore filtering', () => {
     it('should skip qwen-ignored files in @ commands', async () => {
       await createTestFile(
-        path.join(testRootDir, '.qwenignore'),
+        path.join(testRootDir, '.dialignore'),
         'build/output.js',
       );
       const qwenIgnoredFile = await createTestFile(
@@ -613,9 +613,9 @@ describe('handleAtCommand', () => {
       );
     });
   });
-  it('should process non-ignored files when .qwenignore is present', async () => {
+  it('should process non-ignored files when .dialignore is present', async () => {
     await createTestFile(
-      path.join(testRootDir, '.qwenignore'),
+      path.join(testRootDir, '.dialignore'),
       'build/output.js',
     );
     const validFile = await createTestFile(
@@ -647,7 +647,7 @@ describe('handleAtCommand', () => {
 
   it('should handle mixed qwen-ignored and valid files', async () => {
     await createTestFile(
-      path.join(testRootDir, '.qwenignore'),
+      path.join(testRootDir, '.dialignore'),
       'dist/bundle.js',
     );
     const validFile = await createTestFile(

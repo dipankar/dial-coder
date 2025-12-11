@@ -15,7 +15,7 @@
  * - Graceful shutdown
  */
 
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@dial-code/dial-core';
 import { StreamJsonInputReader } from './io/StreamJsonInputReader.js';
 import { StreamJsonOutputAdapter } from './io/StreamJsonOutputAdapter.js';
 import { ControlContext } from './control/ControlContext.js';

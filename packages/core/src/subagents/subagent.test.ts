@@ -28,7 +28,7 @@ import {
   createContentGeneratorConfig,
   AuthType,
 } from '../core/contentGenerator.js';
-import { GeminiChat } from '../core/geminiChat.js';
+import { DialChat } from '../core/dialChat.js';
 import { executeToolCall } from '../core/nonInteractiveToolExecutor.js';
 import type { ToolRegistry } from '../tools/tool-registry.js';
 import { type AnyDeclarativeTool } from '../tools/tools.js';
@@ -41,7 +41,7 @@ import type {
 } from './types.js';
 import { SubagentTerminateMode } from './types.js';
 
-vi.mock('../core/geminiChat.js');
+vi.mock('../core/dialChat.js');
 vi.mock('../core/contentGenerator.js');
 vi.mock('../utils/environmentContext.js', () => ({
   getEnvironmentContext: vi.fn().mockResolvedValue([{ text: 'Env Context' }]),
@@ -196,11 +196,11 @@ describe('subagent.ts', () => {
       });
 
       mockSendMessageStream = vi.fn();
-      vi.mocked(GeminiChat).mockImplementation(
+      vi.mocked(DialChat).mockImplementation(
         () =>
           ({
             sendMessageStream: mockSendMessageStream,
-          }) as unknown as GeminiChat,
+          }) as unknown as DialChat,
       );
 
       // Default mock for executeToolCall
@@ -221,7 +221,7 @@ describe('subagent.ts', () => {
     const getGenerationConfigFromMock = (
       callIndex = 0,
     ): GenerateContentConfig & { systemInstruction?: string | Content } => {
-      const callArgs = vi.mocked(GeminiChat).mock.calls[callIndex];
+      const callArgs = vi.mocked(DialChat).mock.calls[callIndex];
       const generationConfig = callArgs?.[1];
       // Ensure it's defined before proceeding
       expect(generationConfig).toBeDefined();
@@ -341,10 +341,10 @@ describe('subagent.ts', () => {
     });
 
     describe('runNonInteractive - Initialization and Prompting', () => {
-      it('should correctly template the system prompt and initialize GeminiChat', async () => {
+      it('should correctly template the system prompt and initialize DialChat', async () => {
         const { config } = await createMockConfig();
 
-        vi.mocked(GeminiChat).mockClear();
+        vi.mocked(DialChat).mockClear();
 
         const promptConfig: PromptConfig = {
           systemPrompt: 'Hello ${name}, your task is ${task}.',
@@ -366,9 +366,9 @@ describe('subagent.ts', () => {
 
         await scope.runNonInteractive(context);
 
-        // Check if GeminiChat was initialized correctly by the subagent
-        expect(GeminiChat).toHaveBeenCalledTimes(1);
-        const callArgs = vi.mocked(GeminiChat).mock.calls[0];
+        // Check if DialChat was initialized correctly by the subagent
+        expect(DialChat).toHaveBeenCalledTimes(1);
+        const callArgs = vi.mocked(DialChat).mock.calls[0];
 
         // Check Generation Config
         const generationConfig = getGenerationConfigFromMock();
@@ -395,7 +395,7 @@ describe('subagent.ts', () => {
 
       it('should use initialMessages instead of systemPrompt if provided', async () => {
         const { config } = await createMockConfig();
-        vi.mocked(GeminiChat).mockClear();
+        vi.mocked(DialChat).mockClear();
 
         const initialMessages: Content[] = [
           { role: 'user', parts: [{ text: 'Hi' }] },
@@ -416,7 +416,7 @@ describe('subagent.ts', () => {
 
         await scope.runNonInteractive(context);
 
-        const callArgs = vi.mocked(GeminiChat).mock.calls[0];
+        const callArgs = vi.mocked(DialChat).mock.calls[0];
         const generationConfig = getGenerationConfigFromMock();
         const history = callArgs[2];
 

@@ -10,6 +10,7 @@ import { LoadingIndicator } from './LoadingIndicator.js';
 import { ContextSummaryDisplay } from './ContextSummaryDisplay.js';
 import { AutoAcceptIndicator } from './AutoAcceptIndicator.js';
 import { ShellModeIndicator } from './ShellModeIndicator.js';
+import { UserModeIndicator } from './UserModeIndicator.js';
 import { DetailedMessagesDisplay } from './DetailedMessagesDisplay.js';
 import { InputPrompt, calculatePromptWidths } from './InputPrompt.js';
 import { Footer } from './Footer.js';
@@ -23,7 +24,7 @@ import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useVimMode } from '../contexts/VimModeContext.js';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { useSettings } from '../contexts/SettingsContext.js';
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import { ApprovalMode } from '@dial-code/dial-core';
 import { StreamingState } from '../types.js';
 import { ConfigInitDisplay } from '../components/ConfigInitDisplay.js';
 import { t } from '../../i18n/index.js';
@@ -39,7 +40,13 @@ export const Composer = () => {
   const isNarrow = isNarrowWidth(terminalWidth);
   const debugConsoleMaxHeight = Math.floor(Math.max(terminalWidth * 0.2, 5));
 
-  const { contextFileNames, showAutoAcceptIndicator } = uiState;
+  const {
+    contextFileNames,
+    showAutoAcceptIndicator,
+    userMode,
+    userModeIsManual,
+    userModeAutoInfo,
+  } = uiState;
 
   // Use the container width of InputPrompt for width of DetailedMessagesDisplay
   const { containerWidth } = useMemo(
@@ -72,16 +79,35 @@ export const Composer = () => {
 
       <Box
         marginTop={1}
-        justifyContent={
-          settings.merged.ui?.hideContextSummary
-            ? 'flex-start'
-            : 'space-between'
-        }
+        justifyContent="space-between"
         width="100%"
         flexDirection={isNarrow ? 'column' : 'row'}
         alignItems={isNarrow ? 'flex-start' : 'center'}
       >
-        <Box marginRight={1}>
+        {/* LEFT SIDE: Mode indicators (execution + approval) */}
+        <Box flexDirection="column" alignItems="flex-start">
+          {/* User execution mode indicator (Tab to cycle) */}
+          {!uiState.shellModeActive && (
+            <UserModeIndicator
+              mode={userMode}
+              isManuallySelected={userModeIsManual}
+              confidence={userModeAutoInfo?.confidence}
+            />
+          )}
+          {/* Approval mode indicator (Shift+Tab to cycle) */}
+          {showAutoAcceptIndicator !== ApprovalMode.DEFAULT &&
+            !uiState.shellModeActive && (
+              <AutoAcceptIndicator approvalMode={showAutoAcceptIndicator} />
+            )}
+          {uiState.shellModeActive && <ShellModeIndicator />}
+        </Box>
+
+        {/* RIGHT SIDE: Context summary and status messages */}
+        <Box
+          paddingTop={isNarrow ? 1 : 0}
+          flexDirection="column"
+          alignItems="flex-end"
+        >
           {process.env['GEMINI_SYSTEM_MD'] && (
             <Text color={theme.status.error}>|⌐■_■| </Text>
           )}
@@ -109,13 +135,6 @@ export const Composer = () => {
               />
             )
           )}
-        </Box>
-        <Box paddingTop={isNarrow ? 1 : 0}>
-          {showAutoAcceptIndicator !== ApprovalMode.DEFAULT &&
-            !uiState.shellModeActive && (
-              <AutoAcceptIndicator approvalMode={showAutoAcceptIndicator} />
-            )}
-          {uiState.shellModeActive && <ShellModeIndicator />}
         </Box>
       </Box>
 
@@ -152,6 +171,7 @@ export const Composer = () => {
           focus={true}
           vimHandleInput={uiActions.vimHandleInput}
           isEmbeddedShellFocused={uiState.embeddedShellFocused}
+          userMode={userMode}
           placeholder={
             vimEnabled
               ? '  ' + t("Press 'i' for INSERT mode and 'Esc' for NORMAL mode.")

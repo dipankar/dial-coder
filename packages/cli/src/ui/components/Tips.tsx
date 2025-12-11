@@ -7,7 +7,7 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
-import { type Config } from '@qwen-code/qwen-code-core';
+import { type Config } from '@dial-code/dial-core';
 import { t } from '../../i18n/index.js';
 
 interface TipsProps {

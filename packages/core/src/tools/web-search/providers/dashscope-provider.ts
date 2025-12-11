@@ -59,14 +59,14 @@ interface DashScopeSearchResponse {
 }
 
 // File System Configuration
-const QWEN_DIR = '.qwen';
+const DIAL_DIR = '.dial';
 const QWEN_CREDENTIAL_FILENAME = 'oauth_creds.json';
 
 /**
  * Get the path to the cached OAuth credentials file.
  */
 function getQwenCachedCredentialPath(): string {
-  return path.join(os.homedir(), QWEN_DIR, QWEN_CREDENTIAL_FILENAME);
+  return path.join(os.homedir(), DIAL_DIR, QWEN_CREDENTIAL_FILENAME);
 }
 
 /**

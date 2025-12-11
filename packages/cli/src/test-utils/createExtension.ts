@@ -13,7 +13,7 @@ import {
 import {
   type MCPServerConfig,
   type ExtensionInstallMetadata,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 
 export function createExtension({
   extensionsDir = 'extensions-dir',

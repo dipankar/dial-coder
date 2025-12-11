@@ -11,7 +11,7 @@ import {
   getShellConfiguration,
   ShellExecutionService,
   flatMapTextParts,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 
 import type { CommandContext } from '../../ui/commands/types.js';
 import type { IPromptProcessor, PromptPipelineContent } from './types.js';

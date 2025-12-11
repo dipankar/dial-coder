@@ -7,8 +7,8 @@
 import {
   getErrorMessage,
   loadServerHierarchicalMemory,
-  QWEN_DIR,
-} from '@qwen-code/qwen-code-core';
+  DIAL_DIR,
+} from '@dial-code/dial-core';
 import path from 'node:path';
 import os from 'os';
 import fs from 'fs/promises';
@@ -103,7 +103,7 @@ export const memoryCommand: SlashCommand = {
             try {
               const globalMemoryPath = path.join(
                 os.homedir(),
-                QWEN_DIR,
+                DIAL_DIR,
                 'QWEN.md',
               );
               const globalMemoryContent = await fs.readFile(

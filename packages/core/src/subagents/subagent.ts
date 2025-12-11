@@ -25,7 +25,7 @@ import type {
   FunctionDeclaration,
   GenerateContentResponseUsageMetadata,
 } from '@google/genai';
-import { GeminiChat } from '../core/geminiChat.js';
+import { DialChat } from '../core/dialChat.js';
 import type {
   PromptConfig,
   ModelConfig,
@@ -837,11 +837,7 @@ export class SubAgentScope {
         generationConfig.systemInstruction = systemInstruction;
       }
 
-      return new GeminiChat(
-        this.runtimeContext,
-        generationConfig,
-        start_history,
-      );
+      return new DialChat(this.runtimeContext, generationConfig, start_history);
     } catch (error) {
       await reportError(
         error,

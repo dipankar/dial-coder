@@ -5,9 +5,9 @@
  */
 
 import type { GitIgnoreFilter } from '../utils/gitIgnoreParser.js';
-import type { QwenIgnoreFilter } from '../utils/qwenIgnoreParser.js';
+import type { QwenIgnoreFilter } from '../utils/dialIgnoreParser.js';
 import { GitIgnoreParser } from '../utils/gitIgnoreParser.js';
-import { QwenIgnoreParser } from '../utils/qwenIgnoreParser.js';
+import { QwenIgnoreParser } from '../utils/dialIgnoreParser.js';
 import { isGitRepository } from '../utils/gitUtils.js';
 import * as path from 'node:path';
 
@@ -134,7 +134,7 @@ export class FileDiscoveryService {
   }
 
   /**
-   * Returns loaded patterns from .qwenignore
+   * Returns loaded patterns from .dialignore
    */
   getQwenIgnorePatterns(): string[] {
     return this.qwenIgnoreFilter?.getPatterns() ?? [];

@@ -33,13 +33,14 @@ import {
   type IdeInfo,
   type IdeContext,
   type UserTierId,
+  ApprovalMode,
   DEFAULT_GEMINI_FLASH_MODEL,
   IdeClient,
   ideContextStore,
   getErrorMessage,
   getAllGeminiMdFilenames,
   ShellExecutionService,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { validateAuthMethod } from '../config/auth.js';
 import { loadHierarchicalGeminiMemory } from '../config/config.js';
 import process from 'node:process';
@@ -64,7 +65,7 @@ import { basename } from 'node:path';
 import { computeWindowTitle } from '../utils/windowTitle.js';
 import { useTextBuffer } from './components/shared/text-buffer.js';
 import { useLogger } from './hooks/useLogger.js';
-import { useGeminiStream } from './hooks/useGeminiStream.js';
+import { useDialStream } from './hooks/useDialStream.js';
 import { useVim } from './hooks/vim.js';
 import { type LoadedSettings, SettingScope } from '../config/settings.js';
 import { type InitializationResult } from '../core/initializer.js';
@@ -83,6 +84,7 @@ import { ConsolePatcher } from './utils/ConsolePatcher.js';
 import { registerCleanup, runExitCleanup } from '../utils/cleanup.js';
 import { useMessageQueue } from './hooks/useMessageQueue.js';
 import { useAutoAcceptIndicator } from './hooks/useAutoAcceptIndicator.js';
+import { useUserModeIndicator } from './hooks/useUserModeIndicator.js';
 import { useWorkspaceMigration } from './hooks/useWorkspaceMigration.js';
 import { useSessionStats } from './contexts/SessionContext.js';
 import { useGitBranchName } from './hooks/useGitBranchName.js';
@@ -616,6 +618,24 @@ export const AppContainer = (props: AppContainerProps) => {
 
   const cancelHandlerRef = useRef<() => void>(() => {});
 
+  // User mode ref - allows useDialStream to access current mode before useUserModeIndicator runs
+  const userModeRef = useRef<'ask' | 'quick' | 'review' | 'safe'>('quick');
+  const getUserMode = useCallback(() => userModeRef.current, []);
+
+  // Auto mode select ref - allows useDialStream to trigger auto mode selection
+  type ModeSelectionInfo = {
+    mode: 'ask' | 'quick' | 'review' | 'safe';
+    isAutoSelected: boolean;
+    confidence: number;
+    reasons: string[];
+  };
+  const autoModeSelectRef = useRef<((info: ModeSelectionInfo) => void) | null>(
+    null,
+  );
+  const onAutoModeSelect = useCallback((info: ModeSelectionInfo) => {
+    autoModeSelectRef.current?.(info);
+  }, []);
+
   const {
     streamingState,
     submitQuery,
@@ -626,7 +646,8 @@ export const AppContainer = (props: AppContainerProps) => {
     handleApprovalModeChange,
     activePtyId,
     loopDetectionConfirmationRequest,
-  } = useGeminiStream(
+    dialecticEvent,
+  } = useDialStream(
     config.getGeminiClient(),
     historyManager.history,
     historyManager.addItem,
@@ -648,6 +669,8 @@ export const AppContainer = (props: AppContainerProps) => {
     terminalHeight,
     handleVisionSwitchRequired, // onVisionSwitchRequired
     embeddedShellFocused,
+    getUserMode,
+    onAutoModeSelect,
   );
 
   // Auto-accept indicator
@@ -656,6 +679,60 @@ export const AppContainer = (props: AppContainerProps) => {
     addItem: historyManager.addItem,
     onApprovalModeChange: handleApprovalModeChange,
   });
+
+  // User execution mode indicator (Tab to cycle: ask → quick → review → safe)
+  // isActive when not in shell mode and streaming is idle/responding
+  const handleUserModeSync = useCallback(
+    (mode: 'ask' | 'quick' | 'review' | 'safe') => {
+      // When user selects 'ask' mode, also set approval mode to PLAN (read-only)
+      if (mode === 'ask') {
+        try {
+          config.setApprovalMode(ApprovalMode.PLAN);
+        } catch {
+          // Ignore errors from untrusted folders
+        }
+      } else if (config.getApprovalMode() === ApprovalMode.PLAN) {
+        // When leaving 'ask' mode, reset to DEFAULT if we were in PLAN mode
+        try {
+          config.setApprovalMode(ApprovalMode.DEFAULT);
+        } catch {
+          // Ignore errors from untrusted folders
+        }
+      }
+    },
+    [config],
+  );
+
+  const {
+    mode: userMode,
+    isManuallySelected: userModeIsManual,
+    autoSelectionInfo: userModeAutoInfo,
+    setAutoSelectedMode,
+  } = useUserModeIndicator({
+    initialMode: 'quick',
+    addItem: historyManager.addItem,
+    isActive:
+      !shellModeActive &&
+      streamingState !== StreamingState.WaitingForConfirmation,
+    onSyncApprovalMode: handleUserModeSync,
+  });
+
+  // Sync userModeRef when userMode changes (for useDialStream access)
+  useEffect(() => {
+    userModeRef.current = userMode;
+  }, [userMode]);
+
+  // Sync autoModeSelectRef with setAutoSelectedMode
+  useEffect(() => {
+    autoModeSelectRef.current = setAutoSelectedMode;
+  }, [setAutoSelectedMode]);
+
+  // Log dialectic events for debugging (optional)
+  useEffect(() => {
+    if (dialecticEvent && config.getDebugMode()) {
+      console.debug('Dialectic event:', dialecticEvent);
+    }
+  }, [dialecticEvent, config]);
 
   const { messageQueue, addMessage, clearQueue, getQueuedMessagesText } =
     useMessageQueue({
@@ -1261,6 +1338,9 @@ export const AppContainer = (props: AppContainerProps) => {
       historyRemountKey,
       messageQueue,
       showAutoAcceptIndicator,
+      userMode,
+      userModeIsManual,
+      userModeAutoInfo,
       showWorkspaceMigrationDialog,
       workspaceExtensions,
       currentModel,
@@ -1353,6 +1433,9 @@ export const AppContainer = (props: AppContainerProps) => {
       historyRemountKey,
       messageQueue,
       showAutoAcceptIndicator,
+      userMode,
+      userModeIsManual,
+      userModeAutoInfo,
       showWorkspaceMigrationDialog,
       workspaceExtensions,
       userTier,

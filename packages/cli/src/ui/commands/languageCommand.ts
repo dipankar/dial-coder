@@ -20,7 +20,7 @@ import {
 } from '../../i18n/index.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { Storage } from '@qwen-code/qwen-code-core';
+import { Storage } from '@dial-code/dial-core';
 
 const LLM_OUTPUT_LANGUAGE_RULE_FILENAME = 'output-language.md';
 
@@ -68,7 +68,7 @@ This is a **NON-NEGOTIABLE** requirement. Even if the user writes in English, sa
  */
 function getLlmOutputLanguageRulePath(): string {
   return path.join(
-    Storage.getGlobalQwenDir(),
+    Storage.getGlobalDialDir(),
     LLM_OUTPUT_LANGUAGE_RULE_FILENAME,
   );
 }

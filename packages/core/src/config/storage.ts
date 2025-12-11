@@ -9,7 +9,7 @@ import * as os from 'node:os';
 import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
 
-export const QWEN_DIR = '.qwen';
+export const DIAL_DIR = '.dial';
 export const GOOGLE_ACCOUNTS_FILENAME = 'google_accounts.json';
 export const OAUTH_FILE = 'oauth_creds.json';
 const TMP_DIR_NAME = 'tmp';
@@ -22,48 +22,48 @@ export class Storage {
     this.targetDir = targetDir;
   }
 
-  static getGlobalQwenDir(): string {
+  static getGlobalDialDir(): string {
     const homeDir = os.homedir();
     if (!homeDir) {
-      return path.join(os.tmpdir(), '.qwen');
+      return path.join(os.tmpdir(), '.dial');
     }
-    return path.join(homeDir, QWEN_DIR);
+    return path.join(homeDir, DIAL_DIR);
   }
 
   static getMcpOAuthTokensPath(): string {
-    return path.join(Storage.getGlobalQwenDir(), 'mcp-oauth-tokens.json');
+    return path.join(Storage.getGlobalDialDir(), 'mcp-oauth-tokens.json');
   }
 
   static getGlobalSettingsPath(): string {
-    return path.join(Storage.getGlobalQwenDir(), 'settings.json');
+    return path.join(Storage.getGlobalDialDir(), 'settings.json');
   }
 
   static getInstallationIdPath(): string {
-    return path.join(Storage.getGlobalQwenDir(), 'installation_id');
+    return path.join(Storage.getGlobalDialDir(), 'installation_id');
   }
 
   static getGoogleAccountsPath(): string {
-    return path.join(Storage.getGlobalQwenDir(), GOOGLE_ACCOUNTS_FILENAME);
+    return path.join(Storage.getGlobalDialDir(), GOOGLE_ACCOUNTS_FILENAME);
   }
 
   static getUserCommandsDir(): string {
-    return path.join(Storage.getGlobalQwenDir(), 'commands');
+    return path.join(Storage.getGlobalDialDir(), 'commands');
   }
 
   static getGlobalMemoryFilePath(): string {
-    return path.join(Storage.getGlobalQwenDir(), 'memory.md');
+    return path.join(Storage.getGlobalDialDir(), 'memory.md');
   }
 
   static getGlobalTempDir(): string {
-    return path.join(Storage.getGlobalQwenDir(), TMP_DIR_NAME);
+    return path.join(Storage.getGlobalDialDir(), TMP_DIR_NAME);
   }
 
   static getGlobalBinDir(): string {
-    return path.join(Storage.getGlobalQwenDir(), BIN_DIR_NAME);
+    return path.join(Storage.getGlobalDialDir(), BIN_DIR_NAME);
   }
 
-  getQwenDir(): string {
-    return path.join(this.targetDir, QWEN_DIR);
+  getDialDir(): string {
+    return path.join(this.targetDir, DIAL_DIR);
   }
 
   getProjectTempDir(): string {
@@ -77,7 +77,7 @@ export class Storage {
   }
 
   static getOAuthCredsPath(): string {
-    return path.join(Storage.getGlobalQwenDir(), OAUTH_FILE);
+    return path.join(Storage.getGlobalDialDir(), OAUTH_FILE);
   }
 
   getProjectRoot(): string {
@@ -90,16 +90,16 @@ export class Storage {
 
   getHistoryDir(): string {
     const hash = this.getFilePathHash(this.getProjectRoot());
-    const historyDir = path.join(Storage.getGlobalQwenDir(), 'history');
+    const historyDir = path.join(Storage.getGlobalDialDir(), 'history');
     return path.join(historyDir, hash);
   }
 
   getWorkspaceSettingsPath(): string {
-    return path.join(this.getQwenDir(), 'settings.json');
+    return path.join(this.getDialDir(), 'settings.json');
   }
 
   getProjectCommandsDir(): string {
-    return path.join(this.getQwenDir(), 'commands');
+    return path.join(this.getDialDir(), 'commands');
   }
 
   getProjectTempCheckpointsDir(): string {
@@ -107,11 +107,11 @@ export class Storage {
   }
 
   getExtensionsDir(): string {
-    return path.join(this.getQwenDir(), 'extensions');
+    return path.join(this.getDialDir(), 'extensions');
   }
 
   getExtensionsConfigPath(): string {
-    return path.join(this.getExtensionsDir(), 'qwen-extension.json');
+    return path.join(this.getExtensionsDir(), 'dial-extension.json');
   }
 
   getHistoryFilePath(): string {

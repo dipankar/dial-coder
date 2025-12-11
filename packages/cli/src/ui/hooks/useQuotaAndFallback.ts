@@ -12,7 +12,7 @@ import {
   isGenericQuotaExceededError,
   isProQuotaExceededError,
   UserTierId,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { type UseHistoryManagerReturn } from './useHistoryManager.js';
 import { AuthState, MessageType } from '../types.js';

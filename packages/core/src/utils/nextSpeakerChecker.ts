@@ -6,7 +6,7 @@
 
 import type { Content } from '@google/genai';
 import { DEFAULT_QWEN_MODEL } from '../config/models.js';
-import type { GeminiChat } from '../core/geminiChat.js';
+import type { DialChat } from '../core/dialChat.js';
 import { isFunctionResponse } from './messageInspectors.js';
 import type { Config } from '../config/config.js';
 
@@ -40,7 +40,7 @@ export interface NextSpeakerResponse {
 }
 
 export async function checkNextSpeaker(
-  chat: GeminiChat,
+  chat: DialChat,
   config: Config,
   abortSignal: AbortSignal,
   promptId: string,

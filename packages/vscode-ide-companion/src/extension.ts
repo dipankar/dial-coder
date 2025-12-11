@@ -13,11 +13,11 @@ import {
   detectIdeFromEnv,
   IDE_DEFINITIONS,
   type IdeInfo,
-} from '@qwen-code/qwen-code-core/src/ide/detect-ide.js';
+} from '@dial-code/dial-core/src/ide/detect-ide.js';
 
-const CLI_IDE_COMPANION_IDENTIFIER = 'qwenlm.qwen-code-vscode-ide-companion';
-const INFO_MESSAGE_SHOWN_KEY = 'qwenCodeInfoMessageShown';
-export const DIFF_SCHEME = 'qwen-diff';
+const CLI_IDE_COMPANION_IDENTIFIER = 'dialcode.dial-code-vscode-ide-companion';
+const INFO_MESSAGE_SHOWN_KEY = 'dialCodeInfoMessageShown';
+export const DIFF_SCHEME = 'dial-diff';
 
 /**
  * IDE environments where the installation greeting is hidden.  In these
@@ -120,13 +120,13 @@ export async function activate(context: vscode.ExtensionContext) {
       DIFF_SCHEME,
       diffContentProvider,
     ),
-    vscode.commands.registerCommand('qwen.diff.accept', (uri?: vscode.Uri) => {
+    vscode.commands.registerCommand('dial.diff.accept', (uri?: vscode.Uri) => {
       const docUri = uri ?? vscode.window.activeTextEditor?.document.uri;
       if (docUri && docUri.scheme === DIFF_SCHEME) {
         diffManager.acceptDiff(docUri);
       }
     }),
-    vscode.commands.registerCommand('qwen.diff.cancel', (uri?: vscode.Uri) => {
+    vscode.commands.registerCommand('dial.diff.cancel', (uri?: vscode.Uri) => {
       const docUri = uri ?? vscode.window.activeTextEditor?.document.uri;
       if (docUri && docUri.scheme === DIFF_SCHEME) {
         diffManager.cancelDiff(docUri);

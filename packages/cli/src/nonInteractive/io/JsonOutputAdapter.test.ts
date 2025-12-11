@@ -5,11 +5,8 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import type {
-  Config,
-  ServerGeminiStreamEvent,
-} from '@qwen-code/qwen-code-core';
-import { GeminiEventType } from '@qwen-code/qwen-code-core';
+import type { Config, ServerGeminiStreamEvent } from '@dial-code/dial-core';
+import { GeminiEventType } from '@dial-code/dial-core';
 import type { Part } from '@google/genai';
 import { JsonOutputAdapter } from './JsonOutputAdapter.js';
 
@@ -508,6 +505,32 @@ describe('JsonOutputAdapter', () => {
         files: {
           totalLinesAdded: 10,
           totalLinesRemoved: 5,
+        },
+        modes: {
+          ask: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          quick: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          review: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          safe: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
         },
       };
 

@@ -13,12 +13,12 @@ export * from './output/json-formatter.js';
 export * from './core/client.js';
 export * from './core/contentGenerator.js';
 export * from './core/loggingContentGenerator.js';
-export * from './core/geminiChat.js';
+export * from './core/dialChat.js';
 export * from './core/logger.js';
 export * from './core/prompts.js';
 export * from './core/tokenLimits.js';
 export * from './core/turn.js';
-export * from './core/geminiRequest.js';
+export * from './core/dialRequest.js';
 export * from './core/coreToolScheduler.js';
 export * from './core/nonInteractiveToolExecutor.js';
 
@@ -129,3 +129,15 @@ export { Storage } from './config/storage.js';
 
 // Export test utils
 export * from './test-utils/index.js';
+
+// Export LLM abstraction layer (Phase 2)
+export * from './llm/index.js';
+
+// Export Memory System (Phase 3)
+export * from './memory/index.js';
+
+// Export Agents (Phase 4)
+export * from './agents/index.js';
+
+// Export Orchestrator (Phase 4)
+export * from './orchestrator/index.js';

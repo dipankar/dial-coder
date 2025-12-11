@@ -9,7 +9,7 @@ import type { ReadableStream, WritableStream } from 'node:stream/web';
 import type { Content, FunctionCall, Part } from '@google/genai';
 import type {
   Config,
-  GeminiChat,
+  DialChat,
   ToolCallConfirmationDetails,
   ToolResult,
   SubAgentEventEmitter,
@@ -18,7 +18,7 @@ import type {
   SubAgentApprovalRequestEvent,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import {
   AuthType,
   clearCachedCredentialFile,
@@ -40,7 +40,7 @@ import {
   Kind,
   TodoWriteTool,
   UserPromptEvent,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import * as acp from './acp.js';
 import { AcpFileSystemService } from './fileSystemService.js';
 import { Readable, Writable } from 'node:stream';
@@ -279,7 +279,7 @@ class Session {
 
   constructor(
     private readonly id: string,
-    private readonly chat: GeminiChat,
+    private readonly chat: DialChat,
     private readonly config: Config,
     private readonly client: acp.Client,
     private readonly settings: LoadedSettings,

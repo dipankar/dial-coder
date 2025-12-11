@@ -20,6 +20,7 @@ import {
 } from '../utils/displayUtils.js';
 import { computeSessionStats } from '../utils/computeStats.js';
 import { t } from '../../i18n/index.js';
+import type { ModeStats } from '@dial-code/dial-core';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -69,6 +70,117 @@ const Section: React.FC<SectionProps> = ({ title, children }) => (
     {children}
   </Box>
 );
+
+/** Mode display configuration */
+const MODE_CONFIG: Record<
+  string,
+  { symbol: string; label: string; color: string }
+> = {
+  ask: { symbol: '?', label: 'Ask', color: theme.text.accent },
+  quick: { symbol: '\u26A1', label: 'Quick', color: theme.status.success },
+  review: { symbol: '\u25CE', label: 'Review', color: theme.status.warning },
+  safe: { symbol: '\uD83D\uDEE1', label: 'Safe', color: theme.status.error },
+};
+
+const ModeUsageTable: React.FC<{
+  modes: Record<string, ModeStats>;
+}> = ({ modes }) => {
+  const modeWidth = 12;
+  const countWidth = 8;
+  const tokensWidth = 15;
+
+  // Calculate totals
+  const totalCount = Object.values(modes).reduce((sum, m) => sum + m.count, 0);
+  const totalTokens = Object.values(modes).reduce(
+    (sum, m) => sum + m.totalTokens,
+    0,
+  );
+
+  // Only show if there's any mode usage
+  if (totalCount === 0) {
+    return null;
+  }
+
+  return (
+    <Box flexDirection="column" marginTop={1}>
+      {/* Header */}
+      <Box>
+        <Box width={modeWidth}>
+          <Text bold color={theme.text.primary}>
+            {t('Mode')}
+          </Text>
+        </Box>
+        <Box width={countWidth} justifyContent="flex-end">
+          <Text bold color={theme.text.primary}>
+            {t('Uses')}
+          </Text>
+        </Box>
+        <Box width={tokensWidth} justifyContent="flex-end">
+          <Text bold color={theme.text.primary}>
+            {t('Tokens')}
+          </Text>
+        </Box>
+      </Box>
+      {/* Divider */}
+      <Box
+        borderStyle="round"
+        borderBottom={true}
+        borderTop={false}
+        borderLeft={false}
+        borderRight={false}
+        borderColor={theme.border.default}
+        width={modeWidth + countWidth + tokensWidth}
+      ></Box>
+
+      {/* Rows - only show modes that were used */}
+      {Object.entries(modes)
+        .filter(([, modeStats]) => modeStats.count > 0)
+        .map(([modeName, modeStats]) => {
+          const config = MODE_CONFIG[modeName] || {
+            symbol: '?',
+            label: modeName,
+            color: theme.text.primary,
+          };
+          return (
+            <Box key={modeName}>
+              <Box width={modeWidth}>
+                <Text color={config.color}>
+                  {config.symbol} {config.label}
+                </Text>
+              </Box>
+              <Box width={countWidth} justifyContent="flex-end">
+                <Text color={theme.text.primary}>{modeStats.count}</Text>
+              </Box>
+              <Box width={tokensWidth} justifyContent="flex-end">
+                <Text color={theme.status.warning}>
+                  {modeStats.totalTokens.toLocaleString()}
+                </Text>
+              </Box>
+            </Box>
+          );
+        })}
+
+      {/* Total row */}
+      <Box marginTop={1}>
+        <Box width={modeWidth}>
+          <Text bold color={theme.text.primary}>
+            {t('Total')}
+          </Text>
+        </Box>
+        <Box width={countWidth} justifyContent="flex-end">
+          <Text bold color={theme.text.primary}>
+            {totalCount}
+          </Text>
+        </Box>
+        <Box width={tokensWidth} justifyContent="flex-end">
+          <Text bold color={theme.status.warning}>
+            {totalTokens.toLocaleString()}
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
 const ModelUsageTable: React.FC<{
   models: Record<string, ModelMetrics>;
@@ -168,7 +280,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
 }) => {
   const { stats } = useSessionStats();
   const { metrics } = stats;
-  const { models, tools, files } = metrics;
+  const { models, tools, files, modes } = metrics;
   const computed = computeSessionStats(metrics);
 
   const successThresholds = {
@@ -290,6 +402,8 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           cacheEfficiency={computed.cacheEfficiency}
         />
       )}
+
+      {modes && <ModeUsageTable modes={modes} />}
     </Box>
   );
 };

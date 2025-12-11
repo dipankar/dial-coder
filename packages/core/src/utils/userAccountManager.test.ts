@@ -30,7 +30,7 @@ describe('UserAccountManager', () => {
     );
     (os.homedir as Mock).mockReturnValue(tempHomeDir);
     accountsFile = () =>
-      path.join(tempHomeDir, '.qwen', 'google_accounts.json');
+      path.join(tempHomeDir, '.dial', 'google_accounts.json');
     userAccountManager = new UserAccountManager();
   });
 

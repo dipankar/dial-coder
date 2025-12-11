@@ -20,7 +20,7 @@ import {
   makeFakeConfig,
   type GeminiClient,
   type SubagentManager,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { LoadedSettings } from '../config/settings.js';
 import type { InitializationResult } from '../core/initializer.js';
 import { useQuotaAndFallback } from './hooks/useQuotaAndFallback.js';
@@ -68,7 +68,7 @@ vi.mock('./hooks/useConsoleMessages.js');
 vi.mock('./hooks/useTerminalSize.js', () => ({
   useTerminalSize: vi.fn(() => ({ columns: 80, rows: 24 })),
 }));
-vi.mock('./hooks/useGeminiStream.js');
+vi.mock('./hooks/useDialStream.js');
 vi.mock('./hooks/vim.js');
 vi.mock('./hooks/useFocus.js');
 vi.mock('./hooks/useBracketedPaste.js');
@@ -99,7 +99,7 @@ import { useSettingsCommand } from './hooks/useSettingsCommand.js';
 import { useModelCommand } from './hooks/useModelCommand.js';
 import { useSlashCommandProcessor } from './hooks/slashCommandProcessor.js';
 import { useConsoleMessages } from './hooks/useConsoleMessages.js';
-import { useGeminiStream } from './hooks/useGeminiStream.js';
+import { useDialStream } from './hooks/useDialStream.js';
 import { useVim } from './hooks/vim.js';
 import { useFolderTrust } from './hooks/useFolderTrust.js';
 import { useIdeTrustListener } from './hooks/useIdeTrustListener.js';
@@ -114,7 +114,7 @@ import { useLogger } from './hooks/useLogger.js';
 import { useLoadingIndicator } from './hooks/useLoadingIndicator.js';
 import { measureElement } from 'ink';
 import { useTerminalSize } from './hooks/useTerminalSize.js';
-import { ShellExecutionService } from '@qwen-code/qwen-code-core';
+import { ShellExecutionService } from '@dial-code/dial-core';
 
 describe('AppContainer State Management', () => {
   let mockConfig: Config;
@@ -131,7 +131,7 @@ describe('AppContainer State Management', () => {
   const mockedUseModelCommand = useModelCommand as Mock;
   const mockedUseSlashCommandProcessor = useSlashCommandProcessor as Mock;
   const mockedUseConsoleMessages = useConsoleMessages as Mock;
-  const mockedUseGeminiStream = useGeminiStream as Mock;
+  const mockedUseGeminiStream = useDialStream as Mock;
   const mockedUseVim = useVim as Mock;
   const mockedUseFolderTrust = useFolderTrust as Mock;
   const mockedUseIdeTrustListener = useIdeTrustListener as Mock;

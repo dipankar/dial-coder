@@ -1,53 +1,37 @@
-# Qwen Code
+# Dial Code
 
 <div align="center">
 
-![Qwen Code Screenshot](./docs/assets/qwen-screenshot.png)
-
-[![npm version](https://img.shields.io/npm/v/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
 [![License](https://img.shields.io/github/license/QwenLM/qwen-code.svg)](./LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org/)
-[![Downloads](https://img.shields.io/npm/dm/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
 
-**AI-powered command-line workflow tool for developers**
+**AI-powered command-line workflow tool for developers with multi-stage review pipeline**
 
 [Installation](#installation) • [Quick Start](#quick-start) • [Features](#key-features) • [Documentation](./docs/) • [Contributing](./CONTRIBUTING.md)
 
 </div>
 
-<div align="center">
-  
-  <a href="https://qwenlm.github.io/qwen-code-docs/de/">Deutsch</a> | 
-  <a href="https://qwenlm.github.io/qwen-code-docs/fr">français</a> | 
-  <a href="https://qwenlm.github.io/qwen-code-docs/ja/">日本語</a> | 
-  <a href="https://qwenlm.github.io/qwen-code-docs/ru">Русский</a> | 
-  <a href="https://qwenlm.github.io/qwen-code-docs/zh/">中文</a>
-  
-</div>
+Dial Code is a powerful command-line AI workflow tool forked from [**Qwen Code**](https://github.com/QwenLM/qwen-code), featuring a multi-stage review pipeline that plans changes, reviews them for issues, and safely applies them with testing. It supports multiple LLM providers including Qwen, Gemini, OpenAI, and Anthropic.
 
-Qwen Code is a powerful command-line AI workflow tool adapted from [**Gemini CLI**](https://github.com/google-gemini/gemini-cli), specifically optimized for [Qwen3-Coder](https://github.com/QwenLM/Qwen3-Coder) models. It enhances your development workflow with advanced code understanding, automated tasks, and intelligent assistance.
+## 💡 Multiple Provider Support
 
-## 💡 Free Options Available
+Dial Code supports multiple LLM providers:
 
-Get started with Qwen Code at no cost using any of these free options:
-
-### 🔥 Qwen OAuth (Recommended)
+### 🔥 Qwen OAuth (Default)
 
 - **2,000 requests per day** with no token limits
 - **60 requests per minute** rate limit
-- Simply run `qwen` and authenticate with your qwen.ai account
+- Simply run `dial` and authenticate with your qwen.ai account
 - Automatic credential management and refresh
-- Use `/auth` command to switch to Qwen OAuth if you have initialized with OpenAI compatible mode
 
-### 🌏 Regional Free Tiers
+### 🌐 Other Providers
 
-- **Mainland China**: ModelScope offers **2,000 free API calls per day**
-- **International**: OpenRouter provides **up to 1,000 free API calls per day** worldwide
+- **Gemini** - OAuth authentication supported
+- **OpenAI** - Configure with OPENAI_API_KEY
+- **Anthropic** - Configure with ANTHROPIC_API_KEY
+- **Ollama** - Local model support
 
 For detailed setup instructions, see [Authorization](#authorization).
-
-> [!WARNING]
-> **Token Usage Notice**: Qwen Code may issue multiple API calls per cycle, resulting in higher token usage (similar to Claude Code). We're actively optimizing API efficiency.
 
 ## Key Features
 
@@ -55,6 +39,72 @@ For detailed setup instructions, see [Authorization](#authorization).
 - **Workflow Automation** - Automate operational tasks like handling pull requests and complex rebases
 - **Enhanced Parser** - Adapted parser specifically optimized for Qwen-Coder models
 - **Vision Model Support** - Automatically detect images in your input and seamlessly switch to vision-capable models for multimodal analysis
+- **Smart Execution Modes** - Automatic mode selection based on task complexity with multi-stage review for safety
+
+## Execution Modes
+
+Dial Code features intelligent execution modes that adapt to your task's complexity and risk level:
+
+| Mode       | Symbol | Description          | Best For                               |
+| ---------- | ------ | -------------------- | -------------------------------------- |
+| **Ask**    | `?`    | Read-only queries    | Exploring code, getting explanations   |
+| **Quick**  | `⚡`   | Direct execution     | Simple fixes, typos, small changes     |
+| **Review** | `◎`    | Light review cycle   | Moderate changes, new features         |
+| **Safe**   | `🛡`   | Full review pipeline | Critical paths, auth, database changes |
+
+### How It Works
+
+Dial Code automatically analyzes your request and selects the appropriate mode:
+
+```bash
+> Explain how authentication works        # → Ask mode (read-only)
+> Fix the typo in README.md              # → Quick mode (direct)
+> Add a new helper function              # → Review mode (with review)
+> Update the login authentication        # → Safe mode (full pipeline)
+```
+
+### The Review Pipeline
+
+In **Review** and **Safe** modes, changes go through a multi-stage pipeline:
+
+1. **Planner** - Analyzes the task and creates a plan with code patches
+2. **Reviewer** - Reviews the plan for issues, security concerns, and edge cases
+3. **Resolver** - Reconciles feedback and produces the final implementation
+4. **Learner** - Extracts patterns and learnings for future reference
+
+### Override Mode Selection
+
+You can override the automatic selection:
+
+```bash
+# Force safe mode for any task
+dial --mode safe
+
+# Use quick mode when you're confident
+dial --mode quick
+```
+
+### Mode Escalation
+
+If issues are detected during execution, Dial Code can automatically escalate:
+
+- Test failures → Escalate to Review or Safe mode
+- Critical issues found → Escalate to Safe mode
+- Low confidence → Suggest escalation
+
+### Configuration
+
+Configure default mode behavior in `.dial/settings.json`:
+
+```json
+{
+  "executionMode": {
+    "default": "auto",
+    "autoSelect": true,
+    "enableEscalation": true
+  }
+}
+```
 
 ## Installation
 
@@ -66,33 +116,26 @@ Ensure you have [Node.js version 20](https://nodejs.org/en/download) or higher i
 curl -qL https://www.npmjs.com/install.sh | sh
 ```
 
-### Install from npm
-
-```bash
-npm install -g @qwen-code/qwen-code@latest
-qwen --version
-```
-
 ### Install from source
 
 ```bash
-git clone https://github.com/QwenLM/qwen-code.git
-cd qwen-code
+git clone https://github.com/your-org/dial-code.git
+cd dial-code
 npm install
 npm install -g .
 ```
 
-### Install globally with Homebrew (macOS/Linux)
+### Verify installation
 
 ```bash
-brew install qwen-code
+dial --version
 ```
 
 ## Quick Start
 
 ```bash
-# Start Qwen Code
-qwen
+# Start Dial Code
+dial
 
 # Example commands
 > Explain this codebase structure
@@ -106,7 +149,7 @@ Control your token usage with configurable session limits to optimize costs and 
 
 #### Configure Session Token Limit
 
-Create or edit `.qwen/settings.json` in your home directory:
+Create or edit `.dial/settings.json` in your home directory:
 
 ```json
 {
@@ -124,11 +167,11 @@ Create or edit `.qwen/settings.json` in your home directory:
 
 ### Vision Model Configuration
 
-Qwen Code includes intelligent vision model auto-switching that detects images in your input and can automatically switch to vision-capable models for multimodal analysis. **This feature is enabled by default** - when you include images in your queries, you'll see a dialog asking how you'd like to handle the vision model switch.
+Dial Code includes intelligent vision model auto-switching that detects images in your input and can automatically switch to vision-capable models for multimodal analysis. **This feature is enabled by default** - when you include images in your queries, you'll see a dialog asking how you'd like to handle the vision model switch.
 
 #### Skip the Switch Dialog (Optional)
 
-If you don't want to see the interactive dialog each time, configure the default behavior in your `.qwen/settings.json`:
+If you don't want to see the interactive dialog each time, configure the default behavior in your `.dial/settings.json`:
 
 ```json
 {
@@ -151,18 +194,18 @@ You can also set the behavior via command line:
 
 ```bash
 # Switch once per query
-qwen --vlm-switch-mode once
+dial --vlm-switch-mode once
 
 # Switch for entire session
-qwen --vlm-switch-mode session
+dial --vlm-switch-mode session
 
 # Never switch automatically
-qwen --vlm-switch-mode persist
+dial --vlm-switch-mode persist
 ```
 
 #### Disable Vision Models (Optional)
 
-To completely disable vision model support, add to your `.qwen/settings.json`:
+To completely disable vision model support, add to your `.dial/settings.json`:
 
 ```json
 {
@@ -380,7 +423,7 @@ qwen
 - `/clear` - Clear conversation history
 - `/compress` - Compress history to save tokens
 - `/stats` - Show current session information
-- `/exit` or `/quit` - Exit Qwen Code
+- `/exit` or `/quit` - Exit Dial Code
 
 ### Keyboard Shortcuts
 
@@ -394,8 +437,8 @@ qwen
 
 | Agent     | Model              | Accuracy |
 | --------- | ------------------ | -------- |
-| Qwen Code | Qwen3-Coder-480A35 | 37.5%    |
-| Qwen Code | Qwen3-Coder-30BA3B | 31.3%    |
+| Dial Code | Qwen3-Coder-480A35 | 37.5%    |
+| Dial Code | Qwen3-Coder-30BA3B | 31.3%    |
 
 ## Development & Contributing
 

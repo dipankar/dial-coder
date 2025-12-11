@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@qwen-code/qwen-code-core';
-import { AuthType, OutputFormat } from '@qwen-code/qwen-code-core';
+import type { Config } from '@dial-code/dial-core';
+import { AuthType, OutputFormat } from '@dial-code/dial-core';
 import { USER_SETTINGS_PATH } from './config/settings.js';
 import { validateAuthMethod } from './config/auth.js';
 import { type LoadedSettings } from './config/settings.js';

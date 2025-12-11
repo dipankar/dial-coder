@@ -8,9 +8,9 @@ import type {
   MCPServerConfig,
   GeminiCLIExtension,
   ExtensionInstallMetadata,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import {
-  QWEN_DIR,
+  DIAL_DIR,
   Storage,
   Config,
   ExtensionInstallEvent,
@@ -21,7 +21,7 @@ import {
   logExtensionInstallEvent,
   logExtensionUninstall,
   logExtensionDisable,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
@@ -40,7 +40,7 @@ import { ExtensionEnablementManager } from './extensions/extensionEnablement.js'
 import chalk from 'chalk';
 import type { ConfirmationRequest } from '../ui/types.js';
 
-export const EXTENSIONS_DIRECTORY_NAME = path.join(QWEN_DIR, 'extensions');
+export const EXTENSIONS_DIRECTORY_NAME = path.join(DIAL_DIR, 'extensions');
 
 export const EXTENSIONS_CONFIG_FILENAME = 'qwen-extension.json';
 export const INSTALL_METADATA_FILENAME = '.qwen-extension-install.json';

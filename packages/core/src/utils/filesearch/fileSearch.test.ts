@@ -6,7 +6,7 @@
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { FileSearchFactory, AbortError, filter } from './fileSearch.js';
-import { createTmpDir, cleanupTmpDir } from '@qwen-code/qwen-code-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@dial-code/dial-test-utils';
 
 describe('FileSearch', () => {
   let tmpDir: string;
@@ -17,9 +17,9 @@ describe('FileSearch', () => {
     vi.restoreAllMocks();
   });
 
-  it('should use .qwenignore rules', async () => {
+  it('should use .dialignore rules', async () => {
     tmpDir = await createTmpDir({
-      '.qwenignore': 'dist/',
+      '.dialignore': 'dist/',
       dist: ['ignored.js'],
       src: ['not-ignored.js'],
     });
@@ -38,13 +38,13 @@ describe('FileSearch', () => {
     await fileSearch.initialize();
     const results = await fileSearch.search('');
 
-    expect(results).toEqual(['src/', '.qwenignore', 'src/not-ignored.js']);
+    expect(results).toEqual(['src/', '.dialignore', 'src/not-ignored.js']);
   });
 
-  it('should combine .gitignore and .qwenignore rules', async () => {
+  it('should combine .gitignore and .dialignore rules', async () => {
     tmpDir = await createTmpDir({
       '.gitignore': 'dist/',
-      '.qwenignore': 'build/',
+      '.dialignore': 'build/',
       dist: ['ignored-by-git.js'],
       build: ['ignored-by-gemini.js'],
       src: ['not-ignored.js'],
@@ -66,8 +66,8 @@ describe('FileSearch', () => {
 
     expect(results).toEqual([
       'src/',
+      '.dialignore',
       '.gitignore',
-      '.qwenignore',
       'src/not-ignored.js',
     ]);
   });

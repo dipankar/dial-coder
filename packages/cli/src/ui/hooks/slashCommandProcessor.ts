@@ -8,7 +8,7 @@ import { useCallback, useMemo, useEffect, useState } from 'react';
 import { type PartListUnion } from '@google/genai';
 import process from 'node:process';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@dial-code/dial-core';
 import {
   GitService,
   Logger,
@@ -18,7 +18,7 @@ import {
   ToolConfirmationOutcome,
   Storage,
   IdeClient,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import { formatDuration } from '../utils/formatters.js';
 import type {

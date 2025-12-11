@@ -74,7 +74,7 @@ describe('Retry Utility Fallback Integration', () => {
       .mockRejectedValueOnce(createSimulated429Error())
       .mockResolvedValueOnce('success after fallback');
 
-    // Mock the onPersistent429 callback (this is what client.ts/geminiChat.ts provides)
+    // Mock the onPersistent429 callback (this is what client.ts/dialChat.ts provides)
     const mockPersistent429Callback = vi.fn(async (_authType?: string) => {
       fallbackCalled = true;
       // Return true to signal retryWithBackoff to reset attempts and continue.

@@ -52,6 +52,27 @@ export interface ModelMetrics {
   };
 }
 
+/**
+ * User-facing execution mode type for telemetry.
+ * Note: This is intentionally not exported to avoid conflicts with
+ * the UserMode type from the orchestrator module.
+ */
+type TelemetryUserMode = 'ask' | 'quick' | 'review' | 'safe';
+
+/**
+ * Statistics for a single execution mode.
+ */
+export interface ModeStats {
+  /** Number of times this mode was used */
+  count: number;
+  /** Total prompt tokens used in this mode */
+  promptTokens: number;
+  /** Total completion tokens used in this mode */
+  completionTokens: number;
+  /** Total tokens used in this mode */
+  totalTokens: number;
+}
+
 export interface SessionMetrics {
   models: Record<string, ModelMetrics>;
   tools: {
@@ -71,6 +92,8 @@ export interface SessionMetrics {
     totalLinesAdded: number;
     totalLinesRemoved: number;
   };
+  /** Execution mode usage statistics */
+  modes: Record<TelemetryUserMode, ModeStats>;
 }
 
 const createInitialModelMetrics = (): ModelMetrics => ({
@@ -87,6 +110,13 @@ const createInitialModelMetrics = (): ModelMetrics => ({
     thoughts: 0,
     tool: 0,
   },
+});
+
+const createInitialModeStats = (): ModeStats => ({
+  count: 0,
+  promptTokens: 0,
+  completionTokens: 0,
+  totalTokens: 0,
 });
 
 const createInitialMetrics = (): SessionMetrics => ({
@@ -107,6 +137,12 @@ const createInitialMetrics = (): SessionMetrics => ({
   files: {
     totalLinesAdded: 0,
     totalLinesRemoved: 0,
+  },
+  modes: {
+    ask: createInitialModeStats(),
+    quick: createInitialModeStats(),
+    review: createInitialModeStats(),
+    safe: createInitialModeStats(),
   },
 });
 
@@ -146,6 +182,29 @@ export class UiTelemetryService extends EventEmitter {
 
   setLastPromptTokenCount(lastPromptTokenCount: number): void {
     this.#lastPromptTokenCount = lastPromptTokenCount;
+    this.emit('update', {
+      metrics: this.#metrics,
+      lastPromptTokenCount: this.#lastPromptTokenCount,
+    });
+  }
+
+  /**
+   * Record execution mode usage.
+   * @param mode - The execution mode used (ask, quick, review, safe)
+   * @param promptTokens - Prompt tokens consumed
+   * @param completionTokens - Completion tokens generated
+   */
+  recordModeUsage(
+    mode: TelemetryUserMode,
+    promptTokens: number,
+    completionTokens: number,
+  ): void {
+    const modeStats = this.#metrics.modes[mode];
+    modeStats.count++;
+    modeStats.promptTokens += promptTokens;
+    modeStats.completionTokens += completionTokens;
+    modeStats.totalTokens += promptTokens + completionTokens;
+
     this.emit('update', {
       metrics: this.#metrics,
       lastPromptTokenCount: this.#lastPromptTokenCount,

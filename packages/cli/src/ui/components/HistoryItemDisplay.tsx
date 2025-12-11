@@ -10,11 +10,11 @@ import { escapeAnsiCtrlCodes } from '../utils/textUtils.js';
 import type { HistoryItem } from '../types.js';
 import { UserMessage } from './messages/UserMessage.js';
 import { UserShellMessage } from './messages/UserShellMessage.js';
-import { GeminiMessage } from './messages/GeminiMessage.js';
+import { DialMessage } from './messages/DialMessage.js';
 import { InfoMessage } from './messages/InfoMessage.js';
 import { ErrorMessage } from './messages/ErrorMessage.js';
 import { ToolGroupMessage } from './messages/ToolGroupMessage.js';
-import { GeminiMessageContent } from './messages/GeminiMessageContent.js';
+import { DialMessageContent } from './messages/DialMessageContent.js';
 import { CompressionMessage } from './messages/CompressionMessage.js';
 import { SummaryMessage } from './messages/SummaryMessage.js';
 import { WarningMessage } from './messages/WarningMessage.js';
@@ -27,7 +27,7 @@ import { SessionSummaryDisplay } from './SessionSummaryDisplay.js';
 import { Help } from './Help.js';
 import type { SlashCommand } from '../commands/types.js';
 import { ExtensionsList } from './views/ExtensionsList.js';
-import { getMCPServerStatus } from '@qwen-code/qwen-code-core';
+import { getMCPServerStatus } from '@dial-code/dial-core';
 import { ToolsList } from './views/ToolsList.js';
 import { McpStatus } from './views/McpStatus.js';
 
@@ -66,7 +66,7 @@ const HistoryItemDisplayComponent: React.FC<HistoryItemDisplayProps> = ({
         <UserShellMessage text={itemForDisplay.text} />
       )}
       {itemForDisplay.type === 'gemini' && (
-        <GeminiMessage
+        <DialMessage
           text={itemForDisplay.text}
           isPending={isPending}
           availableTerminalHeight={
@@ -76,7 +76,7 @@ const HistoryItemDisplayComponent: React.FC<HistoryItemDisplayProps> = ({
         />
       )}
       {itemForDisplay.type === 'gemini_content' && (
-        <GeminiMessageContent
+        <DialMessageContent
           text={itemForDisplay.text}
           isPending={isPending}
           availableTerminalHeight={

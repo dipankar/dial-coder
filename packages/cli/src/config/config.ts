@@ -7,7 +7,7 @@
 import type {
   FileFilteringOptions,
   MCPServerConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { extensionsCommand } from '../commands/extensions.js';
 import {
   ApprovalMode,
@@ -26,7 +26,7 @@ import {
   Storage,
   InputFormat,
   OutputFormat,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { Settings } from './settings.js';
 import yargs, { type Argv } from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -605,7 +605,7 @@ export async function loadCliConfig(
 
   // Automatically load output-language.md if it exists
   const outputLanguageFilePath = path.join(
-    Storage.getGlobalQwenDir(),
+    Storage.getGlobalDialDir(),
     'output-language.md',
   );
   if (fs.existsSync(outputLanguageFilePath)) {

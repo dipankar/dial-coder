@@ -70,7 +70,7 @@ describe('OpenAIContentConverter', () => {
     });
   });
 
-  describe('convertGeminiRequestToOpenAI', () => {
+  describe('convertDialRequestToOpenAI', () => {
     const createRequestWithFunctionResponse = (
       response: Record<string, unknown>,
     ): GenerateContentParameters => {
@@ -111,7 +111,7 @@ describe('OpenAIContentConverter', () => {
         output: 'Raw output text',
       });
 
-      const messages = converter.convertGeminiRequestToOpenAI(request);
+      const messages = converter.convertDialRequestToOpenAI(request);
       const toolMessage = messages.find((message) => message.role === 'tool');
 
       expect(toolMessage).toBeDefined();
@@ -123,7 +123,7 @@ describe('OpenAIContentConverter', () => {
         error: 'Command failed',
       });
 
-      const messages = converter.convertGeminiRequestToOpenAI(request);
+      const messages = converter.convertDialRequestToOpenAI(request);
       const toolMessage = messages.find((message) => message.role === 'tool');
 
       expect(toolMessage).toBeDefined();
@@ -135,7 +135,7 @@ describe('OpenAIContentConverter', () => {
         data: { value: 42 },
       });
 
-      const messages = converter.convertGeminiRequestToOpenAI(request);
+      const messages = converter.convertDialRequestToOpenAI(request);
       const toolMessage = messages.find((message) => message.role === 'tool');
 
       expect(toolMessage).toBeDefined();

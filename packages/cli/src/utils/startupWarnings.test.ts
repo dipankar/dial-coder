@@ -7,12 +7,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getStartupWarnings } from './startupWarnings.js';
 import * as fs from 'node:fs/promises';
-import { getErrorMessage } from '@qwen-code/qwen-code-core';
+import { getErrorMessage } from '@dial-code/dial-core';
 
 vi.mock('node:fs/promises', { spy: true });
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
-  const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+vi.mock('@dial-code/dial-core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
   return {
     ...actual,
     getErrorMessage: vi.fn(),

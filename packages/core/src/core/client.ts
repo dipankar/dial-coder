@@ -23,7 +23,7 @@ import {
 
 // Core modules
 import type { ContentGenerator } from './contentGenerator.js';
-import { GeminiChat } from './geminiChat.js';
+import { DialChat } from './dialChat.js';
 import {
   getCoreSystemPrompt,
   getCustomSystemPrompt,
@@ -88,7 +88,7 @@ export function isThinkingDefault(model: string) {
 const MAX_TURNS = 100;
 
 export class GeminiClient {
-  private chat?: GeminiChat;
+  private chat?: DialChat;
   private readonly generateContentConfig: GenerateContentConfig = {
     temperature: 0,
     topP: 1,
@@ -126,7 +126,7 @@ export class GeminiClient {
     this.getChat().addHistory(content);
   }
 
-  getChat(): GeminiChat {
+  getChat(): DialChat {
     if (!this.chat) {
       throw new Error('Chat not initialized');
     }
@@ -180,7 +180,7 @@ export class GeminiClient {
     });
   }
 
-  async startChat(extraHistory?: Content[]): Promise<GeminiChat> {
+  async startChat(extraHistory?: Content[]): Promise<DialChat> {
     this.forceFullIdeContext = true;
     this.hasFailedCompressionAttempt = false;
 
@@ -204,7 +204,7 @@ export class GeminiClient {
         };
       }
 
-      return new GeminiChat(
+      return new DialChat(
         this.config,
         {
           systemInstruction,

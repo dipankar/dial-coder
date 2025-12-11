@@ -298,7 +298,7 @@ export default {
   'Load Memory From Include Directories':
     'Load Memory From Include Directories',
   'Respect .gitignore': 'Respect .gitignore',
-  'Respect .qwenignore': 'Respect .qwenignore',
+  'Respect .dialignore': 'Respect .dialignore',
   'Enable Recursive File Search': 'Enable Recursive File Search',
   'Disable Fuzzy Search': 'Disable Fuzzy Search',
   'Enable Interactive Shell': 'Enable Interactive Shell',

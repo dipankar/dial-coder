@@ -7,8 +7,8 @@
 // File for 'gemini mcp list' command
 import type { CommandModule } from 'yargs';
 import { loadSettings } from '../../config/settings.js';
-import type { MCPServerConfig } from '@qwen-code/qwen-code-core';
-import { MCPServerStatus, createTransport } from '@qwen-code/qwen-code-core';
+import type { MCPServerConfig } from '@dial-code/dial-core';
+import { MCPServerStatus, createTransport } from '@dial-code/dial-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { ExtensionStorage, loadExtensions } from '../../config/extension.js';
 import { ExtensionEnablementManager } from '../../config/extensions/extensionEnablement.js';

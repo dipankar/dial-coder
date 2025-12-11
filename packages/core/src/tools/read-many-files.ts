@@ -68,7 +68,7 @@ export interface ReadManyFilesParams {
   useDefaultExcludes?: boolean;
 
   /**
-   * Whether to respect .gitignore and .qwenignore patterns (optional, defaults to true)
+   * Whether to respect .gitignore and .dialignore patterns (optional, defaults to true)
    */
   file_filtering_options?: {
     respect_git_ignore?: boolean;
@@ -152,13 +152,13 @@ ${finalExclusionPatternsForDescription
         : 'none specified'
     }`;
 
-    // Add a note if .qwenignore patterns contributed to the final list of exclusions
+    // Add a note if .dialignore patterns contributed to the final list of exclusions
     if (qwenIgnorePatterns.length > 0) {
       const geminiPatternsInEffect = qwenIgnorePatterns.filter((p) =>
         finalExclusionPatternsForDescription.includes(p),
       ).length;
       if (geminiPatternsInEffect > 0) {
-        excludeDesc += ` (includes ${geminiPatternsInEffect} from .qwenignore)`;
+        excludeDesc += ` (includes ${geminiPatternsInEffect} from .dialignore)`;
       }
     }
 
@@ -533,7 +533,7 @@ export class ReadManyFilesTool extends BaseDeclarativeTool<
         },
         file_filtering_options: {
           description:
-            'Whether to respect ignore patterns from .gitignore or .qwenignore',
+            'Whether to respect ignore patterns from .gitignore or .dialignore',
           type: 'object',
           properties: {
             respect_git_ignore: {
@@ -543,7 +543,7 @@ export class ReadManyFilesTool extends BaseDeclarativeTool<
             },
             respect_qwen_ignore: {
               description:
-                'Optional: Whether to respect .qwenignore patterns when listing files. Defaults to true.',
+                'Optional: Whether to respect .dialignore patterns when listing files. Defaults to true.',
               type: 'boolean',
             },
           },

@@ -52,7 +52,7 @@ describe('OAuthCredentialStorage', () => {
     updatedAt: expect.any(Number),
   };
 
-  const oldFilePath = '/mock/home/.qwen/oauth.json';
+  const oldFilePath = '/mock/home/.dial/oauth.json';
 
   beforeEach(() => {
     vi.spyOn(mockHybridTokenStorage, 'getCredentials').mockResolvedValue(null);

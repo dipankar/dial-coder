@@ -152,10 +152,10 @@ describe('LSTool', () => {
       expect(result.returnDisplay).toBe('Listed 2 item(s). (2 git-ignored)');
     });
 
-    it('should respect qwenignore patterns', async () => {
+    it('should respect dialignore patterns', async () => {
       await fs.writeFile(path.join(tempRootDir, 'file1.txt'), 'content1');
       await fs.writeFile(path.join(tempRootDir, 'file2.log'), 'content1');
-      await fs.writeFile(path.join(tempRootDir, '.qwenignore'), '*.log');
+      await fs.writeFile(path.join(tempRootDir, '.dialignore'), '*.log');
       const invocation = lsTool.build({ path: tempRootDir });
       const result = await invocation.execute(abortSignal);
 

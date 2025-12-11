@@ -11,8 +11,8 @@ import { tmpdir } from 'node:os';
 import type {
   ConfigParameters,
   ContentGeneratorConfig,
-} from '@qwen-code/qwen-code-core';
-import { Config } from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
+import { Config } from '@dial-code/dial-core';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -40,8 +40,8 @@ const TEST_CONTENT_GENERATOR_CONFIG: ContentGeneratorConfig = {
 };
 
 // Mock file discovery service and tool registry
-vi.mock('@qwen-code/qwen-code-core', async () => {
-  const actual = await vi.importActual('@qwen-code/qwen-code-core');
+vi.mock('@dial-code/dial-core', async () => {
+  const actual = await vi.importActual('@dial-code/dial-core');
   return {
     ...actual,
     FileDiscoveryService: vi.fn().mockImplementation(() => ({

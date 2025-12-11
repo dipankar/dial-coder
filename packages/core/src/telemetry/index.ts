@@ -98,4 +98,4 @@ export {
   ApiRequestPhase,
   FileOperation,
 } from './metrics.js';
-export { QwenLogger } from './qwen-logger/qwen-logger.js';
+export { QwenLogger } from './dial-logger/dial-logger.js';

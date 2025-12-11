@@ -32,7 +32,7 @@ const QWEN_OAUTH_SCOPE = 'openid profile email model.completion';
 const QWEN_OAUTH_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:device_code';
 
 // File System Configuration
-const QWEN_DIR = '.qwen';
+const DIAL_DIR = '.dial';
 const QWEN_CREDENTIAL_FILENAME = 'oauth_creds.json';
 
 /**
@@ -917,5 +917,5 @@ export async function clearQwenCredentials(): Promise<void> {
 }
 
 function getQwenCachedCredentialPath(): string {
-  return path.join(os.homedir(), QWEN_DIR, QWEN_CREDENTIAL_FILENAME);
+  return path.join(os.homedir(), DIAL_DIR, QWEN_CREDENTIAL_FILENAME);
 }

@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { ThoughtSummary } from '@qwen-code/qwen-code-core';
+import type { ThoughtSummary } from '@dial-code/dial-core';
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { useStreamingContext } from '../contexts/StreamingContext.js';
 import { StreamingState } from '../types.js';
-import { GeminiRespondingSpinner } from './GeminiRespondingSpinner.js';
+import { DialRespondingSpinner } from './DialRespondingSpinner.js';
 import { formatDuration } from '../utils/formatters.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
@@ -59,7 +59,7 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
       >
         <Box>
           <Box marginRight={1}>
-            <GeminiRespondingSpinner
+            <DialRespondingSpinner
               nonRespondingDisplay={
                 streamingState === StreamingState.WaitingForConfirmation
                   ? '⠏'

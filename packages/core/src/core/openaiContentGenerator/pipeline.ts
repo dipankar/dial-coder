@@ -251,7 +251,7 @@ export class ContentGenerationPipeline {
     userPromptId: string,
     streaming: boolean = false,
   ): Promise<OpenAI.Chat.ChatCompletionCreateParams> {
-    const messages = this.converter.convertGeminiRequestToOpenAI(request);
+    const messages = this.converter.convertDialRequestToOpenAI(request);
 
     // Apply provider-specific enhancements
     const baseRequest: OpenAI.Chat.ChatCompletionCreateParams = {

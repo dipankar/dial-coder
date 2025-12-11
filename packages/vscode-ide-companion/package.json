@@ -1,9 +1,9 @@
 {
-  "name": "qwen-code-vscode-ide-companion",
-  "displayName": "Qwen Code Companion",
-  "description": "Enable Qwen Code with direct access to your VS Code workspace.",
+  "name": "dial-code-vscode-ide-companion",
+  "displayName": "Dial Code Companion",
+  "description": "Enable Dial Code with direct access to your VS Code workspace.",
   "version": "0.3.0",
-  "publisher": "qwenlm",
+  "publisher": "dialcode",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
@@ -19,10 +19,10 @@
     "AI"
   ],
   "keywords": [
-    "qwen-code",
-    "qwen code",
-    "qwen",
-    "qwen code",
+    "dial-code",
+    "dial code",
+    "dial",
+    "dial code",
     "cli",
     "ide integration",
     "ide companion"
@@ -33,63 +33,63 @@
   "contributes": {
     "languages": [
       {
-        "id": "qwen-diff-editable"
+        "id": "dial-diff-editable"
       }
     ],
     "commands": [
       {
-        "command": "qwen.diff.accept",
-        "title": "Qwen Code: Accept Current Diff",
+        "command": "dial.diff.accept",
+        "title": "Dial Code: Accept Current Diff",
         "icon": "$(check)"
       },
       {
-        "command": "qwen.diff.cancel",
-        "title": "Qwen Code: Close Diff Editor",
+        "command": "dial.diff.cancel",
+        "title": "Dial Code: Close Diff Editor",
         "icon": "$(close)"
       },
       {
-        "command": "qwen-code.runQwenCode",
-        "title": "Qwen Code: Run"
+        "command": "dial-code.runDialCode",
+        "title": "Dial Code: Run"
       },
       {
-        "command": "qwen-code.showNotices",
-        "title": "Qwen Code: View Third-Party Notices"
+        "command": "dial-code.showNotices",
+        "title": "Dial Code: View Third-Party Notices"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "qwen.diff.accept",
-          "when": "qwen.diff.isVisible"
+          "command": "dial.diff.accept",
+          "when": "dial.diff.isVisible"
         },
         {
-          "command": "qwen.diff.cancel",
-          "when": "qwen.diff.isVisible"
+          "command": "dial.diff.cancel",
+          "when": "dial.diff.isVisible"
         }
       ],
       "editor/title": [
         {
-          "command": "qwen.diff.accept",
-          "when": "qwen.diff.isVisible",
+          "command": "dial.diff.accept",
+          "when": "dial.diff.isVisible",
           "group": "navigation"
         },
         {
-          "command": "qwen.diff.cancel",
-          "when": "qwen.diff.isVisible",
+          "command": "dial.diff.cancel",
+          "when": "dial.diff.isVisible",
           "group": "navigation"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "qwen.diff.accept",
+        "command": "dial.diff.accept",
         "key": "ctrl+s",
-        "when": "qwen.diff.isVisible"
+        "when": "dial.diff.isVisible"
       },
       {
-        "command": "qwen.diff.accept",
+        "command": "dial.diff.accept",
         "key": "cmd+s",
-        "when": "qwen.diff.isVisible"
+        "when": "dial.diff.isVisible"
       }
     ]
   },

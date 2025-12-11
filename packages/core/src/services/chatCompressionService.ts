@@ -6,7 +6,7 @@
 
 import type { Content } from '@google/genai';
 import type { Config } from '../config/config.js';
-import type { GeminiChat } from '../core/geminiChat.js';
+import type { DialChat } from '../core/dialChat.js';
 import { type ChatCompressionInfo, CompressionStatus } from '../core/turn.js';
 import { uiTelemetryService } from '../telemetry/uiTelemetry.js';
 import { tokenLimit } from '../core/tokenLimits.js';
@@ -78,7 +78,7 @@ export function findCompressSplitPoint(
 
 export class ChatCompressionService {
   async compress(
-    chat: GeminiChat,
+    chat: DialChat,
     promptId: string,
     force: boolean,
     model: string,

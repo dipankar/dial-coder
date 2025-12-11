@@ -26,7 +26,11 @@ import type {
   UserTierId,
   IdeInfo,
   FallbackIntent,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
+import type {
+  UserMode,
+  ModeSelectionInfo,
+} from '../hooks/useUserModeIndicator.js';
 import type { DOMElement } from 'ink';
 import type { SessionStatsState } from '../contexts/SessionContext.js';
 import type { ExtensionUpdateState } from '../state/extensions.js';
@@ -97,6 +101,12 @@ export interface UIState {
   historyRemountKey: number;
   messageQueue: string[];
   showAutoAcceptIndicator: ApprovalMode;
+  /** Current user execution mode (ask/quick/review/safe) */
+  userMode: UserMode;
+  /** Whether user mode was manually selected (vs auto) */
+  userModeIsManual: boolean;
+  /** Auto-selection info if available */
+  userModeAutoInfo: ModeSelectionInfo | null;
   showWorkspaceMigrationDialog: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   workspaceExtensions: any[]; // Extension[]

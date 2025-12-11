@@ -15,8 +15,8 @@ import type {
   Config,
   GeminiClient,
   ShellExecutionResult,
-} from '@qwen-code/qwen-code-core';
-import { isBinary, ShellExecutionService } from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
+import { isBinary, ShellExecutionService } from '@dial-code/dial-core';
 import { type PartListUnion } from '@google/genai';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import { SHELL_COMMAND_NAME } from '../constants.js';

@@ -142,6 +142,27 @@ describe('UiTelemetryService', () => {
         totalLinesAdded: 0,
         totalLinesRemoved: 0,
       },
+      modes: {
+        ask: { count: 0, promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        quick: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        review: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        safe: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+      },
     });
     expect(service.getLastPromptTokenCount()).toBe(0);
   });

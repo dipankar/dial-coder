@@ -10,13 +10,13 @@ import type {
   SessionMetrics,
   TaskResultDisplay,
   ToolCallResponseInfo,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import {
   ToolErrorType,
   MCPServerStatus,
   getMCPServerStatus,
   OutputFormat,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { Part } from '@google/genai';
 import type {
   CLIUserMessage,
@@ -60,9 +60,8 @@ vi.mock('../ui/utils/computeStats.js', () => ({
   }),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
-  const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+vi.mock('@dial-code/dial-core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
   return {
     ...actual,
     getMCPServerStatus: vi.fn(),
@@ -352,6 +351,27 @@ describe('computeUsageFromMetrics', () => {
         totalLinesAdded: 0,
         totalLinesRemoved: 0,
       },
+      modes: {
+        ask: { count: 0, promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        quick: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        review: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        safe: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+      },
     };
     const result = computeUsageFromMetrics(metrics);
     expect(result).toEqual({
@@ -405,6 +425,27 @@ describe('computeUsageFromMetrics', () => {
         totalLinesAdded: 0,
         totalLinesRemoved: 0,
       },
+      modes: {
+        ask: { count: 0, promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        quick: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        review: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        safe: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+      },
     };
     const result = computeUsageFromMetrics(metrics);
     expect(result).toEqual({
@@ -447,6 +488,27 @@ describe('computeUsageFromMetrics', () => {
         totalLinesAdded: 0,
         totalLinesRemoved: 0,
       },
+      modes: {
+        ask: { count: 0, promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        quick: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        review: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        safe: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+      },
     };
     const result = computeUsageFromMetrics(metrics);
     expect(result).not.toHaveProperty('total_tokens');
@@ -476,6 +538,27 @@ describe('computeUsageFromMetrics', () => {
       files: {
         totalLinesAdded: 0,
         totalLinesRemoved: 0,
+      },
+      modes: {
+        ask: { count: 0, promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        quick: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        review: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
+        safe: {
+          count: 0,
+          promptTokens: 0,
+          completionTokens: 0,
+          totalTokens: 0,
+        },
       },
     };
     const result = computeUsageFromMetrics(metrics);

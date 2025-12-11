@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { uiTelemetryService } from '@qwen-code/qwen-code-core';
+import { uiTelemetryService } from '@dial-code/dial-core';
 import type { SlashCommand } from './types.js';
 import { CommandKind } from './types.js';
 import { t } from '../../i18n/index.js';

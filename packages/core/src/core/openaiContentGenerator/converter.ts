@@ -206,7 +206,7 @@ export class OpenAIContentConverter {
   /**
    * Convert Gemini request to OpenAI message format
    */
-  convertGeminiRequestToOpenAI(
+  convertDialRequestToOpenAI(
     request: GenerateContentParameters,
   ): OpenAI.Chat.ChatCompletionMessageParam[] {
     const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [];

@@ -11,7 +11,7 @@ import {
   type ServerGeminiStreamEvent,
   type ToolCallRequestInfo,
   type TaskResultDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { Part, GenerateContentResponseUsageMetadata } from '@google/genai';
 import type {
   CLIMessage,
@@ -1131,6 +1131,32 @@ describe('BaseJsonOutputAdapter', () => {
         files: {
           totalLinesAdded: 10,
           totalLinesRemoved: 5,
+        },
+        modes: {
+          ask: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          quick: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          review: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
+          safe: {
+            count: 0,
+            promptTokens: 0,
+            completionTokens: 0,
+            totalTokens: 0,
+          },
         },
       };
       const options: ResultOptions = {

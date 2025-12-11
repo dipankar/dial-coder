@@ -28,7 +28,7 @@ import {
   getEffectiveValue,
 } from '../../utils/settingsUtils.js';
 import { useVimMode } from '../contexts/VimModeContext.js';
-import { type Config } from '@qwen-code/qwen-code-core';
+import { type Config } from '@dial-code/dial-core';
 import { useKeypress } from '../hooks/useKeypress.js';
 import chalk from 'chalk';
 import { cpSlice, cpLen, stripUnsafeCharacters } from '../utils/textUtils.js';

@@ -11,7 +11,7 @@ import type {
   ToolCallConfirmationDetails,
   ToolConfirmationOutcome,
   ToolResultDisplay,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { PartListUnion } from '@google/genai';
 import { type ReactNode } from 'react';
 
@@ -375,7 +375,7 @@ export interface SubmitPromptResult {
 }
 
 /**
- * Defines the result of the slash command processor for its consumer (useGeminiStream).
+ * Defines the result of the slash command processor for its consumer (useDialStream).
  */
 export type SlashCommandProcessorResult =
   | {

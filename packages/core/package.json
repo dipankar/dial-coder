@@ -1,7 +1,7 @@
 {
-  "name": "@qwen-code/qwen-code-core",
+  "name": "@dial-code/dial-core",
   "version": "0.3.0",
-  "description": "Qwen Code Core",
+  "description": "Dial Code Core",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QwenLM/qwen-code.git"
@@ -76,7 +76,7 @@
     "node-pty": "^1.0.0"
   },
   "devDependencies": {
-    "@qwen-code/qwen-code-test-utils": "file:../test-utils",
+    "@dial-code/dial-test-utils": "file:../test-utils",
     "@types/diff": "^7.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/fast-levenshtein": "^0.0.4",

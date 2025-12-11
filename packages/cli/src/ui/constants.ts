@@ -27,3 +27,27 @@ export const TOOL_STATUS = {
   CANCELED: '-',
   ERROR: 'x',
 } as const;
+
+// Mode symbols for execution mode indicator
+export const MODE_SYMBOLS = {
+  ask: '?', // Read-only, query mode
+  quick: '⚡', // Fast, direct execution
+  review: '◎', // Light review cycle
+  safe: '🛡', // Full dialectic with safeguards
+} as const;
+
+// Mode display names (user-facing)
+export const MODE_LABELS = {
+  ask: 'Ask',
+  quick: 'Quick',
+  review: 'Review',
+  safe: 'Safe',
+} as const;
+
+// Mode descriptions for hints
+export const MODE_HINTS = {
+  ask: 'read-only',
+  quick: 'direct execution',
+  review: 'with review',
+  safe: 'full review cycle',
+} as const;

@@ -27,7 +27,7 @@ const getBuiltinLocalesDir = (): string => {
 };
 
 const getUserLocalesDir = (): string =>
-  path.join(homedir(), '.qwen', 'locales');
+  path.join(homedir(), '.dial', 'locales');
 
 /**
  * Get the path to the user's custom locales directory.

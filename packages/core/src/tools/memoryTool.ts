@@ -71,7 +71,7 @@ Do NOT use this tool:
   - If not specified, the tool will ask the user where they want to save the memory.
 `;
 
-export const QWEN_CONFIG_DIR = '.qwen';
+export const DIAL_CONFIG_DIR = '.dial';
 export const DEFAULT_CONTEXT_FILENAME = 'QWEN.md';
 export const MEMORY_SECTION_HEADER = '## Qwen Added Memories';
 
@@ -111,7 +111,7 @@ interface SaveMemoryParams {
 }
 
 function getGlobalMemoryFilePath(): string {
-  return path.join(Storage.getGlobalQwenDir(), getCurrentGeminiMdFilename());
+  return path.join(Storage.getGlobalDialDir(), getCurrentGeminiMdFilename());
 }
 
 function getProjectMemoryFilePath(): string {

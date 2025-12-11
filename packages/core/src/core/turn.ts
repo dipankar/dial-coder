@@ -26,7 +26,7 @@ import {
   UnauthorizedError,
   toFriendlyError,
 } from '../utils/errors.js';
-import type { GeminiChat } from './geminiChat.js';
+import type { DialChat } from './dialChat.js';
 import { parseThought, type ThoughtSummary } from '../utils/thoughtUtils.js';
 
 // Define a structure for tools passed to the server
@@ -166,7 +166,7 @@ export interface ChatCompressionInfo {
   compressionStatus: CompressionStatus;
 }
 
-export type ServerGeminiChatCompressedEvent = {
+export type ServerDialChatCompressedEvent = {
   type: GeminiEventType.ChatCompressed;
   value: ChatCompressionInfo | null;
 };
@@ -196,7 +196,7 @@ export type ServerGeminiCitationEvent = {
 
 // The original union type, now composed of the individual types
 export type ServerGeminiStreamEvent =
-  | ServerGeminiChatCompressedEvent
+  | ServerDialChatCompressedEvent
   | ServerGeminiCitationEvent
   | ServerGeminiContentEvent
   | ServerGeminiErrorEvent
@@ -220,7 +220,7 @@ export class Turn {
   private currentResponseId?: string;
 
   constructor(
-    private readonly chat: GeminiChat,
+    private readonly chat: DialChat,
     private readonly prompt_id: string,
   ) {}
   // The run method yields simpler events suitable for server logic

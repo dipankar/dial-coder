@@ -10,8 +10,8 @@
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { Config } from '../config/config.js';
-import type { RumEvent } from './qwen-logger/event-types.js';
-import { QwenLogger } from './qwen-logger/qwen-logger.js';
+import type { RumEvent } from './dial-logger/event-types.js';
+import { QwenLogger } from './dial-logger/dial-logger.js';
 
 describe('Circular Reference Integration Test', () => {
   beforeEach(() => {

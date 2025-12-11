@@ -288,7 +288,7 @@ export default {
   'Memory Discovery Max Dirs': '内存发现最大目录数',
   'Load Memory From Include Directories': '从包含目录加载内存',
   'Respect .gitignore': '遵守 .gitignore',
-  'Respect .qwenignore': '遵守 .qwenignore',
+  'Respect .dialignore': '遵守 .dialignore',
   'Enable Recursive File Search': '启用递归文件搜索',
   'Disable Fuzzy Search': '禁用模糊搜索',
   'Enable Interactive Shell': '启用交互式 Shell',

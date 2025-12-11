@@ -11,7 +11,7 @@ import {
   Logger,
   uiTelemetryService,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { CommandService } from './services/CommandService.js';
 import { BuiltinCommandLoader } from './services/BuiltinCommandLoader.js';
 import { FileCommandLoader } from './services/FileCommandLoader.js';

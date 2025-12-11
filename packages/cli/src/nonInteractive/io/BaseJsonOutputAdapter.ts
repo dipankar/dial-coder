@@ -12,8 +12,8 @@ import type {
   SessionMetrics,
   ServerGeminiStreamEvent,
   TaskResultDisplay,
-} from '@qwen-code/qwen-code-core';
-import { GeminiEventType, ToolErrorType } from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
+import { GeminiEventType, ToolErrorType } from '@dial-code/dial-core';
 import type { Part, GenerateContentResponseUsageMetadata } from '@google/genai';
 import type {
   CLIAssistantMessage,

@@ -12,8 +12,8 @@ import type {
 import { Turn, GeminiEventType } from './turn.js';
 import type { GenerateContentResponse, Part, Content } from '@google/genai';
 import { reportError } from '../utils/errorReporting.js';
-import type { GeminiChat } from './geminiChat.js';
-import { StreamEventType } from './geminiChat.js';
+import type { DialChat } from './dialChat.js';
+import { StreamEventType } from './dialChat.js';
 
 const mockSendMessageStream = vi.fn();
 const mockGetHistory = vi.fn();
@@ -60,7 +60,7 @@ describe('Turn', () => {
       getHistory: mockGetHistory,
       maybeIncludeSchemaDepthContext: mockMaybeIncludeSchemaDepthContext,
     };
-    turn = new Turn(mockChatInstance as unknown as GeminiChat, 'prompt-id-1');
+    turn = new Turn(mockChatInstance as unknown as DialChat, 'prompt-id-1');
     mockGetHistory.mockReturnValue([]);
     mockSendMessageStream.mockResolvedValue((async function* () {})());
   });

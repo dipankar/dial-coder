@@ -8,10 +8,10 @@ import type { MockInstance } from 'vitest';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { ideCommand } from './ideCommand.js';
 import { type CommandContext } from './types.js';
-import { IDE_DEFINITIONS } from '@qwen-code/qwen-code-core';
-import * as core from '@qwen-code/qwen-code-core';
+import { IDE_DEFINITIONS } from '@dial-code/dial-core';
+import * as core from '@dial-code/dial-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@dial-code/dial-core', async (importOriginal) => {
   const original = await importOriginal<typeof core>();
   return {
     ...original,

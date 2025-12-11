@@ -12,7 +12,7 @@ import {
   AuthType,
   type ContentGeneratorConfig,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import * as availableModelsModule from '../models/availableModels.js';
 
 // Mock the availableModels module

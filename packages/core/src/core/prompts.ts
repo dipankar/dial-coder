@@ -10,7 +10,7 @@ import os from 'node:os';
 import { ToolNames } from '../tools/tool-names.js';
 import process from 'node:process';
 import { isGitRepository } from '../utils/gitUtils.js';
-import { QWEN_CONFIG_DIR } from '../tools/memoryTool.js';
+import { DIAL_CONFIG_DIR } from '../tools/memoryTool.js';
 import type { GenerateContentConfig } from '@google/genai';
 
 export function resolvePathFromEnv(envVar?: string): {
@@ -113,7 +113,7 @@ export function getCoreSystemPrompt(
   // default path is .qwen/system.md but can be modified via custom path in QWEN_SYSTEM_MD
   let systemMdEnabled = false;
   // The default path for the system prompt file. This can be overridden.
-  let systemMdPath = path.resolve(path.join(QWEN_CONFIG_DIR, 'system.md'));
+  let systemMdPath = path.resolve(path.join(DIAL_CONFIG_DIR, 'system.md'));
   // Resolve the environment variable to get either a path or a switch value.
   const systemMdResolution = resolvePathFromEnv(process.env['QWEN_SYSTEM_MD']);
 

@@ -19,14 +19,11 @@ import type {
   ControlRequestPayload,
   CLIControlMcpMessageRequest,
 } from '../../types.js';
-import type {
-  MCPServerConfig,
-  WorkspaceContext,
-} from '@qwen-code/qwen-code-core';
+import type { MCPServerConfig, WorkspaceContext } from '@dial-code/dial-core';
 import {
   connectToMcpServer,
   MCP_DEFAULT_TIMEOUT_MSEC,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 
 export class MCPController extends BaseController {
   /**

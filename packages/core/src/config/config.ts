@@ -42,6 +42,7 @@ import { GitService } from '../services/gitService.js';
 
 // Tools
 import { EditTool } from '../tools/edit.js';
+import { EnterPlanModeTool } from '../tools/enterPlanMode.js';
 import { ExitPlanModeTool } from '../tools/exitPlanMode.js';
 import { GlobTool } from '../tools/glob.js';
 import { GrepTool } from '../tools/grep.js';
@@ -1212,6 +1213,7 @@ export class Config {
     registerCoreTool(ShellTool, this);
     registerCoreTool(MemoryTool);
     registerCoreTool(TodoWriteTool, this);
+    registerCoreTool(EnterPlanModeTool, this);
     registerCoreTool(ExitPlanModeTool, this);
     registerCoreTool(WebFetchTool, this);
     // Conditionally register web search tool if web search provider is configured

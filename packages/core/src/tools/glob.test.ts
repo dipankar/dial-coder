@@ -6,7 +6,7 @@
 
 import type { GlobToolParams, GlobPath } from './glob.js';
 import { GlobTool, sortFileEntries } from './glob.js';
-import { partListUnionToString } from '../core/geminiRequest.js';
+import { partListUnionToString } from '../core/dialRequest.js';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -341,13 +341,13 @@ describe('GlobTool', () => {
       expect(result.llmContent).not.toContain('a.ignored.txt');
     });
 
-    it('should respect .qwenignore files by default', async () => {
+    it('should respect .dialignore files by default', async () => {
       await fs.writeFile(
-        path.join(tempRootDir, '.qwenignore'),
-        '*.qwenignored.txt',
+        path.join(tempRootDir, '.dialignore'),
+        '*.dialignored.txt',
       );
       await fs.writeFile(
-        path.join(tempRootDir, 'a.qwenignored.txt'),
+        path.join(tempRootDir, 'a.dialignored.txt'),
         'ignored content',
       );
       await fs.writeFile(
@@ -355,7 +355,7 @@ describe('GlobTool', () => {
         'not ignored content',
       );
 
-      // Recreate the tool to pick up the new .qwenignore file
+      // Recreate the tool to pick up the new .dialignore file
       globTool = new GlobTool(mockConfig);
 
       const params: GlobToolParams = { pattern: '*.txt' };
@@ -363,7 +363,7 @@ describe('GlobTool', () => {
       const result = await invocation.execute(abortSignal);
 
       expect(result.llmContent).toContain('Found 3 file(s)'); // fileA.txt, FileB.TXT, b.notignored.txt
-      expect(result.llmContent).not.toContain('a.qwenignored.txt');
+      expect(result.llmContent).not.toContain('a.dialignored.txt');
     });
   });
 

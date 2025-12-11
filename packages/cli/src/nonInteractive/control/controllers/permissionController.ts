@@ -17,11 +17,8 @@
 import type {
   ToolCallRequestInfo,
   WaitingToolCall,
-} from '@qwen-code/qwen-code-core';
-import {
-  InputFormat,
-  ToolConfirmationOutcome,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
+import { InputFormat, ToolConfirmationOutcome } from '@dial-code/dial-core';
 import type {
   CLIControlPermissionRequest,
   CLIControlSetPermissionModeRequest,

@@ -21,8 +21,8 @@ import type { Key } from '../hooks/useKeypress.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 import type { CommandContext, SlashCommand } from '../commands/types.js';
-import type { Config } from '@qwen-code/qwen-code-core';
-import { ApprovalMode } from '@qwen-code/qwen-code-core';
+import type { Config } from '@dial-code/dial-core';
+import { ApprovalMode } from '@dial-code/dial-core';
 import {
   parseInputForHighlighting,
   buildSegmentsForVisualSlice,
@@ -36,6 +36,8 @@ import {
 import * as path from 'node:path';
 import { SCREEN_READER_USER_PREFIX } from '../textConstants.js';
 import { useShellFocusState } from '../contexts/ShellFocusContext.js';
+export type UserMode = 'ask' | 'quick' | 'review' | 'safe';
+
 export interface InputPromptProps {
   buffer: TextBuffer;
   onSubmit: (value: string) => void;
@@ -54,6 +56,26 @@ export interface InputPromptProps {
   onEscapePromptChange?: (showPrompt: boolean) => void;
   vimHandleInput?: (key: Key) => boolean;
   isEmbeddedShellFocused?: boolean;
+  /** Current user execution mode for border color */
+  userMode?: UserMode;
+}
+
+/**
+ * Get border color based on user execution mode.
+ */
+function getModeBorderColor(mode: UserMode): string {
+  switch (mode) {
+    case 'ask':
+      return theme.text.accent; // Blue - informational/read-only
+    case 'quick':
+      return theme.status.success; // Green - fast/simple
+    case 'review':
+      return theme.status.warning; // Yellow - moderate review
+    case 'safe':
+      return theme.status.error; // Red - full review (more thorough)
+    default:
+      return theme.border.default;
+  }
 }
 
 // The input content, input container, and input suggestions list may have different widths
@@ -98,6 +120,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
   onEscapePromptChange,
   vimHandleInput,
   isEmbeddedShellFocused,
+  userMode = 'quick',
 }) => {
   const isShellFocused = useShellFocusState();
   const [justNavigatedHistory, setJustNavigatedHistory] = useState(false);
@@ -707,17 +730,16 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
     statusText = t('Accepting edits');
   }
 
+  // Determine border color based on mode and focus state
+  const modeBorderColor = getModeBorderColor(userMode);
+  const borderColor =
+    isShellFocused && !isEmbeddedShellFocused
+      ? (statusColor ?? theme.border.focused)
+      : modeBorderColor;
+
   return (
     <>
-      <Box
-        borderStyle="round"
-        borderColor={
-          isShellFocused && !isEmbeddedShellFocused
-            ? (statusColor ?? theme.border.focused)
-            : theme.border.default
-        }
-        paddingX={1}
-      >
+      <Box borderStyle="round" borderColor={borderColor} paddingX={1}>
         <Text
           color={statusColor ?? theme.text.accent}
           aria-label={statusText || undefined}

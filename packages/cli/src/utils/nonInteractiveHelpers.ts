@@ -12,12 +12,12 @@ import type {
   ToolCallRequestInfo,
   ToolCallResponseInfo,
   SessionMetrics,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import {
   OutputFormat,
   ToolErrorType,
   getMCPServerStatus,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import type { Part, PartListUnion } from '@google/genai';
 import type {
   CLIUserMessage,

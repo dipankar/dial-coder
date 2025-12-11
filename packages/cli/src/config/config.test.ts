@@ -13,11 +13,11 @@ import {
   WriteFileTool,
   DEFAULT_QWEN_MODEL,
   OutputFormat,
-} from '@qwen-code/qwen-code-core';
+} from '@dial-code/dial-core';
 import { loadCliConfig, parseArguments, type CliArgs } from './config.js';
 import type { Settings } from './settings.js';
 import { ExtensionStorage, type Extension } from './extension.js';
-import * as ServerConfig from '@qwen-code/qwen-code-core';
+import * as ServerConfig from '@dial-code/dial-core';
 import { isWorkspaceTrusted } from './trustedFolders.js';
 import { ExtensionEnablementManager } from './extensions/extensionEnablement.js';
 
@@ -77,9 +77,9 @@ vi.mock('read-package-up', () => ({
   ),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', async () => {
+vi.mock('@dial-code/dial-core', async () => {
   const actualServer = await vi.importActual<typeof ServerConfig>(
-    '@qwen-code/qwen-code-core',
+    '@dial-code/dial-core',
   );
   return {
     ...actualServer,
@@ -1234,7 +1234,7 @@ describe('Hierarchical Memory Loading (config.ts) - Placeholder Suite', () => {
   // 3. Spies on console functions (for logger output) are correctly set up if needed.
   // Example of a previously failing test structure:
   it.skip('should correctly use mocked homedir for global path', async () => {
-    const MOCK_GEMINI_DIR_LOCAL = path.join('/mock/home/user', '.qwen');
+    const MOCK_GEMINI_DIR_LOCAL = path.join('/mock/home/user', '.dial');
     const MOCK_GLOBAL_PATH_LOCAL = path.join(MOCK_GEMINI_DIR_LOCAL, 'QWEN.md');
     mockFs({
       [MOCK_GLOBAL_PATH_LOCAL]: { type: 'file', content: 'GlobalContentOnly' },

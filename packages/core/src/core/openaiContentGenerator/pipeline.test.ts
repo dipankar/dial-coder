@@ -48,7 +48,7 @@ describe('ContentGenerationPipeline', () => {
 
     // Mock converter
     mockConverter = {
-      convertGeminiRequestToOpenAI: vi.fn(),
+      convertDialRequestToOpenAI: vi.fn(),
       convertOpenAIResponseToGemini: vi.fn(),
       convertOpenAIChunkToGemini: vi.fn(),
       convertGeminiToolsToOpenAI: vi.fn(),
@@ -135,7 +135,7 @@ describe('ContentGenerationPipeline', () => {
       } as OpenAI.Chat.ChatCompletion;
       const mockGeminiResponse = new GenerateContentResponse();
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue(
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue(
         mockMessages,
       );
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
@@ -150,7 +150,7 @@ describe('ContentGenerationPipeline', () => {
 
       // Assert
       expect(result).toBe(mockGeminiResponse);
-      expect(mockConverter.convertGeminiRequestToOpenAI).toHaveBeenCalledWith(
+      expect(mockConverter.convertDialRequestToOpenAI).toHaveBeenCalledWith(
         request,
       );
       expect(mockClient.chat.completions.create).toHaveBeenCalledWith(
@@ -216,7 +216,7 @@ describe('ContentGenerationPipeline', () => {
       } as OpenAI.Chat.ChatCompletion;
       const mockGeminiResponse = new GenerateContentResponse();
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue(
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue(
         mockMessages,
       );
       (mockConverter.convertGeminiToolsToOpenAI as Mock).mockResolvedValue(
@@ -256,7 +256,7 @@ describe('ContentGenerationPipeline', () => {
       const userPromptId = 'test-prompt-id';
       const testError = new Error('API Error');
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockClient.chat.completions.create as Mock).mockRejectedValue(testError);
 
       // Act & Assert
@@ -289,7 +289,7 @@ describe('ContentGenerationPipeline', () => {
         config: { abortSignal: abortController.signal },
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
         new GenerateContentResponse(),
       );
@@ -340,7 +340,7 @@ describe('ContentGenerationPipeline', () => {
         { content: { parts: [{ text: ' response' }], role: 'model' } },
       ];
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockGeminiResponse1)
         .mockReturnValueOnce(mockGeminiResponse2);
@@ -421,7 +421,7 @@ describe('ContentGenerationPipeline', () => {
         { content: { parts: [{ text: 'Hello response' }], role: 'model' } },
       ];
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockEmptyResponse)
         .mockReturnValueOnce(mockValidResponse);
@@ -460,7 +460,7 @@ describe('ContentGenerationPipeline', () => {
         },
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockClient.chat.completions.create as Mock).mockResolvedValue(
         mockStream,
       );
@@ -520,7 +520,7 @@ describe('ContentGenerationPipeline', () => {
         },
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock).mockReturnValue(
         new GenerateContentResponse(),
       );
@@ -615,7 +615,7 @@ describe('ContentGenerationPipeline', () => {
         totalTokenCount: 30,
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockContentResponse)
         .mockReturnValueOnce(mockFinishResponse)
@@ -709,7 +709,7 @@ describe('ContentGenerationPipeline', () => {
         totalTokenCount: 30,
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockContentResponse)
         .mockReturnValueOnce(mockFinalResponse);
@@ -818,7 +818,7 @@ describe('ContentGenerationPipeline', () => {
         totalTokenCount: 30,
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockContentResponse)
         .mockReturnValueOnce(mockFinishResponseWithZeroUsage)
@@ -918,7 +918,7 @@ describe('ContentGenerationPipeline', () => {
         totalTokenCount: 30,
       };
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)
         .mockReturnValueOnce(mockContentResponse)
         .mockReturnValueOnce(mockFinalResponse);
@@ -970,7 +970,7 @@ describe('ContentGenerationPipeline', () => {
       ] as OpenAI.Chat.ChatCompletionMessageParam[];
       const mockOpenAIResponse = new GenerateContentResponse();
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue(
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue(
         mockMessages,
       );
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
@@ -1011,7 +1011,7 @@ describe('ContentGenerationPipeline', () => {
       ] as OpenAI.Chat.ChatCompletionMessageParam[];
       const mockOpenAIResponse = new GenerateContentResponse();
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue(
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue(
         mockMessages,
       );
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
@@ -1058,7 +1058,7 @@ describe('ContentGenerationPipeline', () => {
         }),
       );
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue(
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue(
         mockMessages,
       );
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
@@ -1101,7 +1101,7 @@ describe('ContentGenerationPipeline', () => {
       const userPromptId = 'test-prompt-id';
       const mockOpenAIResponse = new GenerateContentResponse();
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIResponseToGemini as Mock).mockReturnValue(
         mockOpenAIResponse,
       );
@@ -1151,7 +1151,7 @@ describe('ContentGenerationPipeline', () => {
         { content: { parts: [{ text: 'Hello' }], role: 'model' } },
       ];
 
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([]);
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([]);
       (mockConverter.convertOpenAIChunkToGemini as Mock).mockReturnValue(
         mockGeminiResponse,
       );
@@ -1286,7 +1286,7 @@ describe('ContentGenerationPipeline', () => {
       ];
 
       // Setup converter mocks
-      (mockConverter.convertGeminiRequestToOpenAI as Mock).mockReturnValue([
+      (mockConverter.convertDialRequestToOpenAI as Mock).mockReturnValue([
         { role: 'user', content: 'test' },
       ]);
       (mockConverter.convertOpenAIChunkToGemini as Mock)

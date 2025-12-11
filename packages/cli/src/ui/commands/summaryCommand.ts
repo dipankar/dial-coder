@@ -11,7 +11,7 @@ import {
   CommandKind,
   type SlashCommandActionReturn,
 } from './types.js';
-import { getProjectSummaryPrompt } from '@qwen-code/qwen-code-core';
+import { getProjectSummaryPrompt } from '@dial-code/dial-core';
 import type { HistoryItemSummary } from '../types.js';
 import { t } from '../../i18n/index.js';
 
@@ -136,7 +136,7 @@ export const summaryCommand: SlashCommand = {
 
       // Ensure .qwen directory exists
       const projectRoot = config.getProjectRoot();
-      const qwenDir = path.join(projectRoot, '.qwen');
+      const qwenDir = path.join(projectRoot, '.dial');
       try {
         await fsPromises.mkdir(qwenDir, { recursive: true });
       } catch (_err) {

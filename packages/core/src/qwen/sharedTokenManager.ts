@@ -19,7 +19,7 @@ import {
 } from './qwenOAuth2.js';
 
 // File System Configuration
-const QWEN_DIR = '.qwen';
+const DIAL_DIR = '.dial';
 const QWEN_CREDENTIAL_FILENAME = 'oauth_creds.json';
 const QWEN_LOCK_FILENAME = 'oauth_creds.lock';
 
@@ -680,7 +680,7 @@ export class SharedTokenManager {
    * @returns The absolute path to the credentials file
    */
   private getCredentialFilePath(): string {
-    return path.join(os.homedir(), QWEN_DIR, QWEN_CREDENTIAL_FILENAME);
+    return path.join(os.homedir(), DIAL_DIR, QWEN_CREDENTIAL_FILENAME);
   }
 
   /**
@@ -689,7 +689,7 @@ export class SharedTokenManager {
    * @returns The absolute path to the lock file
    */
   private getLockFilePath(): string {
-    return path.join(os.homedir(), QWEN_DIR, QWEN_LOCK_FILENAME);
+    return path.join(os.homedir(), DIAL_DIR, QWEN_LOCK_FILENAME);
   }
 
   /**

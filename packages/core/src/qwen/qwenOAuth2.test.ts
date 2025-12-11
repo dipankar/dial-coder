@@ -1531,7 +1531,7 @@ describe('Utility Functions', () => {
       const os = await import('os');
       const path = await import('path');
 
-      const expectedPath = path.join(os.homedir(), '.qwen', 'oauth_creds.json');
+      const expectedPath = path.join(os.homedir(), '.dial', 'oauth_creds.json');
 
       // Since this is a private function, we test it indirectly through clearQwenCredentials
       const { promises: fs } = await import('node:fs');

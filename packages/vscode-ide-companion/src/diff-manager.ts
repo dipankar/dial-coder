@@ -7,7 +7,7 @@
 import {
   IdeDiffAcceptedNotificationSchema,
   IdeDiffClosedNotificationSchema,
-} from '@qwen-code/qwen-code-core/src/ide/types.js';
+} from '@dial-code/dial-core/src/ide/types.js';
 import { type JSONRPCNotification } from '@modelcontextprotocol/sdk/types.js';
 import * as path from 'node:path';
 import * as vscode from 'vscode';
@@ -97,7 +97,7 @@ export class DiffManager {
     const diffTitle = `${path.basename(filePath)} ↔ Modified`;
     await vscode.commands.executeCommand(
       'setContext',
-      'qwen.diff.isVisible',
+      'dial.diff.isVisible',
       true,
     );
 
@@ -231,7 +231,7 @@ export class DiffManager {
     }
     await vscode.commands.executeCommand(
       'setContext',
-      'qwen.diff.isVisible',
+      'dial.diff.isVisible',
       isVisible,
     );
   }
@@ -244,7 +244,7 @@ export class DiffManager {
     const diffInfo = this.diffDocuments.get(rightDocUri.toString());
     await vscode.commands.executeCommand(
       'setContext',
-      'qwen.diff.isVisible',
+      'dial.diff.isVisible',
       false,
     );
 

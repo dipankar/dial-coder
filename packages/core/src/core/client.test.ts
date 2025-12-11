@@ -26,7 +26,7 @@ import {
   type ContentGenerator,
   type ContentGeneratorConfig,
 } from './contentGenerator.js';
-import { type GeminiChat } from './geminiChat.js';
+import { type DialChat } from './dialChat.js';
 import type { Config } from '../config/config.js';
 import { ApprovalMode } from '../config/config.js';
 import {
@@ -389,7 +389,7 @@ describe('Gemini Client (client.ts)', () => {
     it('should call chat.addHistory with the provided content', async () => {
       const mockChat = {
         addHistory: vi.fn(),
-      } as unknown as GeminiChat;
+      } as unknown as DialChat;
       client['chat'] = mockChat;
 
       const newContent = {
@@ -442,7 +442,7 @@ describe('Gemini Client (client.ts)', () => {
         getHistory: mockGetHistory,
         addHistory: vi.fn(),
         setHistory: vi.fn(),
-      } as unknown as GeminiChat;
+      } as unknown as DialChat;
     });
 
     function setup({
@@ -453,11 +453,11 @@ describe('Gemini Client (client.ts)', () => {
       originalTokenCount = 1000,
       summaryText = 'This is a summary.',
     } = {}) {
-      const mockOriginalChat: Partial<GeminiChat> = {
+      const mockOriginalChat: Partial<DialChat> = {
         getHistory: vi.fn((_curated?: boolean) => chatHistory),
         setHistory: vi.fn(),
       };
-      client['chat'] = mockOriginalChat as GeminiChat;
+      client['chat'] = mockOriginalChat as DialChat;
 
       vi.mocked(uiTelemetryService.getLastPromptTokenCount).mockReturnValue(
         originalTokenCount,
@@ -502,14 +502,12 @@ describe('Gemini Client (client.ts)', () => {
         ...historyToKeep,
       ];
 
-      const mockNewChat: Partial<GeminiChat> = {
+      const mockNewChat: Partial<DialChat> = {
         getHistory: vi.fn().mockReturnValue(newCompressedHistory),
         setHistory: vi.fn(),
       };
 
-      client['startChat'] = vi
-        .fn()
-        .mockResolvedValue(mockNewChat as GeminiChat);
+      client['startChat'] = vi.fn().mockResolvedValue(mockNewChat as DialChat);
 
       const totalChars = newCompressedHistory.reduce(
         (total, content) => total + JSON.stringify(content).length,
@@ -690,12 +688,10 @@ describe('Gemini Client (client.ts)', () => {
         },
         ...historyToKeep,
       ];
-      const mockNewChat: Partial<GeminiChat> = {
+      const mockNewChat: Partial<DialChat> = {
         getHistory: vi.fn().mockReturnValue(newCompressedHistory),
       };
-      client['startChat'] = vi
-        .fn()
-        .mockResolvedValue(mockNewChat as GeminiChat);
+      client['startChat'] = vi.fn().mockResolvedValue(mockNewChat as DialChat);
 
       await client.tryCompressChat('prompt-id-3', false);
 
@@ -746,12 +742,10 @@ describe('Gemini Client (client.ts)', () => {
         },
         ...historyToKeep,
       ];
-      const mockNewChat: Partial<GeminiChat> = {
+      const mockNewChat: Partial<DialChat> = {
         getHistory: vi.fn().mockReturnValue(newCompressedHistory),
       };
-      client['startChat'] = vi
-        .fn()
-        .mockResolvedValue(mockNewChat as GeminiChat);
+      client['startChat'] = vi.fn().mockResolvedValue(mockNewChat as DialChat);
 
       const totalChars = newCompressedHistory.reduce(
         (total, content) => total + JSON.stringify(content).length,
@@ -836,12 +830,10 @@ describe('Gemini Client (client.ts)', () => {
         },
         ...historyToKeep,
       ];
-      const mockNewChat: Partial<GeminiChat> = {
+      const mockNewChat: Partial<DialChat> = {
         getHistory: vi.fn().mockReturnValue(newCompressedHistory),
       };
-      client['startChat'] = vi
-        .fn()
-        .mockResolvedValue(mockNewChat as GeminiChat);
+      client['startChat'] = vi.fn().mockResolvedValue(mockNewChat as DialChat);
 
       const totalChars = newCompressedHistory.reduce(
         (total, content) => total + JSON.stringify(content).length,
@@ -914,12 +906,10 @@ describe('Gemini Client (client.ts)', () => {
         },
         ...historyToKeep,
       ];
-      const mockNewChat: Partial<GeminiChat> = {
+      const mockNewChat: Partial<DialChat> = {
         getHistory: vi.fn().mockReturnValue(newCompressedHistory),
       };
-      client['startChat'] = vi
-        .fn()
-        .mockResolvedValue(mockNewChat as GeminiChat);
+      client['startChat'] = vi.fn().mockResolvedValue(mockNewChat as DialChat);
 
       const totalChars = newCompressedHistory.reduce(
         (total, content) => total + JSON.stringify(content).length,
@@ -1074,7 +1064,7 @@ describe('Gemini Client (client.ts)', () => {
       const mockChat = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
-      } as unknown as GeminiChat;
+      } as unknown as DialChat;
       client['chat'] = mockChat;
 
       const initialRequest: Part[] = [{ text: 'Hi' }];
@@ -1133,11 +1123,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       const initialRequest = [{ text: 'Hi' }];
 
@@ -1188,11 +1178,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       const initialRequest = [{ text: 'Hi' }];
 
@@ -1264,11 +1254,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       const initialRequest = [{ text: 'Hi' }];
 
@@ -1310,11 +1300,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Act
       const stream = client.sendMessageStream(
@@ -1354,11 +1344,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Use a signal that never gets aborted
       const abortController = new AbortController();
@@ -1441,11 +1431,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Act & Assert
       // Run up to the limit
@@ -1497,11 +1487,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Use a signal that never gets aborted
       const abortController = new AbortController();
@@ -1570,7 +1560,7 @@ ${JSON.stringify(
         vi.spyOn(client['config'], 'getIdeMode').mockReturnValue(true);
         mockTurnRunFn.mockReturnValue(mockStream);
 
-        const mockChat: Partial<GeminiChat> = {
+        const mockChat: Partial<DialChat> = {
           addHistory: vi.fn(),
           setHistory: vi.fn(),
           // Assume history is not empty for delta checks
@@ -1580,7 +1570,7 @@ ${JSON.stringify(
               { role: 'user', parts: [{ text: 'previous message' }] },
             ]),
         };
-        client['chat'] = mockChat as GeminiChat;
+        client['chat'] = mockChat as DialChat;
       });
 
       const testCases = [
@@ -1815,7 +1805,7 @@ ${JSON.stringify(
     });
 
     describe('IDE context with pending tool calls', () => {
-      let mockChat: Partial<GeminiChat>;
+      let mockChat: Partial<DialChat>;
 
       beforeEach(() => {
         vi.spyOn(client, 'tryCompressChat').mockResolvedValue({
@@ -1834,7 +1824,7 @@ ${JSON.stringify(
           getHistory: vi.fn().mockReturnValue([]), // Default empty history
           setHistory: vi.fn(),
         };
-        client['chat'] = mockChat as GeminiChat;
+        client['chat'] = mockChat as DialChat;
 
         vi.spyOn(client['config'], 'getIdeMode').mockReturnValue(true);
         vi.mocked(ideContextStore.get).mockReturnValue({
@@ -2170,11 +2160,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Act
       const stream = client.sendMessageStream(
@@ -2206,11 +2196,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Act
       const stream = client.sendMessageStream(
@@ -2246,11 +2236,11 @@ ${JSON.stringify(
       })();
       mockTurnRunFn.mockReturnValue(mockStream);
 
-      const mockChat: Partial<GeminiChat> = {
+      const mockChat: Partial<DialChat> = {
         addHistory: vi.fn(),
         getHistory: vi.fn().mockReturnValue([]),
       };
-      client['chat'] = mockChat as GeminiChat;
+      client['chat'] = mockChat as DialChat;
 
       // Act
       const stream = client.sendMessageStream(

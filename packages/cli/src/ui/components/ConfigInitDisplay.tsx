@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react';
 import { appEvents } from './../../utils/events.js';
 import { Box, Text } from 'ink';
 import { useConfig } from '../contexts/ConfigContext.js';
-import { type McpClient, MCPServerStatus } from '@qwen-code/qwen-code-core';
-import { GeminiSpinner } from './GeminiRespondingSpinner.js';
+import { type McpClient, MCPServerStatus } from '@dial-code/dial-core';
+import { GeminiSpinner } from './DialRespondingSpinner.js';
 import { theme } from '../semantic-colors.js';
 import { t } from '../../i18n/index.js';
 
