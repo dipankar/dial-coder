@@ -234,7 +234,7 @@ export class TaskAnalyzer {
     }
 
     // Extract directory paths
-    const dirPatterns = [/([a-zA-Z0-9_-]+\/[a-zA-Z0-9_-/]*)/g, /`([^`]+\/)`/g];
+    const dirPatterns = [/([a-zA-Z0-9_-]+\/[a-zA-Z0-9_/-]*)/g, /`([^`]+\/)`/g];
 
     for (const pattern of dirPatterns) {
       const matches = prompt.matchAll(pattern);

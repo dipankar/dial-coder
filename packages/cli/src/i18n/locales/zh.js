@@ -1,10 +1,10 @@
 /**
  * @license
- * Copyright 2025 Qwen
+ * Copyright 2025 Dial Code
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Chinese translations for Qwen Code CLI
+// Chinese translations for Dial Code CLI
 
 export default {
   // ============================================================================
@@ -54,10 +54,10 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     '完整快捷键列表，请参阅 {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': '获取 Qwen Code 帮助',
+  'for help on Dial Code': '获取 Dial Code 帮助',
   'show version info': '显示版本信息',
   'submit a bug report': '提交错误报告',
-  'About Qwen Code': '关于 Qwen Code',
+  'About Dial Code': '关于 Dial Code',
 
   // ============================================================================
   // System Information Fields
@@ -80,11 +80,11 @@ export default {
   // ============================================================================
   // Commands - General
   // ============================================================================
-  'Analyzes the project and creates a tailored QWEN.md file.':
-    '分析项目并创建定制的 QWEN.md 文件',
-  'list available Qwen Code tools. Usage: /tools [desc]':
-    '列出可用的 Qwen Code 工具。用法：/tools [desc]',
-  'Available Qwen Code CLI tools:': '可用的 Qwen Code CLI 工具：',
+  'Analyzes the project and creates a tailored DIAL.md file.':
+    '分析项目并创建定制的 DIAL.md 文件',
+  'list available Dial Code tools. Usage: /tools [desc]':
+    '列出可用的 Dial Code 工具。用法：/tools [desc]',
+  'Available Dial Code CLI tools:': '可用的 Dial Code CLI 工具：',
   'No tools available': '没有可用工具',
   'View or change the approval mode for tool usage':
     '查看或更改工具使用的审批模式',
@@ -104,8 +104,8 @@ export default {
   'clear the screen and conversation history': '清屏并清除对话历史',
   'Compresses the context by replacing it with a summary.':
     '通过用摘要替换来压缩上下文',
-  'open full Qwen Code documentation in your browser':
-    '在浏览器中打开完整的 Qwen Code 文档',
+  'open full Dial Code documentation in your browser':
+    '在浏览器中打开完整的 Dial Code 文档',
   'Configuration not available.': '配置不可用',
   'change the auth method': '更改认证方法',
   'Show quit confirmation dialog': '显示退出确认对话框',
@@ -167,8 +167,8 @@ export default {
   // ============================================================================
   // Agents - Creation Wizard
   // ============================================================================
-  'Project Level (.qwen/agents/)': '项目级 (.qwen/agents/)',
-  'User Level (~/.qwen/agents/)': '用户级 (~/.qwen/agents/)',
+  'Project Level (.dial/agents/)': '项目级 (.dial/agents/)',
+  'User Level (~/.dial/agents/)': '用户级 (~/.dial/agents/)',
   '✅ Subagent Created Successfully!': '✅ 子代理创建成功！',
   'Subagent "{{name}}" has been saved to {{level}} level.':
     '子代理 "{{name}}" 已保存到 {{level}} 级别。',
@@ -188,7 +188,7 @@ export default {
   // Agents - Creation Wizard Steps
   'Step {{n}}: Choose Location': '步骤 {{n}}: 选择位置',
   'Step {{n}}: Choose Generation Method': '步骤 {{n}}: 选择生成方式',
-  'Generate with Qwen Code (Recommended)': '使用 Qwen Code 生成（推荐）',
+  'Generate with Dial Code (Recommended)': '使用 Dial Code 生成（推荐）',
   'Manual Creation': '手动创建',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     '描述此子代理应该做什么以及何时使用它。（为了获得最佳效果，请全面描述）',
@@ -244,12 +244,12 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit Qwen Code settings': '查看和编辑 Qwen Code 设置',
+  'View and edit Dial Code settings': '查看和编辑 Dial Code 设置',
   Settings: '设置',
   '(Use Enter to select{{tabText}})': '（使用 Enter 选择{{tabText}}）',
   ', Tab to change focus': '，Tab 切换焦点',
-  'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    '要查看更改，必须重启 Qwen Code。按 r 退出并立即应用更改。',
+  'To see changes, Dial Code must be restarted. Press r to exit and apply changes now.':
+    '要查看更改，必须重启 Dial Code。按 r 退出并立即应用更改。',
   // ============================================================================
   // Settings Labels
   // ============================================================================
@@ -332,8 +332,8 @@ export default {
     '安装 {{ideName}} 所需的 IDE 配套工具',
   'enable IDE integration': '启用 IDE 集成',
   'disable IDE integration': '禁用 IDE 集成',
-  'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 Qwen Code：VS Code 或 VS Code 分支版本。',
+  'IDE integration is not supported in your current environment. To use this feature, run Dial Code in one of these supported IDEs: VS Code or VS Code forks.':
+    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 Dial Code：VS Code 或 VS Code 分支版本。',
   'Set up GitHub Actions': '设置 GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     '配置终端按键绑定以支持多行输入（VS Code、Cursor、Windsurf、Trae）',
@@ -551,8 +551,8 @@ export default {
   // ============================================================================
   // Commands - Summary
   // ============================================================================
-  'Generate a project summary and save it to .qwen/PROJECT_SUMMARY.md':
-    '生成项目摘要并保存到 .qwen/PROJECT_SUMMARY.md',
+  'Generate a project summary and save it to .dial/PROJECT_SUMMARY.md':
+    '生成项目摘要并保存到 .dial/PROJECT_SUMMARY.md',
   'No chat client available to generate summary.':
     '没有可用的聊天客户端来生成摘要',
   'Already generating summary, wait for previous request to complete':
@@ -698,30 +698,30 @@ export default {
   'You must select an auth method to proceed. Press Ctrl+C again to exit.':
     '您必须选择认证方法才能继续。再次按 Ctrl+C 退出',
   '(Use Enter to Set Auth)': '（使用 Enter 设置认证）',
-  'Terms of Services and Privacy Notice for Qwen Code':
-    'Qwen Code 的服务条款和隐私声明',
-  'Qwen OAuth': 'Qwen OAuth (免费)',
+  'Terms of Services and Privacy Notice for Dial Code':
+    'Dial Code 的服务条款和隐私声明',
+  'Dial OAuth': 'Dial OAuth (免费)',
   OpenAI: 'OpenAI',
   'Failed to login. Message: {{message}}': '登录失败。消息：{{message}}',
   'Authentication is enforced to be {{enforcedType}}, but you are currently using {{currentType}}.':
     '认证方式被强制设置为 {{enforcedType}}，但您当前使用的是 {{currentType}}',
-  'Qwen OAuth authentication timed out. Please try again.':
-    'Qwen OAuth 认证超时。请重试',
-  'Qwen OAuth authentication cancelled.': 'Qwen OAuth 认证已取消',
-  'Qwen OAuth Authentication': 'Qwen OAuth 认证',
+  'Dial OAuth authentication timed out. Please try again.':
+    'Dial OAuth 认证超时。请重试',
+  'Dial OAuth authentication cancelled.': 'Dial OAuth 认证已取消',
+  'Dial OAuth Authentication': 'Dial OAuth 认证',
   'Please visit this URL to authorize:': '请访问此 URL 进行授权：',
   'Or scan the QR code below:': '或扫描下方的二维码：',
   'Waiting for authorization': '等待授权中',
   'Time remaining:': '剩余时间：',
   '(Press ESC or CTRL+C to cancel)': '（按 ESC 或 CTRL+C 取消）',
-  'Qwen OAuth Authentication Timeout': 'Qwen OAuth 认证超时',
+  'Dial OAuth Authentication Timeout': 'Dial OAuth 认证超时',
   'OAuth token expired (over {{seconds}} seconds). Please select authentication method again.':
     'OAuth 令牌已过期（超过 {{seconds}} 秒）。请重新选择认证方法',
   'Press any key to return to authentication type selection.':
     '按任意键返回认证类型选择',
-  'Waiting for Qwen OAuth authentication...': '正在等待 Qwen OAuth 认证...',
-  'Note: Your existing API key in settings.json will not be cleared when using Qwen OAuth. You can switch back to OpenAI authentication later if needed.':
-    '注意：使用 Qwen OAuth 时，settings.json 中现有的 API 密钥不会被清除。如果需要，您可以稍后切换回 OpenAI 认证。',
+  'Waiting for Dial OAuth authentication...': '正在等待 Dial OAuth 认证...',
+  'Note: Your existing API key in settings.json will not be cleared when using Dial OAuth. You can switch back to OpenAI authentication later if needed.':
+    '注意：使用 Dial OAuth 时，settings.json 中现有的 API 密钥不会被清除。如果需要，您可以稍后切换回 OpenAI 认证。',
   'Authentication timed out. Please try again.': '认证超时。请重试。',
   'Waiting for auth... (Press ESC or CTRL+C to cancel)':
     '正在等待认证...（按 ESC 或 CTRL+C 取消）',
@@ -744,8 +744,8 @@ export default {
   // ============================================================================
   'Select Model': '选择模型',
   '(Press Esc to close)': '（按 Esc 关闭）',
-  'The latest Qwen Coder model from Alibaba Cloud ModelStudio (version: qwen3-coder-plus-2025-09-23)':
-    '来自阿里云 ModelStudio 的最新 Qwen Coder 模型（版本：qwen3-coder-plus-2025-09-23）',
+  'The latest Dial Coder model from Alibaba Cloud ModelStudio (version: qwen3-coder-plus-2025-09-23)':
+    '来自阿里云 ModelStudio 的最新 Dial Coder 模型（版本：qwen3-coder-plus-2025-09-23）',
   'The latest Qwen Vision model from Alibaba Cloud ModelStudio (version: qwen3-vl-plus-2025-09-23)':
     '来自阿里云 ModelStudio 的最新 Qwen Vision 模型（版本：qwen3-vl-plus-2025-09-23）',
 
@@ -822,14 +822,14 @@ export default {
   '1. Ask questions, edit files, or run commands.':
     '1. 提问、编辑文件或运行命令',
   '2. Be specific for the best results.': '2. 具体描述以获得最佳结果',
-  'files to customize your interactions with Qwen Code.':
-    '文件以自定义您与 Qwen Code 的交互',
+  'files to customize your interactions with Dial Code.':
+    '文件以自定义您与 Dial Code 的交互',
   'for more information.': '获取更多信息',
 
   // ============================================================================
   // Exit Screen / Stats
   // ============================================================================
-  'Agent powering down. Goodbye!': 'Qwen Code 正在关闭，再见！',
+  'Agent powering down. Goodbye!': 'Dial Code 正在关闭，再见！',
   'Interaction Summary': '交互摘要',
   'Session ID:': '会话 ID：',
   'Tool Calls:': '工具调用：',

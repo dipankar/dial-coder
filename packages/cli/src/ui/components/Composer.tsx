@@ -11,6 +11,7 @@ import { ContextSummaryDisplay } from './ContextSummaryDisplay.js';
 import { AutoAcceptIndicator } from './AutoAcceptIndicator.js';
 import { ShellModeIndicator } from './ShellModeIndicator.js';
 import { UserModeIndicator } from './UserModeIndicator.js';
+import { DialecticProgressDisplay } from './DialecticProgressDisplay.js';
 import { DetailedMessagesDisplay } from './DetailedMessagesDisplay.js';
 import { InputPrompt, calculatePromptWidths } from './InputPrompt.js';
 import { Footer } from './Footer.js';
@@ -46,6 +47,8 @@ export const Composer = () => {
     userMode,
     userModeIsManual,
     userModeAutoInfo,
+    dialecticEvent,
+    isDialecticActive,
   } = uiState;
 
   // Use the container width of InputPrompt for width of DetailedMessagesDisplay
@@ -57,20 +60,33 @@ export const Composer = () => {
   return (
     <Box flexDirection="column">
       {!uiState.embeddedShellFocused && (
-        <LoadingIndicator
-          thought={
-            uiState.streamingState === StreamingState.WaitingForConfirmation ||
-            config.getAccessibility()?.disableLoadingPhrases
-              ? undefined
-              : uiState.thought
-          }
-          currentLoadingPhrase={
-            config.getAccessibility()?.disableLoadingPhrases
-              ? undefined
-              : uiState.currentLoadingPhrase
-          }
-          elapsedTime={uiState.elapsedTime}
-        />
+        <>
+          {/* Show dialectic progress when in review/safe mode */}
+          {isDialecticActive && (
+            <DialecticProgressDisplay
+              event={dialecticEvent}
+              isActive={isDialecticActive}
+            />
+          )}
+          {/* Show regular loading indicator when not in dialectic mode */}
+          {!isDialecticActive && (
+            <LoadingIndicator
+              thought={
+                uiState.streamingState ===
+                  StreamingState.WaitingForConfirmation ||
+                config.getAccessibility()?.disableLoadingPhrases
+                  ? undefined
+                  : uiState.thought
+              }
+              currentLoadingPhrase={
+                config.getAccessibility()?.disableLoadingPhrases
+                  ? undefined
+                  : uiState.currentLoadingPhrase
+              }
+              elapsedTime={uiState.elapsedTime}
+            />
+          )}
+        </>
       )}
 
       {!uiState.isConfigInitialized && <ConfigInitDisplay />}

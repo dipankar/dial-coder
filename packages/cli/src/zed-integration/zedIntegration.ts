@@ -137,9 +137,8 @@ class GeminiAgent {
       },
       {
         id: AuthType.QWEN_OAUTH,
-        name: 'Qwen OAuth',
-        description:
-          'OAuth authentication for Qwen models with 2000 daily requests',
+        name: 'Dial OAuth',
+        description: 'OAuth authentication for Dial with 2000 daily requests',
       },
     ];
 

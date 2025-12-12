@@ -710,7 +710,6 @@ export const AppContainer = (props: AppContainerProps) => {
     setAutoSelectedMode,
   } = useUserModeIndicator({
     initialMode: 'quick',
-    addItem: historyManager.addItem,
     isActive:
       !shellModeActive &&
       streamingState !== StreamingState.WaitingForConfirmation,
@@ -1377,6 +1376,10 @@ export const AppContainer = (props: AppContainerProps) => {
       // Subagent dialogs
       isSubagentCreateDialogOpen,
       isAgentsManagerDialogOpen,
+      // Dialectic state
+      dialecticEvent,
+      isDialecticActive:
+        dialecticEvent !== null && streamingState === StreamingState.Responding,
     }),
     [
       isThemeDialogOpen,
@@ -1473,6 +1476,8 @@ export const AppContainer = (props: AppContainerProps) => {
       // Subagent dialogs
       isSubagentCreateDialogOpen,
       isAgentsManagerDialogOpen,
+      // Dialectic state
+      dialecticEvent,
     ],
   );
 

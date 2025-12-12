@@ -26,6 +26,7 @@ import type {
   UserTierId,
   IdeInfo,
   FallbackIntent,
+  DialecticEvent,
 } from '@dial-code/dial-core';
 import type {
   UserMode,
@@ -148,6 +149,10 @@ export interface UIState {
   // Subagent dialogs
   isSubagentCreateDialogOpen: boolean;
   isAgentsManagerDialogOpen: boolean;
+  /** Current dialectic event (for progress display) */
+  dialecticEvent: DialecticEvent | null;
+  /** Whether dialectic is actively executing */
+  isDialecticActive: boolean;
 }
 
 export const UIStateContext = createContext<UIState | null>(null);

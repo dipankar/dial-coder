@@ -6,8 +6,6 @@
 
 import { useCallback, useState } from 'react';
 import { useKeypress } from './useKeypress.js';
-import type { HistoryItemWithoutId } from '../types.js';
-import { MessageType } from '../types.js';
 
 /**
  * User-facing execution modes.
@@ -43,8 +41,6 @@ export interface UseUserModeIndicatorArgs {
   initialMode?: UserMode;
   /** Callback when mode changes */
   onModeChange?: (mode: UserMode, isManual: boolean) => void;
-  /** Function to add info messages to history */
-  addItem?: (item: HistoryItemWithoutId, timestamp: number) => void;
   /** Whether the hook is active (Tab key listening) */
   isActive?: boolean;
   /** Callback to sync with approval mode (for 'ask' mode) */
@@ -83,28 +79,9 @@ export interface UseUserModeIndicatorReturn {
  * <ModeIndicator mode={mode} isAutoSelected={!isManuallySelected} />
  * ```
  */
-/**
- * Get a description for each mode.
- */
-function getModeDescription(mode: UserMode): string {
-  switch (mode) {
-    case 'ask':
-      return 'Read-only mode - no file changes allowed';
-    case 'quick':
-      return 'Direct execution - fast, minimal review';
-    case 'review':
-      return 'Review mode - single verification cycle';
-    case 'safe':
-      return 'Safe mode - full dialectic review';
-    default:
-      return '';
-  }
-}
-
 export function useUserModeIndicator({
   initialMode = 'quick',
   onModeChange,
-  addItem,
   isActive = true,
   onSyncApprovalMode,
 }: UseUserModeIndicatorArgs = {}): UseUserModeIndicatorReturn {
@@ -151,17 +128,9 @@ export function useUserModeIndicator({
     const nextMode = USER_MODES[nextIndex];
 
     applyModeChange(nextMode, true);
-
-    // Show mode change message with description
-    const description = getModeDescription(nextMode);
-    addItem?.(
-      {
-        type: MessageType.INFO,
-        text: `Mode: ${nextMode} - ${description}`,
-      },
-      Date.now(),
-    );
-  }, [mode, applyModeChange, addItem]);
+    // Mode change is shown via the UserModeIndicator component
+    // No need to add log messages to history
+  }, [mode, applyModeChange]);
 
   // Tab key cycles through modes
   useKeypress(
