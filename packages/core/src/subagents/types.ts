@@ -221,17 +221,33 @@ export interface ToolConfig {
 }
 
 /**
+ * Model selection modes for automatic routing.
+ */
+export type ModelSelection =
+  | string // Specific model name (e.g., 'qwen3-coder-plus')
+  | 'auto' // Automatic model selection based on task complexity
+  | 'fast' // Prefer faster, lighter models
+  | 'quality'; // Prefer higher quality, more capable models
+
+/**
  * Configures the generative model parameters for the subagent.
  * This interface specifies the model to be used and its associated generation settings,
  * such as temperature and top-p values, which influence the creativity and diversity of the model's output.
  */
 export interface ModelConfig {
   /**
-   * The name or identifier of the model to be used (e.g., 'qwen3-coder-plus').
+   * The name or identifier of the model to be used.
    *
-   * TODO: In the future, this needs to support 'auto' or some other string to support routing use cases.
+   * Can be:
+   * - A specific model name (e.g., 'qwen3-coder-plus')
+   * - 'auto' for automatic model selection based on task complexity
+   * - 'fast' to prefer faster, lighter models
+   * - 'quality' to prefer higher quality models
+   *
+   * When 'auto' is specified, the system will analyze the task and select
+   * an appropriate model based on complexity, context size, and requirements.
    */
-  model?: string;
+  model?: ModelSelection;
   /**
    * The temperature for the model's sampling process.
    */
@@ -246,8 +262,6 @@ export interface ModelConfig {
  * Configures the execution environment and constraints for the subagent.
  * This interface defines parameters that control the subagent's runtime behavior,
  * such as maximum execution time, to prevent infinite loops or excessive resource consumption.
- *
- * TODO: Consider adding max_tokens as a form of budgeting.
  */
 export interface RunConfig {
   /** The maximum execution time for the subagent in minutes. */
@@ -257,4 +271,17 @@ export interface RunConfig {
    * before the execution is terminated. Helps prevent infinite loops.
    */
   max_turns?: number;
+  /**
+   * Maximum total tokens (input + output) allowed for the subagent execution.
+   * This provides a form of cost/resource budgeting for subagent operations.
+   *
+   * When exceeded, the subagent will be terminated with a budget exhaustion error.
+   * If not specified, no token limit is enforced (subject to model limits).
+   */
+  max_tokens?: number;
+  /**
+   * Maximum tokens for each individual response from the model.
+   * This limits the length of individual responses without limiting total usage.
+   */
+  max_output_tokens?: number;
 }

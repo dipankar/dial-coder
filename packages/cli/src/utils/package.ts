@@ -22,6 +22,14 @@ const __dirname = path.dirname(__filename);
 
 let packageJson: PackageJson | undefined;
 
+/**
+ * Retrieves the package.json for this CLI package.
+ *
+ * @returns The parsed package.json, or undefined if not found.
+ * @remarks Returns undefined rather than throwing to allow graceful degradation
+ * in scenarios where package.json might not be available (e.g., bundled builds).
+ * Callers should handle the undefined case appropriately for their use case.
+ */
 export async function getPackageJson(): Promise<PackageJson | undefined> {
   if (packageJson) {
     return packageJson;
@@ -29,7 +37,8 @@ export async function getPackageJson(): Promise<PackageJson | undefined> {
 
   const result = await readPackageUp({ cwd: __dirname });
   if (!result) {
-    // TODO: Maybe bubble this up as an error.
+    // Package.json not found - this can happen in bundled/standalone builds.
+    // Return undefined to allow callers to handle this gracefully.
     return;
   }
 

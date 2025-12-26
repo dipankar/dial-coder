@@ -254,14 +254,37 @@ export interface CLIPartialAssistantMessage {
 export type PermissionMode = 'default' | 'plan' | 'auto-edit' | 'yolo';
 
 /**
- * Permission suggestion for tool use requests
- * TODO: Align with `ToolCallConfirmationDetails`
+ * Permission suggestion for tool use requests.
+ *
+ * This type is designed to work alongside ToolCallConfirmationDetails from
+ * packages/core/src/tools/tools.ts. While ToolCallConfirmationDetails describes
+ * the confirmation dialog, PermissionSuggestion provides actionable suggestions
+ * that map to ToolConfirmationOutcome values.
+ *
+ * @see ToolCallConfirmationDetails for confirmation dialog details
+ * @see ToolConfirmationOutcome for the outcome values these suggestions map to
  */
 export interface PermissionSuggestion {
+  /**
+   * The type of permission suggestion:
+   * - 'allow': Maps to ToolConfirmationOutcome.ProceedOnce or ProceedAlways
+   * - 'deny': Maps to ToolConfirmationOutcome.Cancel
+   * - 'modify': Maps to ToolConfirmationOutcome.ModifyWithEditor
+   */
   type: 'allow' | 'deny' | 'modify';
+  /** Display label for the suggestion */
   label: string;
+  /** Optional description providing more context */
   description?: string;
+  /** Modified input when type is 'modify' */
   modifiedInput?: unknown;
+  /**
+   * Optional scope for 'allow' suggestions:
+   * - 'once': Allow this specific invocation
+   * - 'always': Allow all future invocations of this tool
+   * - 'always_server': Allow all tools from this MCP server
+   */
+  scope?: 'once' | 'always' | 'always_server';
 }
 
 /**

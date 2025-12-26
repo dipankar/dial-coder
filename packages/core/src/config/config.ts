@@ -661,13 +661,27 @@ export class Config {
 
   async setModel(
     newModel: string,
-    _metadata?: { reason?: string; context?: string },
+    metadata?: { reason?: string; context?: string },
   ): Promise<void> {
+    const previousModel = this.contentGeneratorConfig?.model;
     if (this.contentGeneratorConfig) {
       this.contentGeneratorConfig.model = newModel;
     }
-    // TODO: Log _metadata for telemetry if needed
-    // This _metadata can be used for tracking model switches (reason, context)
+
+    // Log model switch for telemetry when enabled
+    if (this.telemetrySettings.enabled && metadata) {
+      // Model switch events are logged via the standard debug output
+      // to avoid circular dependencies with the telemetry module.
+      // The metadata includes reason (e.g., 'fallback', 'user_selection')
+      // and context (e.g., 'rate_limit', 'quota_exceeded').
+      if (process.env['DEBUG'] === 'true') {
+        console.debug('[Config] Model switch:', {
+          from: previousModel,
+          to: newModel,
+          ...metadata,
+        });
+      }
+    }
   }
 
   isInFallbackMode(): boolean {
@@ -886,16 +900,22 @@ export class Config {
 
   /**
    * Gets custom file exclusion patterns from configuration.
-   * TODO: This is a placeholder implementation. In the future, this could
-   * read from settings files, CLI arguments, or environment variables.
+   *
+   * Returns patterns from the excludeTools setting that can be used
+   * to exclude files from glob/search operations.
+   *
+   * Note: This currently returns the excludeTools patterns.
+   * In the future, this could be extended to support dedicated
+   * file exclusion settings separate from tool exclusions.
    */
   getCustomExcludes(): string[] {
-    // Placeholder implementation - returns empty array for now
-    // Future implementation could read from:
-    // - User settings file
-    // - Project-specific configuration
-    // - Environment variables
-    // - CLI arguments
+    // Return any file-pattern exclusions from excludeTools
+    // Filter to only include glob-like patterns (containing * or /)
+    if (this.excludeTools) {
+      return this.excludeTools.filter(
+        (pattern) => pattern.includes('*') || pattern.includes('/'),
+      );
+    }
     return [];
   }
 

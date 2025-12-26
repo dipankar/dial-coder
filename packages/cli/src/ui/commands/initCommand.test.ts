@@ -163,7 +163,7 @@ describe('initCommand', () => {
     expect(result).toEqual({
       type: 'message',
       messageType: 'error',
-      content: 'Configuration not available.',
+      content: 'Configuration not available. Please wait for initialization.',
     });
   });
 });

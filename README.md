@@ -227,7 +227,7 @@ The easiest way to get started - completely free with generous quotas:
 
 ```bash
 # Just run this command and follow the browser authentication
-qwen
+dial
 ```
 
 **What happens:**
@@ -325,7 +325,7 @@ export OPENAI_MODEL="qwen/qwen3-coder:free"
 
 ```bash
 cd your-project/
-qwen
+dial
 
 # Architecture analysis
 > Describe the main pieces of this system's architecture

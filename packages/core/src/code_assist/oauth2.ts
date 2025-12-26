@@ -491,34 +491,13 @@ export function clearOauthClientCache() {
 
 export async function clearCachedCredentialFile() {
   try {
-    const useEncryptedStorage = getUseEncryptedStorageFlag();
-    if (useEncryptedStorage) {
-      await OAuthCredentialStorage.clearCredentials();
-    } else {
-      await fs.rm(Storage.getOAuthCredsPath(), { force: true });
-    }
-    // Clear the Google Account ID cache when credentials are cleared
-    await userAccountManager.clearCachedGoogleAccount();
-    // Clear the in-memory OAuth client cache to force re-authentication
-    clearOauthClientCache();
+    // Use the centralized auth manager to clear all credentials
+    // This provides a clean separation of concerns and avoids circular dependencies
+    const { clearAllCredentials } = await import('../utils/auth-manager.js');
+    const result = await clearAllCredentials('all');
 
-    /**
-     * Also clear Qwen SharedTokenManager cache and credentials file to prevent stale credentials
-     * when switching between auth types
-     * TODO: We do not depend on code_assist, we'll have to build an independent auth-cleaning procedure.
-     */
-    try {
-      const { SharedTokenManager } = await import(
-        '../qwen/sharedTokenManager.js'
-      );
-      const { clearQwenCredentials } = await import('../qwen/qwenOAuth2.js');
-
-      const sharedManager = SharedTokenManager.getInstance();
-      sharedManager.clearCache();
-
-      await clearQwenCredentials();
-    } catch (qwenError) {
-      console.debug('Could not clear Qwen credentials:', qwenError);
+    if (!result.success) {
+      console.debug('Some credentials could not be cleared:', result.errors);
     }
   } catch (e) {
     console.error('Failed to clear cached credentials:', e);

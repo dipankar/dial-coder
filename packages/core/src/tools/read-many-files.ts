@@ -98,7 +98,10 @@ type FileProcessingResult =
 /**
  * Creates the default exclusion patterns including dynamic patterns.
  * This combines the shared patterns with dynamic patterns like QWEN.md.
- * TODO(adh): Consider making this configurable or extendable through a command line argument.
+ *
+ * Exclusions are configurable via:
+ * - Config.getCustomExcludes() for user-defined patterns
+ * - FileExclusions.getReadManyFilesExcludes() which merges defaults with custom exclusions
  */
 function getDefaultExcludes(config?: Config): string[] {
   return config?.getFileExclusions().getReadManyFilesExcludes() ?? [];

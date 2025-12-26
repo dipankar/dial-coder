@@ -11,6 +11,7 @@ import { MainContent } from '../components/MainContent.js';
 import { DialogManager } from '../components/DialogManager.js';
 import { Composer } from '../components/Composer.js';
 import { ExitWarning } from '../components/ExitWarning.js';
+import { ErrorBoundary } from '../components/ErrorBoundary.js';
 import { useUIState } from '../contexts/UIStateContext.js';
 
 export const DefaultAppLayout: React.FC<{ width?: string }> = ({
@@ -20,19 +21,23 @@ export const DefaultAppLayout: React.FC<{ width?: string }> = ({
 
   return (
     <Box flexDirection="column" width={width}>
-      <MainContent />
+      <ErrorBoundary name="MainContent">
+        <MainContent />
+      </ErrorBoundary>
 
       <Box flexDirection="column" ref={uiState.mainControlsRef}>
         <Notifications />
 
-        {uiState.dialogsVisible ? (
-          <DialogManager
-            terminalWidth={uiState.terminalWidth}
-            addItem={uiState.historyManager.addItem}
-          />
-        ) : (
-          <Composer />
-        )}
+        <ErrorBoundary name="DialogManager">
+          {uiState.dialogsVisible ? (
+            <DialogManager
+              terminalWidth={uiState.terminalWidth}
+              addItem={uiState.historyManager.addItem}
+            />
+          ) : (
+            <Composer />
+          )}
+        </ErrorBoundary>
 
         <ExitWarning />
       </Box>

@@ -33,7 +33,11 @@ export interface CommandContext {
   };
   // Core services and configuration
   services: {
-    // TODO(abhipatel12): Ensure that config is never null.
+    /**
+     * The Config object. May be null during early initialization before
+     * config is fully loaded. Commands that require config should use
+     * the `requireConfig()` helper to get a type-safe, non-null Config.
+     */
     config: Config | null;
     settings: LoadedSettings;
     git: GitService | undefined;
@@ -208,7 +212,13 @@ export interface SlashCommand {
   // The action to run. Optional for parent commands that only group sub-commands.
   action?: (
     context: CommandContext,
-    args: string, // TODO: Remove args. CommandContext now contains the complete invocation.
+    /**
+     * @deprecated Use context.invocation instead.
+     * CommandContext now contains the complete invocation including args.
+     * This parameter is kept for backwards compatibility but will be removed
+     * in a future version.
+     */
+    args: string,
   ) =>
     | void
     | SlashCommandActionReturn
@@ -221,4 +231,86 @@ export interface SlashCommand {
   ) => Promise<string[]>;
 
   subCommands?: SlashCommand[];
+}
+
+// ============================================================================
+// Config Safety Utilities
+// ============================================================================
+
+/**
+ * A variant of CommandContext where config is guaranteed to be non-null.
+ * Use this type in command implementations that have already validated
+ * config availability via `requireConfig()`.
+ */
+export interface SafeCommandContext extends CommandContext {
+  services: CommandContext['services'] & {
+    config: Config;
+  };
+}
+
+/**
+ * Error thrown when a command requires config but it's not available.
+ */
+export class ConfigNotAvailableError extends Error {
+  constructor(commandName?: string) {
+    super(
+      commandName
+        ? `Configuration not available for command: ${commandName}`
+        : 'Configuration not available',
+    );
+    this.name = 'ConfigNotAvailableError';
+  }
+}
+
+/**
+ * Type guard and assertion helper for commands that require config.
+ * Returns a SafeCommandContext with config guaranteed to be non-null.
+ *
+ * @param context - The command context to validate
+ * @param commandName - Optional command name for error messages
+ * @returns SafeCommandContext with non-null config
+ * @throws ConfigNotAvailableError if config is null
+ *
+ * @example
+ * ```typescript
+ * action: async (context, args) => {
+ *   const safeContext = requireConfig(context, 'myCommand');
+ *   // safeContext.services.config is now guaranteed non-null
+ *   const targetDir = safeContext.services.config.getTargetDir();
+ * }
+ * ```
+ */
+export function requireConfig(
+  context: CommandContext,
+  commandName?: string,
+): SafeCommandContext {
+  if (!context.services.config) {
+    throw new ConfigNotAvailableError(commandName);
+  }
+  return context as SafeCommandContext;
+}
+
+/**
+ * Helper to get config with a fallback error return for command actions.
+ * Useful for commands that need to return a MessageActionReturn on config failure.
+ *
+ * @param context - The command context
+ * @returns The config or null
+ *
+ * @example
+ * ```typescript
+ * action: async (context, args) => {
+ *   if (!context.services.config) {
+ *     return configNotAvailableError();
+ *   }
+ *   // Proceed with config...
+ * }
+ * ```
+ */
+export function configNotAvailableError(): MessageActionReturn {
+  return {
+    type: 'message',
+    messageType: 'error',
+    content: 'Configuration not available. Please wait for initialization.',
+  };
 }

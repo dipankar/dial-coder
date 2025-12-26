@@ -534,9 +534,11 @@ export function initializePerformanceMonitoring(config: Config): void {
   const meter = getMeter();
   if (!meter) return;
 
-  // Check if performance monitoring is enabled in config
-  // For now, enable performance monitoring when telemetry is enabled
-  // TODO: Add specific performance monitoring settings to config
+  // Performance monitoring is enabled when telemetry is enabled.
+  // This follows the principle of least configuration - if users want telemetry,
+  // they get performance metrics automatically. A separate toggle could be added
+  // in the future if users need fine-grained control over performance metrics
+  // vs other telemetry data.
   isPerformanceMonitoringEnabled = config.getTelemetryEnabled();
 
   if (!isPerformanceMonitoringEnabled) return;

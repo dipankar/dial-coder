@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type React from 'react';
+import React from 'react';
 import { Text, Box } from 'ink';
 import { theme } from '../../semantic-colors.js';
 import { SCREEN_READER_USER_PREFIX } from '../../textConstants.js';
@@ -14,7 +14,10 @@ interface UserMessageProps {
   text: string;
 }
 
-export const UserMessage: React.FC<UserMessageProps> = ({ text }) => {
+/**
+ * Displays a user message in the chat history.
+ */
+const _UserMessage: React.FC<UserMessageProps> = ({ text }) => {
   const prefix = '> ';
   const prefixWidth = prefix.length;
   const isSlashCommand = checkIsSlashCommand(text);
@@ -36,3 +39,8 @@ export const UserMessage: React.FC<UserMessageProps> = ({ text }) => {
     </Box>
   );
 };
+
+/**
+ * Memoized version to prevent unnecessary re-renders when parent updates.
+ */
+export const UserMessage = React.memo(_UserMessage);

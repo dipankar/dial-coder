@@ -509,9 +509,21 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
   return result as unknown as CliArgs;
 }
 
-// This function is now a thin wrapper around the server's implementation.
-// It's kept in the CLI for now as App.tsx directly calls it for memory refresh.
-// TODO: Consider if App.tsx should get memory via a server call or if Config should refresh itself.
+/**
+ * Loads hierarchical QWEN.md memory files.
+ *
+ * This is a thin wrapper around the core's `loadServerHierarchicalMemory`.
+ * It handles CLI-specific concerns like home directory detection.
+ *
+ * Architecture Note:
+ * Currently, AppContainer.tsx calls this function directly and then updates
+ * Config via setUserMemory(). A future improvement would be to add a
+ * refreshMemory() method to Config that encapsulates this logic. However,
+ * this requires passing Settings-derived parameters (importFormat, maxDirs)
+ * to the core Config, which would require interface changes across packages.
+ *
+ * For now, the explicit call pattern works and is well understood.
+ */
 export async function loadHierarchicalGeminiMemory(
   currentWorkingDirectory: string,
   includeDirectoriesToReadGemini: readonly string[] = [],
@@ -588,16 +600,15 @@ export async function loadCliConfig(
     (_, i) => allExtensions[i].isActive,
   );
 
-  // Set the context filename in the server's memoryTool module BEFORE loading memory
-  // TODO(b/343434939): This is a bit of a hack. The contextFileName should ideally be passed
-  // directly to the Config constructor in core, and have core handle setGeminiMdFilename.
-  // However, loadHierarchicalGeminiMemory is called *before* createServerConfig.
-  if (settings.context?.fileName) {
-    setServerGeminiMdFilename(settings.context.fileName);
-  } else {
-    // Reset to default if not provided in settings.
-    setServerGeminiMdFilename(getCurrentGeminiMdFilename());
-  }
+  // Set the context filename BEFORE loading memory, since loadHierarchicalGeminiMemory
+  // uses the filename to discover memory files. We also pass contextFileName to Config
+  // below for consistency (Config calls setGeminiMdFilename in its constructor).
+  //
+  // This dual-set pattern exists because memory loading must happen before Config creation
+  // (Config receives the loaded memory content), but filename must be set before memory loading.
+  const contextFileName =
+    settings.context?.fileName || getCurrentGeminiMdFilename();
+  setServerGeminiMdFilename(contextFileName);
 
   const extensionContextFilePaths = activeExtensions.flatMap(
     (e) => e.contextFiles,
@@ -896,6 +907,7 @@ export async function loadCliConfig(
     output: {
       format: outputSettingsFormat,
     },
+    contextFileName,
   });
 }
 

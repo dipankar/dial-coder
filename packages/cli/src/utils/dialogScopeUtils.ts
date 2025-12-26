@@ -9,16 +9,16 @@ import { SettingScope } from '../config/settings.js';
 import { settingExistsInScope } from './settingsUtils.js';
 
 /**
- * Shared scope labels for dialog components that need to display setting scopes
+ * Shared scope labels for dialog components that need to display setting scopes.
+ *
+ * Design Decision: System scope is intentionally excluded from the UI.
+ * System-level settings were found to cause confusion and conflicts with
+ * user/workspace settings. Settings are now limited to User and Workspace
+ * scopes for clarity and predictability.
  */
 export const SCOPE_LABELS = {
   [SettingScope.User]: 'User Settings',
   [SettingScope.Workspace]: 'Workspace Settings',
-
-  // TODO: migrate system settings to user settings
-  // we don't want to save settings to system scope, it is a troublemaker
-  // comment it out for now.
-  // [SettingScope.System]: 'System Settings',
 } as const;
 
 /**

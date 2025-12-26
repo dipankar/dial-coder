@@ -6,16 +6,28 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import type {
-  CommandContext,
-  SlashCommand,
-  SlashCommandActionReturn,
-} from './types.js';
+import type { SlashCommand, SlashCommandActionReturn } from './types.js';
+import { CommandKind, configNotAvailableError } from './types.js';
 import { getCurrentGeminiMdFilename } from '@dial-code/dial-core';
-import { CommandKind } from './types.js';
 import { Text } from 'ink';
-import React from 'react';
+import type React from 'react';
 import { t } from '../../i18n/index.js';
+
+/**
+ * Confirmation prompt component for overwriting existing QWEN.md file.
+ */
+function OverwriteConfirmationPrompt({
+  contextFileName,
+}: {
+  contextFileName: string;
+}): React.ReactElement {
+  return (
+    <Text>
+      A {contextFileName} file already exists in this directory. Do you want to
+      regenerate it?
+    </Text>
+  );
+}
 
 export const initCommand: SlashCommand = {
   name: 'init',
@@ -23,16 +35,9 @@ export const initCommand: SlashCommand = {
     return t('Analyzes the project and creates a tailored QWEN.md file.');
   },
   kind: CommandKind.BUILT_IN,
-  action: async (
-    context: CommandContext,
-    _args: string,
-  ): Promise<SlashCommandActionReturn> => {
+  action: async (context, _args): Promise<SlashCommandActionReturn> => {
     if (!context.services.config) {
-      return {
-        type: 'message',
-        messageType: 'error',
-        content: t('Configuration not available.'),
-      };
+      return configNotAvailableError();
     }
     const targetDir = context.services.config.getTargetDir();
     const contextFileName = getCurrentGeminiMdFilename();
@@ -48,12 +53,10 @@ export const initCommand: SlashCommand = {
             if (!context.overwriteConfirmed) {
               return {
                 type: 'confirm_action',
-                // TODO: Move to .tsx file to use JSX syntax instead of React.createElement
-                // For now, using React.createElement to maintain .ts compatibility for PR review
-                prompt: React.createElement(
-                  Text,
-                  null,
-                  `A ${contextFileName} file already exists in this directory. Do you want to regenerate it?`,
+                prompt: (
+                  <OverwriteConfirmationPrompt
+                    contextFileName={contextFileName}
+                  />
                 ),
                 originalInvocation: {
                   raw: context.invocation?.raw || '/init',

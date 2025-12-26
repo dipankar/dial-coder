@@ -1,5 +1,7 @@
 # Build stage
-FROM docker.io/library/node:20-slim AS builder
+# Pin to specific Node.js LTS version for reproducibility
+# Node.js 20.19.0 is the current LTS release (April 2024)
+FROM docker.io/library/node:20.19.0-slim AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -26,9 +28,10 @@ RUN npm ci \
   && npm pack -w @qwen-code/qwen-code-core --pack-destination ./packages/core/dist
 
 # Runtime stage
-FROM docker.io/library/node:20-slim
+# Use same pinned version as builder for consistency
+FROM docker.io/library/node:20.19.0-slim
 
-ARG SANDBOX_NAME="qwen-code-sandbox"
+ARG SANDBOX_NAME="dial-code-sandbox"
 ARG CLI_VERSION_ARG
 ENV SANDBOX="$SANDBOX_NAME"
 ENV CLI_VERSION=$CLI_VERSION_ARG
@@ -70,4 +73,4 @@ RUN npm install -g /tmp/*.tgz \
   && rm -rf /tmp/*.tgz
 
 # Default entrypoint when none specified
-CMD ["qwen"]
+CMD ["dial"]

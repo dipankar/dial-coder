@@ -22,6 +22,63 @@ import { getErrorMessage } from '../../utils/errors.js';
 import { ExtensionUpdateState } from '../../ui/state/extensions.js';
 import { ExtensionEnablementManager } from '../../config/extensions/extensionEnablement.js';
 
+/**
+ * Calculate Levenshtein distance between two strings for fuzzy matching.
+ */
+function levenshteinDistance(a: string, b: string): number {
+  const matrix: number[][] = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1, // insertion
+          matrix[i - 1][j] + 1, // deletion
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+/**
+ * Find similar extension names using fuzzy matching.
+ */
+function findSimilarExtensions(
+  query: string,
+  extensionNames: string[],
+  maxSuggestions: number = 3,
+): string[] {
+  const queryLower = query.toLowerCase();
+
+  const scored = extensionNames
+    .map((name) => ({
+      name,
+      distance: levenshteinDistance(queryLower, name.toLowerCase()),
+      // Bonus for substring match
+      substringBonus: name.toLowerCase().includes(queryLower) ? -2 : 0,
+    }))
+    .map((item) => ({
+      name: item.name,
+      score: item.distance + item.substringBonus,
+    }))
+    .filter((item) => item.score <= Math.max(3, query.length / 2)) // Reasonable threshold
+    .sort((a, b) => a.score - b.score);
+
+  return scored.slice(0, maxSuggestions).map((item) => item.name);
+}
+
 interface UpdateArgs {
   name?: string;
   all?: boolean;
@@ -50,7 +107,23 @@ export async function handleUpdate(args: UpdateArgs) {
         (extension) => extension.name === args.name,
       );
       if (!extension) {
-        console.log(`Extension "${args.name}" not found.`);
+        const allExtensionNames = extensions.map((e) => e.name);
+        const suggestions = findSimilarExtensions(args.name, allExtensionNames);
+
+        if (suggestions.length > 0) {
+          console.log(
+            `Extension "${args.name}" not found. Did you mean one of these?`,
+          );
+          suggestions.forEach((name) => console.log(`  - ${name}`));
+        } else if (allExtensionNames.length > 0) {
+          console.log(`Extension "${args.name}" not found.`);
+          console.log('Available extensions:');
+          allExtensionNames.forEach((name) => console.log(`  - ${name}`));
+        } else {
+          console.log(
+            `Extension "${args.name}" not found. No extensions are currently installed.`,
+          );
+        }
         return;
       }
       let updateState: ExtensionUpdateState | undefined;
@@ -67,7 +140,6 @@ export async function handleUpdate(args: UpdateArgs) {
         console.log(`Extension "${args.name}" is already up to date.`);
         return;
       }
-      // TODO(chrstnb): we should list extensions if the requested extension is not installed.
       const updatedExtensionInfo = (await updateExtension(
         extension,
         workingDir,

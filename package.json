@@ -54,7 +54,10 @@
     "telemetry": "node scripts/telemetry.js",
     "check:lockfile": "node scripts/check-lockfile.js",
     "clean": "node scripts/clean.js",
-    "pre-commit": "node scripts/pre-commit.js"
+    "pre-commit": "node scripts/pre-commit.js",
+    "bundle-size": "node scripts/bundle-size.js",
+    "bundle-size:save": "node scripts/bundle-size.js --save",
+    "bundle-size:compare": "node scripts/bundle-size.js --compare"
   },
   "overrides": {
     "wrap-ansi": "9.0.2",

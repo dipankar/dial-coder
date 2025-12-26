@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type React from 'react';
+import React from 'react';
 import { Text, Box } from 'ink';
 import { MarkdownDisplay } from '../../utils/MarkdownDisplay.js';
 import { theme } from '../../semantic-colors.js';
@@ -17,7 +17,10 @@ interface DialMessageProps {
   terminalWidth: number;
 }
 
-export const DialMessage: React.FC<DialMessageProps> = ({
+/**
+ * Displays a message from the Dial AI assistant.
+ */
+const _DialMessage: React.FC<DialMessageProps> = ({
   text,
   isPending,
   availableTerminalHeight,
@@ -44,3 +47,8 @@ export const DialMessage: React.FC<DialMessageProps> = ({
     </Box>
   );
 };
+
+/**
+ * Memoized version to prevent unnecessary re-renders when parent updates.
+ */
+export const DialMessage = React.memo(_DialMessage);

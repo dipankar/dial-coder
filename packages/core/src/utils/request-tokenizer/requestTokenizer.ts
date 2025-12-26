@@ -143,27 +143,65 @@ export class DefaultRequestTokenizer implements RequestTokenizer {
   }
 
   /**
-   * Calculate tokens for audio contents
-   * TODO: Implement proper audio token calculation
+   * Calculate tokens for audio contents.
+   *
+   * Audio token calculation is based on estimated duration derived from file size
+   * and audio format characteristics. Most LLMs process audio at approximately
+   * 25 tokens per second of audio content.
+   *
+   * Estimation approach:
+   * 1. Decode base64 to get actual binary size
+   * 2. Estimate duration based on typical bitrates for common formats
+   * 3. Apply token-per-second rate based on model processing
    */
   private async calculateAudioTokens(
     audioContents: Array<{ data: string; mimeType: string }>,
   ): Promise<number> {
     if (audioContents.length === 0) return 0;
 
-    // Placeholder implementation - audio token calculation would depend on
-    // the specific model's audio processing capabilities
-    // For now, estimate based on data size
+    // Tokens per second of audio (typical for speech/audio models)
+    const TOKENS_PER_SECOND = 25;
+    // Minimum tokens per audio file (accounting for metadata/overhead)
+    const MIN_TOKENS_PER_AUDIO = 16;
+
+    // Typical bitrates in bytes per second for common audio formats
+    const BITRATE_MAP: Record<string, number> = {
+      'audio/wav': 176400, // 16-bit stereo 44.1kHz
+      'audio/x-wav': 176400,
+      'audio/mp3': 16000, // 128 kbps
+      'audio/mpeg': 16000,
+      'audio/ogg': 16000,
+      'audio/webm': 12000, // Variable, estimate
+      'audio/flac': 88200, // ~705 kbps lossless
+      'audio/aac': 16000,
+      'audio/m4a': 16000,
+    };
+
+    const DEFAULT_BITRATE = 16000; // Default to MP3-like bitrate
+
     let totalTokens = 0;
 
     for (const audioContent of audioContents) {
       try {
-        const dataSize = Math.floor(audioContent.data.length * 0.75); // Approximate binary size
-        // Rough estimate: 1 token per 100 bytes of audio data
-        totalTokens += Math.max(Math.ceil(dataSize / 100), 10); // Minimum 10 tokens per audio
+        // Decode base64 to get actual binary size
+        const binarySize = Math.floor(audioContent.data.length * 0.75);
+
+        // Get bitrate for this mime type
+        const bitrate = BITRATE_MAP[audioContent.mimeType] ?? DEFAULT_BITRATE;
+
+        // Estimate duration in seconds
+        const estimatedDurationSeconds = binarySize / bitrate;
+
+        // Calculate tokens based on duration
+        const audioTokens = Math.ceil(
+          estimatedDurationSeconds * TOKENS_PER_SECOND,
+        );
+
+        // Apply minimum and add to total
+        totalTokens += Math.max(audioTokens, MIN_TOKENS_PER_AUDIO);
       } catch (error) {
         console.warn('Error calculating audio tokens:', error);
-        totalTokens += 10; // Fallback minimum
+        totalTokens += MIN_TOKENS_PER_AUDIO;
       }
     }
 

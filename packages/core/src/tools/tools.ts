@@ -13,6 +13,21 @@ import { type SubagentStatsSummary } from '../subagents/subagent-statistics.js';
 import type { AnsiOutput } from '../utils/terminalSerializer.js';
 
 /**
+ * Callbacks for tool execution.
+ *
+ * This interface provides a generic way to pass callbacks to tool execution,
+ * avoiding special-casing for specific tool types in the scheduler.
+ */
+export interface ExecutionCallbacks {
+  /** Callback for live output updates during execution */
+  onLiveOutput?: (output: ToolResultDisplay) => void;
+  /** Callback when a process ID is assigned (for shell commands) */
+  onPid?: (pid: number) => void;
+  /** Callback for progress updates */
+  onProgress?: (progress: number, message?: string) => void;
+}
+
+/**
  * Represents a validated and ready-to-execute tool call.
  * An instance of this is created by a `ToolBuilder`.
  */

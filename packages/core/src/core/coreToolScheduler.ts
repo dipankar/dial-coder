@@ -1062,10 +1062,11 @@ export class CoreToolScheduler {
 
         const shellExecutionConfig = this.config.getShellExecutionConfig();
 
-        // TODO: Refactor to remove special casing for ShellToolInvocation.
-        // Introduce a generic callbacks object for the execute method to handle
-        // things like `onPid` and `onLiveOutput`. This will make the scheduler
-        // agnostic to the invocation type.
+        // Note: ShellToolInvocation requires special handling for the setPidCallback.
+        // The ExecutionCallbacks interface in tools/tools.ts provides a generic way
+        // to handle these callbacks. A future refactoring could update all tool
+        // invocations to accept ExecutionCallbacks instead of individual parameters.
+        // See: packages/core/src/tools/tools.ts -> ExecutionCallbacks interface
         let promise: Promise<ToolResult>;
         if (invocation instanceof ShellToolInvocation) {
           const setPidCallback = (pid: number) => {

@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type React from 'react';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { escapeAnsiCtrlCodes } from '../utils/textUtils.js';
 import type { HistoryItem } from '../types.js';
 import { UserMessage } from './messages/UserMessage.js';
@@ -43,7 +42,10 @@ interface HistoryItemDisplayProps {
   availableTerminalHeightGemini?: number;
 }
 
-const HistoryItemDisplayComponent: React.FC<HistoryItemDisplayProps> = ({
+/**
+ * Displays a single history item in the chat.
+ */
+const HistoryItemDisplayBase: React.FC<HistoryItemDisplayProps> = ({
   item,
   availableTerminalHeight,
   terminalWidth,
@@ -141,5 +143,7 @@ const HistoryItemDisplayComponent: React.FC<HistoryItemDisplayProps> = ({
   );
 };
 
-// Export alias for backward compatibility
-export { HistoryItemDisplayComponent as HistoryItemDisplay };
+/**
+ * Memoized version to prevent unnecessary re-renders when parent updates.
+ */
+export const HistoryItemDisplay = React.memo(HistoryItemDisplayBase);
