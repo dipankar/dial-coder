@@ -26,6 +26,10 @@ export {
   type OpenAICompatibleProviderConfig,
 } from './openai-compatible-provider.js';
 export {
+  MistralProvider,
+  type MistralProviderConfig,
+} from './mistral-provider.js';
+export {
   ContentGeneratorAdapter,
   createLLMClientFromContentGenerator,
 } from './content-generator-adapter.js';

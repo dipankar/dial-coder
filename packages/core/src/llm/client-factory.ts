@@ -78,6 +78,18 @@ export async function createLLMClient(
       });
     }
 
+    case 'mistral': {
+      // Mistral uses OpenAI-compatible API
+      const { MistralProvider } = await import(
+        './adapters/mistral-provider.js'
+      );
+      return new MistralProvider({
+        apiKey: resolveApiKey(config),
+        model: config.model || 'mistral-large-latest',
+        baseURL: config.baseURL,
+      });
+    }
+
     default:
       throw new Error(`Unknown provider type: ${config.type}`);
   }

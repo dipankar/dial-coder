@@ -189,6 +189,17 @@ function getLLMConfigFromCLIConfig(_cliConfig: Config): LLMSystemConfig {
     };
   }
 
+  // Check for Mistral API key
+  const mistralApiKey = process.env['MISTRAL_API_KEY'];
+  if (mistralApiKey) {
+    providers['mistral'] = {
+      type: 'mistral',
+      apiKey: mistralApiKey,
+      model: process.env['MISTRAL_MODEL'] || 'mistral-large-latest',
+      enabled: true,
+    };
+  }
+
   // Check for Ollama
   const ollamaBaseUrl = process.env['OLLAMA_BASE_URL'];
   const ollamaModel = process.env['OLLAMA_MODEL'];

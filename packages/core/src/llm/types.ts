@@ -157,7 +157,8 @@ export interface ProviderConfig {
     | 'openai'
     | 'anthropic'
     | 'ollama'
-    | 'openai-compatible';
+    | 'openai-compatible'
+    | 'mistral';
   name?: string; // Custom name for this provider instance
   model?: string;
   apiKeyEnv?: string;

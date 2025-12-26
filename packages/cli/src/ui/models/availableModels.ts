@@ -39,6 +39,61 @@ export const AVAILABLE_MODELS_QWEN: AvailableModel[] = [
   },
 ];
 
+export const AVAILABLE_MODELS_GEMINI: AvailableModel[] = [
+  {
+    id: 'gemini-2.5-pro',
+    label: 'Gemini 2.5 Pro',
+    get description() {
+      return t("Google's most capable model for complex reasoning tasks");
+    },
+  },
+  {
+    id: 'gemini-2.5-flash',
+    label: 'Gemini 2.5 Flash',
+    get description() {
+      return t('Fast and efficient model for everyday tasks');
+    },
+  },
+  {
+    id: 'gemini-2.0-flash',
+    label: 'Gemini 2.0 Flash',
+    get description() {
+      return t('Previous generation flash model');
+    },
+  },
+];
+
+export const AVAILABLE_MODELS_MISTRAL: AvailableModel[] = [
+  {
+    id: 'mistral-large-latest',
+    label: 'Mistral Large',
+    get description() {
+      return t("Mistral's flagship model for complex tasks");
+    },
+  },
+  {
+    id: 'mistral-medium-latest',
+    label: 'Mistral Medium',
+    get description() {
+      return t('Balanced model for most use cases');
+    },
+  },
+  {
+    id: 'mistral-small-latest',
+    label: 'Mistral Small',
+    get description() {
+      return t('Fast and cost-effective model');
+    },
+  },
+  {
+    id: 'codestral-latest',
+    label: 'Codestral',
+    get description() {
+      return t('Specialized model for code generation');
+    },
+  },
+];
+
 /**
  * Get available Qwen models filtered by vision model preview setting
  */
@@ -70,9 +125,12 @@ export function getAvailableModelsForAuthType(
       const openAIModel = getOpenAIAvailableModelFromEnv();
       return openAIModel ? [openAIModel] : [];
     }
+    case AuthType.LOGIN_WITH_GOOGLE:
+    case AuthType.USE_GEMINI:
+      return AVAILABLE_MODELS_GEMINI;
+    case AuthType.USE_MISTRAL:
+      return AVAILABLE_MODELS_MISTRAL;
     default:
-      // For other auth types, return empty array for now
-      // This can be expanded later according to the design doc
       return [];
   }
 }

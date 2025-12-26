@@ -230,24 +230,72 @@ export const DialogManager = ({
   }
 
   if (uiState.isAuthenticating) {
-    if (uiState.pendingAuthType === AuthType.USE_OPENAI) {
+    // API key providers: OpenAI, Gemini (API Key), Mistral
+    const apiKeyProviders = [
+      AuthType.USE_OPENAI,
+      AuthType.USE_GEMINI,
+      AuthType.USE_MISTRAL,
+    ];
+
+    if (
+      uiState.pendingAuthType &&
+      apiKeyProviders.includes(uiState.pendingAuthType)
+    ) {
       const defaults = getDefaultOpenAIConfig();
+
+      // Get provider-specific configuration
+      const getProviderConfig = () => {
+        switch (uiState.pendingAuthType) {
+          case AuthType.USE_GEMINI:
+            return {
+              providerName: 'Gemini',
+              defaultModel: 'gemini-2.0-flash',
+              showBaseUrl: false,
+              apiKeyUrl: 'https://aistudio.google.com/apikey',
+            };
+          case AuthType.USE_MISTRAL:
+            return {
+              providerName: 'Mistral',
+              defaultModel: 'mistral-large-latest',
+              showBaseUrl: false,
+              apiKeyUrl: 'https://console.mistral.ai/api-keys',
+            };
+          default:
+            return {
+              providerName: 'OpenAI',
+              defaultModel: defaults.model,
+              showBaseUrl: true,
+              apiKeyUrl:
+                'https://bailian.console.aliyun.com/?tab=model#/api-key',
+            };
+        }
+      };
+
+      const providerConfig = getProviderConfig();
+
       return (
         <OpenAIKeyPrompt
           onSubmit={(apiKey, baseUrl, model) => {
-            uiActions.handleAuthSelect(AuthType.USE_OPENAI, SettingScope.User, {
-              apiKey,
-              baseUrl,
-              model,
-            });
+            uiActions.handleAuthSelect(
+              uiState.pendingAuthType!,
+              SettingScope.User,
+              {
+                apiKey,
+                baseUrl,
+                model,
+              },
+            );
           }}
           onCancel={() => {
             uiActions.cancelAuthentication();
             uiActions.setAuthState(AuthState.Updating);
           }}
           defaultApiKey={defaults.apiKey}
-          defaultBaseUrl={defaults.baseUrl}
-          defaultModel={defaults.model}
+          defaultBaseUrl={providerConfig.showBaseUrl ? defaults.baseUrl : ''}
+          defaultModel={providerConfig.defaultModel || defaults.model}
+          providerName={providerConfig.providerName}
+          showBaseUrl={providerConfig.showBaseUrl}
+          apiKeyUrl={providerConfig.apiKeyUrl}
         />
       );
     }

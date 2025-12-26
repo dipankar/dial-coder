@@ -18,6 +18,9 @@ interface OpenAIKeyPromptProps {
   defaultApiKey?: string;
   defaultBaseUrl?: string;
   defaultModel?: string;
+  providerName?: string;
+  showBaseUrl?: boolean;
+  apiKeyUrl?: string;
 }
 
 export const credentialSchema = z.object({
@@ -36,6 +39,9 @@ export function OpenAIKeyPrompt({
   defaultApiKey,
   defaultBaseUrl,
   defaultModel,
+  providerName = 'OpenAI',
+  showBaseUrl = true,
+  apiKeyUrl = 'https://bailian.console.aliyun.com/?tab=model#/api-key',
 }: OpenAIKeyPromptProps): React.JSX.Element {
   const [apiKey, setApiKey] = useState(defaultApiKey || '');
   const [baseUrl, setBaseUrl] = useState(defaultBaseUrl || '');
@@ -85,18 +91,16 @@ export function OpenAIKeyPrompt({
       // Handle Enter key
       if (key.name === 'return') {
         if (currentField === 'apiKey') {
-          // 允许空 API key 跳转到下一个字段，让用户稍后可以返回修改
-          setCurrentField('baseUrl');
+          // Skip baseUrl if not shown
+          setCurrentField(showBaseUrl ? 'baseUrl' : 'model');
           return;
         } else if (currentField === 'baseUrl') {
           setCurrentField('model');
           return;
         } else if (currentField === 'model') {
-          // 只有在提交时才检查 API key 是否为空
           if (apiKey.trim()) {
             validateAndSubmit();
           } else {
-            // 如果 API key 为空，回到 API key 字段
             setCurrentField('apiKey');
           }
         }
@@ -106,7 +110,7 @@ export function OpenAIKeyPrompt({
       // Handle Tab key for field navigation
       if (key.name === 'tab') {
         if (currentField === 'apiKey') {
-          setCurrentField('baseUrl');
+          setCurrentField(showBaseUrl ? 'baseUrl' : 'model');
         } else if (currentField === 'baseUrl') {
           setCurrentField('model');
         } else if (currentField === 'model') {
@@ -120,14 +124,14 @@ export function OpenAIKeyPrompt({
         if (currentField === 'baseUrl') {
           setCurrentField('apiKey');
         } else if (currentField === 'model') {
-          setCurrentField('baseUrl');
+          setCurrentField(showBaseUrl ? 'baseUrl' : 'apiKey');
         }
         return;
       }
 
       if (key.name === 'down') {
         if (currentField === 'apiKey') {
-          setCurrentField('baseUrl');
+          setCurrentField(showBaseUrl ? 'baseUrl' : 'model');
         } else if (currentField === 'baseUrl') {
           setCurrentField('model');
         }
@@ -208,7 +212,7 @@ export function OpenAIKeyPrompt({
       width="100%"
     >
       <Text bold color={Colors.AccentBlue}>
-        {t('OpenAI Configuration Required')}
+        {t('{{providerName}} Configuration Required', { providerName })}
       </Text>
       {validationError && (
         <Box marginTop={1}>
@@ -218,11 +222,10 @@ export function OpenAIKeyPrompt({
       <Box marginTop={1}>
         <Text>
           {t(
-            'Please enter your OpenAI configuration. You can get an API key from',
+            'Please enter your {{providerName}} configuration. You can get an API key from',
+            { providerName },
           )}{' '}
-          <Text color={Colors.AccentBlue}>
-            https://bailian.console.aliyun.com/?tab=model#/api-key
-          </Text>
+          <Text color={Colors.AccentBlue}>{apiKeyUrl}</Text>
         </Text>
       </Box>
       <Box marginTop={1} flexDirection="row">
@@ -240,21 +243,25 @@ export function OpenAIKeyPrompt({
           </Text>
         </Box>
       </Box>
-      <Box marginTop={1} flexDirection="row">
-        <Box width={12}>
-          <Text
-            color={currentField === 'baseUrl' ? Colors.AccentBlue : Colors.Gray}
-          >
-            {t('Base URL:')}
-          </Text>
+      {showBaseUrl && (
+        <Box marginTop={1} flexDirection="row">
+          <Box width={12}>
+            <Text
+              color={
+                currentField === 'baseUrl' ? Colors.AccentBlue : Colors.Gray
+              }
+            >
+              {t('Base URL:')}
+            </Text>
+          </Box>
+          <Box flexGrow={1}>
+            <Text>
+              {currentField === 'baseUrl' ? '> ' : '  '}
+              {baseUrl}
+            </Text>
+          </Box>
         </Box>
-        <Box flexGrow={1}>
-          <Text>
-            {currentField === 'baseUrl' ? '> ' : '  '}
-            {baseUrl}
-          </Text>
-        </Box>
-      </Box>
+      )}
       <Box marginTop={1} flexDirection="row">
         <Box width={12}>
           <Text

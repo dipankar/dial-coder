@@ -173,7 +173,14 @@ export const useAuthCommand = (
       setIsAuthDialogOpen(false);
       setIsAuthenticating(true);
 
-      if (authType === AuthType.USE_OPENAI) {
+      // API key providers: OpenAI, Gemini (API Key), Mistral
+      const apiKeyProviders = [
+        AuthType.USE_OPENAI,
+        AuthType.USE_GEMINI,
+        AuthType.USE_MISTRAL,
+      ];
+
+      if (apiKeyProviders.includes(authType)) {
         if (credentials) {
           config.updateCredentials({
             apiKey: credentials.apiKey,
@@ -223,18 +230,23 @@ export const useAuthCommand = (
     */
   useEffect(() => {
     const defaultAuthType = process.env['QWEN_DEFAULT_AUTH_TYPE'];
+    const validAuthTypes = [
+      AuthType.QWEN_OAUTH,
+      AuthType.USE_OPENAI,
+      AuthType.LOGIN_WITH_GOOGLE,
+      AuthType.USE_GEMINI,
+      AuthType.USE_MISTRAL,
+    ];
     if (
       defaultAuthType &&
-      ![AuthType.QWEN_OAUTH, AuthType.USE_OPENAI].includes(
-        defaultAuthType as AuthType,
-      )
+      !validAuthTypes.includes(defaultAuthType as AuthType)
     ) {
       onAuthError(
         t(
           'Invalid QWEN_DEFAULT_AUTH_TYPE value: "{{value}}". Valid values are: {{validValues}}',
           {
             value: defaultAuthType,
-            validValues: [AuthType.QWEN_OAUTH, AuthType.USE_OPENAI].join(', '),
+            validValues: validAuthTypes.join(', '),
           },
         ),
       );

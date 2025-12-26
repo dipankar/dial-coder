@@ -49,6 +49,7 @@ export enum AuthType {
   CLOUD_SHELL = 'cloud-shell',
   USE_OPENAI = 'openai',
   QWEN_OAUTH = 'qwen-oauth',
+  USE_MISTRAL = 'mistral',
 }
 
 export type ContentGeneratorConfig = {
@@ -107,6 +108,19 @@ export function createContentGeneratorConfig(
     return {
       ...newContentGeneratorConfig,
       model: newContentGeneratorConfig?.model || 'qwen3-coder-plus',
+    } as ContentGeneratorConfig;
+  }
+
+  if (authType === AuthType.USE_MISTRAL) {
+    if (!newContentGeneratorConfig.apiKey) {
+      throw new Error('Mistral API key is required');
+    }
+
+    return {
+      ...newContentGeneratorConfig,
+      model: newContentGeneratorConfig?.model || 'mistral-large-latest',
+      baseUrl:
+        newContentGeneratorConfig?.baseUrl || 'https://api.mistral.ai/v1',
     } as ContentGeneratorConfig;
   }
 
@@ -179,6 +193,26 @@ export async function createContentGenerator(
 
     // Always use OpenAIContentGenerator, logging is controlled by enableOpenAILogging flag
     return createOpenAIContentGenerator(config, gcConfig);
+  }
+
+  if (config.authType === AuthType.USE_MISTRAL) {
+    if (!config.apiKey) {
+      throw new Error('Mistral API key is required');
+    }
+
+    // Mistral uses OpenAI-compatible API, so we can reuse OpenAIContentGenerator
+    const { createOpenAIContentGenerator } = await import(
+      './openaiContentGenerator/index.js'
+    );
+
+    // Use OpenAI content generator with Mistral's API endpoint
+    return createOpenAIContentGenerator(
+      {
+        ...config,
+        baseUrl: config.baseUrl || 'https://api.mistral.ai/v1',
+      },
+      gcConfig,
+    );
   }
 
   if (config.authType === AuthType.QWEN_OAUTH) {

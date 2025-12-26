@@ -29,6 +29,7 @@ import { mcpCommand } from '../ui/commands/mcpCommand.js';
 import { memoryCommand } from '../ui/commands/memoryCommand.js';
 import { modelCommand } from '../ui/commands/modelCommand.js';
 import { permissionsCommand } from '../ui/commands/permissionsCommand.js';
+import { providerCommand } from '../ui/commands/providerCommand.js';
 import { quitCommand, quitConfirmCommand } from '../ui/commands/quitCommand.js';
 import { restoreCommand } from '../ui/commands/restoreCommand.js';
 import { settingsCommand } from '../ui/commands/settingsCommand.js';
@@ -78,6 +79,7 @@ export class BuiltinCommandLoader implements ICommandLoader {
       memoryCommand,
       modelCommand,
       ...(this.config?.getFolderTrust() ? [permissionsCommand] : []),
+      providerCommand,
       quitCommand,
       quitConfirmCommand,
       restoreCommand(this.config),

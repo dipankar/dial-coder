@@ -48,6 +48,21 @@ export function AuthDialog(): React.JSX.Element {
       label: t('OpenAI'),
       value: AuthType.USE_OPENAI,
     },
+    {
+      key: AuthType.LOGIN_WITH_GOOGLE,
+      label: t('Gemini (Google Login)'),
+      value: AuthType.LOGIN_WITH_GOOGLE,
+    },
+    {
+      key: AuthType.USE_GEMINI,
+      label: t('Gemini (API Key)'),
+      value: AuthType.USE_GEMINI,
+    },
+    {
+      key: AuthType.USE_MISTRAL,
+      label: t('Mistral'),
+      value: AuthType.USE_MISTRAL,
+    },
   ];
 
   const initialAuthIndex = Math.max(
