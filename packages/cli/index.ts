@@ -8,7 +8,7 @@
 
 import './src/dial.js';
 import { main } from './src/dial.js';
-import { FatalError } from '@dial-code/dial-core';
+import { FatalError } from '@dial-coder/core';
 
 // --- Global Entry Point ---
 main().catch((error) => {

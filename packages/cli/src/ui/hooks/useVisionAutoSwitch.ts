@@ -5,7 +5,7 @@
  */
 
 import { type PartListUnion, type Part } from '@google/genai';
-import { AuthType, type Config, ApprovalMode } from '@dial-code/dial-core';
+import { AuthType, type Config, ApprovalMode } from '@dial-coder/core';
 import { useCallback, useRef } from 'react';
 import { VisionSwitchOutcome } from '../components/ModelSwitchDialog.js';
 import {
@@ -17,7 +17,7 @@ import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import {
   isSupportedImageMimeType,
   getUnsupportedImageFormatWarning,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 /**
  * Checks if a PartListUnion contains image parts

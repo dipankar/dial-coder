@@ -65,7 +65,7 @@ export interface OauthWebLogin {
 
 const oauthClientPromises = new Map<AuthType, Promise<OAuth2Client>>();
 
-function getUseEncryptedStorageFlag() {
+export function getUseEncryptedStorageFlag() {
   return process.env[FORCE_ENCRYPTED_FILE_ENV_VAR] === 'true';
 }
 

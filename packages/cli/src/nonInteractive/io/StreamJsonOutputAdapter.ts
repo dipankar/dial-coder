@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import type {
   CLIAssistantMessage,
   CLIMessage,

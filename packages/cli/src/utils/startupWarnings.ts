@@ -7,7 +7,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import { join as pathJoin } from 'node:path';
-import { getErrorMessage } from '@dial-code/dial-core';
+import { getErrorMessage } from '@dial-coder/core';
 
 const warningsFilePath = pathJoin(os.tmpdir(), 'qwen-code-warnings.txt');
 

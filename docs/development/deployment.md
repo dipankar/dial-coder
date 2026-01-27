@@ -41,7 +41,7 @@ For security and isolation, Qwen Code can be run inside a container. This is the
   You can run the published sandbox image directly. This is useful for environments where you only have Docker and want to run the CLI.
   ```bash
   # Run the published sandbox image
-  docker run --rm -it ghcr.io/qwenlm/qwen-code:0.0.11
+  docker run --rm -it ghcr.io/neul-labs/dial-coder:0.0.11
   ```
 - **Using the `--sandbox` flag:**
   If you have Qwen Code installed locally (using the standard installation described above), you can instruct it to run inside the sandbox container.
@@ -80,7 +80,7 @@ You can run the most recently committed version of Qwen Code directly from the G
 
 ```bash
 # Execute the CLI directly from the main branch on GitHub
-npx https://github.com/QwenLM/qwen-code
+npx https://github.com/neul-labs/dial-coder
 ```
 
 ## Deployment architecture

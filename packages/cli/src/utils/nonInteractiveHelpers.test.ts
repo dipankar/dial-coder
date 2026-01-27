@@ -10,13 +10,13 @@ import type {
   SessionMetrics,
   TaskResultDisplay,
   ToolCallResponseInfo,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   ToolErrorType,
   MCPServerStatus,
   getMCPServerStatus,
   OutputFormat,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Part } from '@google/genai';
 import type {
   CLIUserMessage,
@@ -60,8 +60,8 @@ vi.mock('../ui/utils/computeStats.js', () => ({
   }),
 }));
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...actual,
     getMCPServerStatus: vi.fn(),

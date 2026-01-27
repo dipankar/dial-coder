@@ -13,7 +13,7 @@ import {
 import {
   type MCPServerConfig,
   type ExtensionInstallMetadata,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 export function createExtension({
   extensionsDir = 'extensions-dir',

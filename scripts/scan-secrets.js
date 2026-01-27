@@ -141,6 +141,10 @@ const ALLOWLIST = [
   // Regex pattern definitions (not actual tokens)
   /^bearer\\s\+/i,
   /^Bearer Token$/, // Pattern name in this file
+  // CLI example patterns (not real tokens)
+  /Bearer abc123/i, // Example token in CLI help text
+  // Settings key patterns (not actual tokens)
+  /Auth: 'security\.auth/i, // Settings key reference
 ];
 
 function shouldSkipFile(filePath) {

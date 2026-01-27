@@ -6,7 +6,7 @@
 
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { execCommand } from '@dial-code/dial-core';
+import { execCommand } from '@dial-coder/core';
 
 /**
  * Checks if the system clipboard contains an image (macOS only for now)

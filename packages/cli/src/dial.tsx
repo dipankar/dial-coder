@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   AuthType,
   getOauthClient,
   InputFormat,
   logUserPrompt,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { render } from 'ink';
 import { randomUUID } from 'node:crypto';
 import dns from 'node:dns';

@@ -24,14 +24,14 @@ import type {
   EditorType,
   GeminiClient,
   AnyToolInvocation,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   ApprovalMode,
   AuthType,
   GeminiEventType as ServerGeminiEventType,
   ToolErrorType,
   ToolConfirmationOutcome,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Part, PartListUnion } from '@google/genai';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import type { HistoryItem, SlashCommandProcessorResult } from '../types.js';
@@ -78,7 +78,7 @@ const mockRestoreOriginalModel = vi.hoisted(() =>
   vi.fn().mockResolvedValue(undefined),
 );
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
+vi.mock('@dial-coder/core', async (importOriginal) => {
   const actualCoreModule = (await importOriginal()) as any;
   return {
     ...actualCoreModule,

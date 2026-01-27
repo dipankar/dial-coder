@@ -13,7 +13,7 @@ import {
   detectIdeFromEnv,
   IDE_DEFINITIONS,
   type IdeInfo,
-} from '@dial-code/dial-core/src/ide/detect-ide.js';
+} from '@dial-coder/core/src/ide/detect-ide.js';
 
 const CLI_IDE_COMPANION_IDENTIFIER = 'dialcode.dial-code-vscode-ide-companion';
 const INFO_MESSAGE_SHOWN_KEY = 'dialCodeInfoMessageShown';

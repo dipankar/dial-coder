@@ -104,7 +104,7 @@ describe('OpenRouterOpenAICompatibleProvider', () => {
 
       expect(headers).toEqual({
         'User-Agent': `QwenCode/1.0.0 (${process.platform}; ${process.arch})`,
-        'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git',
+        'HTTP-Referer': 'https://github.com/neul-labs/dial-coder.git',
         'X-Title': 'Qwen Code',
       });
     });
@@ -124,7 +124,7 @@ describe('OpenRouterOpenAICompatibleProvider', () => {
 
       expect(headers).toEqual({
         'User-Agent': 'ParentAgent/1.0.0',
-        'HTTP-Referer': 'https://github.com/QwenLM/qwen-code.git', // OpenRouter-specific value should override
+        'HTTP-Referer': 'https://github.com/neul-labs/dial-coder.git', // OpenRouter-specific value should override
         'X-Title': 'Qwen Code',
       });
 
@@ -140,7 +140,7 @@ describe('OpenRouterOpenAICompatibleProvider', () => {
         `QwenCode/unknown (${process.platform}; ${process.arch})`,
       );
       expect(headers['HTTP-Referer']).toBe(
-        'https://github.com/QwenLM/qwen-code.git',
+        'https://github.com/neul-labs/dial-coder.git',
       );
       expect(headers['X-Title']).toBe('Qwen Code');
     });
@@ -213,7 +213,7 @@ describe('OpenRouterOpenAICompatibleProvider', () => {
       // Should have both parent and OpenRouter-specific headers
       expect(headers['User-Agent']).toBeDefined(); // From parent
       expect(headers['HTTP-Referer']).toBe(
-        'https://github.com/QwenLM/qwen-code.git',
+        'https://github.com/neul-labs/dial-coder.git',
       ); // OpenRouter-specific
       expect(headers['X-Title']).toBe('Qwen Code'); // OpenRouter-specific
     });

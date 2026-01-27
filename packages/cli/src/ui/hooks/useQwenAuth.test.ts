@@ -6,17 +6,13 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import type { DeviceAuthorizationData } from '@dial-code/dial-core';
+import type { DeviceAuthorizationData } from '@dial-coder/core';
 import { useQwenAuth } from './useQwenAuth.js';
-import {
-  AuthType,
-  qwenOAuth2Events,
-  QwenOAuth2Event,
-} from '@dial-code/dial-core';
+import { AuthType, qwenOAuth2Events, QwenOAuth2Event } from '@dial-coder/core';
 
 // Mock the qwenOAuth2Events
-vi.mock('@dial-code/dial-core', async () => {
-  const actual = await vi.importActual('@dial-code/dial-core');
+vi.mock('@dial-coder/core', async () => {
+  const actual = await vi.importActual('@dial-coder/core');
   const mockEmitter = {
     on: vi.fn().mockReturnThis(),
     off: vi.fn().mockReturnThis(),

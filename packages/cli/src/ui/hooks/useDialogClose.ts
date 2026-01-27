@@ -6,7 +6,7 @@
 
 import { useCallback } from 'react';
 import { SettingScope } from '../../config/settings.js';
-import type { AuthType, ApprovalMode } from '@dial-code/dial-core';
+import type { AuthType, ApprovalMode } from '@dial-coder/core';
 import type { OpenAICredentials } from '../components/OpenAIKeyPrompt.js';
 
 export interface DialogCloseOptions {

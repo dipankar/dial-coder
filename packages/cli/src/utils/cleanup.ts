@@ -6,7 +6,7 @@
 
 import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
-import { Storage } from '@dial-code/dial-core';
+import { Storage } from '@dial-coder/core';
 
 const cleanupFunctions: Array<(() => void) | (() => Promise<void>)> = [];
 

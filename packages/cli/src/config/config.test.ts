@@ -13,11 +13,11 @@ import {
   WriteFileTool,
   DEFAULT_QWEN_MODEL,
   OutputFormat,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { loadCliConfig, parseArguments, type CliArgs } from './config.js';
 import type { Settings } from './settings.js';
 import { ExtensionStorage, type Extension } from './extension.js';
-import * as ServerConfig from '@dial-code/dial-core';
+import * as ServerConfig from '@dial-coder/core';
 import { isWorkspaceTrusted } from './trustedFolders.js';
 import { ExtensionEnablementManager } from './extensions/extensionEnablement.js';
 
@@ -77,10 +77,9 @@ vi.mock('read-package-up', () => ({
   ),
 }));
 
-vi.mock('@dial-code/dial-core', async () => {
-  const actualServer = await vi.importActual<typeof ServerConfig>(
-    '@dial-code/dial-core',
-  );
+vi.mock('@dial-coder/core', async () => {
+  const actualServer =
+    await vi.importActual<typeof ServerConfig>('@dial-coder/core');
   return {
     ...actualServer,
     IdeClient: {

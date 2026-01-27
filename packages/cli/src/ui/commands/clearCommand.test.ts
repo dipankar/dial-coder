@@ -11,8 +11,8 @@ import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 
 // Mock the telemetry service
-vi.mock('@dial-code/dial-core', async () => {
-  const actual = await vi.importActual('@dial-code/dial-core');
+vi.mock('@dial-coder/core', async () => {
+  const actual = await vi.importActual('@dial-coder/core');
   return {
     ...actual,
     uiTelemetryService: {
@@ -21,8 +21,8 @@ vi.mock('@dial-code/dial-core', async () => {
   };
 });
 
-import type { GeminiClient } from '@dial-code/dial-core';
-import { uiTelemetryService } from '@dial-code/dial-core';
+import type { GeminiClient } from '@dial-coder/core';
+import { uiTelemetryService } from '@dial-coder/core';
 
 describe('clearCommand', () => {
   let mockContext: CommandContext;

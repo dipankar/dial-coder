@@ -37,9 +37,9 @@ export interface Logger {
 function isDebugEnabled(): boolean {
   if (typeof process !== 'undefined' && process.env) {
     return (
-      process.env.DEBUG === 'true' ||
-      process.env.DEBUG === '1' ||
-      process.env.DIAL_DEBUG === 'true'
+      process.env['DEBUG'] === 'true' ||
+      process.env['DEBUG'] === '1' ||
+      process.env['DIAL_DEBUG'] === 'true'
     );
   }
   return false;

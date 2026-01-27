@@ -13,10 +13,7 @@
  */
 
 import type { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import type {
-  ToolCallRequestInfo,
-  MCPServerConfig,
-} from '@dial-code/dial-core';
+import type { ToolCallRequestInfo, MCPServerConfig } from '@dial-coder/core';
 import type { PermissionSuggestion } from '../../types.js';
 
 /**

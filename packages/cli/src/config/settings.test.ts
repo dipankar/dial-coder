@@ -69,7 +69,7 @@ import {
   SETTINGS_VERSION,
   SETTINGS_VERSION_KEY,
 } from './settings.js';
-import { FatalConfigError, DIAL_DIR } from '@dial-code/dial-core';
+import { FatalConfigError, DIAL_DIR } from '@dial-coder/core';
 
 const MOCK_WORKSPACE_DIR = '/mock/workspace';
 // Use the (mocked) SETTINGS_DIRECTORY_NAME for consistency

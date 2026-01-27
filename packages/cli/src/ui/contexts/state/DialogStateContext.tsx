@@ -17,7 +17,7 @@ import type {
   LoopDetectionConfirmationRequest,
   QuitConfirmationRequest,
 } from '../../types.js';
-import type { FallbackIntent } from '@dial-code/dial-core';
+import type { FallbackIntent } from '@dial-coder/core';
 
 /**
  * Request for ProQuota dialog when model fallback is needed.

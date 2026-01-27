@@ -780,7 +780,7 @@ export class IdeClient {
         name: 'streamable-http-client',
         // Version should match CLI version for consistency
         // See: process.env.CLI_VERSION or package.json version
-        version: process.env.CLI_VERSION ?? '1.0.0',
+        version: process.env['CLI_VERSION'] ?? '1.0.0',
       });
 
       transport = new StreamableHTTPClientTransport(
@@ -824,7 +824,7 @@ export class IdeClient {
       this.client = new Client({
         name: 'stdio-client',
         // Version should match CLI version for consistency
-        version: process.env.CLI_VERSION ?? '1.0.0',
+        version: process.env['CLI_VERSION'] ?? '1.0.0',
       });
 
       transport = new StdioClientTransport({

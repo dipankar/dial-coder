@@ -19,11 +19,8 @@ import type {
   ControlRequestPayload,
   CLIControlMcpMessageRequest,
 } from '../../types.js';
-import type { MCPServerConfig, WorkspaceContext } from '@dial-code/dial-core';
-import {
-  connectToMcpServer,
-  MCP_DEFAULT_TIMEOUT_MSEC,
-} from '@dial-code/dial-core';
+import type { MCPServerConfig, WorkspaceContext } from '@dial-coder/core';
+import { connectToMcpServer, MCP_DEFAULT_TIMEOUT_MSEC } from '@dial-coder/core';
 
 export class MCPController extends BaseController {
   /**

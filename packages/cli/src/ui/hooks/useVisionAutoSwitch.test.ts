@@ -8,10 +8,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import type { Part, PartListUnion } from '@google/genai';
-import { AuthType, type Config, ApprovalMode } from '@dial-code/dial-core';
+import { AuthType, type Config, ApprovalMode } from '@dial-coder/core';
 
 // Mock the image format functions from core package
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
+vi.mock('@dial-coder/core', async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
   return {
     ...actual,

@@ -5,8 +5,8 @@
  */
 
 import { useState, useEffect } from 'react';
-import type { Storage } from '@dial-code/dial-core';
-import { sessionId, Logger } from '@dial-code/dial-core';
+import type { Storage } from '@dial-coder/core';
+import { sessionId, Logger } from '@dial-coder/core';
 
 /**
  * Hook to manage the logger instance.

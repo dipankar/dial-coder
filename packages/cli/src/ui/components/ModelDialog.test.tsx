@@ -10,7 +10,7 @@ import { ModelDialog } from './ModelDialog.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { DescriptiveRadioButtonSelect } from './shared/DescriptiveRadioButtonSelect.js';
 import { ConfigContext } from '../contexts/ConfigContext.js';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   AVAILABLE_MODELS_QWEN,
   MAINLINE_CODER,

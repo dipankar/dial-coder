@@ -1,10 +1,24 @@
 {
-  "name": "@dial-code/dial-core",
+  "name": "@dial-coder/core",
   "version": "0.3.0",
-  "description": "Dial Code Core",
+  "description": "Dial Coder Core - AI orchestration engine with multi-stage review pipeline",
+  "author": "Neul Labs",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ai",
+    "llm",
+    "code-review",
+    "orchestration",
+    "multi-agent"
+  ],
+  "homepage": "https://docs.neullabs.com/dial-coder",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
+    "url": "git+https://github.com/neul-labs/dial-coder.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/neul-labs/dial-coder/issues"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -76,7 +90,7 @@
     "node-pty": "^1.0.0"
   },
   "devDependencies": {
-    "@dial-code/dial-test-utils": "file:../test-utils",
+    "@dial-coder/test-utils": "file:../test-utils",
     "@types/diff": "^7.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/fast-levenshtein": "^0.0.4",

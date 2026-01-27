@@ -380,7 +380,7 @@ myAgent.resetTokenUsage();
 ```typescript
 import { describe, it, expect, vi } from 'vitest';
 import { MyAgent } from './my-agent.js';
-import { createMockLLMClient } from '@dial-code/test-utils';
+import { createMockLLMClient } from '@dial-coder/test-utils';
 
 describe('MyAgent', () => {
   it('should generate valid output', async () => {

@@ -19,8 +19,8 @@ import type {
   ToolCall,
   Status as CoreStatus,
   EditorType,
-} from '@dial-code/dial-core';
-import { CoreToolScheduler } from '@dial-code/dial-core';
+} from '@dial-coder/core';
+import { CoreToolScheduler } from '@dial-coder/core';
 import { useCallback, useState, useMemo } from 'react';
 import type {
   HistoryItemToolGroup,

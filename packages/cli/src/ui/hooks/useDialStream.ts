@@ -19,7 +19,7 @@ import type {
   DialecticIntegration,
   DialecticEvent,
   ModeSelectionResult,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   GeminiEventType as ServerGeminiEventType,
   getErrorMessage,
@@ -40,7 +40,7 @@ import {
   ApiCancelEvent,
   createDialecticIntegration,
   ModeSelector,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { type Part, type PartListUnion, FinishReason } from '@google/genai';
 import type {
   HistoryItem,

@@ -16,11 +16,10 @@ import {
   loadServerHierarchicalMemory,
   type FileDiscoveryService,
   type LoadServerHierarchicalMemoryResponse,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...original,
     getErrorMessage: vi.fn((error: unknown) => {

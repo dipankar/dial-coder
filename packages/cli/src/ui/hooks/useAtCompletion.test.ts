@@ -9,10 +9,10 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import { useAtCompletion } from './useAtCompletion.js';
-import type { Config, FileSearch } from '@dial-code/dial-core';
-import { FileSearchFactory } from '@dial-code/dial-core';
-import type { FileSystemStructure } from '@dial-code/dial-test-utils';
-import { createTmpDir, cleanupTmpDir } from '@dial-code/dial-test-utils';
+import type { Config, FileSearch } from '@dial-coder/core';
+import { FileSearchFactory } from '@dial-coder/core';
+import type { FileSystemStructure } from '@dial-coder/test-utils';
+import { createTmpDir, cleanupTmpDir } from '@dial-coder/test-utils';
 import { useState } from 'react';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 

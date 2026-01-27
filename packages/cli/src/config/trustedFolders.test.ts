@@ -5,7 +5,7 @@
  */
 
 import * as osActual from 'node:os';
-import { FatalConfigError, ideContextStore } from '@dial-code/dial-core';
+import { FatalConfigError, ideContextStore } from '@dial-coder/core';
 import {
   describe,
   it,

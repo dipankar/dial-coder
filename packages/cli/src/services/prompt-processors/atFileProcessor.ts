@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { flatMapTextParts, readPathFromWorkspace } from '@dial-code/dial-core';
+import { flatMapTextParts, readPathFromWorkspace } from '@dial-coder/core';
 import type { CommandContext } from '../../ui/commands/types.js';
 import { MessageType } from '../../ui/types.js';
 import {

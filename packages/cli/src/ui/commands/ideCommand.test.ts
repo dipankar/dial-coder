@@ -8,10 +8,10 @@ import type { MockInstance } from 'vitest';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { ideCommand } from './ideCommand.js';
 import { type CommandContext } from './types.js';
-import { IDE_DEFINITIONS } from '@dial-code/dial-core';
-import * as core from '@dial-code/dial-core';
+import { IDE_DEFINITIONS } from '@dial-coder/core';
+import * as core from '@dial-coder/core';
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
+vi.mock('@dial-coder/core', async (importOriginal) => {
   const original = await importOriginal<typeof core>();
   return {
     ...original,

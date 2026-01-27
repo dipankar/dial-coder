@@ -18,8 +18,8 @@ import type {
   SessionMetrics,
   ModelMetrics,
   ToolCallStats,
-} from '@dial-code/dial-core';
-import { uiTelemetryService, sessionId } from '@dial-code/dial-core';
+} from '@dial-coder/core';
+import { uiTelemetryService, sessionId } from '@dial-coder/core';
 
 export enum ToolCallDecision {
   ACCEPT = 'accept',

@@ -10,11 +10,11 @@ import { activate } from './extension.js';
 import {
   IDE_DEFINITIONS,
   detectIdeFromEnv,
-} from '@dial-code/dial-core/src/ide/detect-ide.js';
+} from '@dial-coder/core/src/ide/detect-ide.js';
 
-vi.mock('@dial-code/dial-core/src/ide/detect-ide.js', async () => {
+vi.mock('@dial-coder/core/src/ide/detect-ide.js', async () => {
   const actual = await vi.importActual(
-    '@dial-code/dial-core/src/ide/detect-ide.js',
+    '@dial-coder/core/src/ide/detect-ide.js',
   );
   return {
     ...actual,

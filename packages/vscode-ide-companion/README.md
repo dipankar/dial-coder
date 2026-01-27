@@ -1,6 +1,6 @@
 # Qwen Code Companion
 
-The Qwen Code Companion extension seamlessly integrates [Qwen Code](https://github.com/QwenLM/qwen-code). This extension is compatible with both VS Code and VS Code forks.
+The Qwen Code Companion extension seamlessly integrates [Qwen Code](https://github.com/neul-labs/dial-coder). This extension is compatible with both VS Code and VS Code forks.
 
 # Features
 
@@ -21,4 +21,4 @@ To use this extension, you'll need:
 
 # Terms of Service and Privacy Notice
 
-By installing this extension, you agree to the [Terms of Service](https://github.com/QwenLM/qwen-code/blob/main/docs/tos-privacy.md).
+By installing this extension, you agree to the [Terms of Service](https://github.com/neul-labs/dial-coder/blob/main/docs/tos-privacy.md).

@@ -30,24 +30,24 @@ dial-code/
 
 ### Package Responsibilities
 
-1. **@dial-code/cli** (~48K lines)
+1. **@dial-coder/cli** (~48K lines)
    - Terminal UI using React and Ink
    - User input handling and display rendering
    - Session management and history
    - Theme and configuration management
 
-2. **@dial-code/core** (~40K lines)
+2. **@dial-coder/core** (~40K lines)
    - LLM abstraction layer for multiple providers
    - Tool registration and execution
    - Multi-agent orchestration (Planner, Reviewer, etc.)
    - Memory and context management
 
-3. **@dial-code/test-utils**
+3. **@dial-coder/test-utils**
    - Shared mocks and fixtures
    - Test helpers and utilities
    - Common test configurations
 
-4. **@dial-code/vscode-ide-companion**
+4. **@dial-coder/vscode-ide-companion**
    - VS Code extension for IDE integration
    - Code navigation and context sharing
 

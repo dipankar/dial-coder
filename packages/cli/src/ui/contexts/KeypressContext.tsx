@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   KittySequenceOverflowEvent,
   logKittySequenceOverflow,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useStdin } from 'ink';
 import type React from 'react';
 import {

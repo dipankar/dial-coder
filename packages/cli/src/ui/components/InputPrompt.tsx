@@ -21,8 +21,8 @@ import type { Key } from '../hooks/useKeypress.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 import type { CommandContext, SlashCommand } from '../commands/types.js';
-import type { Config } from '@dial-code/dial-core';
-import { ApprovalMode } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
+import { ApprovalMode } from '@dial-coder/core';
 import {
   parseInputForHighlighting,
   buildSegmentsForVisualSlice,

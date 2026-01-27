@@ -42,7 +42,7 @@ This will find the correct extension for your IDE and install it.
 You can also install the extension directly from a marketplace.
 
 - **For Visual Studio Code:** Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=qwenlm.qwen-code-vscode-ide-companion).
-- **For VS Code Forks:** To support forks of VS Code, the extension is also published on the [Open VSX Registry](https://open-vsx.org/extension/qwenlm/qwen-code-vscode-ide-companion). Follow your editor's instructions for installing extensions from this registry.
+- **For VS Code Forks:** To support forks of VS Code, the extension is also published on the [Open VSX Registry](https://open-vsx.org/extension/neul-labs/dial-coder-vscode-ide-companion). Follow your editor's instructions for installing extensions from this registry.
 
 > NOTE:
 > The "Qwen Code Companion" extension may appear towards the bottom of search results. If you don't see it immediately, try scrolling down or sorting by "Newly Published".

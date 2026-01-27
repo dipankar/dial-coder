@@ -11,7 +11,7 @@ import type {
   MessageActionReturn,
 } from './types.js';
 import { CommandKind } from './types.js';
-import type { DiscoveredMCPPrompt } from '@dial-code/dial-core';
+import type { DiscoveredMCPPrompt } from '@dial-coder/core';
 import {
   DiscoveredMCPTool,
   getMCPDiscoveryState,
@@ -21,7 +21,7 @@ import {
   getErrorMessage,
   MCPOAuthTokenStorage,
   MCPOAuthProvider,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { appEvents, AppEvent } from '../../utils/events.js';
 import { MessageType, type HistoryItemMcpStatus } from '../types.js';
 import { t } from '../../i18n/index.js';

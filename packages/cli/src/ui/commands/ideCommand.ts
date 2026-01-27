@@ -11,13 +11,13 @@ import {
   logIdeConnection,
   IdeConnectionEvent,
   IdeConnectionType,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   DIAL_CODE_COMPANION_EXTENSION_NAME,
   getIdeInstaller,
   IDEConnectionStatus,
   ideContextStore,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import path from 'node:path';
 import type {
   CommandContext,

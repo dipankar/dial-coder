@@ -6,8 +6,8 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { validateNonInteractiveAuth } from './validateNonInterActiveAuth.js';
-import { AuthType, OutputFormat } from '@dial-code/dial-core';
-import type { Config } from '@dial-code/dial-core';
+import { AuthType, OutputFormat } from '@dial-coder/core';
+import type { Config } from '@dial-coder/core';
 import * as auth from './config/auth.js';
 import { type LoadedSettings } from './config/settings.js';
 import * as JsonOutputAdapterModule from './nonInteractive/io/JsonOutputAdapter.js';

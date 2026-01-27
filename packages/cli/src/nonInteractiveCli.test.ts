@@ -9,7 +9,7 @@ import type {
   ToolRegistry,
   ServerGeminiStreamEvent,
   SessionMetrics,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { CLIUserMessage } from './nonInteractive/types.js';
 import {
   executeToolCall,
@@ -20,7 +20,7 @@ import {
   uiTelemetryService,
   FatalInputError,
   ApprovalMode,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Part } from '@google/genai';
 import { runNonInteractive } from './nonInteractiveCli.js';
 import { vi, type Mock, type MockInstance } from 'vitest';
@@ -29,9 +29,8 @@ import { CommandKind } from './ui/commands/types.js';
 
 // Mock core modules
 vi.mock('./ui/hooks/atCommandProcessor.js');
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
 
   class MockChatRecordingService {
     initialize = vi.fn();

@@ -13,16 +13,15 @@ import {
   IDEConnectionStatus,
   ideContextStore,
   type IDEConnectionState,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useIdeTrustListener } from './useIdeTrustListener.js';
 import * as trustedFolders from '../../config/trustedFolders.js';
 import { useSettings } from '../contexts/SettingsContext.js';
 import type { LoadedSettings } from '../../config/settings.js';
 
 // Mock dependencies
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
   const ideClientInstance = {
     addTrustChangeListener: vi.fn(),
     removeTrustChangeListener: vi.fn(),

@@ -1,10 +1,25 @@
 {
-  "name": "@dial-code/dial",
+  "name": "@dial-coder/cli",
   "version": "0.3.0",
-  "description": "Dial Code",
+  "description": "Dial Coder CLI - AI-powered command-line interface for developers",
+  "author": "Neul Labs",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ai",
+    "cli",
+    "code-assistant",
+    "developer-tools",
+    "llm",
+    "terminal"
+  ],
+  "homepage": "https://docs.neullabs.com/dial-coder",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
+    "url": "git+https://github.com/neul-labs/dial-coder.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/neul-labs/dial-coder/issues"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -33,12 +48,12 @@
     "dist"
   ],
   "config": {
-    "sandboxImageUri": "ghcr.io/qwenlm/qwen-code:0.3.0"
+    "sandboxImageUri": "ghcr.io/neul-labs/dial-coder:0.3.0"
   },
   "dependencies": {
     "@google/genai": "1.16.0",
     "@iarna/toml": "^2.2.5",
-    "@dial-code/dial-core": "file:../core",
+    "@dial-coder/core": "file:../core",
     "@modelcontextprotocol/sdk": "^1.15.1",
     "@types/update-notifier": "^6.0.8",
     "ansi-regex": "^6.2.2",
@@ -73,7 +88,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.27.6",
-    "@dial-code/dial-test-utils": "file:../test-utils",
+    "@dial-coder/test-utils": "file:../test-utils",
     "@testing-library/react": "^16.3.0",
     "@types/archiver": "^6.0.3",
     "@types/command-exists": "^1.2.3",

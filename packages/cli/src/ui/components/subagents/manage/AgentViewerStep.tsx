@@ -7,7 +7,7 @@
 import { Box, Text } from 'ink';
 import { theme } from '../../../semantic-colors.js';
 import { shouldShowColor, getColorForDisplay } from '../utils.js';
-import { type SubagentConfig } from '@dial-code/dial-core';
+import { type SubagentConfig } from '@dial-coder/core';
 import { t } from '../../../../i18n/index.js';
 
 interface AgentViewerStepProps {

@@ -5,7 +5,7 @@
  */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import { runNonInteractiveStreamJson } from './session.js';
 import type {
   CLIUserMessage,

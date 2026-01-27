@@ -6,7 +6,7 @@
 
 import type React from 'react';
 import { Text } from 'ink';
-import type { AnsiLine, AnsiOutput, AnsiToken } from '@dial-code/dial-core';
+import type { AnsiLine, AnsiOutput, AnsiToken } from '@dial-coder/core';
 
 const DEFAULT_HEIGHT = 24;
 

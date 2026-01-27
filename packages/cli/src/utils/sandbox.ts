@@ -16,8 +16,8 @@ import {
   SETTINGS_DIRECTORY_NAME,
 } from '../config/settings.js';
 import { promisify } from 'node:util';
-import type { Config, SandboxConfig } from '@dial-code/dial-core';
-import { FatalSandboxError } from '@dial-code/dial-core';
+import type { Config, SandboxConfig } from '@dial-coder/core';
+import { FatalSandboxError } from '@dial-coder/core';
 import { ConsolePatcher } from '../ui/utils/ConsolePatcher.js';
 import { randomBytes } from 'node:crypto';
 

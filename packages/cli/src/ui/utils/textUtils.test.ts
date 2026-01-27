@@ -8,7 +8,7 @@ import { describe, it, expect } from 'vitest';
 import type {
   ToolCallConfirmationDetails,
   ToolEditConfirmationDetails,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { escapeAnsiCtrlCodes } from './textUtils.js';
 
 describe('textUtils', () => {

@@ -114,7 +114,7 @@ packages/
 
 ```
 packages/
-├── cli/              # CLI frontend (@dial-code/dial)
+├── cli/              # CLI frontend (@dial-coder/cli)
 │   ├── src/
 │   │   ├── dial.tsx           # Main entry (renamed from gemini.tsx)
 │   │   ├── ui/                # UI components
@@ -122,7 +122,7 @@ packages/
 │   │   └── i18n/              # Internationalization
 │   └── package.json
 │
-├── core/             # Core agent engine (@dial-code/dial-core)
+├── core/             # Core agent engine (@dial-coder/core)
 │   ├── src/
 │   │   ├── orchestrator/      # NEW: Dialectic orchestration
 │   │   │   ├── index.ts

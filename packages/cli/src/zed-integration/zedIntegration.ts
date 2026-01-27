@@ -18,7 +18,7 @@ import type {
   SubAgentApprovalRequestEvent,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   AuthType,
   clearCachedCredentialFile,
@@ -40,7 +40,7 @@ import {
   Kind,
   TodoWriteTool,
   UserPromptEvent,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import * as acp from './acp.js';
 import { AcpFileSystemService } from './fileSystemService.js';
 import { Readable, Writable } from 'node:stream';

@@ -20,7 +20,7 @@ import {
 } from '../utils/displayUtils.js';
 import { computeSessionStats } from '../utils/computeStats.js';
 import { t } from '../../i18n/index.js';
-import type { ModeStats } from '@dial-code/dial-core';
+import type { ModeStats } from '@dial-coder/core';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {

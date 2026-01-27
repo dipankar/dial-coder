@@ -7,7 +7,7 @@
 import fs from 'node:fs/promises';
 import * as os from 'node:os';
 import path from 'node:path';
-import { canUseRipgrep } from '@dial-code/dial-core';
+import { canUseRipgrep } from '@dial-coder/core';
 
 type WarningCheckOptions = {
   workspaceRoot: string;

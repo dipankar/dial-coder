@@ -6,7 +6,7 @@
 
 import { useCallback } from 'react';
 import { useStdin } from 'ink';
-import type { EditorType } from '@dial-code/dial-core';
+import type { EditorType } from '@dial-coder/core';
 import { spawnSync } from 'child_process';
 import { useSettings } from '../contexts/SettingsContext.js';
 

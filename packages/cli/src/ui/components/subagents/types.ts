@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { SubagentLevel, Config } from '@dial-code/dial-core';
+import type { SubagentLevel, Config } from '@dial-coder/core';
 
 /**
  * State management for the subagent creation wizard.

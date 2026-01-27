@@ -16,8 +16,8 @@ import type {
   ToolMcpConfirmationDetails,
   Config,
   EditorType,
-} from '@dial-code/dial-core';
-import { IdeClient, ToolConfirmationOutcome } from '@dial-code/dial-core';
+} from '@dial-coder/core';
+import { IdeClient, ToolConfirmationOutcome } from '@dial-coder/core';
 import type { RadioSelectItem } from '../shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from '../shared/RadioButtonSelect.js';
 import { MaxSizedBox } from '../shared/MaxSizedBox.js';

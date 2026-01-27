@@ -22,7 +22,7 @@ vi.mock('../contexts/VimModeContext.js', () => ({
     vimMode: 'NORMAL',
   })),
 }));
-import { ApprovalMode } from '@dial-code/dial-core';
+import { ApprovalMode } from '@dial-coder/core';
 import { StreamingState } from '../types.js';
 
 // Mock child components

@@ -1,6 +1,37 @@
 {
-  "name": "@dial-code/dial",
+  "name": "dial-coder",
   "version": "0.3.0",
+  "description": "AI-powered CLI for developers with multi-stage review pipeline. Think. Review. Code. Safely.",
+  "author": "Neul Labs",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ai",
+    "cli",
+    "code-assistant",
+    "code-review",
+    "developer-tools",
+    "llm",
+    "openai",
+    "qwen",
+    "anthropic",
+    "ollama",
+    "gemini",
+    "coding-assistant",
+    "ai-coding",
+    "terminal",
+    "productivity",
+    "automation",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "homepage": "https://docs.neullabs.com/dial-coder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neul-labs/dial-coder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neul-labs/dial-coder/issues"
+  },
   "engines": {
     "node": ">=20.0.0"
   },
@@ -8,12 +39,8 @@
   "workspaces": [
     "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
-  },
   "config": {
-    "sandboxImageUri": "ghcr.io/qwenlm/qwen-code:0.3.0"
+    "sandboxImageUri": "ghcr.io/neul-labs/dial-coder:0.3.0"
   },
   "scripts": {
     "start": "cross-env node scripts/start.js",

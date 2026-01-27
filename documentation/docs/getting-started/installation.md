@@ -24,10 +24,10 @@ Download from [nodejs.org](https://nodejs.org/) or use a version manager:
 
 ```bash
 # Clone the repository
-git clone https://github.com/anthropics/dial-code.git
+git clone https://github.com/neul-labs/dial-coder.git
 
 # Navigate and install dependencies
-cd dial-code
+cd dial-coder
 npm install
 
 # Install globally
@@ -51,7 +51,7 @@ You should see the version number displayed.
 To update to the latest version:
 
 ```bash
-cd dial-code
+cd dial-coder
 git pull
 npm install
 npm install -g .
@@ -63,10 +63,10 @@ npm install -g .
 
 ```bash
 # Remove global installation
-npm uninstall -g dial-code
+npm uninstall -g dial-coder
 
 # Remove the repository
-rm -rf dial-code
+rm -rf dial-coder
 ```
 
 ---

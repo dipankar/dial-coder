@@ -7,7 +7,7 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
-import type { DialecticEvent, DialecticEventType } from '@dial-code/dial-core';
+import type { DialecticEvent, DialecticEventType } from '@dial-coder/core';
 
 type ThemeType = typeof theme;
 

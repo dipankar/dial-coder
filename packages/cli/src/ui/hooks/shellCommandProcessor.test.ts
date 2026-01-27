@@ -17,9 +17,8 @@ import {
 
 const mockIsBinary = vi.hoisted(() => vi.fn());
 const mockShellExecutionService = vi.hoisted(() => vi.fn());
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...original,
     ShellExecutionService: { execute: mockShellExecutionService },
@@ -40,7 +39,7 @@ import {
   type GeminiClient,
   type ShellExecutionResult,
   type ShellOutputEvent,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';

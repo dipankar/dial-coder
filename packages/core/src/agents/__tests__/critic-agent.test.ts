@@ -134,9 +134,13 @@ describe('CriticAgent', () => {
       const context = createValidContext();
       context.failurePatterns = [
         {
-          pattern: 'Unhandled promise rejection',
-          frequency: 5,
-          lastOccurrence: '2024-01-01',
+          id: 'failure-1',
+          scope: 'project',
+          type: 'anti_pattern',
+          summary: 'Unhandled promise rejection',
+          reasoning: 'Occurred 5 times',
+          source: { sessionId: 'session-1', date: '2024-01-01' },
+          metadata: { confidence: 'high', timesReferenced: 5 },
         },
       ];
 
@@ -230,7 +234,7 @@ describe('CriticAgent', () => {
         'security',
         'performance',
         'maintainability',
-        'edge-case',
+        'edge_case',
       ] as const;
 
       for (const category of categories) {

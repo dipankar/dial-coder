@@ -14,11 +14,8 @@
  * Abstracts all permission logic from the session manager to keep it clean.
  */
 
-import type {
-  ToolCallRequestInfo,
-  WaitingToolCall,
-} from '@dial-code/dial-core';
-import { InputFormat, ToolConfirmationOutcome } from '@dial-code/dial-core';
+import type { ToolCallRequestInfo, WaitingToolCall } from '@dial-coder/core';
+import { InputFormat, ToolConfirmationOutcome } from '@dial-coder/core';
 import type {
   CLIControlPermissionRequest,
   CLIControlSetPermissionModeRequest,

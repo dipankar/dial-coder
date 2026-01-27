@@ -11,11 +11,7 @@ import { ToolMessage } from './ToolMessage.js';
 import { StreamingState, ToolCallStatus } from '../../types.js';
 import { Text } from 'ink';
 import { StreamingContext } from '../../contexts/StreamingContext.js';
-import type {
-  AnsiOutput,
-  AnsiOutputDisplay,
-  Config,
-} from '@dial-code/dial-core';
+import type { AnsiOutput, AnsiOutputDisplay, Config } from '@dial-coder/core';
 
 vi.mock('../TerminalOutput.js', () => ({
   TerminalOutput: function MockTerminalOutput({

@@ -30,7 +30,7 @@ import {
   ExtensionUninstallEvent,
   ExtensionDisableEvent,
   ExtensionEnableEvent,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { execSync } from 'node:child_process';
 import { SettingScope } from './settings.js';
 import { isWorkspaceTrusted } from './trustedFolders.js';
@@ -76,8 +76,8 @@ const mockLogExtensionEnable = vi.hoisted(() => vi.fn());
 const mockLogExtensionInstallEvent = vi.hoisted(() => vi.fn());
 const mockLogExtensionUninstall = vi.hoisted(() => vi.fn());
 const mockLogExtensionDisable = vi.hoisted(() => vi.fn());
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...actual,
     logExtensionEnable: mockLogExtensionEnable,

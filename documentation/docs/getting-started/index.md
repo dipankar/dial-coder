@@ -24,8 +24,8 @@ Get up and running with Dial Code in minutes.
 
 ```bash
 # Install
-git clone https://github.com/anthropics/dial-code.git
-cd dial-code && npm install && npm install -g .
+git clone https://github.com/neul-labs/dial-coder.git
+cd dial-coder && npm install && npm install -g .
 
 # Run (opens browser for Qwen OAuth)
 dial

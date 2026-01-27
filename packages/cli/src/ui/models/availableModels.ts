@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthType, DEFAULT_QWEN_MODEL } from '@dial-code/dial-core';
+import { AuthType, DEFAULT_QWEN_MODEL } from '@dial-coder/core';
 import { t } from '../../i18n/index.js';
 
 export type AvailableModel = {

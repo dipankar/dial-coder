@@ -13,14 +13,14 @@ import {
   getMCPServerStatus,
   getMCPDiscoveryState,
   DiscoveredMCPTool,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 import type { CallableTool } from '@google/genai';
 import { Type } from '@google/genai';
 import { MessageType } from '../types.js';
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-coder/core')>();
   const mockAuthenticate = vi.fn();
   return {
     ...actual,

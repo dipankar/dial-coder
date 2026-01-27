@@ -10,7 +10,7 @@ import type {
   TaskResultDisplay,
   SubagentStatsSummary,
   Config,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { theme } from '../../../semantic-colors.js';
 import { useKeypress } from '../../../hooks/useKeypress.js';
 import { COLOR_OPTIONS } from '../constants.js';

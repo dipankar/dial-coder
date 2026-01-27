@@ -25,7 +25,7 @@ vi.mock('fs', async (importOriginal) => {
     mkdirSync: vi.fn(),
   };
 });
-vi.mock('@dial-code/dial-core', () => {
+vi.mock('@dial-coder/core', () => {
   class Storage {
     getProjectTempDir(): string {
       return path.join('/test/home/', '.dial', 'tmp', 'mocked_hash');

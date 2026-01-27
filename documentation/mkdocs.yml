@@ -1,8 +1,8 @@
 site_name: Dial Code
 site_description: AI-powered CLI for developers with multi-stage review pipeline
-site_url: https://docs.dial-code.dev
-repo_url: https://github.com/anthropics/dial-code
-repo_name: dial-code
+site_url: https://docs.neullabs.com/dial-coder
+repo_url: https://github.com/neul-labs/dial-coder
+repo_name: dial-coder
 
 theme:
   name: material
@@ -70,13 +70,13 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/anthropics/dial-code
+      link: https://github.com/neul-labs/dial-coder
   generator: false
 
 extra_css:
   - assets/stylesheets/extra.css
 
-copyright: Copyright &copy; 2024-2026 Dial Code Contributors
+copyright: Copyright &copy; 2024-2026 Neul Labs
 
 nav:
   - Home: index.md

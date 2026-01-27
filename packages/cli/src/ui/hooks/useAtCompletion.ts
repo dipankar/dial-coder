@@ -5,8 +5,8 @@
  */
 
 import { useEffect, useReducer, useRef } from 'react';
-import type { Config, FileSearch } from '@dial-code/dial-core';
-import { FileSearchFactory, escapePath } from '@dial-code/dial-core';
+import type { Config, FileSearch } from '@dial-coder/core';
+import { FileSearchFactory, escapePath } from '@dial-coder/core';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 import { MAX_SUGGESTIONS_TO_SHOW } from '../components/SuggestionsDisplay.js';
 

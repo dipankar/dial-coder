@@ -20,7 +20,7 @@ import {
 } from '../../i18n/index.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { Storage } from '@dial-code/dial-core';
+import { Storage } from '@dial-coder/core';
 
 const LLM_OUTPUT_LANGUAGE_RULE_FILENAME = 'output-language.md';
 

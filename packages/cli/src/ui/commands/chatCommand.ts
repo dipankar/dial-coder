@@ -14,7 +14,7 @@ import type {
   SlashCommandActionReturn,
 } from './types.js';
 import { CommandKind } from './types.js';
-import { decodeTagName } from '@dial-code/dial-core';
+import { decodeTagName } from '@dial-coder/core';
 import path from 'node:path';
 import type { HistoryItemWithoutId } from '../types.js';
 import { MessageType } from '../types.js';

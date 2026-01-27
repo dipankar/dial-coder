@@ -1,13 +1,13 @@
 {
-  "name": "dial-code-vscode-ide-companion",
-  "displayName": "Dial Code Companion",
-  "description": "Enable Dial Code with direct access to your VS Code workspace.",
+  "name": "dial-coder-vscode",
+  "displayName": "Dial Coder Companion",
+  "description": "Enable Dial Coder with direct access to your VS Code workspace.",
   "version": "0.3.0",
-  "publisher": "dialcode",
+  "publisher": "neul-labs",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/QwenLM/qwen-code.git",
+    "url": "https://github.com/neul-labs/dial-coder.git",
     "directory": "packages/vscode-ide-companion"
   },
   "engines": {
@@ -19,13 +19,14 @@
     "AI"
   ],
   "keywords": [
-    "dial-code",
-    "dial code",
-    "dial",
-    "dial code",
+    "dial-coder",
+    "dial coder",
+    "ai",
+    "code-assistant",
     "cli",
     "ide integration",
-    "ide companion"
+    "ide companion",
+    "neul-labs"
   ],
   "activationEvents": [
     "onStartupFinished"

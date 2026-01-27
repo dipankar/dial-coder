@@ -11,7 +11,7 @@ import {
   useMemo,
   type PropsWithChildren,
 } from 'react';
-import { ApprovalMode } from '@dial-code/dial-core';
+import { ApprovalMode } from '@dial-coder/core';
 import type { SessionStatsState } from '../SessionContext.js';
 import type {
   UserMode,

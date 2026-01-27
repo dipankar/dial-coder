@@ -15,7 +15,7 @@ import {
 } from '../../config/extension.js';
 import { createExtension } from '../../test-utils/createExtension.js';
 import { useExtensionUpdates } from './useExtensionUpdates.js';
-import { DIAL_DIR, type GeminiCLIExtension } from '@dial-code/dial-core';
+import { DIAL_DIR, type GeminiCLIExtension } from '@dial-coder/core';
 import { renderHook, waitFor } from '@testing-library/react';
 import { MessageType } from '../types.js';
 import { ExtensionEnablementManager } from '../../config/extensions/extensionEnablement.js';

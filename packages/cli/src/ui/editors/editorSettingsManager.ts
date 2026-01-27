@@ -8,7 +8,7 @@ import {
   allowEditorTypeInSandbox,
   checkHasEditorType,
   type EditorType,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 export interface EditorDisplay {
   name: string;

@@ -62,7 +62,7 @@ The implementation is divided into 6 phases:
 ```json
 // packages/cli/package.json
 {
-  "name": "@dial-code/dial",
+  "name": "@dial-coder/cli",
   "bin": {
     "dial": "./dist/index.js"
   }
@@ -70,12 +70,12 @@ The implementation is divided into 6 phases:
 
 // packages/core/package.json
 {
-  "name": "@dial-code/dial-core"
+  "name": "@dial-coder/core"
 }
 
 // packages/test-utils/package.json
 {
-  "name": "@dial-code/dial-test-utils"
+  "name": "@dial-coder/test-utils"
 }
 ```
 

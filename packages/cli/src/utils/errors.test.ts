@@ -5,8 +5,8 @@
  */
 
 import { vi, type Mock, type MockInstance } from 'vitest';
-import type { Config } from '@dial-code/dial-core';
-import { OutputFormat, FatalInputError } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
+import { OutputFormat, FatalInputError } from '@dial-coder/core';
 import {
   getErrorMessage,
   handleError,
@@ -16,9 +16,8 @@ import {
 } from './errors.js';
 
 // Mock the core modules
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
 
   return {
     ...original,

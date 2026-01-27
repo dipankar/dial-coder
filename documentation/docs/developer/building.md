@@ -34,8 +34,8 @@ git --version
 
 ```bash
 # Clone the repository
-git clone https://github.com/anthropics/dial-code.git
-cd dial-code
+git clone https://github.com/neul-labs/dial-coder.git
+cd dial-coder
 
 # Install dependencies
 npm install
@@ -171,7 +171,7 @@ Run this before submitting PRs.
 ## Project Structure
 
 ```
-dial-code/
+dial-coder/
 ├── packages/
 │   ├── cli/           # Terminal interface
 │   │   ├── src/

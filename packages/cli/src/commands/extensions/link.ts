@@ -9,7 +9,7 @@ import {
   installExtension,
   requestConsentNonInteractive,
 } from '../../config/extension.js';
-import type { ExtensionInstallMetadata } from '@dial-code/dial-core';
+import type { ExtensionInstallMetadata } from '@dial-coder/core';
 
 import { getErrorMessage } from '../../utils/errors.js';
 

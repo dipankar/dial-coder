@@ -7,7 +7,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { EOL } from 'node:os';
 import { ToolConfirmationMessage } from './ToolConfirmationMessage.js';
-import type { ToolCallConfirmationDetails, Config } from '@dial-code/dial-core';
+import type { ToolCallConfirmationDetails, Config } from '@dial-coder/core';
 import { renderWithProviders } from '../../../test-utils/render.js';
 import type { LoadedSettings } from '../../../config/settings.js';
 

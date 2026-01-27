@@ -11,7 +11,7 @@ import type {
   ToolCallConfirmationDetails,
   ToolConfirmationOutcome,
   ToolResultDisplay,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { PartListUnion } from '@google/genai';
 import { type ReactNode } from 'react';
 

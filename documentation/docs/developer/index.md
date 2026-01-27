@@ -31,8 +31,8 @@ Set up a development environment.
 
 ```bash
 # Clone
-git clone https://github.com/anthropics/dial-code.git
-cd dial-code
+git clone https://github.com/neul-labs/dial-coder.git
+cd dial-coder
 
 # Install dependencies
 npm install
@@ -49,7 +49,7 @@ npm start
 ## Project Structure
 
 ```
-dial-code/
+dial-coder/
 ├── packages/
 │   ├── cli/           # Terminal UI (React/Ink)
 │   ├── core/          # Backend engine

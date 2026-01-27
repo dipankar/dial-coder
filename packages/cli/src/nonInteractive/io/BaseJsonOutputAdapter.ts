@@ -12,8 +12,8 @@ import type {
   SessionMetrics,
   ServerGeminiStreamEvent,
   TaskResultDisplay,
-} from '@dial-code/dial-core';
-import { GeminiEventType, ToolErrorType } from '@dial-code/dial-core';
+} from '@dial-coder/core';
+import { GeminiEventType, ToolErrorType } from '@dial-coder/core';
 import type { Part, GenerateContentResponseUsageMetadata } from '@google/genai';
 import type {
   CLIAssistantMessage,

@@ -14,7 +14,7 @@ import {
   DIAL_DIR,
   getErrorMessage,
   Storage,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import stripJsonComments from 'strip-json-comments';
 import { DefaultLight } from '../ui/themes/default-light.js';
 import { DefaultDark } from '../ui/themes/default.js';

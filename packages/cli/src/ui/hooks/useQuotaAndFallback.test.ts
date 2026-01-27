@@ -22,15 +22,14 @@ import {
   isGenericQuotaExceededError,
   isProQuotaExceededError,
   makeFakeConfig,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useQuotaAndFallback } from './useQuotaAndFallback.js';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import { AuthState, MessageType } from '../types.js';
 
 // Mock the error checking functions from the core package to control test scenarios
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...original,
     isGenericQuotaExceededError: vi.fn(),

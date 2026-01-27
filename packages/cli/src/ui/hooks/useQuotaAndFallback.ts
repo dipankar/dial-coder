@@ -12,7 +12,7 @@ import {
   isGenericQuotaExceededError,
   isProQuotaExceededError,
   UserTierId,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { type UseHistoryManagerReturn } from './useHistoryManager.js';
 import { AuthState, MessageType } from '../types.js';

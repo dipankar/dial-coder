@@ -6,7 +6,7 @@
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { FileSearchFactory, AbortError, filter } from './fileSearch.js';
-import { createTmpDir, cleanupTmpDir } from '@dial-code/dial-test-utils';
+import { createTmpDir, cleanupTmpDir } from '@dial-coder/test-utils';
 
 describe('FileSearch', () => {
   let tmpDir: string;

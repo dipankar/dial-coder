@@ -12,7 +12,7 @@ import {
   type PropsWithChildren,
 } from 'react';
 import { StreamingState } from '../../types.js';
-import type { ThoughtSummary, DialecticEvent } from '@dial-code/dial-core';
+import type { ThoughtSummary, DialecticEvent } from '@dial-coder/core';
 
 /**
  * State for streaming/loading/processing indicators.

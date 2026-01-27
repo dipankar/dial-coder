@@ -16,7 +16,7 @@ import type { CommandContext } from '../ui/commands/types.js';
 import { createMockCommandContext } from '../test-utils/mockCommandContext.js';
 import * as child_process from 'node:child_process';
 import os from 'node:os';
-import { IdeClient } from '@dial-code/dial-core';
+import { IdeClient } from '@dial-coder/core';
 import * as versionUtils from './version.js';
 import type { ExecSyncOptions } from 'node:child_process';
 
@@ -32,8 +32,8 @@ vi.mock('./version.js', () => ({
   getCliVersion: vi.fn(),
 }));
 
-vi.mock('@dial-code/dial-core', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@dial-code/dial-core')>();
+vi.mock('@dial-coder/core', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@dial-coder/core')>();
   return {
     ...actual,
     IdeClient: {
@@ -268,7 +268,7 @@ describe('systemInfo', () => {
         },
       );
 
-      const { AuthType } = await import('@dial-code/dial-core');
+      const { AuthType } = await import('@dial-coder/core');
       // Update the mock context to use OpenAI auth
       mockContext.services.settings.merged.security!.auth!.selectedType =
         AuthType.USE_OPENAI;

@@ -10,7 +10,7 @@ import {
   getErrorMessage,
   logAuth,
   AuthEvent,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 /**
  * Handles the initial authentication flow.

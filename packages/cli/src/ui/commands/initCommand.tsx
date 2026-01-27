@@ -8,7 +8,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import type { SlashCommand, SlashCommandActionReturn } from './types.js';
 import { CommandKind, configNotAvailableError } from './types.js';
-import { getCurrentGeminiMdFilename } from '@dial-code/dial-core';
+import { getCurrentGeminiMdFilename } from '@dial-coder/core';
 import { Text } from 'ink';
 import type React from 'react';
 import { t } from '../../i18n/index.js';

@@ -12,7 +12,7 @@ import {
   getErrorMessage,
   isWithinRoot,
   ideContextStore,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Settings } from './settings.js';
 import stripJsonComments from 'strip-json-comments';
 

@@ -6,7 +6,7 @@
 
 import { Text } from 'ink';
 import { theme } from '../semantic-colors.js';
-import { tokenLimit } from '@dial-code/dial-core';
+import { tokenLimit } from '@dial-coder/core';
 
 export const ContextUsageDisplay = ({
   promptTokenCount,

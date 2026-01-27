@@ -5,7 +5,7 @@
  */
 
 import { Box, Text } from 'ink';
-import { type SubagentConfig } from '@dial-code/dial-core';
+import { type SubagentConfig } from '@dial-coder/core';
 import type { StepNavigationProps } from '../types.js';
 import { theme } from '../../../semantic-colors.js';
 import { useKeypress } from '../../../hooks/useKeypress.js';

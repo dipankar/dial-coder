@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   AuthEvent,
   AuthType,
   clearCachedCredentialFile,
   getErrorMessage,
   logAuth,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useCallback, useEffect, useState } from 'react';
 import type { LoadedSettings, SettingScope } from '../../config/settings.js';
 import type { OpenAICredentials } from '../components/OpenAIKeyPrompt.js';

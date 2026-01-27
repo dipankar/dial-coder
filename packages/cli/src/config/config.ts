@@ -4,10 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type {
-  FileFilteringOptions,
-  MCPServerConfig,
-} from '@dial-code/dial-core';
+import type { FileFilteringOptions, MCPServerConfig } from '@dial-coder/core';
 import { extensionsCommand } from '../commands/extensions.js';
 import {
   ApprovalMode,
@@ -26,7 +23,7 @@ import {
   Storage,
   InputFormat,
   OutputFormat,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Settings } from './settings.js';
 import yargs, { type Argv } from 'yargs';
 import { hideBin } from 'yargs/helpers';

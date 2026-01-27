@@ -7,7 +7,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { isNodeError, Storage } from '@dial-code/dial-core';
+import { isNodeError, Storage } from '@dial-coder/core';
 
 const MAX_HISTORY_LENGTH = 100;
 

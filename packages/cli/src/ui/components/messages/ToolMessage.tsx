@@ -20,7 +20,7 @@ import type {
   PlanResultDisplay,
   AnsiOutput,
   Config,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { AgentExecutionDisplay } from '../subagents/index.js';
 import { PlanSummaryDisplay } from '../PlanSummaryDisplay.js';
 import { ShellInputPrompt } from '../ShellInputPrompt.js';

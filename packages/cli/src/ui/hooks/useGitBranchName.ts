@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { isCommandAvailable, execCommand } from '@dial-code/dial-core';
+import { isCommandAvailable, execCommand } from '@dial-coder/core';
 import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';

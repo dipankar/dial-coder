@@ -24,18 +24,18 @@ import type {
   Status as ToolCallStatusType,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   DEFAULT_TRUNCATE_TOOL_OUTPUT_LINES,
   DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD,
   ApprovalMode,
   MockTool,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { ToolCallStatus } from '../types.js';
 
 // Mocks
-vi.mock('@dial-code/dial-core', async () => {
-  const actual = await vi.importActual('@dial-code/dial-core');
+vi.mock('@dial-coder/core', async () => {
+  const actual = await vi.importActual('@dial-coder/core');
   return {
     ...actual,
     ToolRegistry: vi.fn(),

@@ -12,8 +12,8 @@ Guidelines for contributing to Dial Code.
 4. **Create** a feature branch
 
 ```bash
-git clone https://github.com/your-username/dial-code.git
-cd dial-code
+git clone https://github.com/your-username/dial-coder.git
+cd dial-coder
 npm install
 git checkout -b feature/my-feature
 ```

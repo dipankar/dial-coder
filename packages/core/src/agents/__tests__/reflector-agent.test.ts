@@ -70,6 +70,15 @@ function createValidContext(): ReflectorContext {
           testsToRun: [],
           confidence: 'high',
         },
+        verification: {
+          success: true,
+          testsRun: 1,
+          testsPassed: 1,
+          testsFailed: 0,
+          failingTests: [],
+          output: 'All tests passed',
+          duration: 100,
+        },
         outcome: 'success',
       },
     ],
@@ -102,7 +111,6 @@ function createValidReflectionOutput(): ReflectionOutput {
     improvementsForNextRound: ['Consider more edge cases'],
     memoryUpdates: {
       addToDecisions: true,
-      updatePatterns: false,
     },
   };
 }
@@ -163,10 +171,13 @@ describe('ReflectorAgent', () => {
       const context = createValidContext();
       context.existingDecisions = [
         {
-          scope: 'global',
+          id: 'decision-1',
+          scope: 'project',
           type: 'invariant',
           summary: 'Use TypeScript strict mode',
           reasoning: 'Type safety',
+          source: { sessionId: 'session-1', date: '2024-01-01' },
+          metadata: { confidence: 'high', timesReferenced: 1 },
         },
       ];
 
@@ -228,7 +239,7 @@ describe('ReflectorAgent', () => {
     it('should accept all valid lesson types', async () => {
       const types = [
         'pattern',
-        'anti-pattern',
+        'anti_pattern',
         'invariant',
         'heuristic',
       ] as const;
@@ -256,7 +267,7 @@ describe('ReflectorAgent', () => {
     });
 
     it('should accept all valid lesson scopes', async () => {
-      const scopes = ['local', 'module', 'project', 'global'] as const;
+      const scopes = ['file', 'module', 'project'] as const;
 
       for (const scope of scopes) {
         const agent = new ReflectorAgent(config);
@@ -291,8 +302,8 @@ describe('ReflectorAgent', () => {
           appliesTo: ['api'],
         },
         {
-          type: 'anti-pattern',
-          scope: 'global',
+          type: 'anti_pattern',
+          scope: 'project',
           description: 'Anti-pattern 1',
           appliesTo: ['all'],
         },
@@ -312,12 +323,7 @@ describe('ReflectorAgent', () => {
 
   describe('validation - decisions to record', () => {
     it('should accept all valid decision types', async () => {
-      const types = [
-        'invariant',
-        'convention',
-        'constraint',
-        'preference',
-      ] as const;
+      const types = ['invariant', 'pattern', 'constraint'] as const;
 
       for (const type of types) {
         const agent = new ReflectorAgent(config);
@@ -359,14 +365,15 @@ describe('ReflectorAgent', () => {
       const output = createValidReflectionOutput();
       output.memoryUpdates = {
         addToDecisions: true,
-        updatePatterns: true,
-        clearOldPatterns: false,
+        addToArchitecture: 'Add new architecture notes',
       };
       agent.setLLMClient(createMockLLMClient([JSON.stringify(output)]));
 
       const result = await agent.generate(createValidContext());
       expect(result.memoryUpdates.addToDecisions).toBe(true);
-      expect(result.memoryUpdates.updatePatterns).toBe(true);
+      expect(result.memoryUpdates.addToArchitecture).toBe(
+        'Add new architecture notes',
+      );
     });
   });
 

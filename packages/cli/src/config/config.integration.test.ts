@@ -11,8 +11,8 @@ import { tmpdir } from 'node:os';
 import type {
   ConfigParameters,
   ContentGeneratorConfig,
-} from '@dial-code/dial-core';
-import { Config } from '@dial-code/dial-core';
+} from '@dial-coder/core';
+import { Config } from '@dial-coder/core';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -40,8 +40,8 @@ const TEST_CONTENT_GENERATOR_CONFIG: ContentGeneratorConfig = {
 };
 
 // Mock file discovery service and tool registry
-vi.mock('@dial-code/dial-core', async () => {
-  const actual = await vi.importActual('@dial-code/dial-core');
+vi.mock('@dial-coder/core', async () => {
+  const actual = await vi.importActual('@dial-coder/core');
   return {
     ...actual,
     FileDiscoveryService: vi.fn().mockImplementation(() => ({

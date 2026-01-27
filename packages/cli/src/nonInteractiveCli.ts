@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config, ToolCallRequestInfo } from '@dial-code/dial-core';
+import type { Config, ToolCallRequestInfo } from '@dial-coder/core';
 import { isSlashCommand } from './ui/utils/commandUtils.js';
 import type { LoadedSettings } from './config/settings.js';
 import {
@@ -16,7 +16,7 @@ import {
   promptIdContext,
   OutputFormat,
   uiTelemetryService,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Content, Part, PartListUnion } from '@google/genai';
 import type { CLIUserMessage, PermissionMode } from './nonInteractive/types.js';
 import type { JsonOutputAdapterInterface } from './nonInteractive/io/BaseJsonOutputAdapter.js';

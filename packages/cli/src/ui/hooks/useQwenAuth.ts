@@ -10,7 +10,7 @@ import {
   qwenOAuth2Events,
   QwenOAuth2Event,
   type DeviceAuthorizationData,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 export interface QwenAuthState {
   deviceAuth: DeviceAuthorizationData | null;

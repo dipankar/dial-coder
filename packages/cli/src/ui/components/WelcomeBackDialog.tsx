@@ -6,7 +6,7 @@
 
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
-import { type ProjectSummaryInfo } from '@dial-code/dial-core';
+import { type ProjectSummaryInfo } from '@dial-coder/core';
 import {
   RadioButtonSelect,
   type RadioSelectItem,

@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/npm/v/dial-code.svg)](https://www.npmjs.com/package/dial-code)
+[![npm version](https://img.shields.io/npm/v/dial-coder.svg)](https://www.npmjs.com/package/dial-coder)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](./LICENSE)
-[![CI](https://github.com/anthropics/dial-code/actions/workflows/ci.yml/badge.svg)](https://github.com/anthropics/dial-code/actions/workflows/ci.yml)
+[![CI](https://github.com/neul-labs/dial-coder/actions/workflows/ci.yml/badge.svg)](https://github.com/neul-labs/dial-coder/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 
 **Think. Review. Code. Safely.**
@@ -21,8 +21,8 @@ AI-powered CLI for developers with multi-stage review pipeline. Changes go throu
 
 ```bash
 # Install
-git clone https://github.com/anthropics/dial-code.git
-cd dial-code && npm install && npm install -g .
+git clone https://github.com/neul-labs/dial-coder.git
+cd dial-coder && npm install && npm install -g .
 
 # Run
 dial

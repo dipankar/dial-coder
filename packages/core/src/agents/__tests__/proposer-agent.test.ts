@@ -55,10 +55,13 @@ function createValidContext(): ProposerContext {
     ],
     projectDecisions: [
       {
+        id: 'decision-1',
         scope: 'auth',
         type: 'invariant',
         summary: 'Use JWT tokens',
         reasoning: 'Industry standard',
+        source: { sessionId: 'session-1', date: '2024-01-01' },
+        metadata: { confidence: 'high', timesReferenced: 1 },
       },
     ],
     sessionHistory: [],
@@ -137,7 +140,14 @@ describe('ProposerAgent', () => {
       agent.setLLMClient(client);
 
       const context = createValidContext();
-      context.previousFailures = ['Test failed: assertion error'];
+      context.previousFailures = [
+        {
+          round: 1,
+          testOutput: 'Test failed: assertion error',
+          failingTests: ['test1'],
+          analysis: 'Assertion did not match expected value',
+        },
+      ];
       context.hints = ['Consider edge cases'];
 
       await agent.generate(context);

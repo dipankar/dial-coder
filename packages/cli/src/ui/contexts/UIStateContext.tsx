@@ -27,7 +27,7 @@ import type {
   IdeInfo,
   FallbackIntent,
   DialecticEvent,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type {
   UserMode,
   ModeSelectionInfo,

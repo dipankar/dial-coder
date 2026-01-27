@@ -10,12 +10,12 @@ import type {
   TelemetrySettings,
   AuthType,
   ChatCompressionSettings,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   ApprovalMode,
   DEFAULT_TRUNCATE_TOOL_OUTPUT_LINES,
   DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { CustomTheme } from '../ui/themes/theme.js';
 
 export type SettingsType =

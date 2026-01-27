@@ -21,8 +21,8 @@ import {
 } from './dial.js';
 import { type LoadedSettings } from './config/settings.js';
 import { appEvents, AppEvent } from './utils/events.js';
-import type { Config } from '@dial-code/dial-core';
-import { OutputFormat } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
+import { OutputFormat } from '@dial-coder/core';
 
 // Custom error to identify mock process.exit calls
 class MockProcessExitError extends Error {

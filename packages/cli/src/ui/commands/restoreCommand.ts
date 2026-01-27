@@ -12,7 +12,7 @@ import {
   type SlashCommandActionReturn,
   CommandKind,
 } from './types.js';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 
 async function restoreAction(
   context: CommandContext,

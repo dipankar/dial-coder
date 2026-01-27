@@ -9,7 +9,7 @@ import {
   getProjectSummaryInfo,
   type ProjectSummaryInfo,
   type Config,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { type Settings } from '../../config/settingsSchema.js';
 
 export interface WelcomeBackState {

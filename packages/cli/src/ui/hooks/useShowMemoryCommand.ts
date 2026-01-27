@@ -6,7 +6,7 @@
 
 import type { Message } from '../types.js';
 import { MessageType } from '../types.js';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import type { LoadedSettings } from '../../config/settings.js';
 
 export function createShowMemoryAction(

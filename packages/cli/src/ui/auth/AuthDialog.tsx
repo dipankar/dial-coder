@@ -6,7 +6,7 @@
 
 import type React from 'react';
 import { useState } from 'react';
-import { AuthType } from '@dial-code/dial-core';
+import { AuthType } from '@dial-coder/core';
 import { Box, Text } from 'ink';
 import { SettingScope } from '../../config/settings.js';
 import { Colors } from '../colors.js';

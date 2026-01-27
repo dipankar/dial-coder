@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { SandboxConfig } from '@dial-code/dial-core';
-import { FatalSandboxError } from '@dial-code/dial-core';
+import type { SandboxConfig } from '@dial-coder/core';
+import { FatalSandboxError } from '@dial-coder/core';
 import commandExists from 'command-exists';
 import * as os from 'node:os';
 import { getPackageJson } from '../utils/package.js';

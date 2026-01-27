@@ -5,8 +5,8 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import type { Config, ServerGeminiStreamEvent } from '@dial-code/dial-core';
-import { GeminiEventType } from '@dial-code/dial-core';
+import type { Config, ServerGeminiStreamEvent } from '@dial-coder/core';
+import { GeminiEventType } from '@dial-coder/core';
 import type { Part } from '@google/genai';
 import { JsonOutputAdapter } from './JsonOutputAdapter.js';
 

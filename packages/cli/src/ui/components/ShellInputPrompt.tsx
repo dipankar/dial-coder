@@ -7,7 +7,7 @@
 import { useCallback } from 'react';
 import type React from 'react';
 import { useKeypress } from '../hooks/useKeypress.js';
-import { ShellExecutionService } from '@dial-code/dial-core';
+import { ShellExecutionService } from '@dial-coder/core';
 import { keyToAnsi, type Key } from '../hooks/keyToAnsi.js';
 
 export interface ShellInputPromptProps {

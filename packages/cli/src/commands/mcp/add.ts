@@ -7,7 +7,7 @@
 // File for 'gemini mcp add' command
 import type { CommandModule } from 'yargs';
 import { loadSettings, SettingScope } from '../../config/settings.js';
-import type { MCPServerConfig } from '@dial-code/dial-core';
+import type { MCPServerConfig } from '@dial-coder/core';
 
 async function addMcpServer(
   name: string,

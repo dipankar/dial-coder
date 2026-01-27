@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   OutputFormat,
   JsonFormatter,
   parseAndFormatApiError,
   FatalTurnLimitedError,
   FatalCancellationError,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 
 export function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {

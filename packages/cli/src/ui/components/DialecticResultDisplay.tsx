@@ -8,7 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { DiffRenderer } from './messages/DiffRenderer.js';
-import type { TaskResult, FinalPatch } from '@dial-code/dial-core';
+import type { TaskResult, FinalPatch } from '@dial-coder/core';
 
 type ThemeType = typeof theme;
 

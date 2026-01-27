@@ -8,7 +8,7 @@ import {
   getErrorMessage,
   loadServerHierarchicalMemory,
   DIAL_DIR,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import path from 'node:path';
 import os from 'os';
 import fs from 'fs/promises';

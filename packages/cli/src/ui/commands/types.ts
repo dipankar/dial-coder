@@ -6,7 +6,7 @@
 
 import type { ReactNode } from 'react';
 import type { Content, PartListUnion } from '@google/genai';
-import type { Config, GitService, Logger } from '@dial-code/dial-core';
+import type { Config, GitService, Logger } from '@dial-coder/core';
 import type {
   HistoryItemWithoutId,
   HistoryItem,

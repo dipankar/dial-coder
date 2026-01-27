@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { MCPServerConfig } from '@dial-code/dial-core';
-import { MCPServerStatus } from '@dial-code/dial-core';
+import type { MCPServerConfig } from '@dial-coder/core';
+import { MCPServerStatus } from '@dial-coder/core';
 import { Box, Text } from 'ink';
 import type React from 'react';
 import { theme } from '../../semantic-colors.js';

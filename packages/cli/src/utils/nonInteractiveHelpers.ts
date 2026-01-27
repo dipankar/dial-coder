@@ -12,12 +12,12 @@ import type {
   ToolCallRequestInfo,
   ToolCallResponseInfo,
   SessionMetrics,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   OutputFormat,
   ToolErrorType,
   getMCPServerStatus,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import type { Part, PartListUnion } from '@google/genai';
 import type {
   CLIUserMessage,

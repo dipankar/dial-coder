@@ -8,7 +8,7 @@ import { describe, it, expect } from 'vitest';
 import { toolsCommand } from './toolsCommand.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { MessageType } from '../types.js';
-import type { Tool } from '@dial-code/dial-core';
+import type { Tool } from '@dial-coder/core';
 
 // Mock tools for testing
 const mockTools = [

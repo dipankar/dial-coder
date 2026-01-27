@@ -11,7 +11,7 @@ import {
   useMemo,
   type PropsWithChildren,
 } from 'react';
-import type { AuthType, UserTierId, IdeInfo } from '@dial-code/dial-core';
+import type { AuthType, UserTierId, IdeInfo } from '@dial-coder/core';
 import type { QwenAuthState } from '../../hooks/useQwenAuth.js';
 import type { RestartReason } from '../../hooks/useIdeTrustListener.js';
 

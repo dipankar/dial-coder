@@ -363,7 +363,7 @@ But at this point you already have:
 - A reasonable MVP you can implement on top of an existing CLI codebase.
 
 [1]: https://github.com/google-gemini/gemini-cli?utm_source=chatgpt.com 'google-gemini/gemini-cli: An open-source AI agent that ...'
-[2]: https://github.com/QwenLM/qwen-code?utm_source=chatgpt.com 'Qwen Code is a coding agent that lives in the digital world.'
+[2]: https://github.com/neul-labs/dial-coder?utm_source=chatgpt.com 'Qwen Code is a coding agent that lives in the digital world.'
 [3]: https://arxiv.org/abs/2503.09089?utm_source=chatgpt.com 'LocAgent: Graph-Guided LLM Agents for Code Localization'
 [4]: https://geminicli.com/docs/get-started/deployment/?utm_source=chatgpt.com 'Gemini CLI Installation, Execution, and Deployment'
 

@@ -14,7 +14,7 @@ import type {
 } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import type { Content } from '@google/genai';
-import type { GeminiClient } from '@dial-code/dial-core';
+import type { GeminiClient } from '@dial-coder/core';
 
 import * as fsPromises from 'node:fs/promises';
 import { chatCommand, serializeHistoryToMarkdown } from './chatCommand.js';

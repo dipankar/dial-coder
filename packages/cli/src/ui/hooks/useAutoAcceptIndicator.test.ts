@@ -16,17 +16,17 @@ import {
 import { renderHook, act } from '@testing-library/react';
 import { useAutoAcceptIndicator } from './useAutoAcceptIndicator.js';
 
-import { Config, ApprovalMode } from '@dial-code/dial-core';
-import type { Config as ActualConfigType } from '@dial-code/dial-core';
+import { Config, ApprovalMode } from '@dial-coder/core';
+import type { Config as ActualConfigType } from '@dial-coder/core';
 import type { Key } from './useKeypress.js';
 import { useKeypress } from './useKeypress.js';
 import { MessageType } from '../types.js';
 
 vi.mock('./useKeypress.js');
 
-vi.mock('@dial-code/dial-core', async () => {
+vi.mock('@dial-coder/core', async () => {
   const actualServerModule = (await vi.importActual(
-    '@dial-code/dial-core',
+    '@dial-coder/core',
   )) as Record<string, unknown>;
   return {
     ...actualServerModule,

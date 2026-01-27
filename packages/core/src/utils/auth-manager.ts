@@ -92,9 +92,10 @@ async function clearGoogleCredentials(): Promise<void> {
     const { OAuthCredentialStorage } = await import(
       '../code_assist/oauth-credential-storage.js'
     );
-    const { userAccountManager } = await import(
-      '../code_assist/user-account-manager.js'
+    const { UserAccountManager } = await import(
+      '../utils/userAccountManager.js'
     );
+    const userAccountManager = new UserAccountManager();
     const { clearOauthClientCache, getUseEncryptedStorageFlag } = await import(
       '../code_assist/oauth2.js'
     );
@@ -214,8 +215,8 @@ async function hasQwenCredentials(): Promise<boolean> {
       '../qwen/sharedTokenManager.js'
     );
     const manager = SharedTokenManager.getInstance();
-    const token = await manager.getAccessToken();
-    return token !== null;
+    const credentials = manager.getCurrentCredentials();
+    return credentials !== null;
   } catch {
     return false;
   }

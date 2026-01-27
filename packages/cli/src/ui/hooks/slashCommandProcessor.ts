@@ -8,7 +8,7 @@ import { useCallback, useMemo, useEffect, useState } from 'react';
 import { type PartListUnion } from '@google/genai';
 import process from 'node:process';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import {
   GitService,
   Logger,
@@ -18,7 +18,7 @@ import {
   ToolConfirmationOutcome,
   Storage,
   IdeClient,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import { formatDuration } from '../utils/formatters.js';
 import type {

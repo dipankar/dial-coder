@@ -6,22 +6,22 @@ This document outlines the complete renaming strategy from "qwen-code" to "dial-
 
 ### Primary Names
 
-| Context        | Old Name                   | New Name                 |
-| -------------- | -------------------------- | ------------------------ |
-| Project Name   | Qwen Code                  | Dial Code                |
-| CLI Command    | `qwen`                     | `dial`                   |
-| NPM Scope      | `@qwen-code/*`             | `@dial-code/*`           |
-| User Directory | `~/.qwen/`                 | `~/.dial/`               |
-| GitHub Org     | QwenLM                     | (TBD - your org)         |
-| Docker Image   | `ghcr.io/qwenlm/qwen-code` | `ghcr.io/dial-code/dial` |
+| Context        | Old Name                       | New Name                 |
+| -------------- | ------------------------------ | ------------------------ |
+| Project Name   | Qwen Code                      | Dial Code                |
+| CLI Command    | `qwen`                         | `dial`                   |
+| NPM Scope      | `@qwen-code/*`                 | `@dial-code/*`           |
+| User Directory | `~/.qwen/`                     | `~/.dial/`               |
+| GitHub Org     | QwenLM                         | (TBD - your org)         |
+| Docker Image   | `ghcr.io/neul-labs/dial-coder` | `ghcr.io/dial-code/dial` |
 
 ### Package Names
 
 | Package           | Old NPM Name                      | New NPM Name                 |
 | ----------------- | --------------------------------- | ---------------------------- |
-| CLI               | `@qwen-code/qwen-code`            | `@dial-code/dial`            |
-| Core              | `@qwen-code/qwen-code-core`       | `@dial-code/dial-core`       |
-| Test Utils        | `@qwen-code/qwen-code-test-utils` | `@dial-code/dial-test-utils` |
+| CLI               | `@qwen-code/qwen-code`            | `@dial-coder/cli`            |
+| Core              | `@qwen-code/qwen-code-core`       | `@dial-coder/core`           |
+| Test Utils        | `@qwen-code/qwen-code-test-utils` | `@dial-coder/test-utils`     |
 | VS Code Extension | `qwen-code-vscode-ide-companion`  | `dial-code-vscode-companion` |
 
 ## 2. File Renames

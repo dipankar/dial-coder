@@ -7,11 +7,8 @@
 import { useState, useCallback } from 'react';
 import type { LoadedSettings, SettingScope } from '../../config/settings.js';
 import { type HistoryItem, MessageType } from '../types.js';
-import type { EditorType } from '@dial-code/dial-core';
-import {
-  allowEditorTypeInSandbox,
-  checkHasEditorType,
-} from '@dial-code/dial-core';
+import type { EditorType } from '@dial-coder/core';
+import { allowEditorTypeInSandbox, checkHasEditorType } from '@dial-coder/core';
 
 interface UseEditorSettingsReturn {
   isEditorDialogOpen: boolean;

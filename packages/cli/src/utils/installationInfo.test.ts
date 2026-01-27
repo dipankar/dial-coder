@@ -9,9 +9,9 @@ import { getInstallationInfo, PackageManager } from './installationInfo.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as childProcess from 'node:child_process';
-import { isGitRepository } from '@dial-code/dial-core';
+import { isGitRepository } from '@dial-coder/core';
 
-vi.mock('@dial-code/dial-core', () => ({
+vi.mock('@dial-coder/core', () => ({
   isGitRepository: vi.fn(),
 }));
 

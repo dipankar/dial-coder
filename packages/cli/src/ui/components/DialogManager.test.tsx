@@ -13,9 +13,9 @@ import { UIActionsContext } from '../contexts/UIActionsContext.js';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 import { SettingsContext } from '../contexts/SettingsContext.js';
 import type { UseHistoryManagerReturn } from '../hooks/useHistoryManager.js';
-import type { Config } from '@dial-code/dial-core';
+import type { Config } from '@dial-coder/core';
 import { createMinimalSettings } from '../../config/settings.js';
-import { ApprovalMode } from '@dial-code/dial-core';
+import { ApprovalMode } from '@dial-coder/core';
 
 // Import Text from ink for mocks
 import { Text } from 'ink';

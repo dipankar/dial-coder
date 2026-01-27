@@ -12,7 +12,7 @@ import {
   AuthType,
   type ContentGeneratorConfig,
   type Config,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import * as availableModelsModule from '../models/availableModels.js';
 
 // Mock the availableModels module

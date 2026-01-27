@@ -7,12 +7,8 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import type { PartListUnion, PartUnion } from '@google/genai';
-import type { AnyToolInvocation, Config } from '@dial-code/dial-core';
-import {
-  getErrorMessage,
-  isNodeError,
-  unescapePath,
-} from '@dial-code/dial-core';
+import type { AnyToolInvocation, Config } from '@dial-coder/core';
+import { getErrorMessage, isNodeError, unescapePath } from '@dial-coder/core';
 import type { HistoryItem, IndividualToolCallDisplay } from '../types.js';
 import { ToolCallStatus } from '../types.js';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';

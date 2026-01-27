@@ -8,7 +8,7 @@ import type {
   MCPServerConfig,
   GeminiCLIExtension,
   ExtensionInstallMetadata,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import {
   DIAL_DIR,
   Storage,
@@ -21,7 +21,7 @@ import {
   logExtensionInstallEvent,
   logExtensionUninstall,
   logExtensionDisable,
-} from '@dial-code/dial-core';
+} from '@dial-coder/core';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
