@@ -1,0 +1,71 @@
+/* Custom styles for Dial Code documentation */
+
+:root {
+  --md-primary-fg-color: #5c6bc0;
+  --md-accent-fg-color: #7c4dff;
+}
+
+/* Hero section styling */
+.md-typeset .hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.md-typeset .hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.md-typeset .hero .tagline {
+  font-size: 1.25rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1.5rem;
+}
+
+/* Feature grid */
+.md-typeset .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.md-typeset .grid .card {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .grid .card h3 {
+  margin-top: 0;
+}
+
+/* Mode badges */
+.md-typeset .mode-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.md-typeset .mode-ask { background: #e3f2fd; color: #1565c0; }
+.md-typeset .mode-quick { background: #fff3e0; color: #ef6c00; }
+.md-typeset .mode-review { background: #e8f5e9; color: #2e7d32; }
+.md-typeset .mode-safe { background: #fce4ec; color: #c2185b; }
+
+/* Code block enhancements */
+.md-typeset pre > code {
+  font-size: 0.85rem;
+}
+
+/* Table improvements */
+.md-typeset table:not([class]) {
+  font-size: 0.85rem;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--md-default-fg-color--lightest);
+}

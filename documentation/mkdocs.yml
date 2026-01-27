@@ -1,0 +1,118 @@
+site_name: Dial Code
+site_description: AI-powered CLI for developers with multi-stage review pipeline
+site_url: https://docs.dial-code.dev
+repo_url: https://github.com/anthropics/dial-code
+repo_name: dial-code
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.keys
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/anthropics/dial-code
+  generator: false
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+copyright: Copyright &copy; 2024-2026 Dial Code Contributors
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - getting-started/index.md
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+    - Authentication: getting-started/authentication.md
+  - Core Concepts:
+    - core-concepts/index.md
+    - Execution Modes: core-concepts/execution-modes.md
+    - Dialectic Pipeline: core-concepts/dialectic-pipeline.md
+    - Tools: core-concepts/tools.md
+  - User Guide:
+    - user-guide/index.md
+    - Commands: user-guide/commands.md
+    - Keyboard Shortcuts: user-guide/keyboard-shortcuts.md
+    - Configuration: user-guide/configuration.md
+    - Themes: user-guide/themes.md
+  - Providers:
+    - providers/index.md
+    - Qwen: providers/qwen.md
+    - OpenAI: providers/openai.md
+    - Ollama: providers/ollama.md
+  - Tools:
+    - tools/index.md
+    - File System: tools/file-system.md
+    - Shell: tools/shell.md
+    - MCP Integration: tools/mcp.md
+  - Developer Guide:
+    - developer/index.md
+    - Architecture: developer/architecture.md
+    - Contributing: developer/contributing.md
+    - Building: developer/building.md
+  - Reference:
+    - reference/index.md
+    - CLI Options: reference/cli-options.md
+    - Environment Variables: reference/environment-vars.md
+    - Troubleshooting: reference/troubleshooting.md
