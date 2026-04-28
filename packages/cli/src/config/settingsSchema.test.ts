@@ -178,12 +178,7 @@ describe('SettingsSchema', () => {
       expect(getSettingsSchema().ui.properties.hideBanner.showInDialog).toBe(
         true,
       );
-      expect(
-        getSettingsSchema().privacy.properties.usageStatisticsEnabled
-          .showInDialog,
-      ).toBe(false);
-
-      // Check that advanced settings are hidden from dialog
+      expect(getSettingsSchema().telemetry.showInDialog).toBe(false);
       expect(getSettingsSchema().security.properties.auth.showInDialog).toBe(
         false,
       );

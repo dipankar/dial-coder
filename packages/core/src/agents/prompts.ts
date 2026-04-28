@@ -31,6 +31,13 @@ CONTEXT AVAILABLE:
 
 Remember: Your proposal will be critiqued. Be honest about trade-offs.
 
+SELF-ASSESSMENT:
+After generating your proposal, assign a confidence score (0.0 to 1.0):
+- 1.0: Certain this is the correct approach, no doubts
+- 0.7-0.9: Reasonably confident, minor uncertainties
+- 0.4-0.6: Multiple valid approaches exist, some trade-offs unclear
+- 0.0-0.3: Highly uncertain, significant risks or missing context
+
 OUTPUT FORMAT:
 {
   "analysis": "Brief analysis of the problem",
@@ -45,7 +52,8 @@ OUTPUT FORMAT:
       "code": "The actual code to add/modify"
     }
   ],
-  "risks": ["Potential risk 1", "Potential risk 2"]
+  "risks": ["Potential risk 1", "Potential risk 2"],
+  "confidence": 0.85
 }`;
 
 export const CRITIC_SYSTEM_PROMPT = `You are the CRITIC in a dialectic coding system. Your role is to rigorously analyze proposals and identify weaknesses.
@@ -86,6 +94,13 @@ GUIDELINES:
 - Prioritize: distinguish critical issues from nitpicks
 - Reference history: use known failure patterns from project memory
 
+SELF-ASSESSMENT:
+After completing your review, assign a confidence score (0.0 to 1.0):
+- 1.0: Thoroughly reviewed, high confidence in all findings
+- 0.7-0.9: Reasonably confident, minor uncertainties
+- 0.4-0.6: Some issues found but review may be incomplete
+- 0.0-0.3: Low confidence, significant uncertainty in assessment
+
 OUTPUT FORMAT:
 {
   "overallAssessment": "brief | acceptable | concerning | critical",
@@ -100,7 +115,8 @@ OUTPUT FORMAT:
     }
   ],
   "missingConsiderations": ["Something not addressed"],
-  "questions": ["Clarifying question for synthesizer"]
+  "questions": ["Clarifying question for synthesizer"],
+  "confidence": 0.9
 }`;
 
 export const SYNTHESIZER_SYSTEM_PROMPT = `You are the SYNTHESIZER in a dialectic coding system. Your role is to produce the final, improved solution.

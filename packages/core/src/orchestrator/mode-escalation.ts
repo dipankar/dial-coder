@@ -48,8 +48,12 @@ export interface EscalationConfig {
   testFailureThreshold: number;
   /** Number of rounds before escalating */
   roundThreshold: number;
-  /** Confidence threshold below which to escalate */
+  /** Synthesis confidence threshold below which to escalate */
   confidenceThreshold: number;
+  /** Proposer confidence threshold below which to escalate (0-1) */
+  proposerConfidenceThreshold: number;
+  /** Number of critic issues that triggers escalation */
+  issueCountThreshold: number;
   /** Issue severity that triggers immediate escalation */
   criticalIssueSeverities: Array<'critical' | 'high'>;
 }
@@ -63,6 +67,8 @@ export const DEFAULT_ESCALATION_CONFIG: EscalationConfig = {
   testFailureThreshold: 2,
   roundThreshold: 2,
   confidenceThreshold: 0.5,
+  proposerConfidenceThreshold: 0.7,
+  issueCountThreshold: 3,
   criticalIssueSeverities: ['critical'],
 };
 
@@ -133,6 +139,18 @@ export class ModeEscalationManager {
     const confidenceCheck = this.checkLowConfidence(roundResult);
     if (confidenceCheck.shouldEscalate) {
       return confidenceCheck;
+    }
+
+    // Check proposer confidence
+    const proposerConfidenceCheck = this.checkProposerConfidence(roundResult);
+    if (proposerConfidenceCheck.shouldEscalate) {
+      return proposerConfidenceCheck;
+    }
+
+    // Check high issue count
+    const issueCountCheck = this.checkIssueCount(roundResult);
+    if (issueCountCheck.shouldEscalate) {
+      return issueCountCheck;
     }
 
     // Check multiple rounds
@@ -260,6 +278,54 @@ export class ModeEscalationManager {
             trigger: 'low_confidence',
           };
         }
+      }
+    }
+
+    return { shouldEscalate: false };
+  }
+
+  /**
+   * Check for low proposer confidence.
+   */
+  private checkProposerConfidence(
+    roundResult: RoundResult,
+  ): EscalationCheckResult {
+    const confidence = roundResult.thesis.confidence;
+    if (confidence !== undefined && confidence < this.config.proposerConfidenceThreshold) {
+      const lowConfidenceRounds = this.roundHistory.filter(
+        (r) => r.thesis.confidence !== undefined && r.thesis.confidence < this.config.proposerConfidenceThreshold,
+      ).length;
+
+      if (lowConfidenceRounds >= 1) {
+        const newMode = getStricterMode(this.currentMode, 'dialectic_light');
+        if (compareModes(newMode, this.currentMode) > 0) {
+          return {
+            shouldEscalate: true,
+            newMode,
+            reason: `Proposer confidence ${confidence.toFixed(2)} below threshold ${this.config.proposerConfidenceThreshold}`,
+            trigger: 'low_confidence',
+          };
+        }
+      }
+    }
+
+    return { shouldEscalate: false };
+  }
+
+  /**
+   * Check for high issue count in antithesis.
+   */
+  private checkIssueCount(roundResult: RoundResult): EscalationCheckResult {
+    const issueCount = roundResult.antithesis.issues.length;
+    if (issueCount >= this.config.issueCountThreshold) {
+      const newMode = getStricterMode(this.currentMode, 'dialectic_full');
+      if (compareModes(newMode, this.currentMode) > 0) {
+        return {
+          shouldEscalate: true,
+          newMode,
+          reason: `${issueCount} issues found (threshold: ${this.config.issueCountThreshold})`,
+          trigger: 'critical_issue',
+        };
       }
     }
 

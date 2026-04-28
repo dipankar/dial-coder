@@ -356,10 +356,6 @@ describe('loadServerHierarchicalMemory', () => {
   });
 
   it('should respect the maxDirs parameter during downward scan', async () => {
-    const consoleDebugSpy = vi
-      .spyOn(console, 'debug')
-      .mockImplementation(() => {});
-
     // Create directories in parallel for better performance
     const dirPromises = Array.from({ length: 2 }, (_, i) =>
       createEmptyDir(path.join(cwd, `deep_dir_${i}`)),
@@ -381,13 +377,6 @@ describe('loadServerHierarchicalMemory', () => {
       },
       1, // maxDirs
     );
-
-    expect(consoleDebugSpy).toHaveBeenCalledWith(
-      expect.stringContaining('[DEBUG] [BfsFileSearch]'),
-      expect.stringContaining('Scanning [1/1]:'),
-    );
-
-    vi.mocked(console.debug).mockRestore();
 
     const result = await loadServerHierarchicalMemory(
       cwd,

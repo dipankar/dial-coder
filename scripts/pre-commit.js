@@ -35,25 +35,58 @@ async function runSecretsScanning(root) {
   });
 }
 
+/**
+ * Check if there are any staged files at all
+ */
+function hasStagedFiles() {
+  try {
+    const output = execSync('git diff --cached --name-only', {
+      encoding: 'utf-8',
+      stdio: 'pipe',
+    });
+    return output.trim().length > 0;
+  } catch {
+    return false;
+  }
+}
+
 try {
   // Get repository root
-  const root = execSync('git rev-parse --show-toplevel').toString().trim();
+  const root = execSync('git rev-parse --show-toplevel')
+    .toString()
+    .trim();
+
+  if (!hasStagedFiles()) {
+    console.log('No staged files. Skipping pre-commit checks.');
+    process.exit(0);
+  }
+
+  console.log('🔍 Running pre-commit checks...\n');
 
   // Run secrets scanning first
-  console.log('🔍 Scanning for secrets...');
+  console.log('━━━ 1/2  Secrets scan ━━━');
   const secretsScanPassed = await runSecretsScanning(root);
 
   if (!secretsScanPassed) {
+    console.error('\n🚨 Secrets scan failed. Commit aborted.');
     process.exit(1);
   }
 
+  console.log('✅ Secrets scan passed.\n');
+
   // Run lint-staged with API directly
-  console.log('📝 Running lint-staged...');
+  console.log('━━━ 2/2  Lint staged files ━━━');
   const lintPassed = await lintStaged({ cwd: root });
 
-  // Exit with appropriate code
-  process.exit(lintPassed ? 0 : 1);
+  if (!lintPassed) {
+    console.error('\n🚨 Lint-staged failed. Commit aborted.');
+    process.exit(1);
+  }
+
+  console.log('✅ Lint-staged passed.\n');
+  console.log('🚀 Pre-commit checks complete. Proceeding with commit.');
+  process.exit(0);
 } catch {
-  // Exit with error code
+  console.error('\n🚨 Pre-commit script error. Commit aborted.');
   process.exit(1);
 }

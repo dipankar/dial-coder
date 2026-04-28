@@ -135,11 +135,9 @@ const ALLOWLIST = [
   // Documentation patterns
   /sk-[x]{20,}/i,
   /AKIA[X]{16}/i,
-  // Google OAuth Client Secrets for installed/desktop apps are NOT treated as secrets
-  // per Google's OAuth2 documentation: https://developers.google.com/identity/protocols/oauth2#installed
-  /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/,
+  // No hardcoded secrets should be allowlisted. All credentials must be configured via environment variables.
   // Regex pattern definitions (not actual tokens)
-  /^bearer\\s\+/i,
+  /^bearer\s+/i, // Regex pattern definition in this file
   /^Bearer Token$/, // Pattern name in this file
   // CLI example patterns (not real tokens)
   /Bearer abc123/i, // Example token in CLI help text

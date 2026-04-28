@@ -13,7 +13,7 @@ import type {
   LLMToolCall,
 } from '../types.js';
 import type { Config } from '../../config/config.js';
-import { DEFAULT_QWEN_MODEL } from '../../config/models.js';
+import { DEFAULT_DIAL_MODEL } from '../../config/models.js';
 
 /**
  * LLM provider that wraps the existing Qwen OAuth authentication system.
@@ -32,7 +32,7 @@ export class QwenOAuthProvider implements AuthenticatedLLMClient {
 
   constructor(cliConfig: Config, model?: string) {
     this.cliConfig = cliConfig;
-    this.model = model || DEFAULT_QWEN_MODEL;
+    this.model = model || DEFAULT_DIAL_MODEL;
   }
 
   /**

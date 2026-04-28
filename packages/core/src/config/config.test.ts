@@ -13,7 +13,6 @@ import { setGeminiMdFilename as mockSetGeminiMdFilename } from '../tools/memoryT
 import {
   DEFAULT_TELEMETRY_TARGET,
   DEFAULT_OTLP_ENDPOINT,
-  QwenLogger,
 } from '../telemetry/index.js';
 import type { ContentGeneratorConfig } from '../core/contentGenerator.js';
 import { DEFAULT_DASHSCOPE_BASE_URL } from '../core/openaiContentGenerator/constants.js';
@@ -210,15 +209,11 @@ describe('Server Config (config.ts)', () => {
     telemetry: TELEMETRY_SETTINGS,
     sessionId: SESSION_ID,
     model: MODEL,
-    usageStatisticsEnabled: false,
   };
 
   beforeEach(() => {
     // Reset mocks if necessary
     vi.clearAllMocks();
-    vi.spyOn(QwenLogger.prototype, 'logStartSessionEvent').mockImplementation(
-      () => undefined,
-    );
   });
 
   describe('initialize', () => {
@@ -448,38 +443,6 @@ describe('Server Config (config.ts)', () => {
     const config = new Config(baseParams);
     const fileService = config.getFileService();
     expect(fileService).toBeDefined();
-  });
-
-  describe('Usage Statistics', () => {
-    it('defaults usage statistics to enabled if not specified', () => {
-      const config = new Config({
-        ...baseParams,
-        usageStatisticsEnabled: undefined,
-      });
-
-      expect(config.getUsageStatisticsEnabled()).toBe(true);
-    });
-
-    it.each([{ enabled: true }, { enabled: false }])(
-      'sets usage statistics based on the provided value (enabled: $enabled)',
-      ({ enabled }) => {
-        const config = new Config({
-          ...baseParams,
-          usageStatisticsEnabled: enabled,
-        });
-        expect(config.getUsageStatisticsEnabled()).toBe(enabled);
-      },
-    );
-
-    it('logs the session start event', async () => {
-      const config = new Config({
-        ...baseParams,
-        usageStatisticsEnabled: true,
-      });
-      await config.refreshAuth(AuthType.USE_GEMINI);
-
-      expect(QwenLogger.prototype.logStartSessionEvent).toHaveBeenCalledOnce();
-    });
   });
 
   describe('Telemetry Settings', () => {
@@ -1181,7 +1144,6 @@ describe('BaseLlmClient Lifecycle', () => {
     telemetry: TELEMETRY_SETTINGS,
     sessionId: SESSION_ID,
     model: MODEL,
-    usageStatisticsEnabled: false,
   };
 
   it('should throw an error if getBaseLlmClient is called before refreshAuth', () => {

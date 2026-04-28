@@ -25,8 +25,9 @@ const QWEN_OAUTH_BASE_URL = 'https://chat.qwen.ai';
 const QWEN_OAUTH_DEVICE_CODE_ENDPOINT = `${QWEN_OAUTH_BASE_URL}/api/v1/oauth2/device/code`;
 const QWEN_OAUTH_TOKEN_ENDPOINT = `${QWEN_OAUTH_BASE_URL}/api/v1/oauth2/token`;
 
-// OAuth Client Configuration
-const QWEN_OAUTH_CLIENT_ID = 'f0304373b74a44d2b584a3fb70ca9e56';
+function getQwenOAuthClientId(): string {
+  return process.env['QWEN_OAUTH_CLIENT_ID'] ?? '';
+}
 
 const QWEN_OAUTH_SCOPE = 'openid profile email model.completion';
 const QWEN_OAUTH_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:device_code';
@@ -286,6 +287,14 @@ export class QwenOAuth2Client implements IQwenOAuth2Client {
     code_challenge: string;
     code_challenge_method: string;
   }): Promise<DeviceAuthorizationResponse> {
+    const QWEN_OAUTH_CLIENT_ID = getQwenOAuthClientId();
+    if (!QWEN_OAUTH_CLIENT_ID) {
+      throw new Error(
+        'Qwen OAuth client ID is not configured. ' +
+          'Please set QWEN_OAUTH_CLIENT_ID environment variable.',
+      );
+    }
+
     const bodyData = {
       client_id: QWEN_OAUTH_CLIENT_ID,
       scope: options.scope,
@@ -328,6 +337,7 @@ export class QwenOAuth2Client implements IQwenOAuth2Client {
     device_code: string;
     code_verifier: string;
   }): Promise<DeviceTokenResponse> {
+    const QWEN_OAUTH_CLIENT_ID = getQwenOAuthClientId();
     const bodyData = {
       grant_type: QWEN_OAUTH_GRANT_TYPE,
       client_id: QWEN_OAUTH_CLIENT_ID,
@@ -392,6 +402,14 @@ export class QwenOAuth2Client implements IQwenOAuth2Client {
   }
 
   async refreshAccessToken(): Promise<TokenRefreshResponse> {
+    const QWEN_OAUTH_CLIENT_ID = getQwenOAuthClientId();
+    if (!QWEN_OAUTH_CLIENT_ID) {
+      throw new Error(
+        'Qwen OAuth client ID is not configured. ' +
+          'Please set QWEN_OAUTH_CLIENT_ID environment variable.',
+      );
+    }
+
     if (!this.credentials.refresh_token) {
       throw new Error('No refresh token available');
     }

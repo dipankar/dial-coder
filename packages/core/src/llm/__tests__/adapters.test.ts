@@ -8,6 +8,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { OpenAIProvider } from '../adapters/openai-provider.js';
 import { AnthropicProvider } from '../adapters/anthropic-provider.js';
 import { OllamaProvider } from '../adapters/ollama-provider.js';
+import { OllamaCloudProvider } from '../adapters/ollama-cloud-provider.js';
 import { OpenAICompatibleProvider } from '../adapters/openai-compatible-provider.js';
 import type { Message, ToolSchema } from '../types.js';
 
@@ -117,6 +118,50 @@ describe('OllamaProvider', () => {
       baseURL: 'http://custom:11434',
     });
     expect(customProvider.name).toBe('ollama');
+  });
+
+  it('should estimate tokens', () => {
+    const messages: Message[] = [
+      { role: 'user', content: 'Hello, how are you?' },
+    ];
+    const tokens = provider.estimateTokens(messages);
+    expect(tokens).toBeGreaterThan(0);
+  });
+});
+
+describe('OllamaCloudProvider', () => {
+  let provider: OllamaCloudProvider;
+
+  beforeEach(() => {
+    provider = new OllamaCloudProvider({
+      model: 'llama3.3',
+      apiKey: 'test-api-key',
+    });
+  });
+
+  it('should have correct name and model', () => {
+    expect(provider.name).toBe('ollama-cloud');
+    expect(provider.model).toBe('llama3.3');
+  });
+
+  it('should not support tools by default', () => {
+    expect(provider.supportsTools()).toBe(false);
+  });
+
+  it('should not support JSON mode', () => {
+    expect(provider.supportsJsonMode()).toBe(false);
+  });
+
+  it('should use default cloud baseURL', () => {
+    expect(provider.name).toBe('ollama-cloud');
+  });
+
+  it('should use custom baseURL when provided', () => {
+    const customProvider = new OllamaCloudProvider({
+      model: 'llama3.3',
+      baseURL: 'https://custom.ollama.com',
+    });
+    expect(customProvider.name).toBe('ollama-cloud');
   });
 
   it('should estimate tokens', () => {

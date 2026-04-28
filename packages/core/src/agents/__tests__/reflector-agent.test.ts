@@ -186,7 +186,7 @@ describe('ReflectorAgent', () => {
       const userMessage = client.complete.mock.calls[0][0].messages.find(
         (m: { role: string }) => m.role === 'user',
       );
-      expect(userMessage.content).toContain('Existing Decisions');
+      expect(userMessage.content).toContain('Existing Project Decisions');
     });
   });
 

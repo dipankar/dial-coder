@@ -120,7 +120,6 @@ const MIGRATION_MAP: Record<string, string> = {
   theme: 'ui.theme',
   toolDiscoveryCommand: 'tools.discoveryCommand',
   toolCallCommand: 'tools.callCommand',
-  usageStatisticsEnabled: 'privacy.usageStatisticsEnabled',
   useExternalAuth: 'security.auth.useExternal',
   useRipgrep: 'tools.useRipgrep',
   vimMode: 'general.vimMode',
@@ -138,19 +137,25 @@ const MIGRATION_MAP: Record<string, string> = {
 };
 
 export function getSystemSettingsPath(): string {
+  if (process.env['DIAL_CODE_SYSTEM_SETTINGS_PATH']) {
+    return process.env['DIAL_CODE_SYSTEM_SETTINGS_PATH'];
+  }
   if (process.env['QWEN_CODE_SYSTEM_SETTINGS_PATH']) {
     return process.env['QWEN_CODE_SYSTEM_SETTINGS_PATH'];
   }
   if (platform() === 'darwin') {
-    return '/Library/Application Support/QwenCode/settings.json';
+    return '/Library/Application Support/DialCoder/settings.json';
   } else if (platform() === 'win32') {
-    return 'C:\\ProgramData\\qwen-code\\settings.json';
+    return 'C:\\ProgramData\\dial-coder\\settings.json';
   } else {
-    return '/etc/qwen-code/settings.json';
+    return '/etc/dial-coder/settings.json';
   }
 }
 
 export function getSystemDefaultsPath(): string {
+  if (process.env['DIAL_CODE_SYSTEM_DEFAULTS_PATH']) {
+    return process.env['DIAL_CODE_SYSTEM_DEFAULTS_PATH'];
+  }
   if (process.env['QWEN_CODE_SYSTEM_DEFAULTS_PATH']) {
     return process.env['QWEN_CODE_SYSTEM_DEFAULTS_PATH'];
   }

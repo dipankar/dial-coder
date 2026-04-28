@@ -17,7 +17,7 @@
 # Dependency directory
 node_modules
 bower_components
-package-lock.json
+# package-lock.json is tracked for reproducible builds
 
 # Editors
 .idea

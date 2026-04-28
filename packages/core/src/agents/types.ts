@@ -92,6 +92,8 @@ export interface ThesisOutput {
   plan: string[];
   patches: ProposedPatch[];
   risks: string[];
+  /** Confidence score 0-1 (1 = highly confident) */
+  confidence?: number;
 }
 
 /**
@@ -155,6 +157,8 @@ export interface AntithesisOutput {
   issues: CriticIssue[];
   missingConsiderations: string[];
   questions: string[];
+  /** Confidence score 0-1 (1 = highly confident in assessment) */
+  confidence?: number;
 }
 
 /**

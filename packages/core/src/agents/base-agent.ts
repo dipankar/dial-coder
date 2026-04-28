@@ -7,6 +7,7 @@
 import type { LLMClient } from '../llm/llm-client.js';
 import type { Message, CompletionOptions, TokenUsage } from '../llm/types.js';
 import type { AgentRole, AgentLLMConfig, LLMAgent } from './types.js';
+import { compactMessages } from '../memory/message-compaction.js';
 
 /**
  * Error thrown when agent output validation fails.
@@ -94,6 +95,24 @@ export abstract class BaseAgent<TContext, TOutput>
 
     for (let attempt = 0; attempt <= this.maxRetries; attempt++) {
       try {
+        // Progressive message compaction if approaching token budget
+        if (typeof this.llmClient.estimateTokens === 'function') {
+          const tokenBudget = this.config.maxTokens
+            ? this.config.maxTokens * 4
+            : 12000;
+          const estimatedTokens = this.llmClient.estimateTokens(
+            options.messages,
+          );
+          if (estimatedTokens > tokenBudget) {
+            const compaction = compactMessages(
+              options.messages,
+              (msgs) => this.llmClient!.estimateTokens(msgs),
+              tokenBudget,
+            );
+            options.messages = compaction.messages;
+          }
+        }
+
         const completion = await this.llmClient.complete(options);
         const content = completion.content;
 

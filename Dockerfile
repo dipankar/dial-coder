@@ -24,8 +24,8 @@ WORKDIR /home/node/app
 # Install dependencies and build packages
 RUN npm ci \
   && npm run build --workspaces \
-  && npm pack -w @qwen-code/qwen-code --pack-destination ./packages/cli/dist \
-  && npm pack -w @qwen-code/qwen-code-core --pack-destination ./packages/core/dist
+  && npm pack -w @dial-coder/cli --pack-destination ./packages/cli/dist \
+  && npm pack -w @dial-coder/core --pack-destination ./packages/core/dist
 
 # Runtime stage
 # Use same pinned version as builder for consistency

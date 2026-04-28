@@ -54,7 +54,7 @@ import type { SubagentHooks } from './subagent-hooks.js';
 import { logSubagentExecution } from '../telemetry/loggers.js';
 import { SubagentExecutionEvent } from '../telemetry/types.js';
 import { TaskTool } from '../tools/task.js';
-import { DEFAULT_QWEN_MODEL } from '../config/models.js';
+import { DEFAULT_DIAL_MODEL } from '../config/models.js';
 
 /**
  * @fileoverview Defines the configuration interfaces for a subagent.
@@ -332,7 +332,7 @@ export class SubAgentScope {
         model:
           this.modelConfig.model ||
           this.runtimeContext.getModel() ||
-          DEFAULT_QWEN_MODEL,
+          DEFAULT_DIAL_MODEL,
         tools: (this.toolConfig?.tools || ['*']).map((t) =>
           typeof t === 'string' ? t : t.name,
         ),
@@ -372,7 +372,7 @@ export class SubAgentScope {
         const responseStream = await chat.sendMessageStream(
           this.modelConfig.model ||
             this.runtimeContext.getModel() ||
-            DEFAULT_QWEN_MODEL,
+            DEFAULT_DIAL_MODEL,
           messageParams,
           promptId,
         );

@@ -212,6 +212,20 @@ function getLLMConfigFromCLIConfig(_cliConfig: Config): LLMSystemConfig {
     };
   }
 
+  // Check for Ollama Cloud
+  const ollamaCloudUrl = process.env['OLLAMA_CLOUD_URL'];
+  const ollamaCloudApiKey = process.env['OLLAMA_CLOUD_API_KEY'];
+  const ollamaCloudModel = process.env['OLLAMA_CLOUD_MODEL'];
+  if (ollamaCloudUrl || ollamaCloudApiKey || ollamaCloudModel) {
+    providers['ollama-cloud'] = {
+      type: 'ollama-cloud',
+      baseURL: ollamaCloudUrl || 'https://ollama.com',
+      apiKey: ollamaCloudApiKey,
+      model: ollamaCloudModel || 'llama3.3',
+      enabled: true,
+    };
+  }
+
   // Determine default provider
   const defaultProvider =
     process.env['DIAL_PROVIDER'] ||

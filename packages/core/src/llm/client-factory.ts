@@ -64,6 +64,17 @@ export async function createLLMClient(
       });
     }
 
+    case 'ollama-cloud': {
+      const { OllamaCloudProvider } = await import(
+        './adapters/ollama-cloud-provider.js'
+      );
+      return new OllamaCloudProvider({
+        apiKey: resolveApiKey(config),
+        model: config.model || 'llama3.3',
+        baseURL: config.baseURL || 'https://ollama.com',
+      });
+    }
+
     case 'openai-compatible': {
       const { OpenAICompatibleProvider } = await import(
         './adapters/openai-compatible-provider.js'

@@ -130,11 +130,11 @@ describe('IDEServer', () => {
     const port = getPortFromMock(replaceMock);
     const expectedPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${port}.json`,
+      `dial-code-ide-server-${port}.json`,
     );
     const expectedPpidPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${process.ppid}.json`,
+      `dial-code-ide-server-${process.ppid}.json`,
     );
     const expectedContent = JSON.stringify({
       port: parseInt(port, 10),
@@ -168,11 +168,11 @@ describe('IDEServer', () => {
     const port = getPortFromMock(replaceMock);
     const expectedPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${port}.json`,
+      `dial-code-ide-server-${port}.json`,
     );
     const expectedPpidPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${process.ppid}.json`,
+      `dial-code-ide-server-${process.ppid}.json`,
     );
     const expectedContent = JSON.stringify({
       port: parseInt(port, 10),
@@ -206,11 +206,11 @@ describe('IDEServer', () => {
     const port = getPortFromMock(replaceMock);
     const expectedPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${port}.json`,
+      `dial-code-ide-server-${port}.json`,
     );
     const expectedPpidPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${process.ppid}.json`,
+      `dial-code-ide-server-${process.ppid}.json`,
     );
     const expectedContent = JSON.stringify({
       port: parseInt(port, 10),
@@ -258,11 +258,11 @@ describe('IDEServer', () => {
     const port = getPortFromMock(replaceMock);
     const expectedPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${port}.json`,
+      `dial-code-ide-server-${port}.json`,
     );
     const expectedPpidPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${process.ppid}.json`,
+      `dial-code-ide-server-${process.ppid}.json`,
     );
     const expectedContent = JSON.stringify({
       port: parseInt(port, 10),
@@ -311,10 +311,10 @@ describe('IDEServer', () => {
     await ideServer.start(mockContext);
     const replaceMock = mockContext.environmentVariableCollection.replace;
     const port = getPortFromMock(replaceMock);
-    const portFile = path.join('/tmp', `qwen-code-ide-server-${port}.json`);
+    const portFile = path.join('/tmp', `dial-code-ide-server-${port}.json`);
     const ppidPortFile = path.join(
       '/tmp',
-      `qwen-code-ide-server-${process.ppid}.json`,
+      `dial-code-ide-server-${process.ppid}.json`,
     );
     expect(fs.writeFile).toHaveBeenCalledWith(portFile, expect.any(String));
     expect(fs.writeFile).toHaveBeenCalledWith(ppidPortFile, expect.any(String));
@@ -346,11 +346,11 @@ describe('IDEServer', () => {
       const port = getPortFromMock(replaceMock);
       const expectedPortFile = path.join(
         '/tmp',
-        `qwen-code-ide-server-${port}.json`,
+        `dial-code-ide-server-${port}.json`,
       );
       const expectedPpidPortFile = path.join(
         '/tmp',
-        `qwen-code-ide-server-${process.ppid}.json`,
+        `dial-code-ide-server-${process.ppid}.json`,
       );
       const expectedContent = JSON.stringify({
         port: parseInt(port, 10),

@@ -47,6 +47,7 @@ import { ExitPlanModeTool } from '../tools/exitPlanMode.js';
 import { GlobTool } from '../tools/glob.js';
 import { GrepTool } from '../tools/grep.js';
 import { LSTool } from '../tools/ls.js';
+import { MemoryQueryTool } from '../tools/memory-query.js';
 import { MemoryTool, setGeminiMdFilename } from '../tools/memoryTool.js';
 import { ReadFileTool } from '../tools/read-file.js';
 import { ReadManyFilesTool } from '../tools/read-many-files.js';
@@ -91,7 +92,7 @@ import {
   DEFAULT_FILE_FILTERING_OPTIONS,
   DEFAULT_MEMORY_FILE_FILTERING_OPTIONS,
 } from './constants.js';
-import { DEFAULT_QWEN_EMBEDDING_MODEL, DEFAULT_QWEN_MODEL } from './models.js';
+import { DEFAULT_DIAL_EMBEDDING_MODEL, DEFAULT_DIAL_MODEL } from './models.js';
 import { Storage } from './storage.js';
 import { DEFAULT_DASHSCOPE_BASE_URL } from '../core/openaiContentGenerator/constants.js';
 
@@ -235,7 +236,6 @@ export interface ConfigParameters {
   accessibility?: AccessibilitySettings;
   telemetry?: TelemetrySettings;
   gitCoAuthor?: GitCoAuthorSettings;
-  usageStatisticsEnabled?: boolean;
   fileFiltering?: {
     respectGitIgnore?: boolean;
     respectQwenIgnore?: boolean;
@@ -348,7 +348,6 @@ export class Config {
   private readonly accessibility: AccessibilitySettings;
   private readonly telemetrySettings: TelemetrySettings;
   private readonly gitCoAuthor: GitCoAuthorSettings;
-  private readonly usageStatisticsEnabled: boolean;
   private geminiClient!: GeminiClient;
   private baseLlmClient!: BaseLlmClient;
   private readonly fileFiltering: {
@@ -417,7 +416,7 @@ export class Config {
 
   constructor(params: ConfigParameters) {
     this.sessionId = params.sessionId;
-    this.embeddingModel = params.embeddingModel ?? DEFAULT_QWEN_EMBEDDING_MODEL;
+    this.embeddingModel = params.embeddingModel ?? DEFAULT_DIAL_EMBEDDING_MODEL;
     this.fileSystemService = new StandardFileSystemService();
     this.sandbox = params.sandbox;
     this.targetDir = path.resolve(params.targetDir);
@@ -457,11 +456,9 @@ export class Config {
     };
     this.gitCoAuthor = {
       enabled: params.gitCoAuthor?.enabled ?? true,
-      name: params.gitCoAuthor?.name ?? 'Qwen-Coder',
-      email: params.gitCoAuthor?.email ?? 'qwen-coder@alibabacloud.com',
+      name: params.gitCoAuthor?.name ?? 'Dial-Coder',
+      email: params.gitCoAuthor?.email ?? 'dial-coder@neullabs.com',
     };
-    this.usageStatisticsEnabled = params.usageStatisticsEnabled ?? true;
-
     this.fileFiltering = {
       respectGitIgnore: params.fileFiltering?.respectGitIgnore ?? true,
       respectQwenIgnore: params.fileFiltering?.respectQwenIgnore ?? true,
@@ -656,7 +653,7 @@ export class Config {
   }
 
   getModel(): string {
-    return this.contentGeneratorConfig?.model || DEFAULT_QWEN_MODEL;
+    return this.contentGeneratorConfig?.model || DEFAULT_DIAL_MODEL;
   }
 
   async setModel(
@@ -942,12 +939,13 @@ export class Config {
     return this.fileDiscoveryService;
   }
 
-  getUsageStatisticsEnabled(): boolean {
-    return this.usageStatisticsEnabled;
-  }
-
   getExtensionContextFilePaths(): string[] {
     return this.extensionContextFilePaths;
+  }
+
+  getUsageStatisticsEnabled(): boolean {
+    // Alibaba RUM telemetry has been removed. Always returns false.
+    return false;
   }
 
   getExperimentalZedIntegration(): boolean {
@@ -1232,6 +1230,7 @@ export class Config {
     registerCoreTool(ReadManyFilesTool, this);
     registerCoreTool(ShellTool, this);
     registerCoreTool(MemoryTool);
+    registerCoreTool(MemoryQueryTool);
     registerCoreTool(TodoWriteTool, this);
     registerCoreTool(EnterPlanModeTool, this);
     registerCoreTool(ExitPlanModeTool, this);

@@ -9,7 +9,7 @@ import { extensionsCommand } from '../commands/extensions.js';
 import {
   ApprovalMode,
   Config,
-  DEFAULT_QWEN_EMBEDDING_MODEL,
+  DEFAULT_DIAL_EMBEDDING_MODEL,
   DEFAULT_MEMORY_FILE_FILTERING_OPTIONS,
   EditTool,
   FileDiscoveryService,
@@ -147,9 +147,9 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
   const rawArgv = hideBin(process.argv);
   const yargsInstance = yargs(rawArgv)
     .locale('en')
-    .scriptName('qwen')
+    .scriptName('dial')
     .usage(
-      'Usage: qwen [options] [command]\n\nQwen Code - Launch an interactive CLI, use -p/--prompt for non-interactive mode',
+      'Usage: dial [options] [command]\n\nDial Coder - Launch an interactive CLI, use -p/--prompt for non-interactive mode',
     )
     .option('telemetry', {
       type: 'boolean',
@@ -795,6 +795,7 @@ export async function loadCliConfig(
     argv.model ||
     process.env['OPENAI_MODEL'] ||
     process.env['QWEN_MODEL'] ||
+    process.env['OLLAMA_CLOUD_MODEL'] ||
     settings.model?.name;
 
   const sandboxConfig = await loadSandboxConfig(settings, argv);
@@ -807,7 +808,7 @@ export async function loadCliConfig(
     argv.vlmSwitchMode || settings.experimental?.vlmSwitchMode;
   return new Config({
     sessionId,
-    embeddingModel: DEFAULT_QWEN_EMBEDDING_MODEL,
+    embeddingModel: DEFAULT_DIAL_EMBEDDING_MODEL,
     sandbox: sandboxConfig,
     targetDir: cwd,
     includeDirectories,
@@ -833,7 +834,6 @@ export async function loadCliConfig(
       screenReader,
     },
     telemetry: telemetrySettings,
-    usageStatisticsEnabled: settings.privacy?.usageStatisticsEnabled ?? true,
     fileFiltering: settings.context?.fileFiltering,
     checkpointing:
       argv.checkpointing || settings.general?.checkpointing?.enabled,

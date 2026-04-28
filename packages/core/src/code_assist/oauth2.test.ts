@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+process.env['GOOGLE_OAUTH_CLIENT_ID'] = 'test-client-id';
+process.env['GOOGLE_OAUTH_CLIENT_SECRET'] = 'test-client-secret';
+
 import type { Credentials } from 'google-auth-library';
 import type { Mock } from 'vitest';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';

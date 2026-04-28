@@ -157,6 +157,7 @@ export interface ProviderConfig {
     | 'openai'
     | 'anthropic'
     | 'ollama'
+    | 'ollama-cloud'
     | 'openai-compatible'
     | 'mistral';
   name?: string; // Custom name for this provider instance

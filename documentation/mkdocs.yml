@@ -81,38 +81,38 @@ copyright: Copyright &copy; 2024-2026 Neul Labs
 nav:
   - Home: index.md
   - Getting Started:
-    - getting-started/index.md
-    - Installation: getting-started/installation.md
-    - Quick Start: getting-started/quick-start.md
-    - Authentication: getting-started/authentication.md
+      - getting-started/index.md
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+      - Authentication: getting-started/authentication.md
   - Core Concepts:
-    - core-concepts/index.md
-    - Execution Modes: core-concepts/execution-modes.md
-    - Dialectic Pipeline: core-concepts/dialectic-pipeline.md
-    - Tools: core-concepts/tools.md
+      - core-concepts/index.md
+      - Execution Modes: core-concepts/execution-modes.md
+      - Dialectic Pipeline: core-concepts/dialectic-pipeline.md
+      - Tools: core-concepts/tools.md
   - User Guide:
-    - user-guide/index.md
-    - Commands: user-guide/commands.md
-    - Keyboard Shortcuts: user-guide/keyboard-shortcuts.md
-    - Configuration: user-guide/configuration.md
-    - Themes: user-guide/themes.md
+      - user-guide/index.md
+      - Commands: user-guide/commands.md
+      - Keyboard Shortcuts: user-guide/keyboard-shortcuts.md
+      - Configuration: user-guide/configuration.md
+      - Themes: user-guide/themes.md
   - Providers:
-    - providers/index.md
-    - Qwen: providers/qwen.md
-    - OpenAI: providers/openai.md
-    - Ollama: providers/ollama.md
+      - providers/index.md
+      - Qwen: providers/qwen.md
+      - OpenAI: providers/openai.md
+      - Ollama: providers/ollama.md
   - Tools:
-    - tools/index.md
-    - File System: tools/file-system.md
-    - Shell: tools/shell.md
-    - MCP Integration: tools/mcp.md
+      - tools/index.md
+      - File System: tools/file-system.md
+      - Shell: tools/shell.md
+      - MCP Integration: tools/mcp.md
   - Developer Guide:
-    - developer/index.md
-    - Architecture: developer/architecture.md
-    - Contributing: developer/contributing.md
-    - Building: developer/building.md
+      - developer/index.md
+      - Architecture: developer/architecture.md
+      - Contributing: developer/contributing.md
+      - Building: developer/building.md
   - Reference:
-    - reference/index.md
-    - CLI Options: reference/cli-options.md
-    - Environment Variables: reference/environment-vars.md
-    - Troubleshooting: reference/troubleshooting.md
+      - reference/index.md
+      - CLI Options: reference/cli-options.md
+      - Environment Variables: reference/environment-vars.md
+      - Troubleshooting: reference/troubleshooting.md

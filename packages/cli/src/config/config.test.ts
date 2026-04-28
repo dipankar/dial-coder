@@ -11,7 +11,7 @@ import {
   ShellTool,
   EditTool,
   WriteFileTool,
-  DEFAULT_QWEN_MODEL,
+  DEFAULT_DIAL_MODEL,
   OutputFormat,
 } from '@dial-coder/core';
 import { loadCliConfig, parseArguments, type CliArgs } from './config.js';
@@ -2158,7 +2158,7 @@ describe('loadCliConfig model selection', () => {
       argv,
     );
 
-    expect(config.getModel()).toBe(DEFAULT_QWEN_MODEL);
+    expect(config.getModel()).toBe(DEFAULT_DIAL_MODEL);
   });
 
   it('always prefers model from argvs', async () => {

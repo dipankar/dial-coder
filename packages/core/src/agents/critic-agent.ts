@@ -203,6 +203,13 @@ export class CriticAgent extends BaseAgent<CriticContext, AntithesisOutput> {
       }
     }
 
+    // Validate confidence if present
+    if (output.confidence !== undefined) {
+      if (typeof output.confidence !== 'number' || output.confidence < 0 || output.confidence > 1) {
+        errors.push('confidence must be a number between 0 and 1');
+      }
+    }
+
     return {
       valid: errors.length === 0,
       errors,

@@ -9,6 +9,8 @@ import type { LLMClient } from '../llm/llm-client.js';
 import type { UserMode } from './mode-config.js';
 import { toInternalMode } from './mode-config.js';
 import { createLLMClientFromContentGenerator } from '../llm/adapters/content-generator-adapter.js';
+import { createProviderManager } from '../llm/provider-manager.js';
+import { DEFAULT_AGENT_CONFIGS, type AgentsConfig } from '../agents/types.js';
 import {
   ExecutionCoordinator,
   type AgentLLMClients,
@@ -20,8 +22,21 @@ import type {
   FileContent,
   FinalPatch,
   VerificationResult,
+  TaskDescription,
 } from '../agents/types.js';
 import { requiresDialectic } from './mode-selector.js';
+import * as path from 'node:path';
+import fs from 'node:fs/promises';
+import { StandardFileSystemService } from '../services/fileSystemService.js';
+import { FileDiscoveryService } from '../services/fileDiscoveryService.js';
+import { ShellExecutionService } from '../services/shellExecutionService.js';
+import {
+  normalizeEditStrings,
+  maybeAugmentOldStringForDeletion,
+  countOccurrences,
+} from '../utils/editHelper.js';
+import { safeLiteralReplace } from '../utils/textUtils.js';
+import { globSync } from 'glob';
 
 /**
  * Event types emitted during dialectic execution.
@@ -131,12 +146,47 @@ export class DialecticIntegration {
       },
     });
 
+    // Set up multi-model provider resolution
+    const providerManager = createProviderManager(this.config);
+    await providerManager.initialize();
+
+    const resolveClient = (role: keyof AgentsConfig): LLMClient => {
+      const agentConfig = DEFAULT_AGENT_CONFIGS[role];
+      const providerName = agentConfig.llm;
+      if (providerName === 'default') {
+        try {
+          return providerManager.getDefaultClient();
+        } catch {
+          return this.llmClient!;
+        }
+      }
+      if (providerName === 'fast') {
+        for (const fastProvider of ['ollama', 'ollama-cloud']) {
+          try {
+            return providerManager.getClient(fastProvider);
+          } catch {
+            // fallback to next
+          }
+        }
+        try {
+          return providerManager.getDefaultClient();
+        } catch {
+          return this.llmClient!;
+        }
+      }
+      try {
+        return providerManager.getClient(providerName);
+      } catch {
+        return this.llmClient!;
+      }
+    };
+
     // Set up dialectic dependencies
     const agentClients: AgentLLMClients = {
-      proposer: this.llmClient,
-      critic: this.llmClient,
-      synthesizer: this.llmClient,
-      reflector: this.llmClient,
+      proposer: resolveClient('proposer'),
+      critic: resolveClient('critic'),
+      synthesizer: resolveClient('synthesizer'),
+      reflector: resolveClient('reflector'),
     };
 
     // Create memory system for the project
@@ -309,17 +359,15 @@ export class DialecticIntegration {
    * FileProvider signature: (files: string[]) => Promise<FileContent[]>
    */
   private createFileProvider() {
-    const config = this.config;
+    const fsService = new StandardFileSystemService();
+    const projectRoot = this.config.getProjectRoot() || process.cwd();
     return async (files: string[]): Promise<FileContent[]> => {
-      const fs = await import('node:fs/promises');
       const results: FileContent[] = [];
 
       for (const file of files) {
         try {
-          const fullPath = config.getProjectRoot()
-            ? `${config.getProjectRoot()}/${file}`
-            : file;
-          const content = await fs.readFile(fullPath, 'utf-8');
+          const fullPath = path.resolve(projectRoot, file);
+          const content = await fsService.readTextFile(fullPath);
           results.push({ path: file, content });
         } catch {
           // Skip files that can't be read
@@ -333,39 +381,143 @@ export class DialecticIntegration {
   /**
    * Create a file discovery function.
    * FileDiscoveryFunction signature: (task: TaskDescription) => Promise<string[]>
-   * Simple implementation that returns empty for now.
-   * Could be enhanced to use glob patterns based on task.
+   * Discovers source files using glob and filters via FileDiscoveryService.
    */
   private createFileDiscovery() {
-    return async (): Promise<string[]> => [];
+    const projectRoot = this.config.getProjectRoot() || process.cwd();
+    const fileDiscoveryService = new FileDiscoveryService(projectRoot);
+    return async (_task: TaskDescription): Promise<string[]> => {
+      try {
+        const patterns = [
+          '**/*.{ts,tsx,js,jsx,py,go,rs,java,rb,php,c,cpp,h,hpp,md,json,yml,yaml}',
+        ];
+        const allFiles = patterns.flatMap((pattern) =>
+          globSync(pattern, {
+            cwd: projectRoot,
+            nodir: true,
+            absolute: false,
+          }),
+        );
+        const uniqueFiles = [...new Set(allFiles)];
+        const filtered = fileDiscoveryService.filterFiles(uniqueFiles, {
+          respectGitIgnore: true,
+          respectQwenIgnore: true,
+        });
+        return filtered.slice(0, 200);
+      } catch {
+        return [];
+      }
+    };
   }
 
   /**
    * Create a verify function for running tests.
-   * VerifyFunction signature: () => Promise<VerificationResult>
-   * Simple implementation that always succeeds.
-   * Could be enhanced to run actual tests.
+   * VerifyFunction signature: (patches: FinalPatch[], testCommand?: string) => Promise<VerificationResult>
+   * Runs the configured test command via ShellExecutionService.
    */
   private createVerifyFunction() {
-    return async (): Promise<VerificationResult> => ({
-      success: true,
-      testsRun: 0,
-      testsPassed: 0,
-      testsFailed: 0,
-      failingTests: [],
-      duration: 0,
-      output: 'Verification skipped',
-    });
+    const projectRoot = this.config.getProjectRoot() || process.cwd();
+    return async (
+      _patches: FinalPatch[],
+      testCommand?: string,
+    ): Promise<VerificationResult> => {
+      const command = testCommand || 'npm test';
+      const startTime = Date.now();
+      try {
+        const controller = new AbortController();
+        const handle = await ShellExecutionService.execute(
+          command,
+          projectRoot,
+          () => {},
+          controller.signal,
+          false,
+          {},
+        );
+        const result = await handle.result;
+        const duration = Date.now() - startTime;
+        if (result.exitCode === 0) {
+          return {
+            success: true,
+            testsRun: 1,
+            testsPassed: 1,
+            testsFailed: 0,
+            failingTests: [],
+            output: result.output,
+            duration,
+          };
+        }
+        return {
+          success: false,
+          testsRun: 1,
+          testsPassed: 0,
+          testsFailed: 1,
+          failingTests: [`Command failed: ${command}`],
+          output:
+            result.output || result.error?.message || 'Verification failed',
+          duration,
+        };
+      } catch (error) {
+        const duration = Date.now() - startTime;
+        return {
+          success: false,
+          testsRun: 0,
+          testsPassed: 0,
+          testsFailed: 0,
+          failingTests: [],
+          output: error instanceof Error ? error.message : String(error),
+          duration,
+        };
+      }
+    };
   }
 
   /**
    * Create a function for applying patches.
    * ApplyPatchFunction signature: (patch: FinalPatch) => Promise<boolean>
-   * Simple implementation that always succeeds.
-   * Could be enhanced to apply actual patches.
+   * Applies edits using EditHelper normalization and FileSystemService.
    */
   private createApplyPatchFunction() {
-    return async (_patch: FinalPatch): Promise<boolean> => true;
+    const fsService = new StandardFileSystemService();
+    const projectRoot = this.config.getProjectRoot() || process.cwd();
+    return async (patch: FinalPatch): Promise<boolean> => {
+      try {
+        const fullPath = path.resolve(projectRoot, patch.file);
+        if (patch.action === 'create') {
+          await fsService.writeTextFile(fullPath, patch.content || '');
+          return true;
+        }
+        if (patch.action === 'delete') {
+          await fs.unlink(fullPath);
+          return true;
+        }
+        // edit
+        const currentContent = await fsService.readTextFile(fullPath);
+        const search = patch.search || '';
+        const replace = patch.replace || '';
+        const normalized = normalizeEditStrings(
+          currentContent,
+          search,
+          replace,
+        );
+        const oldString = maybeAugmentOldStringForDeletion(
+          currentContent,
+          normalized.oldString,
+          normalized.newString,
+        );
+        if (countOccurrences(currentContent, oldString) === 0) {
+          return false;
+        }
+        const newContent = safeLiteralReplace(
+          currentContent,
+          oldString,
+          normalized.newString,
+        );
+        await fsService.writeTextFile(fullPath, newContent);
+        return true;
+      } catch {
+        return false;
+      }
+    };
   }
 }
 

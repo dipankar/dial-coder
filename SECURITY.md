@@ -1,5 +1,7 @@
 # Reporting Security Issues
 
-Please report any security issue or Higress crash report to [ASRC](https://security.alibaba.com/) (Alibaba Security Response Center) where the issue will be triaged appropriately.
+Please report any security issue to [security@neullabs.com](mailto:security@neullabs.com) or via our [security policy page](https://github.com/neul-labs/dial-coder/security).
 
-Thank you for helping keep our project secure.
+We will triage the issue and respond within 48 hours.
+
+Thank you for helping keep Dial Coder secure.

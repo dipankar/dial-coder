@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+process.env['QWEN_OAUTH_CLIENT_ID'] = 'test-qwen-client-id';
+
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EventEmitter } from 'events';
 import { type ChildProcess } from 'child_process';
@@ -1939,9 +1941,7 @@ describe('Enhanced Error Handling and Edge Cases', () => {
       });
 
       const [, options] = vi.mocked(global.fetch).mock.calls[0];
-      expect(options?.body).toContain(
-        'client_id=f0304373b74a44d2b584a3fb70ca9e56',
-      );
+      expect(options?.body).toContain('client_id=test-qwen-client-id');
       expect(options?.body).toContain('scope=test-scope');
       expect(options?.body).toContain('code_challenge=test-challenge');
       expect(options?.body).toContain('code_challenge_method=S256');
@@ -2269,9 +2269,7 @@ describe('Constants and Configuration', () => {
     });
 
     const [, options] = vi.mocked(global.fetch).mock.calls[0];
-    expect(options?.body).toContain(
-      'client_id=f0304373b74a44d2b584a3fb70ca9e56',
-    );
+    expect(options?.body).toContain('client_id=test-qwen-client-id');
   });
 
   it('should use correct default scope', async () => {

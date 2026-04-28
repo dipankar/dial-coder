@@ -10,6 +10,7 @@ import type { Decision, Pattern } from '../memory/types.js';
 import { ProposerAgent } from '../agents/proposer-agent.js';
 import { CriticAgent } from '../agents/critic-agent.js';
 import { SynthesizerAgent } from '../agents/synthesizer-agent.js';
+import { SafetyClassifier } from './safety-classifier.js';
 import type {
   AgentsConfig,
   TaskDescription,
@@ -124,6 +125,7 @@ export class RoundManager {
   private verifyFn: VerifyFunction;
   private applyPatchFn: ApplyPatchFunction;
   private eventHandlers: RoundEventHandler[] = [];
+  private safetyClassifier = new SafetyClassifier();
 
   constructor(
     config: AgentsConfig,
@@ -230,10 +232,7 @@ export class RoundManager {
 
       // Phase 4: Verification
       this.emit({ type: 'verification_start' });
-      const verification = await this.verify(
-        synthesis.patches,
-        options.task.testCommand,
-      );
+      const verification = await this.verify(synthesis.patches, options.task);
       this.emit({ type: 'verification_complete', result: verification });
 
       // Determine outcome
@@ -348,8 +347,45 @@ export class RoundManager {
    */
   private async verify(
     patches: FinalPatch[],
-    testCommand?: string,
+    task: TaskDescription,
   ): Promise<VerificationResult> {
+    // Safety classification before applying patches
+    const safetyInput = {
+      userText: task.originalPrompt,
+      patches: patches.map((p) => ({
+        file: p.file,
+        action: p.action,
+        content: p.content,
+        search: p.search,
+        replace: p.replace,
+      })),
+      testCommand: task.testCommand,
+    };
+    const verdict = this.safetyClassifier.classify(safetyInput);
+    if (verdict === 'block') {
+      return {
+        success: false,
+        testsRun: 0,
+        testsPassed: 0,
+        testsFailed: 0,
+        failingTests: [],
+        output: 'Safety classifier blocked potentially dangerous operation.',
+        duration: 0,
+      };
+    }
+    if (verdict === 'ask') {
+      return {
+        success: false,
+        testsRun: 0,
+        testsPassed: 0,
+        testsFailed: 0,
+        failingTests: [],
+        output:
+          'Safety classifier requires user confirmation for this operation.',
+        duration: 0,
+      };
+    }
+
     // Apply each patch
     for (const patch of patches) {
       const success = await this.applyPatchFn(patch);
@@ -367,7 +403,7 @@ export class RoundManager {
     }
 
     // Run verification
-    return this.verifyFn(patches, testCommand);
+    return this.verifyFn(patches, task.testCommand);
   }
 
   /**
@@ -441,10 +477,7 @@ export class RoundManager {
 
       // Phase 4: Verification
       this.emit({ type: 'verification_start' });
-      const verification = await this.verify(
-        finalPatches,
-        options.task.testCommand,
-      );
+      const verification = await this.verify(finalPatches, options.task);
       this.emit({ type: 'verification_complete', result: verification });
 
       const outcome = this.determineOutcome(verification, synthesis);

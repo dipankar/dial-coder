@@ -27,10 +27,10 @@
   "homepage": "https://docs.neullabs.com/dial-coder",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neul-labs/dial-coder.git"
+    "url": "git+https://github.com/dipankar/dial-coder.git"
   },
   "bugs": {
-    "url": "https://github.com/neul-labs/dial-coder/issues"
+    "url": "https://github.com/dipankar/dial-coder/issues"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -40,7 +40,7 @@
     "packages/*"
   ],
   "config": {
-    "sandboxImageUri": "ghcr.io/neul-labs/dial-coder:0.3.0"
+    "sandboxImageUri": "ghcr.io/dipankar/dial-coder:0.3.0"
   },
   "scripts": {
     "start": "cross-env node scripts/start.js",

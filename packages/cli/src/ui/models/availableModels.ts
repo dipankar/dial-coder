@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthType, DEFAULT_QWEN_MODEL } from '@dial-coder/core';
+import { AuthType, DEFAULT_DIAL_MODEL } from '@dial-coder/core';
 import { t } from '../../i18n/index.js';
 
 export type AvailableModel = {
@@ -15,7 +15,7 @@ export type AvailableModel = {
 };
 
 export const MAINLINE_VLM = 'vision-model';
-export const MAINLINE_CODER = DEFAULT_QWEN_MODEL;
+export const MAINLINE_CODER = DEFAULT_DIAL_MODEL;
 
 export const AVAILABLE_MODELS_QWEN: AvailableModel[] = [
   {
@@ -115,6 +115,48 @@ export function getOpenAIAvailableModelFromEnv(): AvailableModel | null {
   return id ? { id, label: id } : null;
 }
 
+/**
+ * Popular models available on Ollama Cloud.
+ * For dynamic discovery, use fetchOllamaCloudModels().
+ */
+export const AVAILABLE_MODELS_OLLAMA_CLOUD: AvailableModel[] = [
+  {
+    id: 'llama3.3',
+    label: 'Llama 3.3',
+    description: 'Meta’s latest general-purpose LLM',
+  },
+  {
+    id: 'llama3.2',
+    label: 'Llama 3.2',
+    description: 'Meta’s lightweight general-purpose LLM',
+  },
+  {
+    id: 'qwen2.5-coder:32b',
+    label: 'Qwen 2.5 Coder 32B',
+    description: 'Specialized code model',
+  },
+  {
+    id: 'qwen2.5:72b',
+    label: 'Qwen 2.5 72B',
+    description: 'Alibaba’s large general-purpose model',
+  },
+  {
+    id: 'mistral:7b',
+    label: 'Mistral 7B',
+    description: 'Fast and efficient general-purpose model',
+  },
+  {
+    id: 'codellama:34b',
+    label: 'Code Llama 34B',
+    description: 'Meta’s specialized code model',
+  },
+  {
+    id: 'deepseek-coder:33b',
+    label: 'DeepSeek Coder 33B',
+    description: 'DeepSeek’s code-specialized model',
+  },
+];
+
 export function getAvailableModelsForAuthType(
   authType: AuthType,
 ): AvailableModel[] {
@@ -130,6 +172,8 @@ export function getAvailableModelsForAuthType(
       return AVAILABLE_MODELS_GEMINI;
     case AuthType.USE_MISTRAL:
       return AVAILABLE_MODELS_MISTRAL;
+    case AuthType.USE_OLLAMA_CLOUD:
+      return AVAILABLE_MODELS_OLLAMA_CLOUD;
     default:
       return [];
   }

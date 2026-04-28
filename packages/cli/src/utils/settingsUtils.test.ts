@@ -422,7 +422,6 @@ describe('SettingsUtils', () => {
         const keys = booleanSettings.map((s) => s.key);
         expect(keys).toContain('ui.requiresRestart');
         expect(keys).toContain('ui.accessibility.disableLoadingPhrases');
-        expect(keys).not.toContain('privacy.usageStatisticsEnabled');
         expect(keys).not.toContain('security.auth.selectedType'); // Advanced setting
         expect(keys).not.toContain('security.auth.useExternal'); // Advanced setting
       });

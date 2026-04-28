@@ -210,6 +210,46 @@ describe('ModeEscalationManager', () => {
 
       expect(check.shouldEscalate).toBe(false);
     });
+
+    it('should escalate for low proposer confidence', () => {
+      const lowConfidenceRound = createMockRoundResult({
+        thesis: {
+          analysis: 'Test',
+          approach: 'Test',
+          plan: ['Step 1'],
+          patches: [],
+          risks: [],
+          confidence: 0.5,
+        },
+      });
+      manager.recordRound(lowConfidenceRound);
+
+      const check = manager.checkEscalation(lowConfidenceRound);
+
+      expect(check.shouldEscalate).toBe(true);
+      expect(check.trigger).toBe('low_confidence');
+    });
+
+    it('should escalate for high issue count', () => {
+      const result = createMockRoundResult({
+        antithesis: {
+          overallAssessment: 'concerning',
+          strengths: [],
+          issues: [
+            { severity: 'high', category: 'correctness', description: 'Bug 1', location: 'a.ts', suggestion: 'Fix 1' },
+            { severity: 'high', category: 'correctness', description: 'Bug 2', location: 'b.ts', suggestion: 'Fix 2' },
+            { severity: 'medium', category: 'maintainability', description: 'Bug 3', location: 'c.ts', suggestion: 'Fix 3' },
+          ],
+          missingConsiderations: [],
+          questions: [],
+        },
+      });
+
+      const check = manager.checkEscalation(result);
+
+      expect(check.shouldEscalate).toBe(true);
+      expect(check.trigger).toBe('critical_issue');
+    });
   });
 
   describe('escalate', () => {

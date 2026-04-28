@@ -27,7 +27,8 @@ dial
 Use environment variables or a `.env` file:
 
 === "Environment Variables"
-```bash
+
+````bash
 export OPENAI_API_KEY="your_api_key"
 export OPENAI_BASE_URL="https://api.openai.com/v1"
 export OPENAI_MODEL="gpt-4"
@@ -52,7 +53,7 @@ Create `.env` in your project root:
 ```bash
 export OPENAI_API_KEY="sk-..."
 export OPENAI_MODEL="gpt-4"
-```
+````
 
 ### Anthropic
 

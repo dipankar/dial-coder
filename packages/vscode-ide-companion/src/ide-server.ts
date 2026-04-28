@@ -328,11 +328,11 @@ export class IDEServer {
           this.port = address.port;
           this.portFile = path.join(
             os.tmpdir(),
-            `qwen-code-ide-server-${this.port}.json`,
+            `dial-code-ide-server-${this.port}.json`,
           );
           this.ppidPortFile = path.join(
             os.tmpdir(),
-            `qwen-code-ide-server-${process.ppid}.json`,
+            `dial-code-ide-server-${process.ppid}.json`,
           );
           this.log(`IDE server listening on http://127.0.0.1:${this.port}`);
 
@@ -424,7 +424,7 @@ export class IDEServer {
 const createMcpServer = (diffManager: DiffManager) => {
   const server = new McpServer(
     {
-      name: 'qwen-code-companion-mcp-server',
+      name: 'dial-code-companion-mcp-server',
       version: '1.0.0',
     },
     { capabilities: { logging: {} } },

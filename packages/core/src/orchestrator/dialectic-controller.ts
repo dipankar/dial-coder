@@ -79,6 +79,11 @@ export type ControllerEvent =
 export type ControllerEventHandler = (event: ControllerEvent) => void;
 
 /**
+ * Recovery strategies for failed dialectic rounds.
+ */
+export type RecoveryStrategy = 'free' | 'cheap' | 'expensive';
+
+/**
  * File provider function type.
  */
 export type FileProvider = (files: string[]) => Promise<FileContent[]>;
@@ -289,14 +294,13 @@ export class DialecticController {
         }
       }
 
-      // Execute rounds
+      // Execute rounds with cost-aware recovery
       let lastOutcome: RoundOutcome = 'failed';
       const failures: FailureInfo[] = [];
+      const MAX_RECOVERY_ATTEMPTS = 2;
 
       for (let round = 1; round <= this.config.maxRounds; round++) {
-        this.emit({ type: 'round_start', round });
-
-        const roundOptions: RoundOptions = {
+        let roundOptions: RoundOptions = {
           task,
           sessionId,
           round,
@@ -309,27 +313,58 @@ export class DialecticController {
           failurePatterns,
         };
 
-        let result: RoundResult;
-        if (this.config.mode === 'simple') {
-          result = await this.roundManager.executeSimple(roundOptions);
-        } else {
-          result = await this.roundManager.execute(roundOptions);
-        }
+        let succeeded = false;
+        for (let attempt = 0; attempt <= MAX_RECOVERY_ATTEMPTS; attempt++) {
+          if (attempt > 0) {
+            const strategy = this.getRecoveryStrategy(attempt);
+            this.emit({
+              type: 'status',
+              message: `Applying ${strategy} recovery (attempt ${attempt})...`,
+            });
+            roundOptions = this.applyRecovery(strategy, roundOptions);
+          }
 
-        this.roundResults.push(result);
-        lastOutcome = result.outcome;
-        this.emit({ type: 'round_end', round, result });
+          this.emit({ type: 'round_start', round });
 
-        // Store round in memory
-        await this.storeRound(result, task.id, sessionId);
+          let result: RoundResult;
+          if (this.config.mode === 'simple') {
+            result = await this.roundManager.executeSimple(roundOptions);
+          } else {
+            result = await this.roundManager.execute(roundOptions);
+          }
 
-        // Check if we succeeded
-        if (result.outcome === 'success') {
-          break;
-        }
+          this.roundResults.push(result);
+          lastOutcome = result.outcome;
+          this.emit({ type: 'round_end', round, result });
 
-        // Record failure for next round
-        if (result.outcome === 'failed' || result.outcome === 'partial') {
+          // Diminishing returns detection
+          if (round > 1) {
+            const currentUsage = this.roundTokenUsage.get(round);
+            const prevUsage = this.roundTokenUsage.get(round - 1);
+            if (
+              currentUsage &&
+              prevUsage &&
+              currentUsage.total.completionTokens < 500 &&
+              prevUsage.total.completionTokens < 500
+            ) {
+              this.emit({
+                type: 'status',
+                message:
+                  'Diminishing returns detected: low token output in consecutive rounds. Aborting to avoid waste.',
+              });
+              break;
+            }
+          }
+
+          // Store round in memory
+          await this.storeRound(result, task.id, sessionId);
+
+          if (result.outcome === 'success') {
+            succeeded = true;
+            break;
+          }
+
+          // Record failure for potential recovery
           failures.push({
             round,
             testOutput: result.verification.output,
@@ -337,6 +372,17 @@ export class DialecticController {
             analysis: this.analyzeFailure(result),
           });
         }
+
+        if (succeeded) {
+          break;
+        }
+
+        // Circuit breaker: halting after exhausting recovery attempts
+        this.emit({
+          type: 'status',
+          message: `Circuit breaker: halting after ${MAX_RECOVERY_ATTEMPTS + 1} failed attempts in round ${round}.`,
+        });
+        break;
       }
 
       // Collect reflections if enabled
@@ -401,17 +447,82 @@ export class DialecticController {
 
   /**
    * Build session history from previous rounds.
+   *
+   * After every 3 rounds, older history is condensed into a single summary
+   * to keep proposer context bounded.
    */
   private buildSessionHistory(): Array<{
     round: number;
     keyDecision: string;
     outcome: string;
   }> {
-    return this.roundResults.map((r) => ({
+    if (this.roundResults.length <= 3) {
+      return this.roundResults.map((r) => ({
+        round: r.round,
+        keyDecision: r.synthesis.resolutionSummary,
+        outcome: r.outcome,
+      }));
+    }
+
+    // Condense older rounds; keep the last 2 in full detail
+    const condensed = this.condenseSessionHistory();
+    const recent = this.roundResults.slice(-2).map((r) => ({
       round: r.round,
       keyDecision: r.synthesis.resolutionSummary,
       outcome: r.outcome,
     }));
+
+    return [condensed, ...recent];
+  }
+
+  /**
+   * Condense all but the most recent 2 rounds into a single summary entry.
+   */
+  private condenseSessionHistory(): {
+    round: number;
+    keyDecision: string;
+    outcome: string;
+  } {
+    const olderRounds = this.roundResults.slice(0, -2);
+    const outcomes = olderRounds.map((r) => r.outcome);
+    const successCount = outcomes.filter((o) => o === 'success').length;
+    const partialCount = outcomes.filter((o) => o === 'partial').length;
+    const failedCount = outcomes.filter((o) => o === 'failed').length;
+
+    const keyDecisions = olderRounds
+      .map((r) => r.synthesis.resolutionSummary)
+      .filter((s) => s.length > 0);
+
+    const summaryLines: string[] = [
+      `Rounds 1-${olderRounds.length} condensed summary:`,
+      `Outcomes: ${successCount} success, ${partialCount} partial, ${failedCount} failed.`,
+    ];
+
+    if (keyDecisions.length > 0) {
+      summaryLines.push(`Key approaches tried: ${keyDecisions.join('; ')}`);
+    }
+
+    // Surface persistent issues (appearing in >1 round)
+    const allIssues = olderRounds.flatMap((r) =>
+      r.antithesis.issues.map((i) => i.description),
+    );
+    const issueCounts = new Map<string, number>();
+    for (const issue of allIssues) {
+      issueCounts.set(issue, (issueCounts.get(issue) || 0) + 1);
+    }
+    const persistentIssues = [...issueCounts.entries()]
+      .filter(([, count]) => count > 1)
+      .map(([desc]) => desc);
+
+    if (persistentIssues.length > 0) {
+      summaryLines.push(`Persistent issues: ${persistentIssues.slice(0, 3).join('; ')}`);
+    }
+
+    return {
+      round: 0,
+      keyDecision: summaryLines.join(' '),
+      outcome: 'condensed',
+    };
   }
 
   /**
@@ -699,5 +810,62 @@ export class DialecticController {
    */
   getPerformanceTracker(): PerformanceTracker | undefined {
     return this.performanceTracker;
+  }
+
+  /**
+   * Get recovery strategy for a given attempt number.
+   */
+  private getRecoveryStrategy(attempt: number): RecoveryStrategy {
+    if (attempt === 1) return 'free';
+    if (attempt === 2) return 'cheap';
+    return 'expensive';
+  }
+
+  /**
+   * Apply recovery strategy to round options.
+   */
+  private applyRecovery(
+    strategy: RecoveryStrategy,
+    options: RoundOptions,
+  ): RoundOptions {
+    const recovered: RoundOptions = {
+      ...options,
+      relevantFiles: options.relevantFiles.slice(),
+      projectDecisions: options.projectDecisions.slice(),
+      codePatterns: options.codePatterns.slice(),
+      sessionHistory: options.sessionHistory
+        ? options.sessionHistory.slice()
+        : undefined,
+      previousFailures: options.previousFailures
+        ? options.previousFailures.slice()
+        : undefined,
+      hints: options.hints ? [...options.hints] : undefined,
+    };
+
+    if (strategy === 'free') {
+      recovered.relevantFiles = recovered.relevantFiles.slice(0, 5);
+      recovered.hints = undefined;
+      if (recovered.sessionHistory) {
+        recovered.sessionHistory = recovered.sessionHistory.slice(-2);
+      }
+      recovered.projectDecisions = [];
+      recovered.codePatterns = [];
+    } else if (strategy === 'cheap') {
+      recovered.hints = [
+        ...(recovered.hints || []),
+        'Be concise. Focus only on the minimal change needed.',
+      ];
+    } else if (strategy === 'expensive') {
+      const lastFailure =
+        recovered.previousFailures?.[recovered.previousFailures.length - 1];
+      if (lastFailure) {
+        recovered.hints = [
+          ...(recovered.hints || []),
+          `Previous attempt failed: ${lastFailure.analysis}. Reconsider approach and verify assumptions.`,
+        ];
+      }
+    }
+
+    return recovered;
   }
 }

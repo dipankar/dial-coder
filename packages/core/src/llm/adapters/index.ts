@@ -22,6 +22,10 @@ export {
   type OllamaProviderConfig,
 } from './ollama-provider.js';
 export {
+  OllamaCloudProvider,
+  type OllamaCloudProviderConfig,
+} from './ollama-cloud-provider.js';
+export {
   OpenAICompatibleProvider,
   type OpenAICompatibleProviderConfig,
 } from './openai-compatible-provider.js';

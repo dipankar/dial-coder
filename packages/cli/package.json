@@ -48,7 +48,7 @@
     "dist"
   ],
   "config": {
-    "sandboxImageUri": "ghcr.io/neul-labs/dial-coder:0.3.0"
+    "sandboxImageUri": "ghcr.io/dipankar/dial-coder:0.3.0"
   },
   "dependencies": {
     "@google/genai": "1.16.0",

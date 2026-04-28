@@ -7,8 +7,8 @@
 export * from './src/index.js';
 export { Storage } from './src/config/storage.js';
 export {
-  DEFAULT_QWEN_MODEL,
-  DEFAULT_QWEN_EMBEDDING_MODEL,
+  DEFAULT_DIAL_MODEL,
+  DEFAULT_DIAL_EMBEDDING_MODEL,
   DEFAULT_GEMINI_MODEL,
   DEFAULT_GEMINI_MODEL_AUTO,
   DEFAULT_GEMINI_FLASH_MODEL,
@@ -46,6 +46,4 @@ export {
 export { makeFakeConfig } from './src/test-utils/config.js';
 export * from './src/utils/pathReader.js';
 export * from './src/utils/request-tokenizer/supportedImageFormats.js';
-export { ClearcutLogger } from './src/telemetry/clearcut-logger/clearcut-logger.js';
-export { QwenLogger } from './src/telemetry/dial-logger/dial-logger.js';
 export { logModelSlashCommand } from './src/telemetry/loggers.js';

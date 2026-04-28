@@ -2244,9 +2244,6 @@ describe('Settings Loading and Merging', () => {
         ui: {
           theme: 'dark',
         },
-        privacy: {
-          usageStatisticsEnabled: false,
-        },
         model: {
           name: 'gemini-pro',
           chatCompression: {
@@ -2289,7 +2286,6 @@ describe('Settings Loading and Merging', () => {
         preferredEditor: 'code',
         vimMode: true,
         theme: 'dark',
-        usageStatisticsEnabled: false,
         model: 'gemini-pro',
         chatCompression: {
           contextPercentageThreshold: 0.8,

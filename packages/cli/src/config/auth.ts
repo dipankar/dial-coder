@@ -26,5 +26,15 @@ export function validateAuthMethod(authMethod: string): string | null {
     return null;
   }
 
+  if (authMethod === AuthType.USE_OLLAMA_CLOUD) {
+    const hasApiKey =
+      process.env['OLLAMA_CLOUD_API_KEY'] ||
+      settings.merged.security?.auth?.ollamaCloud?.apiKey;
+    if (!hasApiKey) {
+      return 'OLLAMA_CLOUD_API_KEY environment variable not found. Please set it to authenticate with Ollama Cloud.';
+    }
+    return null;
+  }
+
   return 'Invalid auth method selected.';
 }
