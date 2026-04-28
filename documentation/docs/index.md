@@ -7,7 +7,7 @@
 AI-powered CLI for developers with multi-stage review pipeline
 
 [Get Started](getting-started/index.md){ .md-button .md-button--primary }
-[View on GitHub](https://github.com/neul-labs/dial-coder){ .md-button }
+[View on GitHub](https://github.com/dipankar/dial-coder){ .md-button }
 
 </div>
 
@@ -47,7 +47,7 @@ File operations, shell commands, web search, memory, MCP integration, and more -
 
 ```bash
 # Clone and install
-git clone https://github.com/neul-labs/dial-coder.git
+git clone https://github.com/dipankar/dial-coder.git
 cd dial-coder && npm install && npm install -g .
 
 # Start using
@@ -121,4 +121,4 @@ $ dial
 
 ## License
 
-Dial Code is open source under the [Apache 2.0 License](https://github.com/neul-labs/dial-coder/blob/main/LICENSE).
+Dial Code is open source under the [Apache 2.0 License](https://github.com/dipankar/dial-coder/blob/main/LICENSE).

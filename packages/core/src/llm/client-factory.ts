@@ -70,7 +70,7 @@ export async function createLLMClient(
       );
       return new OllamaCloudProvider({
         apiKey: resolveApiKey(config),
-        model: config.model || 'llama3.3',
+        model: config.model || 'kimi-k2.6:cloud',
         baseURL: config.baseURL || 'https://ollama.com',
       });
     }

@@ -35,7 +35,7 @@ describe('docsCommand', () => {
       throw new Error('docsCommand must have an action.');
     }
 
-    const docsUrl = 'https://docs.neullabs.com/dial-coder/en';
+    const docsUrl = 'https://dipankar.github.io/dial-coder/en';
 
     await docsCommand.action(mockContext, '');
 
@@ -57,7 +57,7 @@ describe('docsCommand', () => {
 
     // Simulate a sandbox environment
     vi.stubEnv('SANDBOX', 'gemini-sandbox');
-    const docsUrl = 'https://docs.neullabs.com/dial-coder/en';
+    const docsUrl = 'https://dipankar.github.io/dial-coder/en';
 
     await docsCommand.action(mockContext, '');
 
@@ -80,7 +80,7 @@ describe('docsCommand', () => {
 
     // Simulate the specific 'sandbox-exec' environment
     vi.stubEnv('SANDBOX', 'sandbox-exec');
-    const docsUrl = 'https://docs.neullabs.com/dial-coder/en';
+    const docsUrl = 'https://dipankar.github.io/dial-coder/en';
 
     await docsCommand.action(mockContext, '');
 

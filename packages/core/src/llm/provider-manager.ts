@@ -221,7 +221,7 @@ function getLLMConfigFromCLIConfig(_cliConfig: Config): LLMSystemConfig {
       type: 'ollama-cloud',
       baseURL: ollamaCloudUrl || 'https://ollama.com',
       apiKey: ollamaCloudApiKey,
-      model: ollamaCloudModel || 'llama3.3',
+      model: ollamaCloudModel || 'kimi-k2.6:cloud',
       enabled: true,
     };
   }

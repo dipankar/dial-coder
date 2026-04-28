@@ -12,14 +12,14 @@
     "llm",
     "terminal"
   ],
-  "homepage": "https://docs.neullabs.com/dial-coder",
+  "homepage": "https://github.com/dipankar/dial-coder#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neul-labs/dial-coder.git",
+    "url": "git+https://github.com/dipankar/dial-coder.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/neul-labs/dial-coder/issues"
+    "url": "https://github.com/dipankar/dial-coder/issues"
   },
   "type": "module",
   "main": "dist/index.js",

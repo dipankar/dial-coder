@@ -37,3 +37,4 @@ export {
   ContentGeneratorAdapter,
   createLLMClientFromContentGenerator,
 } from './content-generator-adapter.js';
+export { LlmClientContentGeneratorAdapter } from './llm-client-adapter.js';

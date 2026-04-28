@@ -24,7 +24,7 @@
     "mcp",
     "model-context-protocol"
   ],
-  "homepage": "https://docs.neullabs.com/dial-coder",
+  "homepage": "https://github.com/dipankar/dial-coder#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dipankar/dial-coder.git"

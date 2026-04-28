@@ -109,6 +109,7 @@ export function createContentGeneratorConfig(
     return {
       ...newContentGeneratorConfig,
       model: newContentGeneratorConfig?.model || 'qwen3-coder-plus',
+      baseUrl: newContentGeneratorConfig?.baseUrl || 'https://api.openai.com/v1',
     } as ContentGeneratorConfig;
   }
 
@@ -120,8 +121,19 @@ export function createContentGeneratorConfig(
     return {
       ...newContentGeneratorConfig,
       model: newContentGeneratorConfig?.model || 'mistral-large-latest',
-      baseUrl:
-        newContentGeneratorConfig?.baseUrl || 'https://api.mistral.ai/v1',
+      baseUrl: 'https://api.mistral.ai/v1',
+    } as ContentGeneratorConfig;
+  }
+
+  if (authType === AuthType.USE_OLLAMA_CLOUD) {
+    if (!newContentGeneratorConfig.apiKey) {
+      throw new Error('Ollama Cloud API key is required');
+    }
+
+    return {
+      ...newContentGeneratorConfig,
+      model: newContentGeneratorConfig?.model || 'kimi-k2.6:cloud',
+      baseUrl: 'https://ollama.com',
     } as ContentGeneratorConfig;
   }
 
@@ -240,6 +252,27 @@ export async function createContentGenerator(
         `${error instanceof Error ? error.message : String(error)}`,
       );
     }
+  }
+
+  if (config.authType === AuthType.USE_OLLAMA_CLOUD) {
+    if (!config.apiKey) {
+      throw new Error('Ollama Cloud API key is required');
+    }
+
+    const { OllamaCloudProvider } = await import(
+      '../llm/adapters/ollama-cloud-provider.js'
+    );
+    const { LlmClientContentGeneratorAdapter } = await import(
+      '../llm/adapters/llm-client-adapter.js'
+    );
+
+    const ollamaClient = new OllamaCloudProvider({
+      apiKey: config.apiKey,
+      model: config.model || 'kimi-k2.6:cloud',
+      baseURL: config.baseUrl || 'https://ollama.com',
+    });
+
+    return new LlmClientContentGeneratorAdapter(ollamaClient);
   }
 
   throw new Error(

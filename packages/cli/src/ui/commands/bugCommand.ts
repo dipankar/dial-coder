@@ -37,7 +37,7 @@ export const bugCommand: SlashCommand = {
     }
 
     let bugReportUrl =
-      'https://github.com/neul-labs/dial-coder/issues/new?template=bug_report.yml&title={title}&info={info}';
+      'https://github.com/dipankar/dial-coder/issues/new?template=bug_report.yml&title={title}&info={info}';
 
     const bugCommandSettings = context.services.config?.getBugCommand();
     if (bugCommandSettings?.urlTemplate) {

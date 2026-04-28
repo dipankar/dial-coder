@@ -40,6 +40,18 @@ describe('validateAuthMethod', () => {
     expect(validateAuthMethod(AuthType.QWEN_OAUTH)).toBeNull();
   });
 
+  it('should return null for USE_OLLAMA_CLOUD when OLLAMA_CLOUD_API_KEY is set', () => {
+    process.env['OLLAMA_CLOUD_API_KEY'] = 'fake-ollama-key';
+    expect(validateAuthMethod(AuthType.USE_OLLAMA_CLOUD)).toBeNull();
+  });
+
+  it('should return an error message for USE_OLLAMA_CLOUD if OLLAMA_CLOUD_API_KEY is not set', () => {
+    delete process.env['OLLAMA_CLOUD_API_KEY'];
+    expect(validateAuthMethod(AuthType.USE_OLLAMA_CLOUD)).toBe(
+      'OLLAMA_CLOUD_API_KEY environment variable not found. Please set it to authenticate with Ollama Cloud.',
+    );
+  });
+
   it('should return an error message for an invalid auth method', () => {
     expect(validateAuthMethod('invalid-method')).toBe(
       'Invalid auth method selected.',

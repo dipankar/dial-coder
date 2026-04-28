@@ -457,7 +457,7 @@ export class Config {
     this.gitCoAuthor = {
       enabled: params.gitCoAuthor?.enabled ?? true,
       name: params.gitCoAuthor?.name ?? 'Dial-Coder',
-      email: params.gitCoAuthor?.email ?? 'dial-coder@neullabs.com',
+      email: params.gitCoAuthor?.email ?? 'dial-coder@dipankar.name',
     };
     this.fileFiltering = {
       respectGitIgnore: params.fileFiltering?.respectGitIgnore ?? true,

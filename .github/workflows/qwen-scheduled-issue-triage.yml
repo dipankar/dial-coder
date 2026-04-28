@@ -21,7 +21,7 @@ jobs:
   triage-issues:
     timeout-minutes: 10
     if: |-
-      ${{ github.repository == 'neul-labs/dial-coder' }}
+      ${{ github.repository == 'dipankar/dial-coder' }}
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'read'
@@ -54,7 +54,7 @@ jobs:
       - name: 'Run Qwen Issue Triage'
         if: |-
           ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
-        uses: 'neul-labs/dial-coder-action@5fd6818d04d64e87d255ee4d5f77995e32fbf4c2'
+        uses: 'dipankar/dial-coder-action@5fd6818d04d64e87d255ee4d5f77995e32fbf4c2'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           ISSUES_TO_TRIAGE: '${{ steps.find_issues.outputs.issues_to_triage }}'

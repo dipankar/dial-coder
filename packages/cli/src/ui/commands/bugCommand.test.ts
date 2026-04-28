@@ -75,7 +75,7 @@ ${gitCommitLine}* **Model:** qwen3-coder-plus
 * **IDE Client:** VSCode
 `;
     const expectedUrl =
-      'https://github.com/neul-labs/dial-coder/issues/new?template=bug_report.yml&title=A%20test%20bug&info=' +
+      'https://github.com/dipankar/dial-coder/issues/new?template=bug_report.yml&title=A%20test%20bug&info=' +
       encodeURIComponent(expectedInfo);
 
     expect(open).toHaveBeenCalledWith(expectedUrl);
@@ -172,7 +172,7 @@ ${gitCommitLine}* **Model:** qwen3-coder-plus
 * **IDE Client:** VSCode
 `;
     const expectedUrl =
-      'https://github.com/neul-labs/dial-coder/issues/new?template=bug_report.yml&title=OpenAI%20bug&info=' +
+      'https://github.com/dipankar/dial-coder/issues/new?template=bug_report.yml&title=OpenAI%20bug&info=' +
       encodeURIComponent(expectedInfo);
 
     expect(open).toHaveBeenCalledWith(expectedUrl);

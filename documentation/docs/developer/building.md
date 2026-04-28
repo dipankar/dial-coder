@@ -34,7 +34,7 @@ git --version
 
 ```bash
 # Clone the repository
-git clone https://github.com/neul-labs/dial-coder.git
+git clone https://github.com/dipankar/dial-coder.git
 cd dial-coder
 
 # Install dependencies

@@ -63,6 +63,11 @@ export function AuthDialog(): React.JSX.Element {
       label: t('Mistral'),
       value: AuthType.USE_MISTRAL,
     },
+    {
+      key: AuthType.USE_OLLAMA_CLOUD,
+      label: t('Ollama Cloud'),
+      value: AuthType.USE_OLLAMA_CLOUD,
+    },
   ];
 
   const initialAuthIndex = Math.max(

@@ -37,6 +37,7 @@ export {
   OpenAIProvider,
   AnthropicProvider,
   OllamaProvider,
+  OllamaCloudProvider,
   OpenAICompatibleProvider,
 } from './adapters/index.js';
 
@@ -45,5 +46,6 @@ export type {
   OpenAIProviderConfig,
   AnthropicProviderConfig,
   OllamaProviderConfig,
+  OllamaCloudProviderConfig,
   OpenAICompatibleProviderConfig,
 } from './adapters/index.js';

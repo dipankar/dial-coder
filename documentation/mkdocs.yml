@@ -1,7 +1,7 @@
 site_name: Dial Code
 site_description: AI-powered CLI for developers with multi-stage review pipeline
-site_url: https://docs.neullabs.com/dial-coder
-repo_url: https://github.com/neul-labs/dial-coder
+site_url: https://dipankar.github.io/dial-coder
+repo_url: https://github.com/dipankar/dial-coder
 repo_name: dial-coder
 
 theme:
@@ -70,7 +70,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/neul-labs/dial-coder
+      link: https://github.com/dipankar/dial-coder
   generator: false
 
 extra_css:

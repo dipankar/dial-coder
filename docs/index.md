@@ -31,7 +31,7 @@ qwen --version
 ### Install from source
 
 ```bash
-git clone https://github.com/neul-labs/dial-coder.git
+git clone https://github.com/dipankar/dial-coder.git
 cd qwen-code
 npm install
 npm install -g .

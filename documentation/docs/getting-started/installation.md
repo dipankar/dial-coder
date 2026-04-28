@@ -24,7 +24,7 @@ Download from [nodejs.org](https://nodejs.org/) or use a version manager:
 
 ```bash
 # Clone the repository
-git clone https://github.com/neul-labs/dial-coder.git
+git clone https://github.com/dipankar/dial-coder.git
 
 # Navigate and install dependencies
 cd dial-coder

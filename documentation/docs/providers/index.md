@@ -6,11 +6,12 @@ Dial Code supports multiple LLM providers. Choose based on your needs.
 
 ## Provider Comparison
 
-| Provider            | Auth Method | Free Tier     | Best For                     |
-| ------------------- | ----------- | ------------- | ---------------------------- |
-| [Qwen](qwen.md)     | OAuth       | 2,000/day     | Getting started, general use |
-| [OpenAI](openai.md) | API Key     | Pay-as-you-go | GPT models, enterprise       |
-| [Ollama](ollama.md) | Local       | Unlimited     | Privacy, offline use         |
+| Provider                        | Auth Method | Free Tier     | Best For                     |
+| ------------------------------- | ----------- | ------------- | ---------------------------- |
+| [Qwen](qwen.md)                 | OAuth       | 2,000/day     | Getting started, general use |
+| [Ollama Cloud](ollama.md#cloud) | API Key     | Unlimited     | Cloud-hosted open models     |
+| [OpenAI](openai.md)             | API Key     | Pay-as-you-go | GPT models, enterprise       |
+| [Ollama](ollama.md)             | Local       | Unlimited     | Privacy, offline use         |
 
 ---
 
@@ -30,7 +31,15 @@ export OPENAI_API_KEY="sk-..."
 dial
 ```
 
-### Ollama
+### Ollama Cloud
+
+```bash
+export OLLAMA_CLOUD_API_KEY="..."
+export OLLAMA_CLOUD_MODEL="kimi-k2.6:cloud"
+dial --auth=ollama-cloud
+```
+
+### Ollama (Local)
 
 ```bash
 # Start Ollama first
@@ -63,12 +72,12 @@ Or in settings:
 
 ## Provider Features
 
-| Feature          | Qwen | OpenAI | Ollama |
-| ---------------- | ---- | ------ | ------ |
-| Vision Models    | Yes  | Yes    | Some   |
-| Function Calling | Yes  | Yes    | Some   |
-| Streaming        | Yes  | Yes    | Yes    |
-| Context Length   | 128K | Varies | Varies |
+| Feature          | Qwen | Ollama Cloud | OpenAI | Ollama (Local) |
+| ---------------- | ---- | ------------ | ------ | -------------- |
+| Vision Models    | Yes  | Some         | Yes    | Some           |
+| Function Calling | Yes  | Some         | Yes    | Some           |
+| Streaming        | Yes  | Yes          | Yes    | Yes            |
+| Context Length   | 128K | Varies       | Varies | Varies         |
 
 ---
 
@@ -91,5 +100,6 @@ See individual provider pages for setup details.
 ## Next Steps
 
 - [Qwen](qwen.md) - Default provider setup
+- [Ollama Cloud](ollama.md#cloud) - Cloud-hosted open models
 - [OpenAI](openai.md) - API key configuration
 - [Ollama](ollama.md) - Local model setup

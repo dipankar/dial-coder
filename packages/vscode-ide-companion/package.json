@@ -3,11 +3,11 @@
   "displayName": "Dial Coder Companion",
   "description": "Enable Dial Coder with direct access to your VS Code workspace.",
   "version": "0.3.0",
-  "publisher": "neul-labs",
+  "publisher": "dipankar",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neul-labs/dial-coder.git",
+    "url": "https://github.com/dipankar/dial-coder.git",
     "directory": "packages/vscode-ide-companion"
   },
   "engines": {
@@ -26,7 +26,7 @@
     "cli",
     "ide integration",
     "ide companion",
-    "neul-labs"
+    "dipankar"
   ],
   "activationEvents": [
     "onStartupFinished"

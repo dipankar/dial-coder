@@ -173,11 +173,12 @@ export const useAuthCommand = (
       setIsAuthDialogOpen(false);
       setIsAuthenticating(true);
 
-      // API key providers: OpenAI, Gemini (API Key), Mistral
+      // API key providers: OpenAI, Gemini (API Key), Mistral, Ollama Cloud
       const apiKeyProviders = [
         AuthType.USE_OPENAI,
         AuthType.USE_GEMINI,
         AuthType.USE_MISTRAL,
+        AuthType.USE_OLLAMA_CLOUD,
       ];
 
       if (apiKeyProviders.includes(authType)) {
@@ -236,6 +237,7 @@ export const useAuthCommand = (
       AuthType.LOGIN_WITH_GOOGLE,
       AuthType.USE_GEMINI,
       AuthType.USE_MISTRAL,
+      AuthType.USE_OLLAMA_CLOUD,
     ];
     if (
       defaultAuthType &&

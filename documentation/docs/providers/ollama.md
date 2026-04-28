@@ -23,7 +23,30 @@ Download from [ollama.ai/download](https://ollama.ai/download)
 
 ---
 
-## Quick Start
+## Ollama Cloud
+
+Run cloud-hosted open models via [Ollama Cloud](https://ollama.com/cloud) without managing local infrastructure.
+
+### Setup
+
+```bash
+export OLLAMA_CLOUD_API_KEY="your-api-key"
+export OLLAMA_CLOUD_MODEL="kimi-k2.6:cloud"
+dial --auth=ollama-cloud
+```
+
+### Recommended Models
+
+| Model      | Best For                  |
+| ---------- | ------------------------- |
+| `kimi-k2.6:cloud`  | Advanced reasoning, coding |
+| `glm-5.1:cloud`   | General-purpose tasks      |
+| `llama3.3` | General-purpose tasks      |
+| `qwen2.5-coder:32b` | Code generation   |
+
+---
+
+## Quick Start (Local)
 
 ```bash
 # Start Ollama server
@@ -201,5 +224,5 @@ Search for models at [ollama.ai/library](https://ollama.ai/library).
 
 ## Next Steps
 
-- [Qwen Provider](qwen.md) - Cloud alternative
+- [Providers](../providers/) - Compare all providers
 - [Configuration](../user-guide/configuration.md) - Settings reference

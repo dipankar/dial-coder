@@ -31,7 +31,7 @@ Set up a development environment.
 
 ```bash
 # Clone
-git clone https://github.com/neul-labs/dial-coder.git
+git clone https://github.com/dipankar/dial-coder.git
 cd dial-coder
 
 # Install dependencies

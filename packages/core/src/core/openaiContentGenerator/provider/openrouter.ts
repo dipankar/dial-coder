@@ -24,7 +24,7 @@ export class OpenRouterOpenAICompatibleProvider extends DefaultOpenAICompatibleP
     // Add OpenRouter-specific headers
     return {
       ...baseHeaders,
-      'HTTP-Referer': 'https://github.com/neul-labs/dial-coder.git',
+      'HTTP-Referer': 'https://github.com/dipankar/dial-coder.git',
       'X-Title': 'Qwen Code',
     };
   }

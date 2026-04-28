@@ -121,6 +121,16 @@ export function getOpenAIAvailableModelFromEnv(): AvailableModel | null {
  */
 export const AVAILABLE_MODELS_OLLAMA_CLOUD: AvailableModel[] = [
   {
+    id: 'kimi-k2.6:cloud',
+    label: 'Kimi 2.6',
+    description: 'Moonshot AI’s advanced reasoning model (recommended)',
+  },
+  {
+    id: 'glm-5.1:cloud',
+    label: 'GLM 5.1',
+    description: 'Zhipu AI’s general-purpose model (recommended)',
+  },
+  {
     id: 'llama3.3',
     label: 'Llama 3.3',
     description: 'Meta’s latest general-purpose LLM',

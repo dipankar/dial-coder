@@ -93,6 +93,15 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 dial --auth=anthropic
 ```
 
+**Ollama Cloud:**
+
+```bash
+export OLLAMA_CLOUD_API_KEY="..."
+dial --auth=ollama-cloud
+```
+
+Recommended models: `kimi-k2.6:cloud`, `glm-5.1:cloud`
+
 ### 2. Start a session
 
 ```bash
@@ -147,7 +156,7 @@ Modes are automatically selected based on the task description, or you can force
 | Provider | Setup | Default Model | Free? |
 |----------|-------|---------------|-------|
 | **Ollama** | `ollama run llama3.3` | `llama3.3` | Yes (local) |
-| **Ollama Cloud** | `OLLAMA_CLOUD_API_KEY` | varies | Yes (with key) |
+| **Ollama Cloud** | `OLLAMA_CLOUD_API_KEY` | `kimi-k2.6:cloud` | Yes (with key) |
 | **OpenAI** | `OPENAI_API_KEY` | `gpt-4.1` | Pay-as-you-go |
 | **Anthropic** | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` | Pay-as-you-go |
 | **Gemini** | `GOOGLE_API_KEY` | `gemini-2.5-pro` | Free tier |

@@ -331,7 +331,7 @@ Include:
 - Steps to reproduce
 - Error messages
 
-Report at: [GitHub Issues](https://github.com/neul-labs/dial-coder/issues)
+Report at: [GitHub Issues](https://github.com/dipankar/dial-coder/issues)
 
 ---
 

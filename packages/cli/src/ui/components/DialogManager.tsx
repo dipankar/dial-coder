@@ -62,10 +62,23 @@ export const DialogManager = ({
   const getDefaultOpenAIConfig = () => {
     const fromSettings = settings.merged.security?.auth;
     const modelSettings = settings.merged.model;
+    const isOllamaCloud =
+      uiState.pendingAuthType === AuthType.USE_OLLAMA_CLOUD;
     return {
-      apiKey: fromSettings?.apiKey || process.env['OPENAI_API_KEY'] || '',
-      baseUrl: fromSettings?.baseUrl || process.env['OPENAI_BASE_URL'] || '',
-      model: modelSettings?.name || process.env['OPENAI_MODEL'] || '',
+      apiKey:
+        fromSettings?.apiKey ||
+        process.env[isOllamaCloud ? 'OLLAMA_CLOUD_API_KEY' : 'OPENAI_API_KEY'] ||
+        '',
+      baseUrl:
+        fromSettings?.baseUrl ||
+        process.env[
+          isOllamaCloud ? 'OLLAMA_CLOUD_URL' : 'OPENAI_BASE_URL'
+        ] ||
+        '',
+      model:
+        modelSettings?.name ||
+        process.env[isOllamaCloud ? 'OLLAMA_CLOUD_MODEL' : 'OPENAI_MODEL'] ||
+        '',
     };
   };
 
@@ -230,11 +243,12 @@ export const DialogManager = ({
   }
 
   if (uiState.isAuthenticating) {
-    // API key providers: OpenAI, Gemini (API Key), Mistral
+    // API key providers: OpenAI, Gemini (API Key), Mistral, Ollama Cloud
     const apiKeyProviders = [
       AuthType.USE_OPENAI,
       AuthType.USE_GEMINI,
       AuthType.USE_MISTRAL,
+      AuthType.USE_OLLAMA_CLOUD,
     ];
 
     if (
@@ -259,6 +273,13 @@ export const DialogManager = ({
               defaultModel: 'mistral-large-latest',
               showBaseUrl: false,
               apiKeyUrl: 'https://console.mistral.ai/api-keys',
+            };
+          case AuthType.USE_OLLAMA_CLOUD:
+            return {
+              providerName: 'Ollama Cloud',
+              defaultModel: 'kimi-k2.6:cloud',
+              showBaseUrl: false,
+              apiKeyUrl: 'https://ollama.com/cloud',
             };
           default:
             return {
