@@ -22,6 +22,7 @@ import {
   chmodSync,
   existsSync,
   readFileSync,
+  readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
@@ -90,25 +91,49 @@ if (!argv.s) {
   execSync('npm run build --workspaces', { stdio: 'inherit' });
 }
 
+function rmTgzFiles(packageDir) {
+  const distDir = join(packageDir, 'dist');
+  if (!existsSync(distDir)) {
+    return;
+  }
+  const files = readdirSync(distDir);
+  for (const file of files) {
+    if (file.endsWith('.tgz')) {
+      rmSync(join(distDir, file), { force: true });
+    }
+  }
+}
+
 console.log('packing @dial-coder/cli ...');
 const cliPackageDir = join('packages', 'cli');
-rmSync(join(cliPackageDir, 'dist', 'dial-coder-*.tgz'), { force: true });
+rmTgzFiles(cliPackageDir);
 execSync(`npm pack -w @dial-coder/cli --pack-destination ./packages/cli/dist`, {
   stdio: 'ignore',
 });
 
-console.log('packing @dial-coder/cli-core ...');
+console.log('packing @dial-coder/core ...');
 const corePackageDir = join('packages', 'core');
-rmSync(join(corePackageDir, 'dist', 'dial-coder-*.tgz'), {
-  force: true,
-});
+rmTgzFiles(corePackageDir);
 execSync(
-  `npm pack -w @dial-coder/cli-core --pack-destination ./packages/core/dist`,
+  `npm pack -w @dial-coder/core --pack-destination ./packages/core/dist`,
   { stdio: 'ignore' },
 );
 
-chmodSync(join(cliPackageDir, 'dist', `dial-coder-*.tgz`), 0o755);
-chmodSync(join(corePackageDir, 'dist', `dial-coder-*.tgz`), 0o755);
+function chmodTgzFiles(packageDir) {
+  const distDir = join(packageDir, 'dist');
+  if (!existsSync(distDir)) {
+    return;
+  }
+  const files = readdirSync(distDir);
+  for (const file of files) {
+    if (file.endsWith('.tgz')) {
+      chmodSync(join(distDir, file), 0o755);
+    }
+  }
+}
+
+chmodTgzFiles(cliPackageDir);
+chmodTgzFiles(corePackageDir);
 
 const buildStdout = process.env.VERBOSE ? 'inherit' : 'ignore';
 

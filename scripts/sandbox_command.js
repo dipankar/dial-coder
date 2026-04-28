@@ -115,6 +115,10 @@ if (['1', 'true'].includes(geminiSandbox)) {
     } else {
       process.exit(1);
     }
+  } else if (commandExists('docker')) {
+    command = 'docker';
+  } else if (commandExists('podman')) {
+    command = 'podman';
   } else {
     process.exit(1);
   }
