@@ -85,6 +85,7 @@ nav:
       - Installation: getting-started/installation.md
       - Quick Start: getting-started/quick-start.md
       - Authentication: getting-started/authentication.md
+      - Uninstall: getting-started/uninstall.md
   - Core Concepts:
       - core-concepts/index.md
       - Execution Modes: core-concepts/execution-modes.md
@@ -93,9 +94,19 @@ nav:
   - User Guide:
       - user-guide/index.md
       - Commands: user-guide/commands.md
+      - Tutorials: user-guide/tutorials.md
       - Keyboard Shortcuts: user-guide/keyboard-shortcuts.md
       - Configuration: user-guide/configuration.md
       - Themes: user-guide/themes.md
+      - Language: user-guide/language.md
+      - Trusted Folders: user-guide/trusted-folders.md
+      - Ignore Files: user-guide/ignore-files.md
+      - Subagents: user-guide/subagents.md
+      - Headless Mode: user-guide/headless.md
+      - Sandbox: user-guide/sandbox.md
+      - Checkpointing: user-guide/checkpointing.md
+      - Welcome Back: user-guide/welcome-back.md
+      - Token Caching: user-guide/token-caching.md
   - Providers:
       - providers/index.md
       - Qwen: providers/qwen.md
@@ -104,15 +115,28 @@ nav:
   - Tools:
       - tools/index.md
       - File System: tools/file-system.md
+      - Multi-File: tools/multi-file.md
       - Shell: tools/shell.md
+      - Memory: tools/memory.md
+      - Todo Write: tools/todo-write.md
+      - Web Fetch: tools/web-fetch.md
+      - Web Search: tools/web-search.md
       - MCP Integration: tools/mcp.md
+      - IDE Integration: tools/ide-integration.md
+      - IDE Companion Spec: tools/ide-companion-spec.md
   - Developer Guide:
       - developer/index.md
       - Architecture: developer/architecture.md
       - Contributing: developer/contributing.md
       - Building: developer/building.md
+      - Extensions:
+          - Getting Started: developer/extensions/getting-started.md
+          - Extension API: developer/extensions/extension.md
+          - Releasing: developer/extensions/releasing.md
   - Reference:
       - reference/index.md
       - CLI Options: reference/cli-options.md
       - Environment Variables: reference/environment-vars.md
       - Troubleshooting: reference/troubleshooting.md
+      - Terms of Service & Privacy: reference/tos-privacy.md
+      - Proxy Script Example: reference/proxy-script.md
