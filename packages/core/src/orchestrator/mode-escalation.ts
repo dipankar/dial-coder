@@ -291,9 +291,14 @@ export class ModeEscalationManager {
     roundResult: RoundResult,
   ): EscalationCheckResult {
     const confidence = roundResult.thesis.confidence;
-    if (confidence !== undefined && confidence < this.config.proposerConfidenceThreshold) {
+    if (
+      confidence !== undefined &&
+      confidence < this.config.proposerConfidenceThreshold
+    ) {
       const lowConfidenceRounds = this.roundHistory.filter(
-        (r) => r.thesis.confidence !== undefined && r.thesis.confidence < this.config.proposerConfidenceThreshold,
+        (r) =>
+          r.thesis.confidence !== undefined &&
+          r.thesis.confidence < this.config.proposerConfidenceThreshold,
       ).length;
 
       if (lowConfidenceRounds >= 1) {

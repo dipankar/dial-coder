@@ -86,9 +86,7 @@ export class LlmClientContentGeneratorAdapter implements ContentGenerator {
     };
   }
 
-  private contentsToMessages(
-    contents: unknown,
-  ): Message[] {
+  private contentsToMessages(contents: unknown): Message[] {
     // String content
     if (typeof contents === 'string') {
       return [{ role: 'user', content: contents }];
@@ -129,9 +127,7 @@ export class LlmClientContentGeneratorAdapter implements ContentGenerator {
     );
   }
 
-  private mapRole(
-    role: string,
-  ): 'system' | 'user' | 'assistant' | 'tool' {
+  private mapRole(role: string): 'system' | 'user' | 'assistant' | 'tool' {
     switch (role) {
       case 'user':
         return 'user';
@@ -148,10 +144,7 @@ export class LlmClientContentGeneratorAdapter implements ContentGenerator {
         if ('text' in part && typeof part.text === 'string') {
           return part.text;
         }
-        if (
-          'functionResponse' in part &&
-          part.functionResponse !== undefined
-        ) {
+        if ('functionResponse' in part && part.functionResponse !== undefined) {
           return JSON.stringify(part.functionResponse);
         }
         return '';
@@ -204,9 +197,7 @@ export class LlmClientContentGeneratorAdapter implements ContentGenerator {
       {
         content: {
           role: 'model',
-          parts: chunk.delta?.content
-            ? [{ text: chunk.delta.content }]
-            : [],
+          parts: chunk.delta?.content ? [{ text: chunk.delta.content }] : [],
         },
         finishReason: chunk.finishReason
           ? this.mapFinishReason(chunk.finishReason)
@@ -216,9 +207,7 @@ export class LlmClientContentGeneratorAdapter implements ContentGenerator {
     return response;
   }
 
-  private mapFinishReason(
-    reason: string,
-  ): FinishReason {
+  private mapFinishReason(reason: string): FinishReason {
     switch (reason) {
       case 'stop':
       case 'tool_calls':

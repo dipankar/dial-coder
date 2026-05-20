@@ -515,7 +515,9 @@ export class DialecticController {
       .map(([desc]) => desc);
 
     if (persistentIssues.length > 0) {
-      summaryLines.push(`Persistent issues: ${persistentIssues.slice(0, 3).join('; ')}`);
+      summaryLines.push(
+        `Persistent issues: ${persistentIssues.slice(0, 3).join('; ')}`,
+      );
     }
 
     return {

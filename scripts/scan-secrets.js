@@ -143,6 +143,8 @@ const ALLOWLIST = [
   /Bearer abc123/i, // Example token in CLI help text
   // Settings key patterns (not actual tokens)
   /Auth: 'security\.auth/i, // Settings key reference
+  // Sentinel constants (not actual tokens)
+  /QWEN_OAUTH_DYNAMIC_TOKEN/, // OAuth dynamic-token sentinel
 ];
 
 function shouldSkipFile(filePath) {

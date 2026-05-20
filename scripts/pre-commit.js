@@ -52,9 +52,7 @@ function hasStagedFiles() {
 
 try {
   // Get repository root
-  const root = execSync('git rev-parse --show-toplevel')
-    .toString()
-    .trim();
+  const root = execSync('git rev-parse --show-toplevel').toString().trim();
 
   if (!hasStagedFiles()) {
     console.log('No staged files. Skipping pre-commit checks.');

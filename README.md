@@ -142,25 +142,25 @@ User Request
 
 ### Execution Modes
 
-| Mode | Pipeline | Use For |
-|------|----------|---------|
-| **Ask** (`?`) | None | Read-only questions, explanations, code review |
-| **Quick** (`⚡`) | Proposer only | Fast, low-risk edits (typos, renaming) |
-| **Review** (`◎`) | Proposer + Critic + Synthesizer | Medium-risk changes (refactoring, feature adds) |
-| **Safe** (`🛡`) | Full pipeline + verification | High-risk changes (auth, payments, schema changes) |
+| Mode             | Pipeline                        | Use For                                            |
+| ---------------- | ------------------------------- | -------------------------------------------------- |
+| **Ask** (`?`)    | None                            | Read-only questions, explanations, code review     |
+| **Quick** (`⚡`) | Proposer only                   | Fast, low-risk edits (typos, renaming)             |
+| **Review** (`◎`) | Proposer + Critic + Synthesizer | Medium-risk changes (refactoring, feature adds)    |
+| **Safe** (`🛡`)  | Full pipeline + verification    | High-risk changes (auth, payments, schema changes) |
 
 Modes are automatically selected based on the task description, or you can force a mode with `--mode=<mode>`.
 
 ## Providers
 
-| Provider | Setup | Default Model | Free? |
-|----------|-------|---------------|-------|
-| **Ollama** | `ollama run llama3.3` | `llama3.3` | Yes (local) |
-| **Ollama Cloud** | `OLLAMA_CLOUD_API_KEY` | `kimi-k2.6:cloud` | Yes (with key) |
-| **OpenAI** | `OPENAI_API_KEY` | `gpt-4.1` | Pay-as-you-go |
-| **Anthropic** | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` | Pay-as-you-go |
-| **Gemini** | `GOOGLE_API_KEY` | `gemini-2.5-pro` | Free tier |
-| **Google GenAI** | OAuth or `GOOGLE_API_KEY` | `gemini-2.5-pro` | Free tier |
+| Provider         | Setup                     | Default Model       | Free?          |
+| ---------------- | ------------------------- | ------------------- | -------------- |
+| **Ollama**       | `ollama run llama3.3`     | `llama3.3`          | Yes (local)    |
+| **Ollama Cloud** | `OLLAMA_CLOUD_API_KEY`    | `kimi-k2.6:cloud`   | Yes (with key) |
+| **OpenAI**       | `OPENAI_API_KEY`          | `gpt-4.1`           | Pay-as-you-go  |
+| **Anthropic**    | `ANTHROPIC_API_KEY`       | `claude-sonnet-4-6` | Pay-as-you-go  |
+| **Gemini**       | `GOOGLE_API_KEY`          | `gemini-2.5-pro`    | Free tier      |
+| **Google GenAI** | OAuth or `GOOGLE_API_KEY` | `gemini-2.5-pro`    | Free tier      |
 
 Ollama is the default. No API keys required.
 
@@ -168,32 +168,35 @@ Ollama is the default. No API keys required.
 
 Inside the interactive terminal:
 
-| Command | Description |
-|---------|-------------|
-| `/help` | Show all commands |
-| `/clear` | Clear conversation history |
-| `/compress` | Compact conversation to save tokens |
-| `/stats` | Show token usage and cost |
-| `/memory` | View project memory (decisions, invariants) |
-| `/diff` | Show pending diffs |
-| `/approve` | Approve and apply pending changes |
-| `/reject` | Reject pending changes |
-| `/exit` | Exit session |
+| Command     | Description                                 |
+| ----------- | ------------------------------------------- |
+| `/help`     | Show all commands                           |
+| `/clear`    | Clear conversation history                  |
+| `/compress` | Compact conversation to save tokens         |
+| `/stats`    | Show token usage and cost                   |
+| `/memory`   | View project memory (decisions, invariants) |
+| `/diff`     | Show pending diffs                          |
+| `/approve`  | Approve and apply pending changes           |
+| `/reject`   | Reject pending changes                      |
+| `/exit`     | Exit session                                |
 
 ## Tools
 
 Dial Coder exposes a rich tool set to the AI agent:
 
 **File & Search**
+
 - `view`, `edit`, `write`, `patch` — File operations
 - `glob`, `grep`, `ripgrep` — Code search
 - `ls`, `pwd` — Directory navigation
 
 **Execution**
+
 - `bash` — Shell commands (sandboxed by default)
 - `fetch` — Web requests
 
 **Integration**
+
 - `mcp` — Model Context Protocol servers
 - `memory_search` — Semantic search over project memory
 

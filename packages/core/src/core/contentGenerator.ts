@@ -109,7 +109,8 @@ export function createContentGeneratorConfig(
     return {
       ...newContentGeneratorConfig,
       model: newContentGeneratorConfig?.model || 'qwen3-coder-plus',
-      baseUrl: newContentGeneratorConfig?.baseUrl || 'https://api.openai.com/v1',
+      baseUrl:
+        newContentGeneratorConfig?.baseUrl || 'https://api.openai.com/v1',
     } as ContentGeneratorConfig;
   }
 

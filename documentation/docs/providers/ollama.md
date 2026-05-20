@@ -37,12 +37,12 @@ dial --auth=ollama-cloud
 
 ### Recommended Models
 
-| Model      | Best For                  |
-| ---------- | ------------------------- |
-| `kimi-k2.6:cloud`  | Advanced reasoning, coding |
-| `glm-5.1:cloud`   | General-purpose tasks      |
-| `llama3.3` | General-purpose tasks      |
-| `qwen2.5-coder:32b` | Code generation   |
+| Model               | Best For                   |
+| ------------------- | -------------------------- |
+| `kimi-k2.6:cloud`   | Advanced reasoning, coding |
+| `glm-5.1:cloud`     | General-purpose tasks      |
+| `llama3.3`          | General-purpose tasks      |
+| `qwen2.5-coder:32b` | Code generation            |
 
 ---
 

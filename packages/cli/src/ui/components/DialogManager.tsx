@@ -62,18 +62,17 @@ export const DialogManager = ({
   const getDefaultOpenAIConfig = () => {
     const fromSettings = settings.merged.security?.auth;
     const modelSettings = settings.merged.model;
-    const isOllamaCloud =
-      uiState.pendingAuthType === AuthType.USE_OLLAMA_CLOUD;
+    const isOllamaCloud = uiState.pendingAuthType === AuthType.USE_OLLAMA_CLOUD;
     return {
       apiKey:
         fromSettings?.apiKey ||
-        process.env[isOllamaCloud ? 'OLLAMA_CLOUD_API_KEY' : 'OPENAI_API_KEY'] ||
+        process.env[
+          isOllamaCloud ? 'OLLAMA_CLOUD_API_KEY' : 'OPENAI_API_KEY'
+        ] ||
         '',
       baseUrl:
         fromSettings?.baseUrl ||
-        process.env[
-          isOllamaCloud ? 'OLLAMA_CLOUD_URL' : 'OPENAI_BASE_URL'
-        ] ||
+        process.env[isOllamaCloud ? 'OLLAMA_CLOUD_URL' : 'OPENAI_BASE_URL'] ||
         '',
       model:
         modelSettings?.name ||

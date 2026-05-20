@@ -47,7 +47,8 @@ class MemoryQueryToolInvocation extends BaseToolInvocation<
 
     if (!query || typeof query !== 'string' || query.trim() === '') {
       return {
-        llmContent: 'Error: query parameter is required and must be a non-empty string.',
+        llmContent:
+          'Error: query parameter is required and must be a non-empty string.',
         returnDisplay: 'Error: query parameter is required.',
         error: {
           message: 'query parameter is required',
@@ -62,7 +63,8 @@ class MemoryQueryToolInvocation extends BaseToolInvocation<
 
       if (!initialized) {
         return {
-          llmContent: 'Project memory has not been initialized yet. No decisions, patterns, or session history is available.',
+          llmContent:
+            'Project memory has not been initialized yet. No decisions, patterns, or session history is available.',
           returnDisplay: 'Project memory not initialized.',
         };
       }
@@ -97,7 +99,10 @@ class MemoryQueryToolInvocation extends BaseToolInvocation<
               `- ${result.item.task.interpretedGoal} (${result.item.execution.mode}, ${result.item.execution.roundsExecuted} rounds, ${result.item.execution.finalOutcome})`,
             );
             if (result.item.humanSummary) {
-              const summary = result.item.humanSummary.split('\n').slice(0, 3).join(' ');
+              const summary = result.item.humanSummary
+                .split('\n')
+                .slice(0, 3)
+                .join(' ');
               sections.push(`  Summary: ${summary}`);
             }
           }
@@ -111,9 +116,13 @@ class MemoryQueryToolInvocation extends BaseToolInvocation<
         if (modules.length > 0) {
           sections.push('## Modules');
           for (const result of modules) {
-            sections.push(`- ${result.item.module}: ${result.item.description || 'No description'}`);
+            sections.push(
+              `- ${result.item.module}: ${result.item.description || 'No description'}`,
+            );
             if (result.item.patterns.length > 0) {
-              sections.push(`  Patterns: ${result.item.patterns.map((p) => p.name).join(', ')}`);
+              sections.push(
+                `  Patterns: ${result.item.patterns.map((p) => p.name).join(', ')}`,
+              );
             }
           }
           sections.push('');
@@ -159,19 +168,21 @@ export class MemoryQueryTool extends BaseDeclarativeTool<
     super(
       MemoryQueryTool.Name,
       ToolDisplayNames.MEMORY_QUERY,
-      'Search the project\'s accumulated memory for relevant decisions, patterns, past sessions, and module knowledge. Use this when you need context about how similar tasks were handled, what patterns exist in the codebase, or what decisions have been recorded.',
+      "Search the project's accumulated memory for relevant decisions, patterns, past sessions, and module knowledge. Use this when you need context about how similar tasks were handled, what patterns exist in the codebase, or what decisions have been recorded.",
       Kind.Think,
       {
         type: 'object',
         properties: {
           query: {
             type: 'string',
-            description: 'Search query — keywords or phrases describing what you need from memory.',
+            description:
+              'Search query — keywords or phrases describing what you need from memory.',
           },
           type: {
             type: 'string',
             enum: ['decisions', 'sessions', 'modules', 'all'],
-            description: 'What kind of memory to search. "decisions" = project decisions/patterns/invariants; "sessions" = past session summaries; "modules" = module-specific memory; "all" = everything (default).',
+            description:
+              'What kind of memory to search. "decisions" = project decisions/patterns/invariants; "sessions" = past session summaries; "modules" = module-specific memory; "all" = everything (default).',
           },
           limit: {
             type: 'number',
