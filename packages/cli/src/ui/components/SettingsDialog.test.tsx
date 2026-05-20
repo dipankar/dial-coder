@@ -1290,7 +1290,7 @@ describe('SettingsDialog', () => {
           loadMemoryFromIncludeDirectories: true,
           fileFiltering: {
             respectGitIgnore: true,
-            respectQwenIgnore: true,
+            respectDialIgnore: true,
             enableRecursiveFileSearch: true,
             disableFuzzySearch: false,
           },

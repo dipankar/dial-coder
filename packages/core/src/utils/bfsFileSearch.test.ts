@@ -130,7 +130,7 @@ describe('bfsFileSearch', () => {
         fileService,
         fileFilteringOptions: {
           respectGitIgnore: true,
-          respectQwenIgnore: true,
+          respectDialIgnore: true,
         },
       });
 
@@ -153,7 +153,7 @@ describe('bfsFileSearch', () => {
         fileService,
         fileFilteringOptions: {
           respectGitIgnore: false,
-          respectQwenIgnore: true,
+          respectDialIgnore: true,
         },
       });
 
@@ -182,7 +182,7 @@ describe('bfsFileSearch', () => {
         fileService,
         fileFilteringOptions: {
           respectGitIgnore: false,
-          respectQwenIgnore: false,
+          respectDialIgnore: false,
         },
       });
 

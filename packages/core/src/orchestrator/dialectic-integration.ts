@@ -401,7 +401,7 @@ export class DialecticIntegration {
         const uniqueFiles = [...new Set(allFiles)];
         const filtered = fileDiscoveryService.filterFiles(uniqueFiles, {
           respectGitIgnore: true,
-          respectQwenIgnore: true,
+          respectDialIgnore: true,
         });
         return filtered.slice(0, 200);
       } catch {

@@ -77,7 +77,7 @@ Dial Code is an AI-powered CLI tool that executes actions on behalf of users. Th
 - Environment variable isolation
 - OAuth token refresh (no long-lived tokens)
 - Keychain integration on macOS
-- `.qwenignore` for sensitive files
+- `.dialignore` for sensitive files
 
 #### 3. Data Exfiltration
 
@@ -186,7 +186,7 @@ When sandbox is enabled:
 - Database connection strings
 - Generic secrets patterns
 
-**Exclusion**: Use `.qwenignore` for sensitive files:
+**Exclusion**: Use `.dialignore` for sensitive files:
 
 ```
 .env
@@ -237,7 +237,7 @@ credentials.json
 
 1. **Revoke immediately**: Rotate exposed keys/tokens
 2. **Audit access logs**: Check for unauthorized usage
-3. **Update `.qwenignore`**: Prevent future exposure
+3. **Update `.dialignore`**: Prevent future exposure
 4. **Enable secrets scanning**: Run `npm run pre-commit`
 
 ## Security Roadmap

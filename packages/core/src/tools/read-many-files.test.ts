@@ -76,7 +76,7 @@ describe('ReadManyFilesTool', () => {
 
       getFileFilteringOptions: () => ({
         respectGitIgnore: true,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       }),
       getTargetDir: () => tempRootDir,
       getWorkspaceDirs: () => [tempRootDir],
@@ -491,7 +491,7 @@ describe('ReadManyFilesTool', () => {
         getFileSystemService: () => new StandardFileSystemService(),
         getFileFilteringOptions: () => ({
           respectGitIgnore: true,
-          respectQwenIgnore: true,
+          respectDialIgnore: true,
         }),
         getWorkspaceContext: () => new WorkspaceContext(tempDir1, [tempDir2]),
         getTargetDir: () => tempDir1,

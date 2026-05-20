@@ -697,7 +697,7 @@ const SETTINGS_SCHEMA = {
             description: 'Respect .gitignore files when searching',
             showInDialog: true,
           },
-          respectQwenIgnore: {
+          respectDialIgnore: {
             type: 'boolean',
             label: 'Respect .dialignore',
             category: 'Context',

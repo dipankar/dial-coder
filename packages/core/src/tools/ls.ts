@@ -33,7 +33,7 @@ export interface LSToolParams {
    */
   file_filtering_options?: {
     respect_git_ignore?: boolean;
-    respect_qwen_ignore?: boolean;
+    respect_dial_ignore?: boolean;
   };
 }
 
@@ -169,16 +169,16 @@ class LSToolInvocation extends BaseToolInvocation<LSToolParams, ToolResult> {
       );
 
       const fileDiscovery = this.config.getFileService();
-      const { filteredPaths, gitIgnoredCount, qwenIgnoredCount } =
+      const { filteredPaths, gitIgnoredCount, dialIgnoredCount } =
         fileDiscovery.filterFilesWithReport(relativePaths, {
           respectGitIgnore:
             this.params.file_filtering_options?.respect_git_ignore ??
             this.config.getFileFilteringOptions().respectGitIgnore ??
             DEFAULT_FILE_FILTERING_OPTIONS.respectGitIgnore,
-          respectQwenIgnore:
-            this.params.file_filtering_options?.respect_qwen_ignore ??
-            this.config.getFileFilteringOptions().respectQwenIgnore ??
-            DEFAULT_FILE_FILTERING_OPTIONS.respectQwenIgnore,
+          respectDialIgnore:
+            this.params.file_filtering_options?.respect_dial_ignore ??
+            this.config.getFileFilteringOptions().respectDialIgnore ??
+            DEFAULT_FILE_FILTERING_OPTIONS.respectDialIgnore,
         });
 
       const entries = [];
@@ -222,8 +222,8 @@ class LSToolInvocation extends BaseToolInvocation<LSToolParams, ToolResult> {
       if (gitIgnoredCount > 0) {
         ignoredMessages.push(`${gitIgnoredCount} git-ignored`);
       }
-      if (qwenIgnoredCount > 0) {
-        ignoredMessages.push(`${qwenIgnoredCount} qwen-ignored`);
+      if (dialIgnoredCount > 0) {
+        ignoredMessages.push(`${dialIgnoredCount} dial-ignored`);
       }
       if (ignoredMessages.length > 0) {
         resultMessage += `\n\n(${ignoredMessages.join(', ')})`;
@@ -285,7 +285,7 @@ export class LSTool extends BaseDeclarativeTool<LSToolParams, ToolResult> {
                   'Optional: Whether to respect .gitignore patterns when listing files. Only available in git repositories. Defaults to true.',
                 type: 'boolean',
               },
-              respect_qwen_ignore: {
+              respect_dial_ignore: {
                 description:
                   'Optional: Whether to respect .dialignore patterns when listing files. Defaults to true.',
                 type: 'boolean',

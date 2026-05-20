@@ -55,10 +55,10 @@ describe('handleAtCommand', () => {
       isSandboxed: () => false,
       getFileService: () => new FileDiscoveryService(testRootDir),
       getFileFilteringRespectGitIgnore: () => true,
-      getFileFilteringRespectQwenIgnore: () => true,
+      getFileFilteringRespectDialIgnore: () => true,
       getFileFilteringOptions: () => ({
         respectGitIgnore: true,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       }),
       getFileSystemService: () => new StandardFileSystemService(),
       getEnableRecursiveFileSearch: vi.fn(() => true),
@@ -580,17 +580,17 @@ describe('handleAtCommand', () => {
     });
   });
 
-  describe('qwen-ignore filtering', () => {
-    it('should skip qwen-ignored files in @ commands', async () => {
+  describe('dial-ignore filtering', () => {
+    it('should skip dial-ignored files in @ commands', async () => {
       await createTestFile(
         path.join(testRootDir, '.dialignore'),
         'build/output.js',
       );
-      const qwenIgnoredFile = await createTestFile(
+      const dialIgnoredFile = await createTestFile(
         path.join(testRootDir, 'build', 'output.js'),
         'console.log("Hello");',
       );
-      const query = `@${qwenIgnoredFile}`;
+      const query = `@${dialIgnoredFile}`;
 
       const result = await handleAtCommand({
         query,
@@ -606,10 +606,10 @@ describe('handleAtCommand', () => {
         shouldProceed: true,
       });
       expect(mockOnDebugMessage).toHaveBeenCalledWith(
-        `Path ${qwenIgnoredFile} is qwen-ignored and will be skipped.`,
+        `Path ${dialIgnoredFile} is dial-ignored and will be skipped.`,
       );
       expect(mockOnDebugMessage).toHaveBeenCalledWith(
-        `Ignored 1 files:\nQwen-ignored: ${qwenIgnoredFile}`,
+        `Ignored 1 files:\nDial-ignored: ${dialIgnoredFile}`,
       );
     });
   });
@@ -645,7 +645,7 @@ describe('handleAtCommand', () => {
     });
   });
 
-  it('should handle mixed qwen-ignored and valid files', async () => {
+  it('should handle mixed dial-ignored and valid files', async () => {
     await createTestFile(
       path.join(testRootDir, '.dialignore'),
       'dist/bundle.js',
@@ -654,11 +654,11 @@ describe('handleAtCommand', () => {
       path.join(testRootDir, 'src', 'main.ts'),
       '// Main application entry',
     );
-    const qwenIgnoredFile = await createTestFile(
+    const dialIgnoredFile = await createTestFile(
       path.join(testRootDir, 'dist', 'bundle.js'),
       'console.log("bundle");',
     );
-    const query = `@${validFile} @${qwenIgnoredFile}`;
+    const query = `@${validFile} @${dialIgnoredFile}`;
 
     const result = await handleAtCommand({
       query,
@@ -671,7 +671,7 @@ describe('handleAtCommand', () => {
 
     expect(result).toEqual({
       processedQuery: [
-        { text: `@${validFile} @${qwenIgnoredFile}` },
+        { text: `@${validFile} @${dialIgnoredFile}` },
         { text: '\n--- Content from referenced files ---' },
         { text: `\nContent from @${validFile}:\n` },
         { text: '// Main application entry' },
@@ -680,10 +680,10 @@ describe('handleAtCommand', () => {
       shouldProceed: true,
     });
     expect(mockOnDebugMessage).toHaveBeenCalledWith(
-      `Path ${qwenIgnoredFile} is qwen-ignored and will be skipped.`,
+      `Path ${dialIgnoredFile} is dial-ignored and will be skipped.`,
     );
     expect(mockOnDebugMessage).toHaveBeenCalledWith(
-      `Ignored 1 files:\nQwen-ignored: ${qwenIgnoredFile}`,
+      `Ignored 1 files:\nDial-ignored: ${dialIgnoredFile}`,
     );
   });
 

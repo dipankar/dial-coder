@@ -72,7 +72,7 @@ export interface ReadManyFilesParams {
    */
   file_filtering_options?: {
     respect_git_ignore?: boolean;
-    respect_qwen_ignore?: boolean;
+    respect_dial_ignore?: boolean;
   };
 }
 
@@ -132,17 +132,17 @@ ${this.config.getTargetDir()}
     // Determine the final list of exclusion patterns exactly as in execute method
     const paramExcludes = this.params.exclude || [];
     const paramUseDefaultExcludes = this.params.useDefaultExcludes !== false;
-    const qwenIgnorePatterns = this.config
+    const dialIgnorePatterns = this.config
       .getFileService()
-      .getQwenIgnorePatterns();
+      .getDialIgnorePatterns();
     const finalExclusionPatternsForDescription: string[] =
       paramUseDefaultExcludes
         ? [
             ...getDefaultExcludes(this.config),
             ...paramExcludes,
-            ...qwenIgnorePatterns,
+            ...dialIgnorePatterns,
           ]
-        : [...paramExcludes, ...qwenIgnorePatterns];
+        : [...paramExcludes, ...dialIgnorePatterns];
 
     let excludeDesc = `Excluding: ${
       finalExclusionPatternsForDescription.length > 0
@@ -156,8 +156,8 @@ ${finalExclusionPatternsForDescription
     }`;
 
     // Add a note if .dialignore patterns contributed to the final list of exclusions
-    if (qwenIgnorePatterns.length > 0) {
-      const geminiPatternsInEffect = qwenIgnorePatterns.filter((p) =>
+    if (dialIgnorePatterns.length > 0) {
+      const geminiPatternsInEffect = dialIgnorePatterns.filter((p) =>
         finalExclusionPatternsForDescription.includes(p),
       ).length;
       if (geminiPatternsInEffect > 0) {
@@ -224,16 +224,16 @@ ${finalExclusionPatternsForDescription
       );
 
       const fileDiscovery = this.config.getFileService();
-      const { filteredPaths, gitIgnoredCount, qwenIgnoredCount } =
+      const { filteredPaths, gitIgnoredCount, dialIgnoredCount } =
         fileDiscovery.filterFilesWithReport(relativeEntries, {
           respectGitIgnore:
             this.params.file_filtering_options?.respect_git_ignore ??
             this.config.getFileFilteringOptions().respectGitIgnore ??
             DEFAULT_FILE_FILTERING_OPTIONS.respectGitIgnore,
-          respectQwenIgnore:
-            this.params.file_filtering_options?.respect_qwen_ignore ??
-            this.config.getFileFilteringOptions().respectQwenIgnore ??
-            DEFAULT_FILE_FILTERING_OPTIONS.respectQwenIgnore,
+          respectDialIgnore:
+            this.params.file_filtering_options?.respect_dial_ignore ??
+            this.config.getFileFilteringOptions().respectDialIgnore ??
+            DEFAULT_FILE_FILTERING_OPTIONS.respectDialIgnore,
         });
 
       for (const relativePath of filteredPaths) {
@@ -260,10 +260,10 @@ ${finalExclusionPatternsForDescription
         });
       }
 
-      // Add info about qwen-ignored files if any were filtered
-      if (qwenIgnoredCount > 0) {
+      // Add info about dial-ignored files if any were filtered
+      if (dialIgnoredCount > 0) {
         skippedFiles.push({
-          path: `${qwenIgnoredCount} file(s)`,
+          path: `${dialIgnoredCount} file(s)`,
           reason: 'qwen ignored',
         });
       }
@@ -544,7 +544,7 @@ export class ReadManyFilesTool extends BaseDeclarativeTool<
                 'Optional: Whether to respect .gitignore patterns when listing files. Only available in git repositories. Defaults to true.',
               type: 'boolean',
             },
-            respect_qwen_ignore: {
+            respect_dial_ignore: {
               description:
                 'Optional: Whether to respect .dialignore patterns when listing files. Defaults to true.',
               type: 'boolean',

@@ -8,12 +8,12 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import ignore from 'ignore';
 
-export interface QwenIgnoreFilter {
+export interface DialIgnoreFilter {
   isIgnored(filePath: string): boolean;
   getPatterns(): string[];
 }
 
-export class QwenIgnoreParser implements QwenIgnoreFilter {
+export class DialIgnoreParser implements DialIgnoreFilter {
   private projectRoot: string;
   private patterns: string[] = [];
   private ig = ignore();

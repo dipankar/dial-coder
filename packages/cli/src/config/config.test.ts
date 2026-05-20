@@ -99,11 +99,11 @@ vi.mock('@dial-coder/core', async () => {
     ),
     DEFAULT_MEMORY_FILE_FILTERING_OPTIONS: {
       respectGitIgnore: false,
-      respectQwenIgnore: true,
+      respectDialIgnore: true,
     },
     DEFAULT_FILE_FILTERING_OPTIONS: {
       respectGitIgnore: true,
-      respectQwenIgnore: true,
+      respectDialIgnore: true,
     },
   };
 });
@@ -1218,7 +1218,7 @@ describe('Hierarchical Memory Loading (config.ts) - Placeholder Suite', () => {
       'tree',
       {
         respectGitIgnore: false,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       },
       undefined, // maxDirs
     );
@@ -3222,13 +3222,13 @@ describe('loadCliConfig fileFiltering', () => {
       value: false,
     },
     {
-      property: 'respectQwenIgnore',
-      getter: (c) => c.getFileFilteringRespectQwenIgnore(),
+      property: 'respectDialIgnore',
+      getter: (c) => c.getFileFilteringRespectDialIgnore(),
       value: true,
     },
     {
-      property: 'respectQwenIgnore',
-      getter: (c) => c.getFileFilteringRespectQwenIgnore(),
+      property: 'respectDialIgnore',
+      getter: (c) => c.getFileFilteringRespectDialIgnore(),
       value: false,
     },
     {

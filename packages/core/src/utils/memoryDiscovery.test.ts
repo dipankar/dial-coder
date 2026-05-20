@@ -344,7 +344,7 @@ describe('loadServerHierarchicalMemory', () => {
       'tree',
       {
         respectGitIgnore: true,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       },
       200, // maxDirs parameter
     );
@@ -373,7 +373,7 @@ describe('loadServerHierarchicalMemory', () => {
       'tree', // importFormat
       {
         respectGitIgnore: true,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       },
       1, // maxDirs
     );

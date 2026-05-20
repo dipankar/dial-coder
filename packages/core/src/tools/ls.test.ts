@@ -37,7 +37,7 @@ describe('LSTool', () => {
       getFileService: () => new FileDiscoveryService(tempRootDir),
       getFileFilteringOptions: () => ({
         respectGitIgnore: true,
-        respectQwenIgnore: true,
+        respectDialIgnore: true,
       }),
     } as unknown as Config;
 
@@ -161,7 +161,7 @@ describe('LSTool', () => {
 
       expect(result.llmContent).toContain('file1.txt');
       expect(result.llmContent).not.toContain('file2.log');
-      expect(result.returnDisplay).toBe('Listed 2 item(s). (1 qwen-ignored)');
+      expect(result.returnDisplay).toBe('Listed 2 item(s). (1 dial-ignored)');
     });
 
     it('should handle non-directory paths', async () => {
