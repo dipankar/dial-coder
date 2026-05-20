@@ -4,18 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  readPackageUp,
-  type PackageJson as BasePackageJson,
-} from 'read-package-up';
+import { readPackageUp, type PackageJson } from 'read-package-up';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-export type PackageJson = BasePackageJson & {
-  config?: {
-    sandboxImageUri?: string;
-  };
-};
+export type { PackageJson };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

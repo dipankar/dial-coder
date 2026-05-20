@@ -5,7 +5,7 @@
  */
 
 import { execSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // A script to handle versioning and ensure all related changes are in a single, atomic commit.
@@ -17,10 +17,6 @@ function run(command) {
 
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf-8'));
-}
-
-function writeJson(filePath, data) {
-  writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n');
 }
 
 // 1. Get the version from the command line arguments.
@@ -82,28 +78,7 @@ for (const workspaceName of workspacesToVersion) {
 const rootPackageJsonPath = resolve(process.cwd(), 'package.json');
 const newVersion = readJson(rootPackageJsonPath).version;
 
-// 5. Update the sandboxImageUri in the root package.json
-const rootPackageJson = readJson(rootPackageJsonPath);
-if (rootPackageJson.config?.sandboxImageUri) {
-  rootPackageJson.config.sandboxImageUri =
-    rootPackageJson.config.sandboxImageUri.replace(/:.*$/, `:${newVersion}`);
-  console.log(`Updated sandboxImageUri in root to use version ${newVersion}`);
-  writeJson(rootPackageJsonPath, rootPackageJson);
-}
-
-// 6. Update the sandboxImageUri in the cli package.json
-const cliPackageJsonPath = resolve(process.cwd(), 'packages/cli/package.json');
-const cliPackageJson = readJson(cliPackageJsonPath);
-if (cliPackageJson.config?.sandboxImageUri) {
-  cliPackageJson.config.sandboxImageUri =
-    cliPackageJson.config.sandboxImageUri.replace(/:.*$/, `:${newVersion}`);
-  console.log(
-    `Updated sandboxImageUri in cli package to use version ${newVersion}`,
-  );
-  writeJson(cliPackageJsonPath, cliPackageJson);
-}
-
-// 7. Run `npm install` to update package-lock.json.
+// 5. Run `npm install` to update package-lock.json.
 run(
   'npm install --workspace packages/cli --workspace packages/core --package-lock-only',
 );

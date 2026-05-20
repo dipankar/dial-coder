@@ -8,7 +8,6 @@ import type { SandboxConfig } from '@dial-coder/core';
 import { FatalSandboxError } from '@dial-coder/core';
 import commandExists from 'command-exists';
 import * as os from 'node:os';
-import { getPackageJson } from '../utils/package.js';
 import type { Settings } from './settings.js';
 
 // This is a stripped-down version of the CliArgs interface from config.ts
@@ -95,11 +94,7 @@ export async function loadSandboxConfig(
   const sandboxOption = argv.sandbox ?? settings.tools?.sandbox;
   const command = getSandboxCommand(sandboxOption);
 
-  const packageJson = await getPackageJson();
-  const image =
-    argv.sandboxImage ??
-    process.env['DIAL_SANDBOX_IMAGE'] ??
-    packageJson?.config?.sandboxImageUri;
+  const image = argv.sandboxImage ?? process.env['DIAL_SANDBOX_IMAGE'];
 
   return command && image ? { command, image } : undefined;
 }

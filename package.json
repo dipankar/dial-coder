@@ -39,9 +39,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "config": {
-    "sandboxImageUri": "ghcr.io/dipankar/dial-coder:0.3.0"
-  },
   "scripts": {
     "start": "cross-env node scripts/start.js",
     "debug": "cross-env DEBUG=1 node --inspect-brk scripts/start.js",

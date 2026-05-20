@@ -30,8 +30,6 @@ import { join } from 'node:path';
 import os from 'node:os';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import cliPkgJson from '../packages/cli/package.json' with { type: 'json' };
-
 const argv = yargs(hideBin(process.argv))
   .option('s', {
     alias: 'skip-npm-install-build',
@@ -48,8 +46,12 @@ const argv = yargs(hideBin(process.argv))
   .option('i', {
     alias: 'image',
     type: 'string',
-    default: cliPkgJson.config.sandboxImageUri,
-    description: 'use <image> name for custom image',
+    default: process.env['DIAL_SANDBOX_IMAGE'],
+    description:
+      'use <image> name for custom image (defaults to $DIAL_SANDBOX_IMAGE)',
+    demandOption:
+      !process.env['DIAL_SANDBOX_IMAGE'] &&
+      'must pass --image=<name> or set DIAL_SANDBOX_IMAGE',
   })
   .option('output-file', {
     type: 'string',
