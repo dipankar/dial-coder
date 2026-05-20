@@ -1,6 +1,6 @@
-# Qwen Code Configuration
+# Dial Coder Configuration
 
-Qwen Code offers several ways to configure its behavior, including environment variables, command-line arguments, and settings files. This document outlines the different configuration methods and available settings.
+Dial Coder offers several ways to configure its behavior, including environment variables, command-line arguments, and settings files. This document outlines the different configuration methods and available settings.
 
 ## Configuration layers
 
@@ -16,27 +16,27 @@ Configuration is applied in the following order of precedence (lower numbers are
 
 ## Settings files
 
-Qwen Code uses JSON settings files for persistent configuration. There are four locations for these files:
+Dial Coder uses JSON settings files for persistent configuration. There are four locations for these files:
 
 - **System defaults file:**
   - **Location:** `/etc/qwen-code/system-defaults.json` (Linux), `C:\ProgramData\qwen-code\system-defaults.json` (Windows) or `/Library/Application Support/QwenCode/system-defaults.json` (macOS). The path can be overridden using the `QWEN_CODE_SYSTEM_DEFAULTS_PATH` environment variable.
   - **Scope:** Provides a base layer of system-wide default settings. These settings have the lowest precedence and are intended to be overridden by user, project, or system override settings.
 - **User settings file:**
   - **Location:** `~/.dial/settings.json` (where `~` is your home directory).
-  - **Scope:** Applies to all Qwen Code sessions for the current user.
+  - **Scope:** Applies to all Dial Coder sessions for the current user.
 - **Project settings file:**
   - **Location:** `.dial/settings.json` within your project's root directory.
-  - **Scope:** Applies only when running Qwen Code from that specific project. Project settings override user settings.
+  - **Scope:** Applies only when running Dial Coder from that specific project. Project settings override user settings.
 
 - **System settings file:**
   - **Location:** `/etc/qwen-code/settings.json` (Linux), `C:\ProgramData\qwen-code\settings.json` (Windows) or `/Library/Application Support/QwenCode/settings.json` (macOS). The path can be overridden using the `QWEN_CODE_SYSTEM_SETTINGS_PATH` environment variable.
-  - **Scope:** Applies to all Qwen Code sessions on the system, for all users. System settings override user and project settings. May be useful for system administrators at enterprises to have controls over users' Qwen Code setups.
+  - **Scope:** Applies to all Dial Coder sessions on the system, for all users. System settings override user and project settings. May be useful for system administrators at enterprises to have controls over users' Dial Coder setups.
 
 **Note on environment variables in settings:** String values within your `settings.json` files can reference environment variables using either `$VAR_NAME` or `${VAR_NAME}` syntax. These variables will be automatically resolved when the settings are loaded. For example, if you have an environment variable `MY_API_TOKEN`, you could use it in `settings.json` like this: `"apiKey": "$MY_API_TOKEN"`.
 
 ### The `.qwen` directory in your project
 
-In addition to a project settings file, a project's `.qwen` directory can contain other project-specific files related to Qwen Code's operation, such as:
+In addition to a project settings file, a project's `.qwen` directory can contain other project-specific files related to Dial Coder's operation, such as:
 
 - [Custom sandbox profiles](#sandboxing) (e.g., `.dial/sandbox-macos-custom.sb`, `.dial/sandbox.Dockerfile`).
 
@@ -121,7 +121,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
   - **Example:** `"autoAccept": true`
 
 - **`theme`** (string):
-  - **Description:** Sets the visual [theme](./themes.md) for Qwen Code.
+  - **Description:** Sets the visual [theme](./themes.md) for Dial Coder.
   - **Default:** `"Default"`
   - **Example:** `"theme": "GitHub"`
 
@@ -131,7 +131,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
   - **Example:** `"vimMode": true`
 
 - **`sandbox`** (boolean or string):
-  - **Description:** Controls whether and how to use sandboxing for tool execution. If set to `true`, Qwen Code uses a pre-built `qwen-code-sandbox` Docker image. For more information, see [Sandboxing](#sandboxing).
+  - **Description:** Controls whether and how to use sandboxing for tool execution. If set to `true`, Dial Coder uses a pre-built `dial-coder-sandbox` Docker image. For more information, see [Sandboxing](#sandboxing).
   - **Default:** `false`
   - **Example:** `"sandbox": "docker"`
 
@@ -149,7 +149,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
   - **Example:** `"toolCallCommand": "bin/call_tool"`
 
 - **`mcpServers`** (object):
-  - **Description:** Configures connections to one or more Model-Context Protocol (MCP) servers for discovering and using custom tools. Qwen Code attempts to connect to each configured MCP server to discover available tools. If multiple MCP servers expose a tool with the same name, the tool names will be prefixed with the server alias you defined in the configuration (e.g., `serverAlias__actualToolName`) to avoid conflicts. Note that the system might strip certain schema properties from MCP tool definitions for compatibility. At least one of `command`, `url`, or `httpUrl` must be provided. If multiple are specified, the order of precedence is `httpUrl`, then `url`, then `command`.
+  - **Description:** Configures connections to one or more Model-Context Protocol (MCP) servers for discovering and using custom tools. Dial Coder attempts to connect to each configured MCP server to discover available tools. If multiple MCP servers expose a tool with the same name, the tool names will be prefixed with the server alias you defined in the configuration (e.g., `serverAlias__actualToolName`) to avoid conflicts. Note that the system might strip certain schema properties from MCP tool definitions for compatibility. At least one of `command`, `url`, or `httpUrl` must be provided. If multiple are specified, the order of precedence is `httpUrl`, then `url`, then `command`.
   - **Default:** Empty
   - **Properties:**
     - **`<SERVER_NAME>`** (object): The server parameters for the named server.
@@ -217,7 +217,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
   - **Example:** `"preferredEditor": "vscode"`
 
 - **`telemetry`** (object)
-  - **Description:** Configures logging and metrics collection for Qwen Code. For more information, see [Telemetry](../telemetry.md).
+  - **Description:** Configures logging and metrics collection for Dial Coder. For more information, see [Telemetry](../telemetry.md).
   - **Default:** `{"enabled": false, "target": "local", "otlpEndpoint": "http://localhost:4317", "logPrompts": true}`
   - **Properties:**
     - **`enabled`** (boolean): Whether or not telemetry is enabled.
@@ -456,7 +456,7 @@ The CLI automatically loads environment variables from an `.env` file. The loadi
   - `<profile_name>`: Uses a custom profile. To define a custom profile, create a file named `sandbox-macos-<profile_name>.sb` in your project's `.dial/` directory (e.g., `my-project/.dial/sandbox-macos-custom.sb`).
 - **`DEBUG` or `DEBUG_MODE`** (often used by underlying libraries or the CLI itself):
   - Set to `true` or `1` to enable verbose debug logging, which can be helpful for troubleshooting.
-  - **Note:** These variables are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Use `.dial/.env` files if you need to set these for Qwen Code specifically.
+  - **Note:** These variables are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Use `.dial/.env` files if you need to set these for Dial Coder specifically.
 - **`NO_COLOR`**:
   - Set to any value to disable all color output in the CLI.
 - **`CLI_TITLE`**:
@@ -478,7 +478,7 @@ Arguments passed directly when running the CLI can override other configurations
   - Specifies the Qwen model to use for this session.
   - Example: `npm start -- --model qwen3-coder-plus`
 - **`--prompt <your_prompt>`** (**`-p <your_prompt>`**):
-  - Used to pass a prompt directly to the command. This invokes Qwen Code in a non-interactive mode.
+  - Used to pass a prompt directly to the command. This invokes Dial Coder in a non-interactive mode.
 - **`--prompt-interactive <your_prompt>`** (**`-i <your_prompt>`**):
   - Starts an interactive session with the provided prompt as the initial input.
   - The prompt is processed within the interactive session, not before it.
@@ -606,11 +606,11 @@ This example demonstrates how you can provide general project context, specific 
   - Use `/memory show` to display the combined instructional context currently loaded, allowing you to verify the hierarchy and content being used by the AI.
   - See the [Commands documentation](./commands.md#memory) for full details on the `/memory` command and its sub-commands (`show` and `refresh`).
 
-By understanding and utilizing these configuration layers and the hierarchical nature of context files, you can effectively manage the AI's memory and tailor Qwen Code's responses to your specific needs and projects.
+By understanding and utilizing these configuration layers and the hierarchical nature of context files, you can effectively manage the AI's memory and tailor Dial Coder's responses to your specific needs and projects.
 
 ## Sandboxing
 
-Qwen Code can execute potentially unsafe operations (like shell commands and file modifications) within a sandboxed environment to protect your system.
+Dial Coder can execute potentially unsafe operations (like shell commands and file modifications) within a sandboxed environment to protect your system.
 
 Sandboxing is disabled by default, but you can enable it in a few ways:
 
@@ -618,12 +618,12 @@ Sandboxing is disabled by default, but you can enable it in a few ways:
 - Setting `GEMINI_SANDBOX` environment variable.
 - Sandbox is enabled when using `--yolo` or `--approval-mode=yolo` by default.
 
-By default, it uses a pre-built `qwen-code-sandbox` Docker image.
+By default, it uses a pre-built `dial-coder-sandbox` Docker image.
 
 For project-specific sandboxing needs, you can create a custom Dockerfile at `.dial/sandbox.Dockerfile` in your project's root directory. This Dockerfile can be based on the base sandbox image:
 
 ```dockerfile
-FROM qwen-code-sandbox
+FROM dial-coder-sandbox
 
 # Add your custom dependencies or configurations here
 # For example:
@@ -631,7 +631,7 @@ FROM qwen-code-sandbox
 # COPY ./my-config /app/my-config
 ```
 
-When `.dial/sandbox.Dockerfile` exists, you can use `BUILD_SANDBOX` environment variable when running Qwen Code to automatically build the custom sandbox image:
+When `.dial/sandbox.Dockerfile` exists, you can use `BUILD_SANDBOX` environment variable when running Dial Coder to automatically build the custom sandbox image:
 
 ```bash
 BUILD_SANDBOX=1 qwen -s
@@ -639,7 +639,7 @@ BUILD_SANDBOX=1 qwen -s
 
 ## Usage Statistics
 
-To help us improve Qwen Code, we collect anonymized usage statistics. This data helps us understand how the CLI is used, identify common issues, and prioritize new features.
+To help us improve Dial Coder, we collect anonymized usage statistics. This data helps us understand how the CLI is used, identify common issues, and prioritize new features.
 
 **What we collect:**
 
@@ -671,4 +671,4 @@ Note: When usage statistics are enabled, events are sent to an Alibaba Cloud RUM
   - **Category:** UI
   - **Requires Restart:** No
   - **Example:** `"enableWelcomeBack": false`
-  - **Details:** When enabled, Qwen Code will automatically detect if you're returning to a project with a previously generated project summary (`.dial/PROJECT_SUMMARY.md`) and show a dialog allowing you to continue your previous conversation or start fresh. This feature integrates with the `/chat summary` command and quit confirmation dialog. See the [Welcome Back documentation](./welcome-back.md) for more details.
+  - **Details:** When enabled, Dial Coder will automatically detect if you're returning to a project with a previously generated project summary (`.dial/PROJECT_SUMMARY.md`) and show a dialog allowing you to continue your previous conversation or start fresh. This feature integrates with the `/chat summary` command and quit confirmation dialog. See the [Welcome Back documentation](./welcome-back.md) for more details.

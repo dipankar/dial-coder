@@ -868,7 +868,7 @@ describe('SettingsDialog', () => {
 
       // Should not show restart prompt initially
       expect(lastFrame()).not.toContain(
-        'To see changes, Qwen Code must be restarted',
+        'To see changes, Dial Coder must be restarted',
       );
 
       unmount();

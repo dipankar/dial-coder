@@ -1,8 +1,8 @@
-# Welcome to Qwen Code documentation
+# Welcome to Dial Coder documentation
 
-Qwen Code is a powerful command-line AI workflow tool adapted from [**Gemini CLI**](https://github.com/google-gemini/gemini-cli) ([details](./README.gemini.md)), specifically optimized for [Qwen3-Coder](https://github.com/QwenLM/Qwen3-Coder) models. It enhances your development workflow with advanced code understanding, automated tasks, and intelligent assistance.
+Dial Coder is a powerful command-line AI workflow tool adapted from [**Gemini CLI**](https://github.com/google-gemini/gemini-cli) ([details](./README.gemini.md)), specifically optimized for [Qwen3-Coder](https://github.com/QwenLM/Qwen3-Coder) models. It enhances your development workflow with advanced code understanding, automated tasks, and intelligent assistance.
 
-## 🚀 Why Choose Qwen Code?
+## 🚀 Why Choose Dial Coder?
 
 - 🎯 **Free Tier:** Up to 60 requests/min and 2,000 requests/day with your [QwenChat](https://chat.qwen.ai/) account.
 - 🧠 **Advanced Model:** Specially optimized for [Qwen3-Coder](https://github.com/QwenLM/Qwen3-Coder) for superior code understanding and assistance.
@@ -24,7 +24,7 @@ curl -qL https://www.npmjs.com/install.sh | sh
 ### Install from npm
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest
+npm install -g @dial-coder/qwen-code@latest
 qwen --version
 ```
 
@@ -46,7 +46,7 @@ brew install qwen-code
 ## Quick Start
 
 ```bash
-# Start Qwen Code
+# Start Dial Coder
 qwen
 
 # Example commands
@@ -79,7 +79,7 @@ Create or edit `.dial/settings.json` in your home directory:
 
 ### Vision Model Configuration
 
-Qwen Code includes intelligent vision model auto-switching that detects images in your input and can automatically switch to vision-capable models for multimodal analysis. **This feature is enabled by default** - when you include images in your queries, you'll see a dialog asking how you'd like to handle the vision model switch.
+Dial Coder includes intelligent vision model auto-switching that detects images in your input and can automatically switch to vision-capable models for multimodal analysis. **This feature is enabled by default** - when you include images in your queries, you'll see a dialog asking how you'd like to handle the vision model switch.
 
 #### Skip the Switch Dialog (Optional)
 
@@ -335,7 +335,7 @@ qwen
 - `/clear` - Clear conversation history
 - `/compress` - Compress history to save tokens
 - `/stats` - Show current session information
-- `/exit` or `/quit` - Exit Qwen Code
+- `/exit` or `/quit` - Exit Dial Coder
 
 ### Keyboard Shortcuts
 

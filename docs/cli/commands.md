@@ -1,6 +1,6 @@
 # CLI Commands
 
-Qwen Code supports several built-in commands to help you manage your session, customize the interface, and control its behavior. These commands are prefixed with a forward slash (`/`), an at symbol (`@`), or an exclamation mark (`!`).
+Dial Coder supports several built-in commands to help you manage your session, customize the interface, and control its behavior. These commands are prefixed with a forward slash (`/`), an at symbol (`@`), or an exclamation mark (`!`).
 
 ## Slash commands (`/`)
 
@@ -9,7 +9,7 @@ Slash commands provide meta-level control over the CLI itself.
 ### Built-in Commands
 
 - **`/bug`**
-  - **Description:** File an issue about Qwen Code. By default, the issue is filed within the GitHub repository for Qwen Code. The string you enter after `/bug` will become the headline for the bug being filed. The default `/bug` behavior can be modified using the `advanced.bugCommand` setting in your `.dial/settings.json` files.
+  - **Description:** File an issue about Dial Coder. By default, the issue is filed within the GitHub repository for Dial Coder. The string you enter after `/bug` will become the headline for the bug being filed. The default `/bug` behavior can be modified using the `advanced.bugCommand` setting in your `.dial/settings.json` files.
 
 - **`/chat`**
   - **Description:** Save and resume conversation history for branching conversation state interactively, or resuming a previous state from a later session.
@@ -53,7 +53,7 @@ Slash commands provide meta-level control over the CLI itself.
   - **Description:** Replace the entire chat context with a summary. This saves on tokens used for future tasks while retaining a high level summary of what has happened.
 
 - **`/copy`**
-  - **Description:** Copies the last output produced by Qwen Code to your clipboard, for easy sharing or reuse.
+  - **Description:** Copies the last output produced by Dial Coder to your clipboard, for easy sharing or reuse.
 
 - **`/directory`** (or **`/dir`**)
   - **Description:** Manage workspace directories for multi-directory support.
@@ -70,10 +70,10 @@ Slash commands provide meta-level control over the CLI itself.
   - **Description:** Open a dialog for selecting supported editors.
 
 - **`/extensions`**
-  - **Description:** Lists all active extensions in the current Qwen Code session. See [Qwen Code Extensions](../extension.md).
+  - **Description:** Lists all active extensions in the current Dial Coder session. See [Dial Coder Extensions](../extension.md).
 
 - **`/help`** (or **`/?`**)
-  - **Description:** Display help information about the Qwen Code, including available commands and their usage.
+  - **Description:** Display help information about the Dial Coder, including available commands and their usage.
 
 - **`/mcp`**
   - **Description:** List configured Model Context Protocol (MCP) servers, their connection status, server details, and available tools.
@@ -109,7 +109,7 @@ Slash commands provide meta-level control over the CLI itself.
     - **Qwen Coder:** The latest Qwen Coder model from Alibaba Cloud ModelStudio (version: qwen3-coder-plus-2025-09-23)
     - **Qwen Vision:** The latest Qwen Vision model from Alibaba Cloud ModelStudio (version: qwen3-vl-plus-2025-09-23) - supports image analysis
     - **OpenAI Models:** Available when using OpenAI authentication (configured via `OPENAI_MODEL` environment variable)
-  - **Note:** Model selection is session-specific and does not persist across different Qwen Code sessions. To set a default model, use the `model.name` setting in your configuration.
+  - **Note:** Model selection is session-specific and does not persist across different Dial Coder sessions. To set a default model, use the `model.name` setting in your configuration.
 
 - **`/restore`**
   - **Description:** Restores the project files to the state they were in just before a tool was executed. This is particularly useful for undoing file edits made by a tool. If run without a tool call ID, it will list available checkpoints to restore from.
@@ -117,15 +117,15 @@ Slash commands provide meta-level control over the CLI itself.
   - **Note:** Only available if the CLI is invoked with the `--checkpointing` option or configured via [settings](./configuration.md). See [Checkpointing documentation](../checkpointing.md) for more details.
 
 - **`/settings`**
-  - **Description:** Open the settings editor to view and modify Qwen Code settings.
-  - **Details:** This command provides a user-friendly interface for changing settings that control the behavior and appearance of Qwen Code. It is equivalent to manually editing the `.dial/settings.json` file, but with validation and guidance to prevent errors.
+  - **Description:** Open the settings editor to view and modify Dial Coder settings.
+  - **Details:** This command provides a user-friendly interface for changing settings that control the behavior and appearance of Dial Coder. It is equivalent to manually editing the `.dial/settings.json` file, but with validation and guidance to prevent errors.
   - **Usage:** Simply run `/settings` and the editor will open. You can then browse or search for specific settings, view their current values, and modify them as desired. Changes to some settings are applied immediately, while others require a restart.
 
 - **`/stats`**
-  - **Description:** Display detailed statistics for the current Qwen Code session, including token usage, cached token savings (when available), and session duration. Note: Cached token information is only displayed when cached tokens are being used, which occurs with API key authentication but not with OAuth authentication at this time.
+  - **Description:** Display detailed statistics for the current Dial Coder session, including token usage, cached token savings (when available), and session duration. Note: Cached token information is only displayed when cached tokens are being used, which occurs with API key authentication but not with OAuth authentication at this time.
 
 - [**`/theme`**](./themes.md)
-  - **Description:** Open a dialog that lets you change the visual theme of Qwen Code.
+  - **Description:** Open a dialog that lets you change the visual theme of Dial Coder.
 
 - **`/auth`**
   - **Description:** Open a dialog that lets you change the authentication method.
@@ -160,7 +160,7 @@ Slash commands provide meta-level control over the CLI itself.
   - **Note:** For detailed information on creating and managing subagents, see the [Subagents documentation](../subagents.md).
 
 - [**`/tools`**](../tools/index.md)
-  - **Description:** Display a list of tools that are currently available within Qwen Code.
+  - **Description:** Display a list of tools that are currently available within Dial Coder.
   - **Usage:** `/tools [desc]`
   - **Sub-commands:**
     - **`desc`** or **`descriptions`**:
@@ -169,7 +169,7 @@ Slash commands provide meta-level control over the CLI itself.
       - **Description:** Hide tool descriptions, showing only the tool names.
 
 - **`/quit-confirm`**
-  - **Description:** Show a confirmation dialog before exiting Qwen Code, allowing you to choose how to handle your current session.
+  - **Description:** Show a confirmation dialog before exiting Dial Coder, allowing you to choose how to handle your current session.
   - **Usage:** `/quit-confirm`
   - **Features:**
     - **Quit immediately:** Exit without saving anything (equivalent to `/quit`)
@@ -179,7 +179,7 @@ Slash commands provide meta-level control over the CLI itself.
   - **Note:** This command is automatically triggered when you press Ctrl+C once, providing a safety mechanism to prevent accidental exits.
 
 - **`/quit`** (or **`/exit`**)
-  - **Description:** Exit Qwen Code immediately without any confirmation dialog.
+  - **Description:** Exit Dial Coder immediately without any confirmation dialog.
 
 - **`/vim`**
   - **Description:** Toggle vim mode on or off. When vim mode is enabled, the input area supports vim-style navigation and editing commands in both NORMAL and INSERT modes.
@@ -209,11 +209,11 @@ Slash commands provide meta-level control over the CLI itself.
 
 For a quick start, see the [example](#example-a-pure-function-refactoring-command) below.
 
-Custom commands allow you to save and reuse your favorite or most frequently used prompts as personal shortcuts within Qwen Code. You can create commands that are specific to a single project or commands that are available globally across all your projects, streamlining your workflow and ensuring consistency.
+Custom commands allow you to save and reuse your favorite or most frequently used prompts as personal shortcuts within Dial Coder. You can create commands that are specific to a single project or commands that are available globally across all your projects, streamlining your workflow and ensuring consistency.
 
 #### File Locations & Precedence
 
-Qwen Code discovers commands from two locations, loaded in a specific order:
+Dial Coder discovers commands from two locations, loaded in a specific order:
 
 1.  **User Commands (Global):** Located in `~/.dial/commands/`. These commands are available in any project you are working on.
 2.  **Project Commands (Local):** Located in `<your-project-root>/.dial/commands/`. These commands are specific to the current project and can be checked into version control to be shared with your team.
@@ -333,7 +333,7 @@ When you run `/changelog 1.2.0 added "New feature"`, the final text sent to the 
 
 You can make your commands dynamic by executing shell commands directly within your `prompt` and injecting their output. This is ideal for gathering context from your local environment, like reading file content or checking the status of Git.
 
-When a custom command attempts to execute a shell command, Qwen Code will now prompt you for confirmation before proceeding. This is a security measure to ensure that only intended commands can be run.
+When a custom command attempts to execute a shell command, Dial Coder will now prompt you for confirmation before proceeding. This is a security measure to ensure that only intended commands can be run.
 
 **How It Works:**
 
@@ -446,7 +446,7 @@ That's it! You can now run your command in the CLI. First, you might add a file 
 > /refactor:pure
 ```
 
-Qwen Code will then execute the multi-line prompt defined in your TOML file.
+Dial Coder will then execute the multi-line prompt defined in your TOML file.
 
 ## Input Prompt Shortcuts
 
@@ -487,13 +487,13 @@ At commands are used to include the content of files or directories as part of y
 
 ## Shell mode & passthrough commands (`!`)
 
-The `!` prefix lets you interact with your system's shell directly from within Qwen Code.
+The `!` prefix lets you interact with your system's shell directly from within Dial Coder.
 
 - **`!<shell_command>`**
   - **Description:** Execute the given `<shell_command>` using `bash` on Linux/macOS or `cmd.exe` on Windows. Any output or errors from the command are displayed in the terminal.
   - **Examples:**
-    - `!ls -la` (executes `ls -la` and returns to Qwen Code)
-    - `!git status` (executes `git status` and returns to Qwen Code)
+    - `!ls -la` (executes `ls -la` and returns to Dial Coder)
+    - `!git status` (executes `git status` and returns to Dial Coder)
 
 - **`!` (Toggle shell mode)**
   - **Description:** Typing `!` on its own toggles shell mode.
@@ -501,7 +501,7 @@ The `!` prefix lets you interact with your system's shell directly from within Q
       - When active, shell mode uses a different coloring and a "Shell Mode Indicator".
       - While in shell mode, text you type is interpreted directly as a shell command.
     - **Exiting shell mode:**
-      - When exited, the UI reverts to its standard appearance and normal Qwen Code behavior resumes.
+      - When exited, the UI reverts to its standard appearance and normal Dial Coder behavior resumes.
 
 - **Caution for all `!` usage:** Commands you execute in shell mode have the same permissions and impact as if you ran them directly in your terminal.
 

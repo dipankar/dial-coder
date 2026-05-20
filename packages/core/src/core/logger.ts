@@ -68,7 +68,7 @@ export function decodeTagName(str: string): string {
 }
 
 export class Logger {
-  private qwenDir: string | undefined;
+  private dialDir: string | undefined;
   private logFilePath: string | undefined;
   private sessionId: string | undefined;
   private messageId = 0; // Instance-specific counter for the next messageId
@@ -141,11 +141,11 @@ export class Logger {
       return;
     }
 
-    this.qwenDir = this.storage.getProjectTempDir();
-    this.logFilePath = path.join(this.qwenDir, LOG_FILE_NAME);
+    this.dialDir = this.storage.getProjectTempDir();
+    this.logFilePath = path.join(this.dialDir, LOG_FILE_NAME);
 
     try {
-      await fs.mkdir(this.qwenDir, { recursive: true });
+      await fs.mkdir(this.dialDir, { recursive: true });
       let fileExisted = true;
       try {
         await fs.access(this.logFilePath);
@@ -282,12 +282,12 @@ export class Logger {
     if (!tag.length) {
       throw new Error('No checkpoint tag specified.');
     }
-    if (!this.qwenDir) {
+    if (!this.dialDir) {
       throw new Error('Checkpoint file path not set.');
     }
     // Encode the tag to handle all special characters safely.
     const encodedTag = encodeTagName(tag);
-    return path.join(this.qwenDir, `checkpoint-${encodedTag}.json`);
+    return path.join(this.dialDir, `checkpoint-${encodedTag}.json`);
   }
 
   private async _getCheckpointPath(tag: string): Promise<string> {
@@ -305,7 +305,7 @@ export class Logger {
     }
 
     // 2. Fallback for backward compatibility: check for the old raw path.
-    const oldPath = path.join(this.qwenDir!, `checkpoint-${tag}.json`);
+    const oldPath = path.join(this.dialDir!, `checkpoint-${tag}.json`);
     try {
       await fs.access(oldPath);
       return oldPath; // Found it, use the old path.
@@ -367,7 +367,7 @@ export class Logger {
   }
 
   async deleteCheckpoint(tag: string): Promise<boolean> {
-    if (!this.initialized || !this.qwenDir) {
+    if (!this.initialized || !this.dialDir) {
       console.error(
         'Logger not initialized or checkpoint file path not set. Cannot delete checkpoint.',
       );
@@ -391,7 +391,7 @@ export class Logger {
     }
 
     // 2. Attempt to delete the old raw path for backward compatibility.
-    const oldPath = path.join(this.qwenDir!, `checkpoint-${tag}.json`);
+    const oldPath = path.join(this.dialDir!, `checkpoint-${tag}.json`);
     if (newPath !== oldPath) {
       try {
         await fs.unlink(oldPath);

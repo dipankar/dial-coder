@@ -136,15 +136,15 @@ export const summaryCommand: SlashCommand = {
 
       // Ensure .dial directory exists
       const projectRoot = config.getProjectRoot();
-      const qwenDir = path.join(projectRoot, '.dial');
+      const dialDir = path.join(projectRoot, '.dial');
       try {
-        await fsPromises.mkdir(qwenDir, { recursive: true });
+        await fsPromises.mkdir(dialDir, { recursive: true });
       } catch (_err) {
         // Directory might already exist, ignore error
       }
 
       // Save the summary to PROJECT_SUMMARY.md
-      const summaryPath = path.join(qwenDir, 'PROJECT_SUMMARY.md');
+      const summaryPath = path.join(dialDir, 'PROJECT_SUMMARY.md');
       const summaryContent = `${markdownSummary}
 
 ---

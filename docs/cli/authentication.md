@@ -1,10 +1,10 @@
 # Authentication Setup
 
-Qwen Code supports two main authentication methods to access AI models. Choose the method that best fits your use case:
+Dial Coder supports two main authentication methods to access AI models. Choose the method that best fits your use case:
 
 1.  **Qwen OAuth (Recommended):**
     - Use this option to log in with your qwen.ai account.
-    - During initial startup, Qwen Code will direct you to the qwen.ai authentication page. Once authenticated, your credentials will be cached locally so the web login can be skipped on subsequent runs.
+    - During initial startup, Dial Coder will direct you to the qwen.ai authentication page. Once authenticated, your credentials will be cached locally so the web login can be skipped on subsequent runs.
     - **Requirements:**
       - Valid qwen.ai account
       - Internet connection for initial authentication
@@ -16,7 +16,7 @@ Qwen Code supports two main authentication methods to access AI models. Choose t
     **Getting Started:**
 
     ```bash
-    # Start Qwen Code and follow the OAuth flow
+    # Start Dial Coder and follow the OAuth flow
     qwen
     ```
 
@@ -77,11 +77,11 @@ This will allow you to reconfigure your authentication method without restarting
 
 ### Persisting Environment Variables with `.env` Files
 
-You can create a **`.dial/.env`** file in your project directory or in your home directory. Creating a plain **`.env`** file also works, but `.dial/.env` is recommended to keep Qwen Code variables isolated from other tools.
+You can create a **`.dial/.env`** file in your project directory or in your home directory. Creating a plain **`.env`** file also works, but `.dial/.env` is recommended to keep Dial Coder variables isolated from other tools.
 
 **Important:** Some environment variables (like `DEBUG` and `DEBUG_MODE`) are automatically excluded from project `.env` files to prevent interference with qwen-code behavior. Use `.dial/.env` files for qwen-code specific variables.
 
-Qwen Code automatically loads environment variables from the **first** `.env` file it finds, using the following search order:
+Dial Coder automatically loads environment variables from the **first** `.env` file it finds, using the following search order:
 
 1. Starting in the **current directory** and moving upward toward `/`, for each directory it checks:
    1. `.dial/.env`
@@ -118,7 +118,7 @@ EOF
 
 ## Non-Interactive Mode / Headless Environments
 
-When running Qwen Code in a non-interactive environment, you cannot use the OAuth login flow.
+When running Dial Coder in a non-interactive environment, you cannot use the OAuth login flow.
 Instead, you must configure authentication using environment variables.
 
 The CLI will automatically detect if it is running in a non-interactive terminal and will use the

@@ -62,8 +62,8 @@ describe('ShellTool', () => {
       getGeminiClient: vi.fn(),
       getGitCoAuthor: vi.fn().mockReturnValue({
         enabled: true,
-        name: 'Qwen-Coder',
-        email: 'qwen-coder@alibabacloud.com',
+        name: 'Dial-Coder',
+        email: 'dial-coder@dial.local',
       }),
       getShouldUseNodePtyShell: vi.fn().mockReturnValue(false),
     } as unknown as Config;
@@ -538,7 +538,7 @@ describe('ShellTool', () => {
         // Verify that the command was executed with co-author added
         expect(mockShellExecutionService).toHaveBeenCalledWith(
           expect.stringContaining(
-            'Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>',
+            'Co-authored-by: Dial-Coder <dial-coder@dial.local>',
           ),
           expect.any(String),
           expect.any(Function),
@@ -568,7 +568,7 @@ describe('ShellTool', () => {
 
         expect(mockShellExecutionService).toHaveBeenCalledWith(
           expect.stringContaining(
-            'Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>',
+            'Co-authored-by: Dial-Coder <dial-coder@dial.local>',
           ),
           expect.any(String),
           expect.any(Function),
@@ -598,7 +598,7 @@ describe('ShellTool', () => {
 
         expect(mockShellExecutionService).toHaveBeenCalledWith(
           expect.stringContaining(
-            'Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>',
+            'Co-authored-by: Dial-Coder <dial-coder@dial.local>',
           ),
           expect.any(String),
           expect.any(Function),
@@ -686,7 +686,7 @@ describe('ShellTool', () => {
 
         expect(mockShellExecutionService).toHaveBeenCalledWith(
           expect.stringContaining(
-            'Co-authored-by: Qwen-Coder <qwen-coder@alibabacloud.com>',
+            'Co-authored-by: Dial-Coder <dial-coder@dial.local>',
           ),
           expect.any(String),
           expect.any(Function),
@@ -700,8 +700,8 @@ describe('ShellTool', () => {
         // Mock config with disabled co-author
         (mockConfig.getGitCoAuthor as Mock).mockReturnValue({
           enabled: false,
-          name: 'Qwen-Coder',
-          email: 'qwen-coder@alibabacloud.com',
+          name: 'Dial-Coder',
+          email: 'dial-coder@dial.local',
         });
 
         const command = 'git commit -m "Initial commit"';

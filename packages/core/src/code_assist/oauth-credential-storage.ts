@@ -13,7 +13,7 @@ import * as os from 'node:os';
 import { promises as fs } from 'node:fs';
 
 const DIAL_DIR = '.dial';
-const KEYCHAIN_SERVICE_NAME = 'qwen-code-oauth';
+const KEYCHAIN_SERVICE_NAME = 'dial-coder-oauth';
 const MAIN_ACCOUNT_KEY = 'main-account';
 
 export class OAuthCredentialStorage {

@@ -1,6 +1,6 @@
-# Qwen Code Extensions
+# Dial Coder Extensions
 
-Qwen Code extensions package prompts, MCP servers, and custom commands into a familiar and user-friendly format. With extensions, you can expand the capabilities of Qwen Code and share those capabilities with others. They are designed to be easily installable and shareable.
+Dial Coder extensions package prompts, MCP servers, and custom commands into a familiar and user-friendly format. With extensions, you can expand the capabilities of Dial Coder and share those capabilities with others. They are designed to be easily installable and shareable.
 
 ## Extension management
 
@@ -20,7 +20,7 @@ Note that we create a copy of the installed extension, so you will need to run `
 qwen extensions install https://github.com/qwen-cli-extensions/security
 ```
 
-This will install the Qwen Code Security extension, which offers support for a `/security:analyze` command.
+This will install the Dial Coder Security extension, which offers support for a `/security:analyze` command.
 
 ### Uninstalling an extension
 
@@ -78,7 +78,7 @@ qwen extensions link path/to/directory
 
 ## How it works
 
-On startup, Qwen Code looks for extensions in `<home>/.dial/extensions`
+On startup, Dial Coder looks for extensions in `<home>/.dial/extensions`
 
 Extensions exist as a directory that contains a `qwen-extension.json` file. For example:
 
@@ -109,7 +109,7 @@ The `qwen-extension.json` file contains the configuration for the extension. The
 - `contextFileName`: The name of the file that contains the context for the extension. This will be used to load the context from the extension directory. If this property is not used but a `DIAL.md` file is present in your extension directory, then that file will be loaded.
 - `excludeTools`: An array of tool names to exclude from the model. You can also specify command-specific restrictions for tools that support it, like the `run_shell_command` tool. For example, `"excludeTools": ["run_shell_command(rm -rf)"]` will block the `rm -rf` command. Note that this differs from the MCP server `excludeTools` functionality, which can be listed in the MCP server config. **Important:** Tools specified in `excludeTools` will be disabled for the entire conversation context and will affect all subsequent queries in the current session.
 
-When Qwen Code starts, it loads all the extensions and merges their configurations. If there are any conflicts, the workspace configuration takes precedence.
+When Dial Coder starts, it loads all the extensions and merges their configurations. If there are any conflicts, the workspace configuration takes precedence.
 
 ### Custom commands
 
@@ -147,7 +147,7 @@ For example, if both a user and the `gcp` extension define a `deploy` command:
 
 ## Variables
 
-Qwen Code extensions allow variable substitution in `qwen-extension.json`. This can be useful if e.g., you need the current directory to run an MCP server using `"cwd": "${extensionPath}${/}run.ts"`.
+Dial Coder extensions allow variable substitution in `qwen-extension.json`. This can be useful if e.g., you need the current directory to run an MCP server using `"cwd": "${extensionPath}${/}run.ts"`.
 
 **Supported variables:**
 

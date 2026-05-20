@@ -1233,8 +1233,8 @@ describe('Hierarchical Memory Loading (config.ts) - Placeholder Suite', () => {
   // 3. Spies on console functions (for logger output) are correctly set up if needed.
   // Example of a previously failing test structure:
   it.skip('should correctly use mocked homedir for global path', async () => {
-    const MOCK_GEMINI_DIR_LOCAL = path.join('/mock/home/user', '.dial');
-    const MOCK_GLOBAL_PATH_LOCAL = path.join(MOCK_GEMINI_DIR_LOCAL, 'DIAL.md');
+    const MOCK_DIAL_DIR_LOCAL = path.join('/mock/home/user', '.dial');
+    const MOCK_GLOBAL_PATH_LOCAL = path.join(MOCK_DIAL_DIR_LOCAL, 'DIAL.md');
     mockFs({
       [MOCK_GLOBAL_PATH_LOCAL]: { type: 'file', content: 'GlobalContentOnly' },
     });

@@ -31,7 +31,7 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
           <Text bold color={theme.text.accent}>
             DIAL.md
           </Text>{' '}
-          {t('files to customize your interactions with Qwen Code.')}
+          {t('files to customize your interactions with Dial Coder.')}
         </Text>
       )}
       <Text color={theme.text.primary}>

@@ -686,7 +686,7 @@ export class CoreToolScheduler {
 
             if (excludedMatch) {
               // The tool exists but is excluded - return permission error directly
-              const permissionErrorMessage = `Qwen Code requires permission to use ${excludedMatch}, but that permission was declined.`;
+              const permissionErrorMessage = `Dial Coder requires permission to use ${excludedMatch}, but that permission was declined.`;
               return {
                 status: 'error',
                 request: reqInfo,
@@ -822,7 +822,7 @@ export class CoreToolScheduler {
 
             if (shouldAutoDeny) {
               // Treat as execution denied error, similar to excluded tools
-              const errorMessage = `Qwen Code requires permission to use "${reqInfo.name}", but that permission was declined.`;
+              const errorMessage = `Dial Coder requires permission to use "${reqInfo.name}", but that permission was declined.`;
               this.setStatusInternal(
                 reqInfo.callId,
                 'error',

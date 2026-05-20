@@ -214,13 +214,14 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
     })
     .option('proxy', {
       type: 'string',
-      description: 'Proxy for Qwen Code, like schema://user:password@host:port',
+      description:
+        'Proxy for Dial Coder, like schema://user:password@host:port',
     })
     .deprecateOption(
       'proxy',
       'Use the "proxy" setting in settings.json instead. This flag will be removed in a future version.',
     )
-    .command('$0 [query..]', 'Launch Qwen Code CLI', (yargsInstance: Argv) =>
+    .command('$0 [query..]', 'Launch Dial Coder CLI', (yargsInstance: Argv) =>
       yargsInstance
         .positional('query', {
           description:

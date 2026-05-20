@@ -49,7 +49,7 @@ packages/core/src/generated/
 .integration-tests/
 packages/vscode-ide-companion/*.vsix
 
-# Qwen Code Configs
+# Dial Coder Configs
 .qwen/
 logs/
 # GHA credentials

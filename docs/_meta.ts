@@ -1,5 +1,5 @@
 export default {
-  index: 'Welcome to Qwen Code',
+  index: 'Welcome to Dial Coder',
   cli: 'CLI',
   core: 'Core',
   tools: 'Tools',

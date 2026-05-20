@@ -701,12 +701,12 @@ Sandboxing is disabled by default, but you can enable it in a few ways:
 - Setting `GEMINI_SANDBOX` environment variable.
 - Sandbox is enabled when using `--yolo` or `--approval-mode=yolo` by default.
 
-By default, it uses a pre-built `qwen-code-sandbox` Docker image.
+By default, it uses a pre-built `dial-coder-sandbox` Docker image.
 
 For project-specific sandboxing needs, you can create a custom Dockerfile at `.dial/sandbox.Dockerfile` in your project's root directory. This Dockerfile can be based on the base sandbox image:
 
 ```dockerfile
-FROM qwen-code-sandbox
+FROM dial-coder-sandbox
 
 # Add your custom dependencies or configurations here
 # For example:

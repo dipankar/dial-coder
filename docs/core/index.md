@@ -1,6 +1,6 @@
-# Qwen Code Core
+# Dial Coder Core
 
-Qwen Code's core package (`packages/core`) is the backend portion of Qwen Code, handling communication with model APIs, managing tools, and processing requests sent from `packages/cli`. For a general overview of Qwen Code, see the [main documentation page](../index.md).
+Dial Coder's core package (`packages/core`) is the backend portion of Dial Coder, handling communication with model APIs, managing tools, and processing requests sent from `packages/cli`. For a general overview of Dial Coder, see the [main documentation page](../index.md).
 
 ## Navigating this section
 
@@ -9,7 +9,7 @@ Qwen Code's core package (`packages/core`) is the backend portion of Qwen Code, 
 
 ## Role of the core
 
-While the `packages/cli` portion of Qwen Code provides the user interface, `packages/core` is responsible for:
+While the `packages/cli` portion of Dial Coder provides the user interface, `packages/core` is responsible for:
 
 - **Model API interaction:** Securely communicating with the configured model provider, sending user prompts, and receiving model responses.
 - **Prompt engineering:** Constructing effective prompts for the model, potentially incorporating conversation history, tool definitions, and instructional context from context files (e.g., `DIAL.md`).
@@ -38,7 +38,7 @@ You can find token limits for each provider's models in their documentation.
 
 ## Model fallback
 
-Qwen Code includes a model fallback mechanism to ensure that you can continue to use the CLI even if the default model is rate-limited.
+Dial Coder includes a model fallback mechanism to ensure that you can continue to use the CLI even if the default model is rate-limited.
 
 If you are using the default "pro" model and the CLI detects that you are being rate-limited, it automatically switches to the "flash" model for the current session. This allows you to continue working without interruption.
 

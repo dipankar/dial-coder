@@ -1,13 +1,13 @@
-# Sandboxing in Qwen Code
+# Sandboxing in Dial Coder
 
-This document provides a guide to sandboxing in Qwen Code, including prerequisites, quickstart, and configuration.
+This document provides a guide to sandboxing in Dial Coder, including prerequisites, quickstart, and configuration.
 
 ## Prerequisites
 
-Before using sandboxing, you need to install and set up Qwen Code:
+Before using sandboxing, you need to install and set up Dial Coder:
 
 ```bash
-npm install -g @qwen-code/qwen-code
+npm install -g @dial-coder/qwen-code
 ```
 
 To verify the installation
@@ -131,7 +131,7 @@ export SANDBOX_SET_UID_GID=false  # Disable UID/GID mapping
 DEBUG=1 qwen -s -p "debug command"
 ```
 
-**Note:** If you have `DEBUG=true` in a project's `.env` file, it won't affect the CLI due to automatic exclusion. Use `.dial/.env` files for Qwen Code-specific debug settings.
+**Note:** If you have `DEBUG=true` in a project's `.env` file, it won't affect the CLI due to automatic exclusion. Use `.dial/.env` files for Dial Coder-specific debug settings.
 
 ### Inspect sandbox
 

@@ -1,6 +1,6 @@
 # Tutorials
 
-This page contains tutorials for interacting with Qwen Code.
+This page contains tutorials for interacting with Dial Coder.
 
 ## Setting up a Model Context Protocol (MCP) server
 
@@ -58,11 +58,11 @@ Use an environment variable to store your GitHub PAT:
 GITHUB_PERSONAL_ACCESS_TOKEN="<YOUR_GITHUB_PAT>"
 ```
 
-Qwen Code uses this value in the `mcpServers` configuration that you defined in the `settings.json` file.
+Dial Coder uses this value in the `mcpServers` configuration that you defined in the `settings.json` file.
 
-#### Launch Qwen Code and verify the connection
+#### Launch Dial Coder and verify the connection
 
-When you launch Qwen Code, it automatically reads your configuration and launches the GitHub MCP server in the background. You can then use natural language prompts to ask Qwen Code to perform GitHub actions. For example:
+When you launch Dial Coder, it automatically reads your configuration and launches the GitHub MCP server in the background. You can then use natural language prompts to ask Dial Coder to perform GitHub actions. For example:
 
 ```bash
 "get all open issues assigned to me in the 'foo/bar' repo and prioritize them"

@@ -25,7 +25,7 @@ export class OpenRouterOpenAICompatibleProvider extends DefaultOpenAICompatibleP
     return {
       ...baseHeaders,
       'HTTP-Referer': 'https://github.com/dipankar/dial-coder.git',
-      'X-Title': 'Qwen Code',
+      'X-Title': 'Dial Coder',
     };
   }
 }

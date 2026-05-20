@@ -173,7 +173,7 @@ export function AuthDialog(): React.JSX.Element {
         </Box>
       )}
       <Box marginTop={1}>
-        <Text>{t('Terms of Services and Privacy Notice for Qwen Code')}</Text>
+        <Text>{t('Terms of Services and Privacy Notice for Dial Coder')}</Text>
       </Box>
       <Box marginTop={1}>
         <Text color={Colors.AccentBlue}>
