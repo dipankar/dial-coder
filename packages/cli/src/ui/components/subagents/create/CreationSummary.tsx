@@ -257,8 +257,8 @@ export function CreationSummary({
           <Text color={theme.text.primary}>{t('Location: ')}</Text>
           <Text>
             {state.location === 'project'
-              ? t('Project Level (.qwen/agents/)')
-              : t('User Level (~/.qwen/agents/)')}
+              ? t('Project Level (.dial/agents/)')
+              : t('User Level (~/.dial/agents/)')}
           </Text>
         </Box>
 

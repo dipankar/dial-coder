@@ -19,7 +19,7 @@ export const summaryCommand: SlashCommand = {
   name: 'summary',
   get description() {
     return t(
-      'Generate a project summary and save it to .qwen/PROJECT_SUMMARY.md',
+      'Generate a project summary and save it to .dial/PROJECT_SUMMARY.md',
     );
   },
   kind: CommandKind.BUILT_IN,
@@ -134,7 +134,7 @@ export const summaryCommand: SlashCommand = {
         },
       });
 
-      // Ensure .qwen directory exists
+      // Ensure .dial directory exists
       const projectRoot = config.getProjectRoot();
       const qwenDir = path.join(projectRoot, '.dial');
       try {
@@ -162,7 +162,7 @@ export const summaryCommand: SlashCommand = {
         summary: {
           isPending: false,
           stage: 'completed',
-          filePath: '.qwen/PROJECT_SUMMARY.md',
+          filePath: '.dial/PROJECT_SUMMARY.md',
         },
       };
       ui.addItem(completedSummaryItem, Date.now());

@@ -40,7 +40,7 @@ To set the language for the language model's responses, use the `output` subcomm
 /language output <language>
 ```
 
-This command generates a language rule file that instructs the LLM to respond in the specified language. The rule file is saved to `~/.qwen/output-language.md`.
+This command generates a language rule file that instructs the LLM to respond in the specified language. The rule file is saved to `~/.dial/output-language.md`.
 
 ### Examples
 

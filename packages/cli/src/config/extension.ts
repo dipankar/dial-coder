@@ -303,7 +303,7 @@ export function loadInstallMetadata(
 
 function getContextFileNames(config: ExtensionConfig): string[] {
   if (!config.contextFileName) {
-    return ['QWEN.md'];
+    return ['DIAL.md'];
   } else if (!Array.isArray(config.contextFileName)) {
     return [config.contextFileName];
   }

@@ -117,8 +117,8 @@ vi.mock('../tools/read-many-files', () => ({
 vi.mock('../tools/memoryTool', () => ({
   MemoryTool: createToolMock('save_memory'),
   setGeminiMdFilename: vi.fn(),
-  getCurrentGeminiMdFilename: vi.fn(() => 'QWEN.md'), // Mock the original filename
-  DEFAULT_CONTEXT_FILENAME: 'QWEN.md',
+  getCurrentGeminiMdFilename: vi.fn(() => 'DIAL.md'), // Mock the original filename
+  DEFAULT_CONTEXT_FILENAME: 'DIAL.md',
   DIAL_CONFIG_DIR: '.dial',
 }));
 

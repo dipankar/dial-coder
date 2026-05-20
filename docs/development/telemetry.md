@@ -48,7 +48,7 @@ observability framework — Qwen Code's observability system provides:
 
 ## Configuration
 
-All telemetry behavior is controlled through your `.qwen/settings.json` file.
+All telemetry behavior is controlled through your `.dial/settings.json` file.
 These settings can be overridden by environment variables or CLI flags.
 
 | Setting        | Environment Variable             | CLI Flag                                                 | Description                                       | Values            | Default                 |
@@ -111,7 +111,7 @@ Before using either method below, complete these steps:
 
 Sends telemetry directly to Google Cloud services. No collector needed.
 
-1. Enable telemetry in your `.qwen/settings.json`:
+1. Enable telemetry in your `.dial/settings.json`:
    ```json
    {
      "telemetry": {
@@ -132,7 +132,7 @@ Sends telemetry directly to Google Cloud services. No collector needed.
 For custom processing, filtering, or routing, use an OpenTelemetry collector to
 forward data to Google Cloud.
 
-1. Configure your `.qwen/settings.json`:
+1. Configure your `.dial/settings.json`:
    ```json
    {
      "telemetry": {
@@ -150,7 +150,7 @@ forward data to Google Cloud.
    - Start a local OTEL collector that forwards to Google Cloud
    - Configure your workspace
    - Provide links to view traces, metrics, and logs in Google Cloud Console
-   - Save collector logs to `~/.qwen/tmp/<projectHash>/otel/collector-gcp.log`
+   - Save collector logs to `~/.dial/tmp/<projectHash>/otel/collector-gcp.log`
    - Stop collector on exit (e.g. `Ctrl+C`)
 3. Run Qwen Code and send prompts.
 4. View logs and metrics:
@@ -158,7 +158,7 @@ forward data to Google Cloud.
      - Logs: https://console.cloud.google.com/logs/
      - Metrics: https://console.cloud.google.com/monitoring/metrics-explorer
      - Traces: https://console.cloud.google.com/traces/list
-   - Open `~/.qwen/tmp/<projectHash>/otel/collector-gcp.log` to view local
+   - Open `~/.dial/tmp/<projectHash>/otel/collector-gcp.log` to view local
      collector logs.
 
 ## Local Telemetry
@@ -167,19 +167,19 @@ For local development and debugging, you can capture telemetry data locally:
 
 ### File-based Output (Recommended)
 
-1. Enable telemetry in your `.qwen/settings.json`:
+1. Enable telemetry in your `.dial/settings.json`:
    ```json
    {
      "telemetry": {
        "enabled": true,
        "target": "local",
        "otlpEndpoint": "",
-       "outfile": ".qwen/telemetry.log"
+       "outfile": ".dial/telemetry.log"
      }
    }
    ```
 2. Run Qwen Code and send prompts.
-3. View logs and metrics in the specified file (e.g., `.qwen/telemetry.log`).
+3. View logs and metrics in the specified file (e.g., `.dial/telemetry.log`).
 
 ### Collector-Based Export (Advanced)
 
@@ -191,7 +191,7 @@ For local development and debugging, you can capture telemetry data locally:
    - Download and start Jaeger and OTEL collector
    - Configure your workspace for local telemetry
    - Provide a Jaeger UI at http://localhost:16686
-   - Save logs/metrics to `~/.qwen/tmp/<projectHash>/otel/collector.log`
+   - Save logs/metrics to `~/.dial/tmp/<projectHash>/otel/collector.log`
    - Stop collector on exit (e.g. `Ctrl+C`)
 2. Run Qwen Code and send prompts.
 3. View traces at http://localhost:16686 and logs/metrics in the collector log

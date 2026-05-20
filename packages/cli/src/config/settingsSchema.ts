@@ -185,7 +185,7 @@ const SETTINGS_SCHEMA = {
         description:
           'The language for the user interface. Use "auto" to detect from system settings. ' +
           'You can also use custom language codes (e.g., "es", "fr") by placing JS language files ' +
-          'in ~/.qwen/locales/ (e.g., ~/.qwen/locales/es.js).',
+          'in ~/.dial/locales/ (e.g., ~/.dial/locales/es.js).',
         showInDialog: true,
         options: [
           { value: 'auto', label: 'Auto (detect from system)' },

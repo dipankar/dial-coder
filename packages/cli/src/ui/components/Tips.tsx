@@ -29,7 +29,7 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text color={theme.text.primary}>
           3. Create{' '}
           <Text bold color={theme.text.accent}>
-            QWEN.md
+            DIAL.md
           </Text>{' '}
           {t('files to customize your interactions with Qwen Code.')}
         </Text>

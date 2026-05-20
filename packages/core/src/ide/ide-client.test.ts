@@ -56,7 +56,7 @@ describe('IdeClient', () => {
 
     // Mock environment variables
     process.env['QWEN_CODE_IDE_WORKSPACE_PATH'] = '/test/workspace';
-    delete process.env['QWEN_CODE_IDE_SERVER_PORT'];
+    delete process.env['DIAL_CODE_IDE_SERVER_PORT'];
     delete process.env['QWEN_CODE_IDE_SERVER_STDIO_COMMAND'];
     delete process.env['QWEN_CODE_IDE_SERVER_STDIO_ARGS'];
 
@@ -109,7 +109,7 @@ describe('IdeClient', () => {
       await ideClient.connect();
 
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-12345.json'),
+        path.join('/tmp', 'dial-code-ide-server-12345.json'),
         'utf8',
       );
       expect(StreamableHTTPClientTransport).toHaveBeenCalledWith(
@@ -175,7 +175,7 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([]);
-      process.env['QWEN_CODE_IDE_SERVER_PORT'] = '9090';
+      process.env['DIAL_CODE_IDE_SERVER_PORT'] = '9090';
 
       const ideClient = await IdeClient.getInstance();
       await ideClient.connect();
@@ -224,7 +224,7 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([]);
-      process.env['QWEN_CODE_IDE_SERVER_PORT'] = '9090';
+      process.env['DIAL_CODE_IDE_SERVER_PORT'] = '9090';
 
       const ideClient = await IdeClient.getInstance();
       await ideClient.connect();
@@ -277,7 +277,7 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(config);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp', 'qwen-code-ide-server-12345.json'),
+        path.join('/tmp', 'dial-code-ide-server-12345.json'),
         'utf8',
       );
     });
@@ -309,7 +309,7 @@ describe('IdeClient', () => {
         vi.mocked(fs.promises.readdir) as Mock<
           (path: fs.PathLike) => Promise<string[]>
         >
-      ).mockResolvedValue(['qwen-code-ide-server-12345-123.json']);
+      ).mockResolvedValue(['dial-code-ide-server-12345-123.json']);
       vi.mocked(fs.promises.readFile).mockResolvedValue(JSON.stringify(config));
       vi.spyOn(IdeClient, 'validateWorkspacePath').mockReturnValue({
         isValid: true,
@@ -324,7 +324,7 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(config);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp/gemini/ide', 'qwen-code-ide-server-12345-123.json'),
+        path.join('/tmp/gemini/ide', 'dial-code-ide-server-12345-123.json'),
         'utf8',
       );
     });
@@ -346,8 +346,8 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json',
-        'qwen-code-ide-server-12345-222.json',
+        'dial-code-ide-server-12345-111.json',
+        'dial-code-ide-server-12345-222.json',
       ]);
       vi.mocked(fs.promises.readFile)
         .mockResolvedValueOnce(JSON.stringify(invalidConfig))
@@ -387,8 +387,8 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json',
-        'qwen-code-ide-server-12345-222.json',
+        'dial-code-ide-server-12345-111.json',
+        'dial-code-ide-server-12345-222.json',
       ]);
       vi.mocked(fs.promises.readFile)
         .mockResolvedValueOnce(JSON.stringify(config1))
@@ -408,7 +408,7 @@ describe('IdeClient', () => {
     });
 
     it('should prioritize the config matching the port from the environment variable', async () => {
-      process.env['QWEN_CODE_IDE_SERVER_PORT'] = '2222';
+      process.env['DIAL_CODE_IDE_SERVER_PORT'] = '2222';
       const config1 = { port: '1111', workspacePath: '/test/workspace' };
       const config2 = { port: '2222', workspacePath: '/test/workspace2' };
       vi.mocked(fs.promises.readFile).mockRejectedValueOnce(
@@ -419,8 +419,8 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json',
-        'qwen-code-ide-server-12345-222.json',
+        'dial-code-ide-server-12345-111.json',
+        'dial-code-ide-server-12345-222.json',
       ]);
       vi.mocked(fs.promises.readFile)
         .mockResolvedValueOnce(JSON.stringify(config1))
@@ -437,7 +437,7 @@ describe('IdeClient', () => {
       ).getConnectionConfigFromFile();
 
       expect(result).toEqual(config2);
-      delete process.env['QWEN_CODE_IDE_SERVER_PORT'];
+      delete process.env['DIAL_CODE_IDE_SERVER_PORT'];
     });
 
     it('should handle invalid JSON in one of the config files', async () => {
@@ -450,8 +450,8 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json',
-        'qwen-code-ide-server-12345-222.json',
+        'dial-code-ide-server-12345-111.json',
+        'dial-code-ide-server-12345-222.json',
       ]);
       vi.mocked(fs.promises.readFile)
         .mockResolvedValueOnce('invalid json')
@@ -498,9 +498,9 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json', // valid
+        'dial-code-ide-server-12345-111.json', // valid
         'not-a-config-file.txt', // invalid
-        'qwen-code-ide-server-asdf.json', // invalid
+        'dial-code-ide-server-asdf.json', // invalid
       ]);
       vi.mocked(fs.promises.readFile).mockResolvedValueOnce(
         JSON.stringify(validConfig),
@@ -518,7 +518,7 @@ describe('IdeClient', () => {
 
       expect(result).toEqual(validConfig);
       expect(fs.promises.readFile).toHaveBeenCalledWith(
-        path.join('/tmp/gemini/ide', 'qwen-code-ide-server-12345-111.json'),
+        path.join('/tmp/gemini/ide', 'dial-code-ide-server-12345-111.json'),
         'utf8',
       );
       expect(fs.promises.readFile).not.toHaveBeenCalledWith(
@@ -528,7 +528,7 @@ describe('IdeClient', () => {
     });
 
     it('should match env port string to a number port in the config', async () => {
-      process.env['QWEN_CODE_IDE_SERVER_PORT'] = '3333';
+      process.env['DIAL_CODE_IDE_SERVER_PORT'] = '3333';
       const config1 = { port: 1111, workspacePath: '/test/workspace' };
       const config2 = { port: 3333, workspacePath: '/test/workspace2' };
       vi.mocked(fs.promises.readFile).mockRejectedValueOnce(
@@ -539,8 +539,8 @@ describe('IdeClient', () => {
           (path: fs.PathLike) => Promise<string[]>
         >
       ).mockResolvedValue([
-        'qwen-code-ide-server-12345-111.json',
-        'qwen-code-ide-server-12345-222.json',
+        'dial-code-ide-server-12345-111.json',
+        'dial-code-ide-server-12345-222.json',
       ]);
       vi.mocked(fs.promises.readFile)
         .mockResolvedValueOnce(JSON.stringify(config1))
@@ -557,7 +557,7 @@ describe('IdeClient', () => {
       ).getConnectionConfigFromFile();
 
       expect(result).toEqual(config2);
-      delete process.env['QWEN_CODE_IDE_SERVER_PORT'];
+      delete process.env['DIAL_CODE_IDE_SERVER_PORT'];
     });
   });
 

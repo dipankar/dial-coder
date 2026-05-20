@@ -77,17 +77,17 @@ This will allow you to reconfigure your authentication method without restarting
 
 ### Persisting Environment Variables with `.env` Files
 
-You can create a **`.qwen/.env`** file in your project directory or in your home directory. Creating a plain **`.env`** file also works, but `.qwen/.env` is recommended to keep Qwen Code variables isolated from other tools.
+You can create a **`.dial/.env`** file in your project directory or in your home directory. Creating a plain **`.env`** file also works, but `.dial/.env` is recommended to keep Qwen Code variables isolated from other tools.
 
-**Important:** Some environment variables (like `DEBUG` and `DEBUG_MODE`) are automatically excluded from project `.env` files to prevent interference with qwen-code behavior. Use `.qwen/.env` files for qwen-code specific variables.
+**Important:** Some environment variables (like `DEBUG` and `DEBUG_MODE`) are automatically excluded from project `.env` files to prevent interference with qwen-code behavior. Use `.dial/.env` files for qwen-code specific variables.
 
 Qwen Code automatically loads environment variables from the **first** `.env` file it finds, using the following search order:
 
 1. Starting in the **current directory** and moving upward toward `/`, for each directory it checks:
-   1. `.qwen/.env`
+   1. `.dial/.env`
    2. `.env`
 2. If no file is found, it falls back to your **home directory**:
-   - `~/.qwen/.env`
+   - `~/.dial/.env`
    - `~/.env`
 
 > **Important:** The search stops at the **first** file encountered—variables are **not merged** across multiple files.
@@ -97,8 +97,8 @@ Qwen Code automatically loads environment variables from the **first** `.env` fi
 **Project-specific overrides** (take precedence when you are inside the project):
 
 ```bash
-mkdir -p .qwen
-cat >> .qwen/.env <<'EOF'
+mkdir -p .dial
+cat >> .dial/.env <<'EOF'
 OPENAI_API_KEY="your-api-key"
 OPENAI_BASE_URL="https://api-inference.modelscope.cn/v1"
 OPENAI_MODEL="Qwen/Qwen3-Coder-480B-A35B-Instruct"
@@ -108,8 +108,8 @@ EOF
 **User-wide settings** (available in every directory):
 
 ```bash
-mkdir -p ~/.qwen
-cat >> ~/.qwen/.env <<'EOF'
+mkdir -p ~/.dial
+cat >> ~/.dial/.env <<'EOF'
 OPENAI_API_KEY="your-api-key"
 OPENAI_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1"
 OPENAI_MODEL="qwen3-coder-plus"

@@ -24,7 +24,7 @@ Before you begin, ensure you have the following installed and configured:
 
 #### Configure the MCP server in `settings.json`
 
-In your project's root directory, create or open the [`.qwen/settings.json` file](./configuration.md). Within the file, add the `mcpServers` configuration block, which provides instructions for how to launch the GitHub MCP server.
+In your project's root directory, create or open the [`.dial/settings.json` file](./configuration.md). Within the file, add the `mcpServers` configuration block, which provides instructions for how to launch the GitHub MCP server.
 
 ```json
 {
@@ -55,7 +55,7 @@ In your project's root directory, create or open the [`.qwen/settings.json` file
 Use an environment variable to store your GitHub PAT:
 
 ```bash
-GITHUB_PERSONAL_ACCESS_TOKEN="pat_YourActualGitHubTokenHere"
+GITHUB_PERSONAL_ACCESS_TOKEN="<YOUR_GITHUB_PAT>"
 ```
 
 Qwen Code uses this value in the `mcpServers` configuration that you defined in the `settings.json` file.

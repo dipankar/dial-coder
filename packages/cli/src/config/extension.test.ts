@@ -160,7 +160,7 @@ describe('extension tests', () => {
       expect(extensions[0].config.name).toBe('test-extension');
     });
 
-    it('should load context file path when QWEN.md is present', () => {
+    it('should load context file path when DIAL.md is present', () => {
       createExtension({
         extensionsDir: userExtensionsDir,
         name: 'ext1',
@@ -181,7 +181,7 @@ describe('extension tests', () => {
       const ext1 = extensions.find((e) => e.config.name === 'ext1');
       const ext2 = extensions.find((e) => e.config.name === 'ext2');
       expect(ext1?.contextFiles).toEqual([
-        path.join(userExtensionsDir, 'ext1', 'QWEN.md'),
+        path.join(userExtensionsDir, 'ext1', 'DIAL.md'),
       ]);
       expect(ext2?.contextFiles).toEqual([]);
     });

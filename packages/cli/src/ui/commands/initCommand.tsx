@@ -14,7 +14,7 @@ import type React from 'react';
 import { t } from '../../i18n/index.js';
 
 /**
- * Confirmation prompt component for overwriting existing QWEN.md file.
+ * Confirmation prompt component for overwriting existing DIAL.md file.
  */
 function OverwriteConfirmationPrompt({
   contextFileName,
@@ -32,7 +32,7 @@ function OverwriteConfirmationPrompt({
 export const initCommand: SlashCommand = {
   name: 'init',
   get description() {
-    return t('Analyzes the project and creates a tailored QWEN.md file.');
+    return t('Analyzes the project and creates a tailored DIAL.md file.');
   },
   kind: CommandKind.BUILT_IN,
   action: async (context, _args): Promise<SlashCommandActionReturn> => {

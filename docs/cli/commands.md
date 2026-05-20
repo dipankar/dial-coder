@@ -9,7 +9,7 @@ Slash commands provide meta-level control over the CLI itself.
 ### Built-in Commands
 
 - **`/bug`**
-  - **Description:** File an issue about Qwen Code. By default, the issue is filed within the GitHub repository for Qwen Code. The string you enter after `/bug` will become the headline for the bug being filed. The default `/bug` behavior can be modified using the `advanced.bugCommand` setting in your `.qwen/settings.json` files.
+  - **Description:** File an issue about Qwen Code. By default, the issue is filed within the GitHub repository for Qwen Code. The string you enter after `/bug` will become the headline for the bug being filed. The default `/bug` behavior can be modified using the `advanced.bugCommand` setting in your `.dial/settings.json` files.
 
 - **`/chat`**
   - **Description:** Save and resume conversation history for branching conversation state interactively, or resuming a previous state from a later session.
@@ -18,8 +18,8 @@ Slash commands provide meta-level control over the CLI itself.
       - **Description:** Saves the current conversation history. You must add a `<tag>` for identifying the conversation state.
       - **Usage:** `/chat save <tag>`
       - **Details on Checkpoint Location:** The default locations for saved chat checkpoints are:
-        - Linux/macOS: `~/.qwen/tmp/<project_hash>/`
-        - Windows: `C:\Users\<YourUsername>\.qwen\tmp\<project_hash>\`
+        - Linux/macOS: `~/.dial/tmp/<project_hash>/`
+        - Windows: `C:\Users\<YourUsername>\.dial\tmp\<project_hash>\`
         - When you run `/chat list`, the CLI only scans these specific directories to find available checkpoints.
         - **Note:** These checkpoints are for manually saving and resuming conversation states. For automatic checkpoints created before file modifications, see the [Checkpointing documentation](../checkpointing.md).
     - **`resume`**
@@ -39,12 +39,12 @@ Slash commands provide meta-level control over the CLI itself.
   - **Keyboard shortcut:** Press **Ctrl+L** at any time to perform a clear action.
 
 - **`/summary`**
-  - **Description:** Generate a comprehensive project summary from the current conversation history and save it to `.qwen/PROJECT_SUMMARY.md`. This summary includes the overall goal, key knowledge, recent actions, and current plan, making it perfect for resuming work in future sessions.
+  - **Description:** Generate a comprehensive project summary from the current conversation history and save it to `.dial/PROJECT_SUMMARY.md`. This summary includes the overall goal, key knowledge, recent actions, and current plan, making it perfect for resuming work in future sessions.
   - **Usage:** `/summary`
   - **Features:**
     - Analyzes the entire conversation history to extract important context
     - Creates a structured markdown summary with sections for goals, knowledge, actions, and plans
-    - Automatically saves to `.qwen/PROJECT_SUMMARY.md` in your project root
+    - Automatically saves to `.dial/PROJECT_SUMMARY.md` in your project root
     - Shows progress indicators during generation and saving
     - Integrates with the Welcome Back feature for seamless session resumption
   - **Note:** This command requires an active conversation with at least 2 messages to generate a meaningful summary.
@@ -87,14 +87,14 @@ Slash commands provide meta-level control over the CLI itself.
   - **Keyboard Shortcut:** Press **Ctrl+T** at any time to toggle between showing and hiding tool descriptions.
 
 - **`/memory`**
-  - **Description:** Manage the AI's instructional context (hierarchical memory loaded from `QWEN.md` files by default; configurable via `contextFileName`).
+  - **Description:** Manage the AI's instructional context (hierarchical memory loaded from `DIAL.md` files by default; configurable via `contextFileName`).
   - **Sub-commands:**
     - **`add`**:
       - **Description:** Adds the following text to the AI's memory. Usage: `/memory add <text to remember>`
     - **`show`**:
-      - **Description:** Display the full, concatenated content of the current hierarchical memory that has been loaded from all context files (e.g., `QWEN.md`). This lets you inspect the instructional context being provided to the model.
+      - **Description:** Display the full, concatenated content of the current hierarchical memory that has been loaded from all context files (e.g., `DIAL.md`). This lets you inspect the instructional context being provided to the model.
     - **`refresh`**:
-      - **Description:** Reload the hierarchical instructional memory from all context files (default: `QWEN.md`) found in the configured locations (global, project/ancestors, and sub-directories). This updates the model with the latest context content.
+      - **Description:** Reload the hierarchical instructional memory from all context files (default: `DIAL.md`) found in the configured locations (global, project/ancestors, and sub-directories). This updates the model with the latest context content.
     - **Note:** For more details on how context files contribute to hierarchical memory, see the [CLI Configuration documentation](./configuration.md#context-files-hierarchical-instructional-context).
 
 - **`/model`**
@@ -118,7 +118,7 @@ Slash commands provide meta-level control over the CLI itself.
 
 - **`/settings`**
   - **Description:** Open the settings editor to view and modify Qwen Code settings.
-  - **Details:** This command provides a user-friendly interface for changing settings that control the behavior and appearance of Qwen Code. It is equivalent to manually editing the `.qwen/settings.json` file, but with validation and guidance to prevent errors.
+  - **Details:** This command provides a user-friendly interface for changing settings that control the behavior and appearance of Qwen Code. It is equivalent to manually editing the `.dial/settings.json` file, but with validation and guidance to prevent errors.
   - **Usage:** Simply run `/settings` and the editor will open. You can then browse or search for specific settings, view their current values, and modify them as desired. Changes to some settings are applied immediately, while others require a restart.
 
 - **`/stats`**
@@ -155,8 +155,8 @@ Slash commands provide meta-level control over the CLI itself.
       - **Description:** Open an interactive management dialog to view, edit, and delete existing subagents. Shows both project-level and user-level agents.
       - **Usage:** `/agents manage`
   - **Storage Locations:**
-    - **Project-level:** `.qwen/agents/` (shared with team, takes precedence)
-    - **User-level:** `~/.qwen/agents/` (personal agents, available across projects)
+    - **Project-level:** `.dial/agents/` (shared with team, takes precedence)
+    - **User-level:** `~/.dial/agents/` (personal agents, available across projects)
   - **Note:** For detailed information on creating and managing subagents, see the [Subagents documentation](../subagents.md).
 
 - [**`/tools`**](../tools/index.md)
@@ -189,11 +189,11 @@ Slash commands provide meta-level control over the CLI itself.
     - **Editing commands:** Delete with `x`, change with `c`, insert with `i`, `a`, `o`, `O`; complex operations like `dd`, `cc`, `dw`, `cw`
     - **Count support:** Prefix commands with numbers (e.g., `3h`, `5w`, `10G`)
     - **Repeat last command:** Use `.` to repeat the last editing operation
-    - **Persistent setting:** Vim mode preference is saved to `~/.qwen/settings.json` and restored between sessions
+    - **Persistent setting:** Vim mode preference is saved to `~/.dial/settings.json` and restored between sessions
   - **Status indicator:** When enabled, shows `[NORMAL]` or `[INSERT]` in the footer
 
 - **`/init`**
-  - **Description:** Analyzes the current directory and creates a `QWEN.md` context file by default (or the filename specified by `contextFileName`). If a non-empty file already exists, no changes are made. The command seeds an empty file and prompts the model to populate it with project-specific instructions.
+  - **Description:** Analyzes the current directory and creates a `DIAL.md` context file by default (or the filename specified by `contextFileName`). If a non-empty file already exists, no changes are made. The command seeds an empty file and prompts the model to populate it with project-specific instructions.
 
 - [**`/language`**](./language.md)
   - **Description:** View or change the language setting for both UI and LLM output.
@@ -215,8 +215,8 @@ Custom commands allow you to save and reuse your favorite or most frequently use
 
 Qwen Code discovers commands from two locations, loaded in a specific order:
 
-1.  **User Commands (Global):** Located in `~/.qwen/commands/`. These commands are available in any project you are working on.
-2.  **Project Commands (Local):** Located in `<your-project-root>/.qwen/commands/`. These commands are specific to the current project and can be checked into version control to be shared with your team.
+1.  **User Commands (Global):** Located in `~/.dial/commands/`. These commands are available in any project you are working on.
+2.  **Project Commands (Local):** Located in `<your-project-root>/.dial/commands/`. These commands are specific to the current project and can be checked into version control to be shared with your team.
 
 If a command in the project directory has the same name as a command in the user directory, the **project command will always be used.** This allows projects to override global commands with project-specific versions.
 
@@ -224,8 +224,8 @@ If a command in the project directory has the same name as a command in the user
 
 The name of a command is determined by its file path relative to its `commands` directory. Subdirectories are used to create namespaced commands, with the path separator (`/` or `\`) being converted to a colon (`:`).
 
-- A file at `~/.qwen/commands/test.toml` becomes the command `/test`.
-- A file at `<project>/.qwen/commands/git/commit.toml` becomes the namespaced command `/git:commit`.
+- A file at `~/.dial/commands/test.toml` becomes the command `/test`.
+- A file at `<project>/.dial/commands/git/commit.toml` becomes the namespaced command `/git:commit`.
 
 #### TOML File Format (v1)
 
@@ -301,7 +301,7 @@ If you do **not** provide any arguments (e.g., `/mycommand`), the prompt is sent
 This example shows how to create a robust command by defining a role for the model, explaining where to find the user's input, and specifying the expected format and behavior.
 
 ```toml
-# In: <project>/.qwen/commands/changelog.toml
+# In: <project>/.dial/commands/changelog.toml
 # Invoked via: /changelog 1.2.0 added "Support for default argument parsing."
 
 description = "Adds a new entry to the project's CHANGELOG.md file."
@@ -348,7 +348,7 @@ When a custom command attempts to execute a shell command, Qwen Code will now pr
 This command gets the staged git diff and uses it to ask the model to write a commit message.
 
 ````toml
-# In: <project>/.qwen/commands/git/commit.toml
+# In: <project>/.dial/commands/git/commit.toml
 # Invoked via: /git:commit
 
 description = "Generates a Git commit message based on staged changes."
@@ -385,7 +385,7 @@ You can directly embed the content of a file or a directory listing into your pr
 This command injects the content of a _fixed_ best practices file (`docs/best-practices.md`) and uses the user's arguments to provide context for the review.
 
 ```toml
-# In: <project>/.qwen/commands/review.toml
+# In: <project>/.dial/commands/review.toml
 # Invoked via: /review FileCommandLoader.ts
 
 description = "Reviews the provided context using a best practice guide."
@@ -413,16 +413,16 @@ Let's create a global command that asks the model to refactor a piece of code.
 First, ensure the user commands directory exists, then create a `refactor` subdirectory for organization and the final TOML file.
 
 ```bash
-mkdir -p ~/.qwen/commands/refactor
-touch ~/.qwen/commands/refactor/pure.toml
+mkdir -p ~/.dial/commands/refactor
+touch ~/.dial/commands/refactor/pure.toml
 ```
 
 **2. Add the content to the file:**
 
-Open `~/.qwen/commands/refactor/pure.toml` in your editor and add the following content. We are including the optional `description` for best practice.
+Open `~/.dial/commands/refactor/pure.toml` in your editor and add the following content. We are including the optional `description` for best practice.
 
 ```toml
-# In: ~/.qwen/commands/refactor/pure.toml
+# In: ~/.dial/commands/refactor/pure.toml
 # This command will be invoked via: /refactor:pure
 
 description = "Asks the model to refactor the current context into a pure function."

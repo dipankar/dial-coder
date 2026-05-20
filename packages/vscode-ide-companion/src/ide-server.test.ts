@@ -70,7 +70,7 @@ const getPortFromMock = (
 ) => {
   const port = vi
     .mocked(replaceMock)
-    .mock.calls.find((call) => call[0] === 'QWEN_CODE_IDE_SERVER_PORT')?.[1];
+    .mock.calls.find((call) => call[0] === 'DIAL_CODE_IDE_SERVER_PORT')?.[1];
 
   if (port === undefined) {
     expect.fail('Port was not set');
@@ -112,7 +112,7 @@ describe('IDEServer', () => {
 
     expect(replaceMock).toHaveBeenNthCalledWith(
       1,
-      'QWEN_CODE_IDE_SERVER_PORT',
+      'DIAL_CODE_IDE_SERVER_PORT',
       expect.any(String), // port is a number as a string
     );
 

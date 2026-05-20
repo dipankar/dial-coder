@@ -32,7 +32,7 @@ export function createExtension({
   );
 
   if (addContextFile) {
-    fs.writeFileSync(path.join(extDir, 'QWEN.md'), 'context');
+    fs.writeFileSync(path.join(extDir, 'DIAL.md'), 'context');
   }
 
   if (contextFileName) {

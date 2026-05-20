@@ -1,6 +1,6 @@
 # Getting Started with Qwen Code Extensions
 
-This guide will walk you through creating your first Qwen Code extension. You'll learn how to set up a new extension, add a custom tool via an MCP server, create a custom command, and provide context to the model with a `QWEN.md` file.
+This guide will walk you through creating your first Qwen Code extension. You'll learn how to set up a new extension, add a custom tool via an MCP server, create a custom command, and provide context to the model with a `DIAL.md` file.
 
 ## Prerequisites
 
@@ -163,11 +163,11 @@ Custom commands provide a way to create shortcuts for complex prompts. Let's add
 
 After saving the file, restart the Qwen Code. You can now run `/fs:grep-code "some pattern"` to use your new command.
 
-## Step 5: Add a Custom `QWEN.md`
+## Step 5: Add a Custom `DIAL.md`
 
-You can provide persistent context to the model by adding a `QWEN.md` file to your extension. This is useful for giving the model instructions on how to behave or information about your extension's tools. Note that you may not always need this for extensions built to expose commands and prompts.
+You can provide persistent context to the model by adding a `DIAL.md` file to your extension. This is useful for giving the model instructions on how to behave or information about your extension's tools. Note that you may not always need this for extensions built to expose commands and prompts.
 
-1.  Create a file named `QWEN.md` in the root of your extension directory:
+1.  Create a file named `DIAL.md` in the root of your extension directory:
 
     ```markdown
     # My First Extension Instructions
@@ -181,7 +181,7 @@ You can provide persistent context to the model by adding a `QWEN.md` file to yo
     {
       "name": "my-first-extension",
       "version": "1.0.0",
-      "contextFileName": "QWEN.md",
+      "contextFileName": "DIAL.md",
       "mcpServers": {
         "nodeServer": {
           "command": "node",
@@ -192,7 +192,7 @@ You can provide persistent context to the model by adding a `QWEN.md` file to yo
     }
     ```
 
-Restart the CLI again. The model will now have the context from your `QWEN.md` file in every session where the extension is active.
+Restart the CLI again. The model will now have the context from your `DIAL.md` file in every session where the extension is active.
 
 ## Step 6: Releasing Your Extension
 

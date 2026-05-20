@@ -40,7 +40,7 @@ export function IdeIntegrationNudge({
   const { displayName: ideName } = ide;
   // Assume extension is already installed if the env variables are set.
   const isExtensionPreInstalled =
-    !!process.env['QWEN_CODE_IDE_SERVER_PORT'] &&
+    !!process.env['DIAL_CODE_IDE_SERVER_PORT'] &&
     !!process.env['QWEN_CODE_IDE_WORKSPACE_PATH'];
 
   const OPTIONS: Array<RadioSelectItem<IdeIntegrationNudgeResult>> = [

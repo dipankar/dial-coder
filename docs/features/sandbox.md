@@ -131,7 +131,7 @@ export SANDBOX_SET_UID_GID=false  # Disable UID/GID mapping
 DEBUG=1 qwen -s -p "debug command"
 ```
 
-**Note:** If you have `DEBUG=true` in a project's `.env` file, it won't affect the CLI due to automatic exclusion. Use `.qwen/.env` files for Qwen Code-specific debug settings.
+**Note:** If you have `DEBUG=true` in a project's `.env` file, it won't affect the CLI due to automatic exclusion. Use `.dial/.env` files for Qwen Code-specific debug settings.
 
 ### Inspect sandbox
 

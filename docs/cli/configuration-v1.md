@@ -22,10 +22,10 @@ Qwen Code uses JSON settings files for persistent configuration. There are four 
   - **Location:** `/etc/qwen-code/system-defaults.json` (Linux), `C:\ProgramData\qwen-code\system-defaults.json` (Windows) or `/Library/Application Support/QwenCode/system-defaults.json` (macOS). The path can be overridden using the `QWEN_CODE_SYSTEM_DEFAULTS_PATH` environment variable.
   - **Scope:** Provides a base layer of system-wide default settings. These settings have the lowest precedence and are intended to be overridden by user, project, or system override settings.
 - **User settings file:**
-  - **Location:** `~/.qwen/settings.json` (where `~` is your home directory).
+  - **Location:** `~/.dial/settings.json` (where `~` is your home directory).
   - **Scope:** Applies to all Qwen Code sessions for the current user.
 - **Project settings file:**
-  - **Location:** `.qwen/settings.json` within your project's root directory.
+  - **Location:** `.dial/settings.json` within your project's root directory.
   - **Scope:** Applies only when running Qwen Code from that specific project. Project settings override user settings.
 
 - **System settings file:**
@@ -38,13 +38,13 @@ Qwen Code uses JSON settings files for persistent configuration. There are four 
 
 In addition to a project settings file, a project's `.qwen` directory can contain other project-specific files related to Qwen Code's operation, such as:
 
-- [Custom sandbox profiles](#sandboxing) (e.g., `.qwen/sandbox-macos-custom.sb`, `.qwen/sandbox.Dockerfile`).
+- [Custom sandbox profiles](#sandboxing) (e.g., `.dial/sandbox-macos-custom.sb`, `.dial/sandbox.Dockerfile`).
 
 ### Available settings in `settings.json`:
 
 - **`contextFileName`** (string or array of strings):
-  - **Description:** Specifies the filename for context files (e.g., `QWEN.md`, `AGENTS.md`). Can be a single filename or a list of accepted filenames.
-  - **Default:** `QWEN.md`
+  - **Description:** Specifies the filename for context files (e.g., `DIAL.md`, `AGENTS.md`). Can be a single filename or a list of accepted filenames.
+  - **Default:** `DIAL.md`
   - **Example:** `"contextFileName": "AGENTS.md"`
 
 - **`bugCommand`** (object):
@@ -281,7 +281,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
     ```
 
 - **`excludedProjectEnvVars`** (array of strings):
-  - **Description:** Specifies environment variables that should be excluded from being loaded from project `.env` files. This prevents project-specific environment variables (like `DEBUG=true`) from interfering with the CLI behavior. Variables from `.qwen/.env` files are never excluded.
+  - **Description:** Specifies environment variables that should be excluded from being loaded from project `.env` files. This prevents project-specific environment variables (like `DEBUG=true`) from interfering with the CLI behavior. Variables from `.dial/.env` files are never excluded.
   - **Default:** `["DEBUG", "DEBUG_MODE"]`
   - **Example:**
     ```json
@@ -301,7 +301,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
     ```
 
 - **`loadMemoryFromIncludeDirectories`** (boolean):
-  - **Description:** Controls the behavior of the `/memory refresh` command. If set to `true`, `QWEN.md` files should be loaded from all directories that are added. If set to `false`, `QWEN.md` should only be loaded from the current directory.
+  - **Description:** Controls the behavior of the `/memory refresh` command. If set to `true`, `DIAL.md` files should be loaded from all directories that are added. If set to `false`, `DIAL.md` should only be loaded from the current directory.
   - **Default:** `false`
   - **Example:**
     ```json
@@ -420,7 +420,7 @@ If you are experiencing performance issues with file searching (e.g., with `@` c
 
 The CLI keeps a history of shell commands you run. To avoid conflicts between different projects, this history is stored in a project-specific directory within your user's home folder.
 
-- **Location:** `~/.qwen/tmp/<project_hash>/shell_history`
+- **Location:** `~/.dial/tmp/<project_hash>/shell_history`
   - `<project_hash>` is a unique identifier generated from your project's root path.
   - The history is stored in a file named `shell_history`.
 
@@ -434,7 +434,7 @@ The CLI automatically loads environment variables from an `.env` file. The loadi
 2.  If not found, it searches upwards in parent directories until it finds an `.env` file or reaches the project root (identified by a `.git` folder) or the home directory.
 3.  If still not found, it looks for `~/.env` (in the user's home directory).
 
-**Environment Variable Exclusion:** Some environment variables (like `DEBUG` and `DEBUG_MODE`) are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Variables from `.qwen/.env` files are never excluded. You can customize this behavior using the `excludedProjectEnvVars` setting in your `settings.json` file.
+**Environment Variable Exclusion:** Some environment variables (like `DEBUG` and `DEBUG_MODE`) are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Variables from `.dial/.env` files are never excluded. You can customize this behavior using the `excludedProjectEnvVars` setting in your `settings.json` file.
 
 - **`OPENAI_API_KEY`**:
   - One of several available [authentication methods](./authentication.md).
@@ -453,10 +453,10 @@ The CLI automatically loads environment variables from an `.env` file. The loadi
   - Switches the Seatbelt (`sandbox-exec`) profile on macOS.
   - `permissive-open`: (Default) Restricts writes to the project folder (and a few other folders, see `packages/cli/src/utils/sandbox-macos-permissive-open.sb`) but allows other operations.
   - `strict`: Uses a strict profile that declines operations by default.
-  - `<profile_name>`: Uses a custom profile. To define a custom profile, create a file named `sandbox-macos-<profile_name>.sb` in your project's `.qwen/` directory (e.g., `my-project/.qwen/sandbox-macos-custom.sb`).
+  - `<profile_name>`: Uses a custom profile. To define a custom profile, create a file named `sandbox-macos-<profile_name>.sb` in your project's `.dial/` directory (e.g., `my-project/.dial/sandbox-macos-custom.sb`).
 - **`DEBUG` or `DEBUG_MODE`** (often used by underlying libraries or the CLI itself):
   - Set to `true` or `1` to enable verbose debug logging, which can be helpful for troubleshooting.
-  - **Note:** These variables are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Use `.qwen/.env` files if you need to set these for Qwen Code specifically.
+  - **Note:** These variables are automatically excluded from project `.env` files by default to prevent interference with the CLI behavior. Use `.dial/.env` files if you need to set these for Qwen Code specifically.
 - **`NO_COLOR`**:
   - Set to any value to disable all color output in the CLI.
 - **`CLI_TITLE`**:
@@ -550,11 +550,11 @@ Arguments passed directly when running the CLI can override other configurations
 
 ## Context Files (Hierarchical Instructional Context)
 
-While not strictly configuration for the CLI's _behavior_, context files (defaulting to `QWEN.md` but configurable via the `contextFileName` setting) are crucial for configuring the _instructional context_ (also referred to as "memory"). This powerful feature allows you to give project-specific instructions, coding style guides, or any relevant background information to the AI, making its responses more tailored and accurate to your needs. The CLI includes UI elements, such as an indicator in the footer showing the number of loaded context files, to keep you informed about the active context.
+While not strictly configuration for the CLI's _behavior_, context files (defaulting to `DIAL.md` but configurable via the `contextFileName` setting) are crucial for configuring the _instructional context_ (also referred to as "memory"). This powerful feature allows you to give project-specific instructions, coding style guides, or any relevant background information to the AI, making its responses more tailored and accurate to your needs. The CLI includes UI elements, such as an indicator in the footer showing the number of loaded context files, to keep you informed about the active context.
 
 - **Purpose:** These Markdown files contain instructions, guidelines, or context that you want the Qwen model to be aware of during your interactions. The system is designed to manage this instructional context hierarchically.
 
-### Example Context File Content (e.g., `QWEN.md`)
+### Example Context File Content (e.g., `DIAL.md`)
 
 Here's a conceptual example of what a context file at the root of a TypeScript project might contain:
 
@@ -589,9 +589,9 @@ Here's a conceptual example of what a context file at the root of a TypeScript p
 
 This example demonstrates how you can provide general project context, specific coding conventions, and even notes about particular files or components. The more relevant and precise your context files are, the better the AI can assist you. Project-specific context files are highly encouraged to establish conventions and context.
 
-- **Hierarchical Loading and Precedence:** The CLI implements a sophisticated hierarchical memory system by loading context files (e.g., `QWEN.md`) from several locations. Content from files lower in this list (more specific) typically overrides or supplements content from files higher up (more general). The exact concatenation order and final context can be inspected using the `/memory show` command. The typical loading order is:
+- **Hierarchical Loading and Precedence:** The CLI implements a sophisticated hierarchical memory system by loading context files (e.g., `DIAL.md`) from several locations. Content from files lower in this list (more specific) typically overrides or supplements content from files higher up (more general). The exact concatenation order and final context can be inspected using the `/memory show` command. The typical loading order is:
   1.  **Global Context File:**
-      - Location: `~/.qwen/<contextFileName>` (e.g., `~/.qwen/QWEN.md` in your user home directory).
+      - Location: `~/.dial/<contextFileName>` (e.g., `~/.dial/DIAL.md` in your user home directory).
       - Scope: Provides default instructions for all your projects.
   2.  **Project Root & Ancestors Context Files:**
       - Location: The CLI searches for the configured context file in the current working directory and then in each parent directory up to either the project root (identified by a `.git` folder) or your home directory.
@@ -620,7 +620,7 @@ Sandboxing is disabled by default, but you can enable it in a few ways:
 
 By default, it uses a pre-built `qwen-code-sandbox` Docker image.
 
-For project-specific sandboxing needs, you can create a custom Dockerfile at `.qwen/sandbox.Dockerfile` in your project's root directory. This Dockerfile can be based on the base sandbox image:
+For project-specific sandboxing needs, you can create a custom Dockerfile at `.dial/sandbox.Dockerfile` in your project's root directory. This Dockerfile can be based on the base sandbox image:
 
 ```dockerfile
 FROM qwen-code-sandbox
@@ -631,7 +631,7 @@ FROM qwen-code-sandbox
 # COPY ./my-config /app/my-config
 ```
 
-When `.qwen/sandbox.Dockerfile` exists, you can use `BUILD_SANDBOX` environment variable when running Qwen Code to automatically build the custom sandbox image:
+When `.dial/sandbox.Dockerfile` exists, you can use `BUILD_SANDBOX` environment variable when running Qwen Code to automatically build the custom sandbox image:
 
 ```bash
 BUILD_SANDBOX=1 qwen -s
@@ -671,4 +671,4 @@ Note: When usage statistics are enabled, events are sent to an Alibaba Cloud RUM
   - **Category:** UI
   - **Requires Restart:** No
   - **Example:** `"enableWelcomeBack": false`
-  - **Details:** When enabled, Qwen Code will automatically detect if you're returning to a project with a previously generated project summary (`.qwen/PROJECT_SUMMARY.md`) and show a dialog allowing you to continue your previous conversation or start fresh. This feature integrates with the `/chat summary` command and quit confirmation dialog. See the [Welcome Back documentation](./welcome-back.md) for more details.
+  - **Details:** When enabled, Qwen Code will automatically detect if you're returning to a project with a previously generated project summary (`.dial/PROJECT_SUMMARY.md`) and show a dialog allowing you to continue your previous conversation or start fresh. This feature integrates with the `/chat summary` command and quit confirmation dialog. See the [Welcome Back documentation](./welcome-back.md) for more details.

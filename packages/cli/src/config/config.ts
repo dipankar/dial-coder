@@ -507,7 +507,7 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
 }
 
 /**
- * Loads hierarchical QWEN.md memory files.
+ * Loads hierarchical DIAL.md memory files.
  *
  * This is a thin wrapper around the core's `loadServerHierarchicalMemory`.
  * It handles CLI-specific concerns like home directory detection.

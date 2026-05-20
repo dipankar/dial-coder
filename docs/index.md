@@ -61,7 +61,7 @@ Control your token usage with configurable session limits to optimize costs and 
 
 #### Configure Session Token Limit
 
-Create or edit `.qwen/settings.json` in your home directory:
+Create or edit `.dial/settings.json` in your home directory:
 
 ```json
 {
@@ -83,7 +83,7 @@ Qwen Code includes intelligent vision model auto-switching that detects images i
 
 #### Skip the Switch Dialog (Optional)
 
-If you don't want to see the interactive dialog each time, configure the default behavior in your `.qwen/settings.json`:
+If you don't want to see the interactive dialog each time, configure the default behavior in your `.dial/settings.json`:
 
 ```json
 {
@@ -117,7 +117,7 @@ qwen --vlm-switch-mode persist
 
 #### Disable Vision Models (Optional)
 
-To completely disable vision model support, add to your `.qwen/settings.json`:
+To completely disable vision model support, add to your `.dial/settings.json`:
 
 ```json
 {

@@ -535,7 +535,7 @@ export class IdeClient {
   }
 
   private getPortFromEnv(): string | undefined {
-    const port = process.env['QWEN_CODE_IDE_SERVER_PORT'];
+    const port = process.env['DIAL_CODE_IDE_SERVER_PORT'];
     if (!port) {
       return undefined;
     }
@@ -580,13 +580,13 @@ export class IdeClient {
     try {
       const portFile = path.join(
         os.tmpdir(),
-        `qwen-code-ide-server-${this.ideProcessInfo.pid}.json`,
+        `dial-code-ide-server-${this.ideProcessInfo.pid}.json`,
       );
       const portFileContents = await fs.promises.readFile(portFile, 'utf8');
       return JSON.parse(portFileContents);
     } catch (_) {
       // For newer extension versions, the file name matches the pattern
-      // /^qwen-code-ide-server-${pid}-\d+\.json$/. If multiple IDE
+      // /^dial-code-ide-server-${pid}-\d+\.json$/. If multiple IDE
       // windows are open, multiple files matching the pattern are expected to
       // exist.
     }
@@ -605,7 +605,7 @@ export class IdeClient {
     }
 
     const fileRegex = new RegExp(
-      `^qwen-code-ide-server-${this.ideProcessInfo.pid}-\\d+\\.json$`,
+      `^dial-code-ide-server-${this.ideProcessInfo.pid}-\\d+\\.json$`,
     );
     const matchingFiles = portFiles
       .filter((file) => fileRegex.test(file))

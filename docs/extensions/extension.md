@@ -78,11 +78,11 @@ qwen extensions link path/to/directory
 
 ## How it works
 
-On startup, Qwen Code looks for extensions in `<home>/.qwen/extensions`
+On startup, Qwen Code looks for extensions in `<home>/.dial/extensions`
 
 Extensions exist as a directory that contains a `qwen-extension.json` file. For example:
 
-`<home>/.qwen/extensions/my-extension/qwen-extension.json`
+`<home>/.dial/extensions/my-extension/qwen-extension.json`
 
 ### `qwen-extension.json`
 
@@ -97,7 +97,7 @@ The `qwen-extension.json` file contains the configuration for the extension. The
       "command": "node my-server.js"
     }
   },
-  "contextFileName": "QWEN.md",
+  "contextFileName": "DIAL.md",
   "excludeTools": ["run_shell_command"]
 }
 ```
@@ -106,7 +106,7 @@ The `qwen-extension.json` file contains the configuration for the extension. The
 - `version`: The version of the extension.
 - `mcpServers`: A map of MCP servers to configure. The key is the name of the server, and the value is the server configuration. These servers will be loaded on startup just like MCP servers configured in a [`settings.json` file](./cli/configuration.md). If both an extension and a `settings.json` file configure an MCP server with the same name, the server defined in the `settings.json` file takes precedence.
   - Note that all MCP server configuration options are supported except for `trust`.
-- `contextFileName`: The name of the file that contains the context for the extension. This will be used to load the context from the extension directory. If this property is not used but a `QWEN.md` file is present in your extension directory, then that file will be loaded.
+- `contextFileName`: The name of the file that contains the context for the extension. This will be used to load the context from the extension directory. If this property is not used but a `DIAL.md` file is present in your extension directory, then that file will be loaded.
 - `excludeTools`: An array of tool names to exclude from the model. You can also specify command-specific restrictions for tools that support it, like the `run_shell_command` tool. For example, `"excludeTools": ["run_shell_command(rm -rf)"]` will block the `rm -rf` command. Note that this differs from the MCP server `excludeTools` functionality, which can be listed in the MCP server config. **Important:** Tools specified in `excludeTools` will be disabled for the entire conversation context and will affect all subsequent queries in the current session.
 
 When Qwen Code starts, it loads all the extensions and merges their configurations. If there are any conflicts, the workspace configuration takes precedence.
@@ -120,7 +120,7 @@ Extensions can provide [custom commands](./cli/commands.md#custom-commands) by p
 An extension named `gcp` with the following structure:
 
 ```
-.qwen/extensions/gcp/
+.dial/extensions/gcp/
 ├── qwen-extension.json
 └── commands/
     ├── deploy.toml
@@ -153,6 +153,6 @@ Qwen Code extensions allow variable substitution in `qwen-extension.json`. This 
 
 | variable                   | description                                                                                                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `${extensionPath}`         | The fully-qualified path of the extension in the user's filesystem e.g., '/Users/username/.qwen/extensions/example-extension'. This will not unwrap symlinks. |
+| `${extensionPath}`         | The fully-qualified path of the extension in the user's filesystem e.g., '/Users/username/.dial/extensions/example-extension'. This will not unwrap symlinks. |
 | `${workspacePath}`         | The fully-qualified path of the current workspace.                                                                                                            |
 | `${/} or ${pathSeparator}` | The path separator (differs per OS).                                                                                                                          |

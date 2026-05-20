@@ -97,7 +97,7 @@ type FileProcessingResult =
 
 /**
  * Creates the default exclusion patterns including dynamic patterns.
- * This combines the shared patterns with dynamic patterns like QWEN.md.
+ * This combines the shared patterns with dynamic patterns like DIAL.md.
  *
  * Exclusions are configurable via:
  * - Config.getCustomExcludes() for user-defined patterns

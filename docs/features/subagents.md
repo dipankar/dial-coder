@@ -91,8 +91,8 @@ Opens an interactive management dialog for viewing and managing existing subagen
 
 Subagents are stored as Markdown files in two locations:
 
-- **Project-level**: `.qwen/agents/` (takes precedence)
-- **User-level**: `~/.qwen/agents/` (fallback)
+- **Project-level**: `.dial/agents/` (takes precedence)
+- **User-level**: `~/.dial/agents/` (fallback)
 
 This allows you to have both project-specific agents and personal agents that work across all projects.
 
